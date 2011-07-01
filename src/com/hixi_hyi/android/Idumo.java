@@ -9,25 +9,9 @@ import java.util.ArrayList;
 
 import com.hixi_hyi.android.data.PipeData;
 import com.hixi_hyi.android.handler.DataHandlerInterface;
-import com.hixi_hyi.android.handler.imp.DebugHandler;
-import com.hixi_hyi.android.handler.imp.DelayHandler;
-import com.hixi_hyi.android.handler.imp.GoogleBarChartHandler;
-import com.hixi_hyi.android.handler.imp.ImpoundHandler;
-import com.hixi_hyi.android.handler.imp.TCPByteStreamHandler;
-import com.hixi_hyi.android.handler.imp.TCPStringStreamHandler;
-import com.hixi_hyi.android.handler.imp.transform.JoinStringHandler;
-import com.hixi_hyi.android.handler.imp.transform.ToStringHandler;
 import com.hixi_hyi.android.provider.DataProviderInterface;
-import com.hixi_hyi.android.provider.imp.AccelerometerProvider;
-import com.hixi_hyi.android.provider.imp.AccelerometerXProvider;
-import com.hixi_hyi.android.provider.imp.AccelerometerYProvider;
-import com.hixi_hyi.android.provider.imp.GPSProvider;
-import com.hixi_hyi.android.receiptor.DataReceiptor;
 import com.hixi_hyi.android.receiptor.DataReceiptorInterface;
-import com.hixi_hyi.android.receiptor.imp.DebugReceiptor;
-import com.hixi_hyi.android.receiptor.imp.ImageViewReceiptor;
-import com.hixi_hyi.android.receiptor.imp.TextReceiptor;
-import com.hixi_hyi.android.receiptor.imp.TextViewReceiptor;
+
 
 import android.app.Activity;
 import android.hardware.SensorManager;
@@ -56,43 +40,6 @@ public class Idumo extends Activity {
 		sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		locationManager =(LocationManager)getSystemService(LOCATION_SERVICE);
 		idumocomp = new ArrayList<IdumoInterface>();
-
-		// Provider
-		AccelerometerProvider accelProvider = new AccelerometerProvider(sensorManager);
-
-		TCPStringStreamHandler tcpHandler = null;
-		try {
-			tcpHandler = new TCPStringStreamHandler("172.21.67.142", 10000);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		DebugHandler debugHandler = new DebugHandler();
-
-		JoinStringHandler tostringHandler = new JoinStringHandler(",");
-
-
-		if(tostringHandler.isRegist(accelProvider)){
-//			Log.v(this.getClass().getSimpleName(), "Registed:"+accelProvider.getClass().getSimpleName()+"->"+tostringHandler.getClass().getSimpleName());
-			accelProvider.addProviderListener(tostringHandler);
-		}
-
-		if(debugHandler.isRegist(tostringHandler)){
-			Log.v(this.getClass().getSimpleName(), "Registed:"+tostringHandler.getClass().getSimpleName()+"->"+debugHandler.getClass().getSimpleName());
-			tostringHandler.addHandlerListener(debugHandler);
-		}
-		if(tcpHandler.isRegist(tostringHandler)){
-//			Log.v(this.getClass().getSimpleName(), "Registed:"+tostringHandler.getClass().getSimpleName()+"->"+tcpHandler.getClass().getSimpleName());
-			tostringHandler.addHandlerListener(tcpHandler);
-		}
-
-//		GPSProvider gps = new GPSProvider(locationManager);
-//		idumocomp.add(gps);
-
-		idumocomp.add(accelProvider);
-		idumocomp.add(tcpHandler);
-		idumocomp.add(debugHandler);
-		idumocomp.add(tostringHandler);
 
 	}
 
