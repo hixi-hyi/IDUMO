@@ -1,16 +1,15 @@
 package com.hixi_hyi.android.idumo;
 
-
 public interface IdumoInterface {
-    void onStart();
+	void onStart();
 
-    void onRestart();
+	void onRestart();
 
-    void onResume();
+	void onResume();
 
-    void onPause();
+	void onPause();
 
-    void onStop();
+	void onStop();
 
-    void onDestroy();
+	void onDestroy();
 }

@@ -27,15 +27,15 @@ public class PipeData implements Iterable<Object> {
 
 	public Collection<Class<?>> getDataType() {
 		ArrayList<Class<?>> types = new ArrayList<Class<?>>();
-		for(Object o: datalist){
+		for (Object o : datalist) {
 			types.add(o.getClass());
 		}
 		return types;
 	}
 
-//	public Object poll() {
-//		return remove(0);
-//	}
+	// public Object poll() {
+	// return remove(0);
+	// }
 
 	/**
 	 * @param index
@@ -75,7 +75,7 @@ public class PipeData implements Iterable<Object> {
 	}
 
 	/**
-	 *
+	 * 
 	 * @see java.util.ArrayList#clear()
 	 */
 	public void clear() {
@@ -289,7 +289,7 @@ public class PipeData implements Iterable<Object> {
 	}
 
 	/**
-	 *
+	 * 
 	 * @see java.util.ArrayList#trimToSize()
 	 */
 	public void trimToSize() {
