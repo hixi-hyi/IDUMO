@@ -1,13 +1,17 @@
 package com.hixi_hyi.android.idumo;
 
-import com.hixi_hyi.android.idumo.eventlistener.HandlerListener;
-import com.hixi_hyi.android.idumo.eventlistener.ProviderListener;
+import java.util.Collection;
+
+import com.hixi_hyi.android.idumo.data.PipeData;
 
 /**
  * @author Hiroyoshi HOUCHI
- * 
+ *
  */
-public interface HandlerInterface extends IdumoInterface, ProviderListener,
-		HandlerListener {
-
+public interface HandlerInterface{
+	public PipeData getData();
+	public Collection<Class<?>> getNotifyDataType();
+	public void setParameter(PipeData parameter);
+	public boolean isAccesibleParameter(PipeData parameter);
+	public boolean addProvider(ProviderInterface provider);
 }

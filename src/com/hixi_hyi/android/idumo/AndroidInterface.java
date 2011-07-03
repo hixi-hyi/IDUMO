@@ -1,6 +1,6 @@
 package com.hixi_hyi.android.idumo;
 
-public interface IdumoInterface {
+public interface AndroidInterface {
 	void onStart();
 
 	void onRestart();

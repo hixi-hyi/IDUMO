@@ -5,6 +5,8 @@ package com.hixi_hyi.android.idumo;
 
 import java.util.ArrayList;
 
+import com.hixi_hyi.android.idumo.controller.AccelerometerToViewController;
+
 import android.app.Activity;
 import android.hardware.SensorManager;
 import android.location.LocationManager;
@@ -12,104 +14,53 @@ import android.os.Bundle;
 
 /**
  * @author Hiroyoshi HOUCHI
- * 
+ *
  */
 public class Idumo extends Activity {
 
-	private SensorManager sensorManager;
-	private ArrayList<IdumoInterface> idumocomp;
-	private LocationManager locationManager;
+	AccelerometerToViewController controller;
 
-	/*
-	 * (非 Javadoc)
-	 * 
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
-	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-		locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-		idumocomp = new ArrayList<IdumoInterface>();
-
+		controller = new AccelerometerToViewController();
+		controller.onCreate(this);
 	}
 
-	/*
-	 * (非 Javadoc)
-	 * 
-	 * @see android.app.Activity#onPause()
-	 */
 	@Override
 	protected void onPause() {
-		for (IdumoInterface i : idumocomp) {
-			i.onPause();
-		}
+		controller.onPause();
 		super.onPause();
 	}
 
-	/*
-	 * (非 Javadoc)
-	 * 
-	 * @see android.app.Activity#onDestroy()
-	 */
 	@Override
 	protected void onDestroy() {
-		for (IdumoInterface i : idumocomp) {
-			i.onDestroy();
-		}
+		controller.onDestroy();
 		super.onDestroy();
 	}
 
-	/*
-	 * (非 Javadoc)
-	 * 
-	 * @see android.app.Activity#onRestart()
-	 */
 	@Override
 	protected void onRestart() {
-		for (IdumoInterface i : idumocomp) {
-			i.onRestart();
-		}
+		controller.onRestart();
 		super.onRestart();
 	}
 
-	/*
-	 * (非 Javadoc)
-	 * 
-	 * @see android.app.Activity#onStart()
-	 */
 	@Override
 	protected void onStart() {
-		for (IdumoInterface i : idumocomp) {
-			i.onStart();
-		}
 		super.onStart();
+		controller.onStart();
 	}
 
-	/*
-	 * (非 Javadoc)
-	 * 
-	 * @see android.app.Activity#onStop()
-	 */
 	@Override
 	protected void onStop() {
-		for (IdumoInterface i : idumocomp) {
-			i.onStop();
-		}
+		controller.onStop();
 		super.onStop();
 	}
 
-	/*
-	 * (非 Javadoc)
-	 * 
-	 * @see android.app.Activity#onResume()
-	 */
 	@Override
 	protected void onResume() {
-		for (IdumoInterface i : idumocomp) {
-			i.onResume();
-		}
 		super.onResume();
+		controller.onResume();
 	}
 
 }
