@@ -1,4 +1,4 @@
-package com.hixi_hyi.android;
+package com.hixi_hyi.android.idumo;
 
 
 public interface IdumoInterface {

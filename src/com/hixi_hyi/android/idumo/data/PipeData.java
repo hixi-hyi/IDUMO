@@ -1,4 +1,4 @@
-package com.hixi_hyi.android.data;
+package com.hixi_hyi.android.idumo.data;
 
 import java.util.ArrayList;
 import java.util.Collection;

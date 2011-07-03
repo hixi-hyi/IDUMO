@@ -1,16 +1,16 @@
 /**
  *
  */
-package com.hixi_hyi.android;
+package com.hixi_hyi.android.idumo;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-import com.hixi_hyi.android.data.PipeData;
-import com.hixi_hyi.android.handler.DataHandlerInterface;
-import com.hixi_hyi.android.provider.DataProviderInterface;
-import com.hixi_hyi.android.receiptor.DataReceiptorInterface;
+import com.hixi_hyi.android.idumo.data.PipeData;
+import com.hixi_hyi.android.idumo.handler.HandlerInterface;
+import com.hixi_hyi.android.idumo.provider.ProviderInterface;
+import com.hixi_hyi.android.idumo.receiptor.ReceiptorInterface;
 
 
 import android.app.Activity;

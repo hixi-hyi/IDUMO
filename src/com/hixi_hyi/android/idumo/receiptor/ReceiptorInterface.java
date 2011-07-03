@@ -1,10 +1,10 @@
-package com.hixi_hyi.android.receiptor;
+package com.hixi_hyi.android.idumo.receiptor;
 
-import com.hixi_hyi.android.IdumoInterface;
-import com.hixi_hyi.android.data.PipeData;
-import com.hixi_hyi.android.eventlistener.HandlerListener;
+import com.hixi_hyi.android.idumo.IdumoInterface;
+import com.hixi_hyi.android.idumo.data.PipeData;
+import com.hixi_hyi.android.idumo.eventlistener.HandlerListener;
 
-public interface DataReceiptorInterface extends IdumoInterface,HandlerListener {
+public interface ReceiptorInterface extends IdumoInterface,HandlerListener {
 	/**
 	 * 指定されたパラメータを設定するメソッド
 	 * @param parameter
