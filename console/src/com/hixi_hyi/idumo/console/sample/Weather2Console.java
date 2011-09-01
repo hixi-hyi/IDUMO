@@ -1,14 +1,18 @@
 package com.hixi_hyi.idumo.console.sample;
 
 import com.hixi_hyi.idumo.console.receiptor.SystemOutReceiptor;
+import com.hixi_hyi.idumo.console.util.ConsoleLogger;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.provider.LivedoorWeatherProvider;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 public class Weather2Console {
 
 	public static void main(String[] args){
 		try {
+			LogManager.DEBUG = true;
+			LogManager.LOGGER = new ConsoleLogger();
 			LivedoorWeatherProvider date = new LivedoorWeatherProvider(63);
 			LivedoorWeatherProvider locate = new LivedoorWeatherProvider(63);
 			LivedoorWeatherProvider maxtemp = new LivedoorWeatherProvider(63);
