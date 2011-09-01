@@ -12,9 +12,9 @@ public class AndroidLogger implements Logger{
 	}
 
 	public String getFileLineMethod(){
-		int number = Thread.currentThread().getStackTrace()[4].getLineNumber();
-		String classname = Thread.currentThread().getStackTrace()[4].getFileName();
-		String methodname = Thread.currentThread().getStackTrace()[4].getMethodName();
+		int number = Thread.currentThread().getStackTrace()[5].getLineNumber();
+		String classname = Thread.currentThread().getStackTrace()[5].getFileName();
+		String methodname = Thread.currentThread().getStackTrace()[5].getMethodName();
 		return String.format("【%3d:%s->%s】", number,classname,methodname);
 	}
 	@Override
