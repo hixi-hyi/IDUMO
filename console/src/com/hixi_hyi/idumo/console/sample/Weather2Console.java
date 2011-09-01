@@ -3,6 +3,7 @@ package com.hixi_hyi.idumo.console.sample;
 import com.hixi_hyi.idumo.console.receiptor.SystemOutReceiptor;
 import com.hixi_hyi.idumo.console.util.ConsoleLogger;
 import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.front.IdumoContainer;
 import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.provider.LivedoorWeatherProvider;
 import com.hixi_hyi.idumo.core.util.LogManager;
@@ -13,12 +14,21 @@ public class Weather2Console {
 		try {
 			LogManager.DEBUG = true;
 			LogManager.LOGGER = new ConsoleLogger();
+
+			IdumoContainer container = new IdumoContainer();
+
 			LivedoorWeatherProvider date = new LivedoorWeatherProvider(63);
+			container.add(date);
 			LivedoorWeatherProvider locate = new LivedoorWeatherProvider(63);
+			container.add(locate);
 			LivedoorWeatherProvider maxtemp = new LivedoorWeatherProvider(63);
+			container.add(maxtemp);
 			LivedoorWeatherProvider mintemp = new LivedoorWeatherProvider(63);
+			container.add(mintemp);
 			LivedoorWeatherProvider weather = new LivedoorWeatherProvider(63);
+			container.add(weather);
 			LivedoorWeatherProvider description = new LivedoorWeatherProvider(63);
+			container.add(description);
 
 			date.setOption(LivedoorWeatherProvider.Type.DATE);
 			locate.setOption(LivedoorWeatherProvider.Type.LOCATION);
@@ -28,22 +38,36 @@ public class Weather2Console {
 			description.setOption(LivedoorWeatherProvider.Type.DESCRIPTION);
 
 			StringConcatHandler s1 = new StringConcatHandler("DATE:");
+			container.add(s1);
 			StringConcatHandler s2 = new StringConcatHandler("Location:");
+			container.add(s2);
 			StringConcatHandler s3 = new StringConcatHandler("Max:");
+			container.add(s3);
 			StringConcatHandler s4 = new StringConcatHandler("Min:");
+			container.add(s4);
 			StringConcatHandler s5 = new StringConcatHandler("Weather:");
+			container.add(s5);
 			StringConcatHandler s6 = new StringConcatHandler("Desc:");
-
-			s1.setSender(date);
-			s2.setSender(locate);
-			s3.setSender(maxtemp);
-			s4.setSender(mintemp);
-			s5.setSender(weather);
-			s6.setSender(description);
+			container.add(s6);
 
 			SystemOutReceiptor console= new SystemOutReceiptor();
+			container.add(console);
 
-			console.setSender(s1,s2,s3,s4,s5,s6);
+			container.connect(date, s1);
+			container.connect(locate, s2);
+			container.connect(maxtemp, s3);
+			container.connect(mintemp, s4);
+			container.connect(weather, s5);
+			container.connect(description, s6);
+
+			container.connect(s1, console);
+			container.connect(s2, console);
+			container.connect(s3, console);
+			container.connect(s4, console);
+			container.connect(s5, console);
+			container.connect(s6, console);
+
+			container.compile();
 
 			console.run();
 
