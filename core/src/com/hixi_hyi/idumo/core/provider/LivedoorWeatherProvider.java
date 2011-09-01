@@ -11,6 +11,7 @@ import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.SenderWithOption;
 import com.hixi_hyi.idumo.core.component.LivedoorWeather;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * LivedoorWeatherからデータを取得し，提供するプロバイダ
@@ -55,6 +56,7 @@ public class LivedoorWeatherProvider implements SenderWithOption {
 
 	@Override
 	public PipeData getData() {
+		LogManager.log();
 		PipeData p = new PipeData();
 		switch (type) {
 		case LOCATION:
