@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="com.hixi_hyi.idumo.android"
+      android:versionCode="1"
+      android:versionName="1.0">
+
+
+    <application android:debuggable="true"
+    			android:icon="@drawable/icon"
+    			android:label="@string/app_name">
+         <activity android:name="Idumo"
+                  android:configChanges="orientation|keyboardHidden"
+                  android:screenOrientation="portrait"
+                  android:label="Idumo">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <!--
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                -->
+            </intent-filter>
+        </activity>
+
+        <!-- ************************************* -->
+        <!--          IDUMO SAMPLES                -->
+        <!-- ************************************* -->
+
+
+        <!-- ************************************* -->
+        <!--          SENSOR SAMPLES                -->
+        <!-- ************************************* -->
+        <activity android:name=".sample.sensor.Accelerometer2View"
+        		 android:label="@string/activity_accel2view">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".sample.sensor.GPS2View"
+        		 android:label="@string/activity_gps2view">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".sample.sensor.Magnetic2View"
+        		 android:label="@string/activity_mag2view">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".sample.sensor.Proximity2View"
+        		 android:label="@string/activity_proximity2view">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".sample.sensor.Light2View"
+        		 android:label="@string/activity_light2view">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".sample.sensor.Temperature2View"
+        		 android:label="@string/activity_temp2view">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".sample.sensor.Orientation2View"
+        		 android:label="@string/activity_orient2view">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+
+        <!-- ************************************* -->
+        <!--          APP   SAMPLES                -->
+        <!-- ************************************* -->
+        <activity android:name=".sample.app.LivedoorWeather2MultiView"
+        		 android:label="@string/activity_lweather2mview">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".sample.app.GPS2Location"
+        		 android:label="@string/activity_gps2location">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+
+
+        <activity android:name=".sample.Accelerometer2TCP"
+        		 android:label="@string/activity_accel2tcp">
+ 	        <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".sample.RandomByte2TCP"
+        		 android:label="@string/activity_ramdom2tcp">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".sample.google.GCalendar2View"
+        		 android:label="@string/activity_gcal2view">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".sample.google.GDocs2Viewd.sample.google.GDocs2Viewd.sample.google.GDocs2Viewd.sample.google.GDocs2View"
+        		 android:label="@string/activity_gdocs2view">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+
+
+     </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+	<uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+</manifest>
