@@ -7,12 +7,13 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import com.hixi_hyi.idumo.android.ApplicationControlforAndroid;
-import com.hixi_hyi.idumo.android.util.LogUtil;
+import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoRunnable;
 import com.hixi_hyi.idumo.core.ReceiverWithOption;
 import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * バイト情報をTCP通信を用いて送ることが出来るReceiptor
@@ -97,13 +98,13 @@ public class TCPByteStreamReceiptor implements ReceiverWithOption,ApplicationCon
 
 	@Override
 	public void run() {
-		LogUtil.d();
+		LogManager.log();
 		PipeData data =sender.getData();
 		byte[] bytedata = new byte[data.size()];
 		int i=0;
-		LogUtil.d("size: "+data.size());
+		LogManager.debug("size: "+data.size());
 		for(Object o:data){
-			LogUtil.d(o.toString());
+			LogManager.debug(o.toString());
 			bytedata[i] = (Byte)o;
 			i++;
 		}

@@ -6,11 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
-import com.hixi_hyi.idumo.android.util.LogUtil;
+import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.IdumoRuntimeException;
 import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.SenderWithOption;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * Android上の加速度センサの値を提供するProvider
@@ -51,7 +52,7 @@ public class AccelerometerProvider implements SenderWithOption{
 
 	@Override
 	public PipeData getData() {
-		LogUtil.d();
+		LogManager.log();
 		PipeData p = new PipeData();
 		switch (methodType) {
 		case X:

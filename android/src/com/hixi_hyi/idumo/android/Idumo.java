@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.hixi_hyi.idumo.android.util.DeployUtil;
-import com.hixi_hyi.idumo.android.util.LogUtil;
+import com.hixi_hyi.idumo.android.util.AndroidLogger;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -40,9 +41,11 @@ public class Idumo extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-		//LogUtil
-		LogUtil.isDebug = DeployUtil.isDebuggable(this);
-		LogUtil.TAG = TAG;
+		//AndroidLogger
+        LogManager.DEBUG = DeployUtil.isDebuggable(this);
+        LogManager.LOGGER = new AndroidLogger(TAG);
+//		AndroidLogger.isDebug = DeployUtil.isDebuggable(this);
+//		AndroidLogger.TAG = TAG;
 
 
         Intent intent = getIntent();
@@ -51,7 +54,7 @@ public class Idumo extends ListActivity {
         if (path == null) {
             path = "";
         }
-        LogUtil.d(path);
+        LogManager.debug(path);
         List<Action> data  = getData(path);
         ListAdapter adapter = new ArrayAdapter<Action>(this,android.R.layout.simple_list_item_1, data);
         setListAdapter(adapter);

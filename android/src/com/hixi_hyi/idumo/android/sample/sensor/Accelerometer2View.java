@@ -8,9 +8,10 @@ import com.hixi_hyi.idumo.android.provider.AccelerometerProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
-import com.hixi_hyi.idumo.android.util.LogUtil;
+import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 import android.app.Activity;
 import android.content.Context;
@@ -31,7 +32,7 @@ public class Accelerometer2View extends Activity implements Runnable {
 	@Override
 	public void run() {
 		while(isDo){
-			LogUtil.d();
+			LogManager.log();
 			handler.post(textView);
 			try {
 				Thread.sleep(1000);

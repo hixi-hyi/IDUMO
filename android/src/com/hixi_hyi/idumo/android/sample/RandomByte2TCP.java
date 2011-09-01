@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import com.hixi_hyi.idumo.android.ApplicationControlforAndroid;
 import com.hixi_hyi.idumo.android.handler.ThroughHandler;
 import com.hixi_hyi.idumo.android.receiptor.TCPByteStreamReceiptor;
-import com.hixi_hyi.idumo.android.util.LogUtil;
+import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.provider.RandomByteProvider;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -29,7 +30,7 @@ public class RandomByte2TCP extends Activity implements Runnable{
 	@Override
 	public void run() {
 		while(isDo){
-			LogUtil.d();
+			LogManager.log();
 			tcp.run();
 //			handler.post(tcp);
 			try {

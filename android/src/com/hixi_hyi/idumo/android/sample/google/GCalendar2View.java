@@ -23,7 +23,7 @@ public class GCalendar2View extends ListActivity implements Runnable {
 	@Override
 	public void run() {
 //		while(isDo){
-//			LogUtil.d();
+//			AndroidLogger.d();
 //			handler.post(textView);
 //			try {
 //				Thread.sleep(1000);

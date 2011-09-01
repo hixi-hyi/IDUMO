@@ -8,10 +8,11 @@ import com.hixi_hyi.idumo.android.provider.GPSProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.android.sensor.GPSSensor;
-import com.hixi_hyi.idumo.android.util.LogUtil;
+import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.component.ReversedGeocording;
 import com.hixi_hyi.idumo.core.handler.ReversedGeocordingHandler;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 import android.app.Activity;
 import android.content.Context;
@@ -40,7 +41,7 @@ public class GPS2Location extends Activity implements Runnable {
 	@Override
 	public void run() {
 		while(true){
-			LogUtil.d();
+			LogManager.log();
 			try {
 				if(textView.isReady()){
 					handler.post(textView);

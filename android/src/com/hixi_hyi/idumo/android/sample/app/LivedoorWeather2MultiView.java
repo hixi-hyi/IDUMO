@@ -8,7 +8,7 @@ import com.hixi_hyi.idumo.android.provider.AccelerometerProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
-import com.hixi_hyi.idumo.android.util.LogUtil;
+import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.provider.LivedoorWeatherProvider;

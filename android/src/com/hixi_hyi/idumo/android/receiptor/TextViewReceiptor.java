@@ -6,12 +6,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.widget.TextView;
 
-import com.hixi_hyi.idumo.android.util.LogUtil;
+import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.IdumoRunnable;
 import com.hixi_hyi.idumo.core.IdumoRuntimeException;
 import com.hixi_hyi.idumo.core.Receiver;
 import com.hixi_hyi.idumo.core.ReceiverWithOption;
 import com.hixi_hyi.idumo.core.Sender;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * Android上にテキスト情報を出力するReceiptorです
@@ -34,7 +35,7 @@ public class TextViewReceiptor extends TextView implements Receiver,IdumoRunnabl
 
 	@Override
 	public void run() {
-		LogUtil.d();
+		LogManager.log();
 		for(Sender sender: senders){
 			if(!sender.isReady()){
 				return;
@@ -48,7 +49,7 @@ public class TextViewReceiptor extends TextView implements Receiver,IdumoRunnabl
 			sb.append("\n");
 		}
 
-		LogUtil.d(sb.toString());
+		LogManager.debug(sb.toString());
 
 		setText(sb.toString());
 

@@ -6,7 +6,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 import com.hixi_hyi.idumo.android.ApplicationControlforAndroid;
-import com.hixi_hyi.idumo.android.util.LogUtil;
+import com.hixi_hyi.idumo.android.util.AndroidLogger;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * 地磁気センサ
@@ -66,7 +67,7 @@ public enum MagneticFieldSensor implements SensorEventListener,ApplicationContro
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-		LogUtil.d();
+		LogManager.log();
 		if(event.sensor.getType()==useSensorType()){
 			magnet = event.values.clone();
 //			x = event.values[0];

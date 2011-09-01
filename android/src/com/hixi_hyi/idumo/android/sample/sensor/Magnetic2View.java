@@ -8,9 +8,10 @@ import com.hixi_hyi.idumo.android.provider.MagneticFiledProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
-import com.hixi_hyi.idumo.android.util.LogUtil;
+import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 import android.app.Activity;
 import android.content.Context;
@@ -30,7 +31,7 @@ public class Magnetic2View extends Activity implements Runnable {
 	@Override
 	public void run() {
 		while(isDo){
-			LogUtil.d();
+			LogManager.log();
 			handler.post(textView);
 			try {
 				Thread.sleep(1000);

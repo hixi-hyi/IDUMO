@@ -2,12 +2,13 @@ package com.hixi_hyi.idumo.android.handler;
 
 import java.util.List;
 
-import com.hixi_hyi.idumo.android.util.LogUtil;
+import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoRuntimeException;
 import com.hixi_hyi.idumo.core.ReceiverWithOption;
 import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 public class ThroughHandler implements Sender,ReceiverWithOption {
 
@@ -15,7 +16,7 @@ public class ThroughHandler implements Sender,ReceiverWithOption {
 
 	@Override
 	public PipeData getData() {
-		LogUtil.d();
+		LogManager.log();
 		if(!provider.isReady()){
 			return null;
 		}

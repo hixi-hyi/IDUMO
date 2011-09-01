@@ -8,7 +8,8 @@ import android.location.LocationProvider;
 import android.os.Bundle;
 
 import com.hixi_hyi.idumo.android.ApplicationControlforAndroid;
-import com.hixi_hyi.idumo.android.util.LogUtil;
+import com.hixi_hyi.idumo.android.util.AndroidLogger;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * GPSセンサ
@@ -26,7 +27,7 @@ public enum GPSSensor implements LocationListener , ApplicationControlforAndroid
 	public void init(LocationManager manager){
 		this.locationManager = manager;
 		location = locationManager.getLastKnownLocation(locationManager.getBestProvider(new Criteria(), true));
-//		LogUtil.d(location);
+//		AndroidLogger.d(location);
 	}
 
 
@@ -98,13 +99,13 @@ public enum GPSSensor implements LocationListener , ApplicationControlforAndroid
 	public void onLocationChanged(Location location) {
 		this.isReady = true;
 		this.location = location;
-		LogUtil.d("Latitude:"+String.valueOf(location.getLatitude()));
-		LogUtil.d("Longitude:"+String.valueOf(location.getLongitude()));
-		LogUtil.d("Accurary:"+String.valueOf(location.getAccuracy()));
-		LogUtil.d("Altitude:"+String.valueOf(location.getAltitude()));
-		LogUtil.d("Time:"+String.valueOf(location.getTime()));
-		LogUtil.d("Speed:"+String.valueOf(location.getSpeed()));
-		LogUtil.d("Bearing:"+String.valueOf(location.getBearing()));
+		LogManager.debug("Latitude:"+String.valueOf(location.getLatitude()));
+		LogManager.debug("Longitude:"+String.valueOf(location.getLongitude()));
+		LogManager.debug("Accurary:"+String.valueOf(location.getAccuracy()));
+		LogManager.debug("Altitude:"+String.valueOf(location.getAltitude()));
+		LogManager.debug("Time:"+String.valueOf(location.getTime()));
+		LogManager.debug("Speed:"+String.valueOf(location.getSpeed()));
+		LogManager.debug("Bearing:"+String.valueOf(location.getBearing()));
 
 	}
 
@@ -124,13 +125,13 @@ public enum GPSSensor implements LocationListener , ApplicationControlforAndroid
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 		switch (status) {
 		case LocationProvider.AVAILABLE:
-			LogUtil.d("STATUS AVAILABLE");
+			LogManager.debug("STATUS AVAILABLE");
 			break;
 		case LocationProvider.OUT_OF_SERVICE:
-			LogUtil.d("STATUS OUT_OF_SERVICE");
+			LogManager.debug("STATUS OUT_OF_SERVICE");
 			break;
 		case LocationProvider.TEMPORARILY_UNAVAILABLE:
-			LogUtil.d("STATUS TEMPORARILY_UNAVAILABLE");
+			LogManager.debug("STATUS TEMPORARILY_UNAVAILABLE");
 			break;
 		}
 	}

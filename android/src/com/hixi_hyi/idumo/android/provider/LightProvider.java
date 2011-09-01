@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hixi_hyi.idumo.android.sensor.LightSensor;
-import com.hixi_hyi.idumo.android.util.LogUtil;
+import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * Android上の光センサの情報を取得できるProvider
@@ -32,7 +33,7 @@ public class LightProvider implements Sender{
 
 	@Override
 	public PipeData getData() {
-		LogUtil.d();
+		LogManager.log();
 		PipeData p = new PipeData();
 		p.add(light.getLight());
 		return p;

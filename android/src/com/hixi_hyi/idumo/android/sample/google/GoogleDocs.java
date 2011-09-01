@@ -20,7 +20,8 @@ import com.google.api.client.sample.docs.v3.model.Link;
 import com.google.api.client.xml.XmlNamespaceDictionary;
 import com.google.api.client.xml.atom.AtomParser;
 import com.hixi_hyi.idumo.android.ApplicationControlforAndroid;
-import com.hixi_hyi.idumo.android.util.LogUtil;
+import com.hixi_hyi.idumo.android.util.AndroidLogger;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 public class GoogleDocs implements ApplicationControlforAndroid{
 
@@ -40,11 +41,11 @@ public class GoogleDocs implements ApplicationControlforAndroid{
 					null,
 					null).getResult();
 		} catch (OperationCanceledException e) {
-			LogUtil.d(e);
+			LogManager.debug(e);
 		} catch (AuthenticatorException e) {
-			LogUtil.d(e);
+			LogManager.debug(e);
 		} catch (IOException e) {
-			LogUtil.d(e);
+			LogManager.debug(e);
 		}
 
 		String authToken = "";
@@ -84,13 +85,13 @@ public class GoogleDocs implements ApplicationControlforAndroid{
 			request.url = new GoogleUrl("https://docs.google.com/feeds/default/private/full"); // ※2
 			feed = request.execute().parseAs(Feed.class);
 		} catch (IOException e) {
-			LogUtil.d(e);
+			LogManager.debug(e);
 		}
 
 		// 結果を表示
 		String tmp = "";
 		for (Link link : feed.links) {
-			LogUtil.d(link);
+			LogManager.debug(link);
 		}
 //		TextView v = new TextView(this);
 //		v.setText(tmp);
