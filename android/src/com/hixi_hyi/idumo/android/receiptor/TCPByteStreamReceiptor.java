@@ -6,7 +6,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import com.hixi_hyi.idumo.android.ApplicationControlforAndroid;
+import com.hixi_hyi.idumo.android.ApplicationControllerforAndroid;
 import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoRunnable;
@@ -21,7 +21,7 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  *
  */
-public class TCPByteStreamReceiptor implements ReceiverWithOption,ApplicationControlforAndroid,IdumoRunnable {
+public class TCPByteStreamReceiptor implements ReceiverWithOption,ApplicationControllerforAndroid,IdumoRunnable {
 	private String ip;
 	private int port;
 	private Socket socket;

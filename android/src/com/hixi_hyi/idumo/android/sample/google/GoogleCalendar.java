@@ -34,11 +34,11 @@ import com.google.api.client.sample.calendar.android.model.CalendarEntry;
 import com.google.api.client.sample.calendar.android.model.CalendarFeed;
 import com.google.api.client.sample.calendar.android.model.CalendarUrl;
 import com.google.common.collect.Lists;
-import com.hixi_hyi.idumo.android.ApplicationControlforAndroid;
+import com.hixi_hyi.idumo.android.ApplicationControllerforAndroid;
 import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
-public final class GoogleCalendar implements ApplicationControlforAndroid {
+public final class GoogleCalendar implements ApplicationControllerforAndroid {
 
 	private final List<CalendarEntry> calendars = Lists.newArrayList();
 	private final HttpTransport transport = AndroidHttp.newCompatibleTransport();

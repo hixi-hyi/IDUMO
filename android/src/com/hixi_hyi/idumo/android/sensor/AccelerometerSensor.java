@@ -5,7 +5,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-import com.hixi_hyi.idumo.android.ApplicationControlforAndroid;
+import com.hixi_hyi.idumo.android.ApplicationControllerforAndroid;
 import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
@@ -14,7 +14,7 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  *
  */
-public enum AccelerometerSensor implements SensorEventListener ,ApplicationControlforAndroid{
+public enum AccelerometerSensor implements SensorEventListener ,ApplicationControllerforAndroid{
 
 	INSTANCE;
 

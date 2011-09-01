@@ -1,11 +1,11 @@
 package com.hixi_hyi.idumo.android;
 
 public class AbstractApplicationControllerforAndroid implements
-		ApplicationControlforAndroid {
+		ApplicationControllerforAndroid {
 
-	ApplicationControlforAndroid aci;
+	ApplicationControllerforAndroid aci;
 
-	public AbstractApplicationControllerforAndroid(ApplicationControlforAndroid aci){
+	public AbstractApplicationControllerforAndroid(ApplicationControllerforAndroid aci){
 		this.aci = aci;
 	}
 

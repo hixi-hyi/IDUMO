@@ -19,11 +19,11 @@ import com.google.api.client.sample.docs.v3.model.Feed;
 import com.google.api.client.sample.docs.v3.model.Link;
 import com.google.api.client.xml.XmlNamespaceDictionary;
 import com.google.api.client.xml.atom.AtomParser;
-import com.hixi_hyi.idumo.android.ApplicationControlforAndroid;
+import com.hixi_hyi.idumo.android.ApplicationControllerforAndroid;
 import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
-public class GoogleDocs implements ApplicationControlforAndroid{
+public class GoogleDocs implements ApplicationControllerforAndroid{
 
 
 	public GoogleDocs(Activity activity){

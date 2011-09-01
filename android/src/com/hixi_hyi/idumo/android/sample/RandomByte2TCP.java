@@ -2,7 +2,7 @@ package com.hixi_hyi.idumo.android.sample;
 
 import java.util.ArrayList;
 
-import com.hixi_hyi.idumo.android.ApplicationControlforAndroid;
+import com.hixi_hyi.idumo.android.ApplicationControllerforAndroid;
 import com.hixi_hyi.idumo.android.handler.ThroughHandler;
 import com.hixi_hyi.idumo.android.receiptor.TCPByteStreamReceiptor;
 import com.hixi_hyi.idumo.android.util.AndroidLogger;
@@ -19,7 +19,7 @@ public class RandomByte2TCP extends Activity implements Runnable{
 	private static final String IP="192.168.12.10";
 	private static final int PORT= 10000;
 
-	private ArrayList<ApplicationControlforAndroid> android;
+	private ArrayList<ApplicationControllerforAndroid> android;
 	private RandomByteProvider ramdombyte;
 	private ThroughHandler through;
 	private TCPByteStreamReceiptor tcp;
@@ -44,7 +44,7 @@ public class RandomByte2TCP extends Activity implements Runnable{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		android = new ArrayList<ApplicationControlforAndroid>();
+		android = new ArrayList<ApplicationControllerforAndroid>();
 
 		ramdombyte = new RandomByteProvider();
 
@@ -68,14 +68,14 @@ public class RandomByte2TCP extends Activity implements Runnable{
 	@Override
 	public void onStart() {
 		super.onStart();
-		for(ApplicationControlforAndroid a:android){
+		for(ApplicationControllerforAndroid a:android){
 			a.onStart();
 		}
 	}
 
 	@Override
 	public void onRestart() {
-		for(ApplicationControlforAndroid a:android){
+		for(ApplicationControllerforAndroid a:android){
 			a.onRestart();
 		}
 		super.onRestart();
@@ -84,7 +84,7 @@ public class RandomByte2TCP extends Activity implements Runnable{
 	@Override
 	public void onResume() {
 		super.onResume();
-		for(ApplicationControlforAndroid a:android){
+		for(ApplicationControllerforAndroid a:android){
 			a.onResume();
 		}
 		isDo = true;
@@ -94,7 +94,7 @@ public class RandomByte2TCP extends Activity implements Runnable{
 
 	@Override
 	public void onPause() {
-		for(ApplicationControlforAndroid a:android){
+		for(ApplicationControllerforAndroid a:android){
 			a.onPause();
 		}
 		isDo = false;
@@ -103,7 +103,7 @@ public class RandomByte2TCP extends Activity implements Runnable{
 
 	@Override
 	public void onStop() {
-		for(ApplicationControlforAndroid a:android){
+		for(ApplicationControllerforAndroid a:android){
 			a.onStop();
 		}
 		super.onStop();
@@ -111,7 +111,7 @@ public class RandomByte2TCP extends Activity implements Runnable{
 
 	@Override
 	public void onDestroy() {
-		for(ApplicationControlforAndroid a:android){
+		for(ApplicationControllerforAndroid a:android){
 			a.onDestroy();
 		}
 		super.onDestroy();

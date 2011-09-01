@@ -2,7 +2,7 @@ package com.hixi_hyi.idumo.android.sample.app;
 
 import java.util.ArrayList;
 
-import com.hixi_hyi.idumo.android.ApplicationControlforAndroid;
+import com.hixi_hyi.idumo.android.ApplicationControllerforAndroid;
 import com.hixi_hyi.idumo.android.handler.ThroughHandler;
 import com.hixi_hyi.idumo.android.provider.GPSProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
@@ -28,7 +28,7 @@ import android.os.Handler;
  */
 public class GPS2Location extends Activity implements Runnable {
 
-	private ArrayList<ApplicationControlforAndroid> android;
+	private ArrayList<ApplicationControllerforAndroid> android;
 	private GPSProvider gps;
 	private GPSProvider gps2;
 
@@ -58,7 +58,7 @@ public class GPS2Location extends Activity implements Runnable {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		android = new ArrayList<ApplicationControlforAndroid>();
+		android = new ArrayList<ApplicationControllerforAndroid>();
 		handler = new Handler();
 
 		LocationManager location = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -88,14 +88,14 @@ public class GPS2Location extends Activity implements Runnable {
 	@Override
 	public void onStart() {
 		super.onStart();
-		for(ApplicationControlforAndroid a:android){
+		for(ApplicationControllerforAndroid a:android){
 			a.onStart();
 		}
 	}
 
 	@Override
 	public void onRestart() {
-		for(ApplicationControlforAndroid a:android){
+		for(ApplicationControllerforAndroid a:android){
 			a.onRestart();
 		}
 		super.onRestart();
@@ -104,7 +104,7 @@ public class GPS2Location extends Activity implements Runnable {
 	@Override
 	public void onResume() {
 		super.onResume();
-		for(ApplicationControlforAndroid a:android){
+		for(ApplicationControllerforAndroid a:android){
 			a.onResume();
 		}
 		isDo = true;
@@ -114,7 +114,7 @@ public class GPS2Location extends Activity implements Runnable {
 
 	@Override
 	public void onPause() {
-		for(ApplicationControlforAndroid a:android){
+		for(ApplicationControllerforAndroid a:android){
 			a.onPause();
 		}
 		isDo = false;
@@ -123,7 +123,7 @@ public class GPS2Location extends Activity implements Runnable {
 
 	@Override
 	public void onStop() {
-		for(ApplicationControlforAndroid a:android){
+		for(ApplicationControllerforAndroid a:android){
 			a.onStop();
 		}
 		super.onStop();
@@ -131,7 +131,7 @@ public class GPS2Location extends Activity implements Runnable {
 
 	@Override
 	public void onDestroy() {
-		for(ApplicationControlforAndroid a:android){
+		for(ApplicationControllerforAndroid a:android){
 			a.onDestroy();
 		}
 		super.onDestroy();
