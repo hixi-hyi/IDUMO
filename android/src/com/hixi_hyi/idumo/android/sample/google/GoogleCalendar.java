@@ -34,11 +34,11 @@ import com.google.api.client.sample.calendar.android.model.CalendarEntry;
 import com.google.api.client.sample.calendar.android.model.CalendarFeed;
 import com.google.api.client.sample.calendar.android.model.CalendarUrl;
 import com.google.common.collect.Lists;
-import com.hixi_hyi.idumo.android.ApplicationControllerforAndroid;
+import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
 import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
-public final class GoogleCalendar implements ApplicationControllerforAndroid {
+public final class GoogleCalendar implements ApplicationControllerForAndroid {
 
 	private final List<CalendarEntry> calendars = Lists.newArrayList();
 	private final HttpTransport transport = AndroidHttp.newCompatibleTransport();
@@ -133,30 +133,30 @@ public final class GoogleCalendar implements ApplicationControllerforAndroid {
 	}
 
 	@Override
-	public void onStart() {
+	public void onIdumoStart() {
 
 	}
 
 	@Override
-	public void onRestart() {
+	public void onIdumoRestart() {
 
 	}
 
 	@Override
-	public void onResume() {
+	public void onIdumoResume() {
 	}
 
 	@Override
-	public void onPause() {
+	public void onIdumoPause() {
 	}
 
 	@Override
-	public void onStop() {
+	public void onIdumoStop() {
 
 	}
 
 	@Override
-	public void onDestroy() {
+	public void onIdumoDestroy() {
 
 	}
 

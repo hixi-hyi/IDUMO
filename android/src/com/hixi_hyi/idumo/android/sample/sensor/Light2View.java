@@ -2,7 +2,7 @@ package com.hixi_hyi.idumo.android.sample.sensor;
 
 import java.util.ArrayList;
 
-import com.hixi_hyi.idumo.android.ApplicationControllerforAndroid;
+import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
 import com.hixi_hyi.idumo.android.handler.ThroughHandler;
 import com.hixi_hyi.idumo.android.provider.LightProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
@@ -20,7 +20,7 @@ import android.os.Handler;
 
 public class Light2View extends Activity implements Runnable {
 
-	private ArrayList<ApplicationControllerforAndroid> android;
+	private ArrayList<ApplicationControllerForAndroid> android;
 	private LightProvider light;
 	private TextViewReceiptor textView;
 	private Thread thread;
@@ -44,7 +44,7 @@ public class Light2View extends Activity implements Runnable {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		android = new ArrayList<ApplicationControllerforAndroid>();
+		android = new ArrayList<ApplicationControllerForAndroid>();
 		handler = new Handler();
 
 		SensorManager sensor = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
@@ -68,15 +68,15 @@ public class Light2View extends Activity implements Runnable {
 	@Override
 	public void onStart() {
 		super.onStart();
-		for(ApplicationControllerforAndroid a:android){
-			a.onStart();
+		for(ApplicationControllerForAndroid a:android){
+			a.onIdumoStart();
 		}
 	}
 
 	@Override
 	public void onRestart() {
-		for(ApplicationControllerforAndroid a:android){
-			a.onRestart();
+		for(ApplicationControllerForAndroid a:android){
+			a.onIdumoRestart();
 		}
 		super.onRestart();
 	}
@@ -84,8 +84,8 @@ public class Light2View extends Activity implements Runnable {
 	@Override
 	public void onResume() {
 		super.onResume();
-		for(ApplicationControllerforAndroid a:android){
-			a.onResume();
+		for(ApplicationControllerForAndroid a:android){
+			a.onIdumoResume();
 		}
 		isDo = true;
 		thread = new Thread(this);
@@ -94,8 +94,8 @@ public class Light2View extends Activity implements Runnable {
 
 	@Override
 	public void onPause() {
-		for(ApplicationControllerforAndroid a:android){
-			a.onPause();
+		for(ApplicationControllerForAndroid a:android){
+			a.onIdumoPause();
 		}
 		isDo = false;
 		super.onPause();
@@ -103,16 +103,16 @@ public class Light2View extends Activity implements Runnable {
 
 	@Override
 	public void onStop() {
-		for(ApplicationControllerforAndroid a:android){
-			a.onStop();
+		for(ApplicationControllerForAndroid a:android){
+			a.onIdumoStop();
 		}
 		super.onStop();
 	}
 
 	@Override
 	public void onDestroy() {
-		for(ApplicationControllerforAndroid a:android){
-			a.onDestroy();
+		for(ApplicationControllerForAndroid a:android){
+			a.onIdumoDestroy();
 		}
 		super.onDestroy();
 	}

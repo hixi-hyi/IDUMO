@@ -5,7 +5,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-import com.hixi_hyi.idumo.android.ApplicationControllerforAndroid;
+import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
 import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
@@ -15,7 +15,7 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  *
  */
 public enum LightSensor implements SensorEventListener,
-		ApplicationControllerforAndroid {
+		ApplicationControllerForAndroid {
 
 	INSTANCE;
 
@@ -40,30 +40,30 @@ public enum LightSensor implements SensorEventListener,
 	}
 
 	@Override
-	public void onResume() {
+	public void onIdumoResume() {
 		Sensor magnet = sensorManager.getDefaultSensor(useSensorType());
 		sensorManager.registerListener(this, magnet ,SensorManager.SENSOR_DELAY_UI);
 	}
 
 	@Override
-	public void onStart() {
+	public void onIdumoStart() {
 	}
 
 	@Override
-	public void onRestart() {
+	public void onIdumoRestart() {
 	}
 
 	@Override
-	public void onPause() {
+	public void onIdumoPause() {
 		sensorManager.unregisterListener(this);
 	}
 
 	@Override
-	public void onStop() {
+	public void onIdumoStop() {
 	}
 
 	@Override
-	public void onDestroy() {
+	public void onIdumoDestroy() {
 	}
 
 	@Override

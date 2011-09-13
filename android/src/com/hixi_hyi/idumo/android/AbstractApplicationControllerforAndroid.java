@@ -1,42 +1,42 @@
 package com.hixi_hyi.idumo.android;
 
 public class AbstractApplicationControllerforAndroid implements
-		ApplicationControllerforAndroid {
+		ApplicationControllerForAndroid {
 
-	ApplicationControllerforAndroid aci;
+	ApplicationControllerForAndroid aci;
 
-	public AbstractApplicationControllerforAndroid(ApplicationControllerforAndroid aci){
+	public AbstractApplicationControllerforAndroid(ApplicationControllerForAndroid aci){
 		this.aci = aci;
 	}
 
 	@Override
-	public void onStart() {
-		aci.onStart();
+	public void onIdumoStart() {
+		aci.onIdumoStart();
 	}
 
 	@Override
-	public void onRestart() {
-		aci.onRestart();
+	public void onIdumoRestart() {
+		aci.onIdumoRestart();
 	}
 
 	@Override
-	public void onResume() {
-		aci.onResume();
+	public void onIdumoResume() {
+		aci.onIdumoResume();
 	}
 
 	@Override
-	public void onPause() {
-		aci.onPause();
+	public void onIdumoPause() {
+		aci.onIdumoPause();
 	}
 
 	@Override
-	public void onStop() {
-		aci.onStop();
+	public void onIdumoStop() {
+		aci.onIdumoStop();
 	}
 
 	@Override
-	public void onDestroy() {
-		aci.onDestroy();
+	public void onIdumoDestroy() {
+		aci.onIdumoDestroy();
 	}
 
 }

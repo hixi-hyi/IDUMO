@@ -5,7 +5,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-import com.hixi_hyi.idumo.android.ApplicationControllerforAndroid;
+import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
 import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
@@ -14,7 +14,7 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  *
  */
-public enum AccelerometerSensor implements SensorEventListener ,ApplicationControllerforAndroid{
+public enum AccelerometerSensor implements SensorEventListener ,ApplicationControllerForAndroid{
 
 	INSTANCE;
 
@@ -77,7 +77,7 @@ public enum AccelerometerSensor implements SensorEventListener ,ApplicationContr
 	}
 
 	@Override
-	public void onResume() {
+	public void onIdumoResume() {
 		accelerometer = sensorManager.getDefaultSensor(useSensorType());
 		sensorManager.registerListener(this, accelerometer,SensorManager.SENSOR_DELAY_UI);
 	}
@@ -87,25 +87,25 @@ public enum AccelerometerSensor implements SensorEventListener ,ApplicationContr
 	}
 
 	@Override
-	public void onPause() {
+	public void onIdumoPause() {
 		sensorManager.unregisterListener(this);
 	}
 
 
 	@Override
-	public void onStart() {
+	public void onIdumoStart() {
 	}
 
 	@Override
-	public void onRestart() {
+	public void onIdumoRestart() {
 	}
 
 	@Override
-	public void onStop() {
+	public void onIdumoStop() {
 	}
 
 	@Override
-	public void onDestroy() {
+	public void onIdumoDestroy() {
 	}
 
 	public boolean isReady() {

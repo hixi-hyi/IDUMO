@@ -7,7 +7,7 @@ import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
 
-import com.hixi_hyi.idumo.android.ApplicationControllerforAndroid;
+import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
 import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
@@ -16,7 +16,7 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  *
  */
-public enum GPSSensor implements LocationListener , ApplicationControllerforAndroid{
+public enum GPSSensor implements LocationListener , ApplicationControllerForAndroid{
 
 	INSTANCE;
 
@@ -143,25 +143,25 @@ public enum GPSSensor implements LocationListener , ApplicationControllerforAndr
 
 //必須機能なのでここに実装してみた
 	@Override
-	public void onResume() {
+	public void onIdumoResume() {
 		locationManager.requestLocationUpdates(useSensorType(),0,0,this);
 	}
 
 	@Override
-	public void onPause() {
+	public void onIdumoPause() {
 		locationManager.removeUpdates(this);
 	}
 
 	@Override
-	public void onStart() {}
+	public void onIdumoStart() {}
 
 	@Override
-	public void onRestart() {}
+	public void onIdumoRestart() {}
 
 	@Override
-	public void onStop() {}
+	public void onIdumoStop() {}
 
 	@Override
-	public void onDestroy() {}
+	public void onIdumoDestroy() {}
 
 }

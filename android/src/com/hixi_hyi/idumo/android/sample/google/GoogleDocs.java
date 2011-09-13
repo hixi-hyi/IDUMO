@@ -19,11 +19,11 @@ import com.google.api.client.sample.docs.v3.model.Feed;
 import com.google.api.client.sample.docs.v3.model.Link;
 import com.google.api.client.xml.XmlNamespaceDictionary;
 import com.google.api.client.xml.atom.AtomParser;
-import com.hixi_hyi.idumo.android.ApplicationControllerforAndroid;
+import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
 import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
-public class GoogleDocs implements ApplicationControllerforAndroid{
+public class GoogleDocs implements ApplicationControllerForAndroid{
 
 
 	public GoogleDocs(Activity activity){
@@ -106,27 +106,27 @@ public class GoogleDocs implements ApplicationControllerforAndroid{
 
 
 	@Override
-	public void onStart() {
+	public void onIdumoStart() {
 	}
 
 	@Override
-	public void onRestart() {
+	public void onIdumoRestart() {
 	}
 
 	@Override
-	public void onResume() {
+	public void onIdumoResume() {
 	}
 
 	@Override
-	public void onPause() {
+	public void onIdumoPause() {
 	}
 
 	@Override
-	public void onStop() {
+	public void onIdumoStop() {
 	}
 
 	@Override
-	public void onDestroy() {
+	public void onIdumoDestroy() {
 	}
 
 }

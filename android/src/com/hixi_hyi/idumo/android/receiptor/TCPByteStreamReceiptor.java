@@ -6,7 +6,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import com.hixi_hyi.idumo.android.ApplicationControllerforAndroid;
+import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
 import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoRunnable;
@@ -21,7 +21,7 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  *
  */
-public class TCPByteStreamReceiptor implements ReceiverWithOption,ApplicationControllerforAndroid,IdumoRunnable {
+public class TCPByteStreamReceiptor implements ReceiverWithOption,ApplicationControllerForAndroid,IdumoRunnable {
 	private String ip;
 	private int port;
 	private Socket socket;
@@ -59,15 +59,15 @@ public class TCPByteStreamReceiptor implements ReceiverWithOption,ApplicationCon
 	}
 
 	@Override
-	public void onStart() {
+	public void onIdumoStart() {
 	}
 
 	@Override
-	public void onRestart() {
+	public void onIdumoRestart() {
 	}
 
 	@Override
-	public void onResume() {
+	public void onIdumoResume() {
 		try {
 			socket.connect(new InetSocketAddress(ip, port));
 			outstream = socket.getOutputStream();
@@ -79,7 +79,7 @@ public class TCPByteStreamReceiptor implements ReceiverWithOption,ApplicationCon
 	}
 
 	@Override
-	public void onPause() {
+	public void onIdumoPause() {
 		try {
 			socket.close();
 			outstream.close();
@@ -89,11 +89,11 @@ public class TCPByteStreamReceiptor implements ReceiverWithOption,ApplicationCon
 	}
 
 	@Override
-	public void onStop() {
+	public void onIdumoStop() {
 	}
 
 	@Override
-	public void onDestroy() {
+	public void onIdumoDestroy() {
 	}
 
 	@Override
