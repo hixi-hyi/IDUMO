@@ -3,6 +3,7 @@ package com.hixi_hyi.idumo.console.sample;
 import com.hixi_hyi.idumo.console.receiptor.SystemOutReceiptor;
 import com.hixi_hyi.idumo.console.util.ConsoleLogger;
 import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.IdumoRunnable;
 import com.hixi_hyi.idumo.core.front.IdumoContainer;
 import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.provider.LivedoorWeatherProvider;
@@ -69,7 +70,10 @@ public class Weather2Console {
 
 			container.compile();
 
-			console.run();
+			for(IdumoRunnable r: container.getRunnables()){
+				r.run();
+			}
+
 
 		} catch (IdumoException e) {
 			e.printStackTrace();
