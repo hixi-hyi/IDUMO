@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.hixi_hyi.idumo.core.ApplicationController;
 import com.hixi_hyi.idumo.core.IdumoComponent;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoRunnable;
@@ -16,11 +17,15 @@ public class IdumoContainer{
 
 	private ArrayList<IdumoComponent> items = new ArrayList<IdumoComponent>();
 	private ArrayList<IdumoRunnable> runnables = new ArrayList<IdumoRunnable>();
+	private ArrayList<ApplicationController> controllers = new ArrayList<ApplicationController>();
 
 	private HashMap<Receiver,Connect> connector = new HashMap<Receiver,Connect>();
 
 	public void add(IdumoComponent item) {
 		items.add(item);
+		if(item instanceof ApplicationController){
+			controllers.add((ApplicationController)item);
+		}
 		if(item instanceof IdumoRunnable){
 			runnables.add((IdumoRunnable)item);
 		}
@@ -46,11 +51,15 @@ public class IdumoContainer{
 
 	}
 
-	public Collection<IdumoRunnable> getIdumoRunnables(){
+	public Collection<IdumoRunnable> getRunnables(){
 		return runnables;
 	}
 
-	private class Connect {
+	public Collection<ApplicationController> getController(){
+		return controllers;
+	}
+
+	public class Connect {
 		private ArrayList<Sender> senders = new ArrayList<Sender>();
 		public void add(Sender sender){
 			senders.add(sender);
