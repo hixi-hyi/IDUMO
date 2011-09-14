@@ -14,16 +14,16 @@
 
 package com.google.api.client.sample.calendar.android.model;
 
+import java.util.List;
+
 import com.google.api.client.util.Key;
 import com.google.common.collect.Lists;
-
-import java.util.List;
 
 /**
  * @author Yaniv Inbar
  */
 public class CalendarFeed extends Feed {
-
-  @Key("entry")
-  public List<CalendarEntry> calendars = Lists.newArrayList();
+	
+	@Key("entry")
+	public List<CalendarEntry>	calendars	= Lists.newArrayList();
 }

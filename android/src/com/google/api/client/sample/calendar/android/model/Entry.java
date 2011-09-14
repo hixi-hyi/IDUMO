@@ -14,41 +14,41 @@
 
 package com.google.api.client.sample.calendar.android.model;
 
+import java.util.List;
+
 import com.google.api.client.util.Data;
 import com.google.api.client.util.Key;
-
-import java.util.List;
 
 /**
  * @author Yaniv Inbar
  */
 public class Entry implements Cloneable {
-
-  @Key
-  public String summary;
-
-  @Key
-  public String title;
-
-  @Key
-  public String updated;
-
-  @Key("link")
-  public List<Link> links;
-
-  @Override
-  protected Entry clone() {
-    try {
-      @SuppressWarnings("unchecked")
-      Entry result = (Entry) super.clone();
-      Data.deepCopy(this, result);
-      return result;
-    } catch (CloneNotSupportedException e) {
-      throw new IllegalStateException(e);
-    }
-  }
-
-  String getEditLink() {
-    return Link.find(links, "edit");
-  }
+	
+	@Key
+	public String		summary;
+	
+	@Key
+	public String		title;
+	
+	@Key
+	public String		updated;
+	
+	@Key("link")
+	public List<Link>	links;
+	
+	@Override
+	protected Entry clone() {
+		try {
+			@SuppressWarnings("unchecked")
+			Entry result = (Entry) super.clone();
+			Data.deepCopy(this, result);
+			return result;
+		} catch (CloneNotSupportedException e) {
+			throw new IllegalStateException(e);
+		}
+	}
+	
+	String getEditLink() {
+		return Link.find(links, "edit");
+	}
 }

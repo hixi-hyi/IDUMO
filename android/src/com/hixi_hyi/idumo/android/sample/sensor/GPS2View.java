@@ -2,34 +2,31 @@ package com.hixi_hyi.idumo.android.sample.sensor;
 
 import java.util.ArrayList;
 
-import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
-import com.hixi_hyi.idumo.android.handler.ThroughHandler;
-import com.hixi_hyi.idumo.android.provider.GPSProvider;
-import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
-import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
-import com.hixi_hyi.idumo.android.sensor.GPSSensor;
-import com.hixi_hyi.idumo.android.util.AndroidLogger;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
-import com.hixi_hyi.idumo.core.util.LogManager;
-
 import android.app.Activity;
 import android.content.Context;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
+import com.hixi_hyi.idumo.android.provider.GPSProvider;
+import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
+import com.hixi_hyi.idumo.android.sensor.GPSSensor;
+import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
+import com.hixi_hyi.idumo.core.util.LogManager;
+
 public class GPS2View extends Activity implements Runnable {
-
-	private ArrayList<ApplicationControllerForAndroid> android;
-	private TextViewReceiptor textView;
-	private Thread thread;
-	private boolean isDo;
-	private Handler handler;
-
+	
+	private ArrayList<ApplicationControllerForAndroid>	android;
+	private TextViewReceiptor							textView;
+	private Thread										thread;
+	private boolean										isDo;
+	private Handler										handler;
+	
 	@Override
 	public void run() {
-		while(isDo){
+		while (isDo) {
 			LogManager.log();
 			handler.post(textView);
 			try {
@@ -38,21 +35,21 @@ public class GPS2View extends Activity implements Runnable {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
-
+			
 		}
 	}
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		android = new ArrayList<ApplicationControllerForAndroid>();
 		handler = new Handler();
-
+		
 		LocationManager location = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 		GPSSensor gpsSensor = GPSSensor.INSTANCE;
 		gpsSensor.init(location);
 		android.add(gpsSensor);
-
+		
 		GPSProvider gps = new GPSProvider(gpsSensor);
 		GPSProvider gps2 = new GPSProvider(gpsSensor);
 		GPSProvider gps3 = new GPSProvider(gpsSensor);
@@ -72,7 +69,7 @@ public class GPS2View extends Activity implements Runnable {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-
+		
 		StringConcatHandler s1 = new StringConcatHandler("Accuary:");
 		StringConcatHandler s2 = new StringConcatHandler("Altitude:");
 		StringConcatHandler s3 = new StringConcatHandler("Bearing:");
@@ -80,9 +77,9 @@ public class GPS2View extends Activity implements Runnable {
 		StringConcatHandler s5 = new StringConcatHandler("Longitude:");
 		StringConcatHandler s6 = new StringConcatHandler("Speed:");
 		StringConcatHandler s7 = new StringConcatHandler("Time:");
-
+		
 		textView = new TextViewReceiptor(this);
-
+		
 		s1.setSender(gps);
 		s2.setSender(gps2);
 		s3.setSender(gps3);
@@ -90,61 +87,61 @@ public class GPS2View extends Activity implements Runnable {
 		s5.setSender(gps5);
 		s6.setSender(gps6);
 		s7.setSender(gps7);
-
-		textView.setSender(s1,s2,s3,s4,s5,s6,s7);
-
+		
+		textView.setSender(s1, s2, s3, s4, s5, s6, s7);
+		
 	}
-
+	
 	@Override
 	public void onStart() {
 		super.onStart();
-		for(ApplicationControllerForAndroid a:android){
+		for (ApplicationControllerForAndroid a : android) {
 			a.onIdumoStart();
 		}
 	}
-
+	
 	@Override
 	public void onRestart() {
-		for(ApplicationControllerForAndroid a:android){
+		for (ApplicationControllerForAndroid a : android) {
 			a.onIdumoRestart();
 		}
 		super.onRestart();
 	}
-
+	
 	@Override
 	public void onResume() {
 		super.onResume();
-		for(ApplicationControllerForAndroid a:android){
+		for (ApplicationControllerForAndroid a : android) {
 			a.onIdumoResume();
 		}
 		isDo = true;
 		thread = new Thread(this);
 		thread.start();
 	}
-
+	
 	@Override
 	public void onPause() {
-		for(ApplicationControllerForAndroid a:android){
+		for (ApplicationControllerForAndroid a : android) {
 			a.onIdumoPause();
 		}
 		isDo = false;
 		super.onPause();
 	}
-
+	
 	@Override
 	public void onStop() {
-		for(ApplicationControllerForAndroid a:android){
+		for (ApplicationControllerForAndroid a : android) {
 			a.onIdumoStop();
 		}
 		super.onStop();
 	}
-
+	
 	@Override
 	public void onDestroy() {
-		for(ApplicationControllerForAndroid a:android){
+		for (ApplicationControllerForAndroid a : android) {
 			a.onIdumoDestroy();
 		}
 		super.onDestroy();
 	}
-
+	
 }

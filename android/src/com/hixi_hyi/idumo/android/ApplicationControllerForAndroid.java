@@ -4,16 +4,16 @@ import com.hixi_hyi.idumo.core.ApplicationController;
 
 /**
  * ApplicationのON/OFF時に必要な処理を書くためのインタフェース
- *
+ * 
  * @author Hiroyoshi HOUCHI
- *
+ * 
  */
-public interface ApplicationControllerForAndroid extends ApplicationController{
+public interface ApplicationControllerForAndroid extends ApplicationController {
 	void onIdumoRestart();
-
+	
 	void onIdumoResume();
-
+	
 	void onIdumoPause();
-
+	
 	void onIdumoDestroy();
 }

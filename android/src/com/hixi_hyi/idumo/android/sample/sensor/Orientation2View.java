@@ -2,37 +2,34 @@ package com.hixi_hyi.idumo.android.sample.sensor;
 
 import java.util.ArrayList;
 
-import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
-import com.hixi_hyi.idumo.android.handler.ThroughHandler;
-import com.hixi_hyi.idumo.android.provider.OrientationProvider;
-import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
-import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
-import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
-import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
-import com.hixi_hyi.idumo.android.sensor.OrientationSensor;
-import com.hixi_hyi.idumo.android.util.AndroidLogger;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
-import com.hixi_hyi.idumo.core.util.LogManager;
-
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
+import com.hixi_hyi.idumo.android.provider.OrientationProvider;
+import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
+import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
+import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
+import com.hixi_hyi.idumo.android.sensor.OrientationSensor;
+import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
+import com.hixi_hyi.idumo.core.util.LogManager;
+
 public class Orientation2View extends Activity implements Runnable {
-
-	private ArrayList<ApplicationControllerForAndroid> android;
-	private SensorManager sensorManager;
-	private TextViewReceiptor textView;
-	private Thread thread;
-	private boolean isDo;
-	private Handler handler;
-
+	
+	private ArrayList<ApplicationControllerForAndroid>	android;
+	private SensorManager								sensorManager;
+	private TextViewReceiptor							textView;
+	private Thread										thread;
+	private boolean										isDo;
+	private Handler										handler;
+	
 	@Override
 	public void run() {
-		while(isDo){
+		while (isDo) {
 			LogManager.log();
 			handler.post(textView);
 			try {
@@ -41,16 +38,16 @@ public class Orientation2View extends Activity implements Runnable {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
-
+			
 		}
 	}
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		android = new ArrayList<ApplicationControllerForAndroid>();
 		handler = new Handler();
-
+		
 		sensorManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
 		AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
 		accelerometerSensor.init(sensorManager);
@@ -60,11 +57,11 @@ public class Orientation2View extends Activity implements Runnable {
 		android.add(magneticFieldSensor);
 		OrientationSensor orientationSensor = OrientationSensor.INSTANCE;
 		orientationSensor.init(accelerometerSensor, magneticFieldSensor);
-
+		
 		OrientationProvider o1 = new OrientationProvider(orientationSensor);
 		OrientationProvider o2 = new OrientationProvider(orientationSensor);
 		OrientationProvider o3 = new OrientationProvider(orientationSensor);
-
+		
 		try {
 			o1.setOption(OrientationProvider.Type.AZMUTH);
 			o2.setOption(OrientationProvider.Type.PITCH);
@@ -72,72 +69,71 @@ public class Orientation2View extends Activity implements Runnable {
 		} catch (IdumoException e) {
 			e.printStackTrace();
 		}
-
+		
 		StringConcatHandler s1 = new StringConcatHandler("Azmuth:");
 		StringConcatHandler s2 = new StringConcatHandler("Pitch:");
 		StringConcatHandler s3 = new StringConcatHandler("Roll:");
-
+		
 		s1.setSender(o1);
 		s2.setSender(o2);
 		s3.setSender(o3);
-
+		
 		textView = new TextViewReceiptor(this);
-
-		textView.setSender(s1,s2,s3);
-
-
+		
+		textView.setSender(s1, s2, s3);
+		
 	}
-
+	
 	@Override
 	public void onStart() {
 		super.onStart();
-		for(ApplicationControllerForAndroid a:android){
+		for (ApplicationControllerForAndroid a : android) {
 			a.onIdumoStart();
 		}
 	}
-
+	
 	@Override
 	public void onRestart() {
-		for(ApplicationControllerForAndroid a:android){
+		for (ApplicationControllerForAndroid a : android) {
 			a.onIdumoRestart();
 		}
 		super.onRestart();
 	}
-
+	
 	@Override
 	public void onResume() {
 		super.onResume();
-		for(ApplicationControllerForAndroid a:android){
+		for (ApplicationControllerForAndroid a : android) {
 			a.onIdumoResume();
 		}
 		isDo = true;
 		thread = new Thread(this);
 		thread.start();
 	}
-
+	
 	@Override
 	public void onPause() {
-		for(ApplicationControllerForAndroid a:android){
+		for (ApplicationControllerForAndroid a : android) {
 			a.onIdumoPause();
 		}
 		isDo = false;
 		super.onPause();
 	}
-
+	
 	@Override
 	public void onStop() {
-		for(ApplicationControllerForAndroid a:android){
+		for (ApplicationControllerForAndroid a : android) {
 			a.onIdumoStop();
 		}
 		super.onStop();
 	}
-
+	
 	@Override
 	public void onDestroy() {
-		for(ApplicationControllerForAndroid a:android){
+		for (ApplicationControllerForAndroid a : android) {
 			a.onIdumoDestroy();
 		}
 		super.onDestroy();
 	}
-
+	
 }

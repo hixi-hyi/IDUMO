@@ -16,49 +16,49 @@ import com.hixi_hyi.idumo.core.data.PipeData;
 // TODO 非検証
 /**
  * 画像を表示するためのクラス
- *
+ * 
  * @author Hiroyoshi HOUCHI
- *
+ * 
  */
 public class ImageViewReceiptor extends ImageView implements ReceiverWithOption, IdumoRunnable {
-
-	private Sender sender;
-	private Activity activity;
-
+	
+	private Sender		sender;
+	private Activity	activity;
+	
 	public ImageViewReceiptor(Context context) {
 		super(context);
 		activity = (Activity) context;
 		activity.setContentView(this);
 	}
-
+	
 	@Override
 	public void run() {
 		PipeData p = sender.getData();
 		Bitmap image = (Bitmap) p.get(0);
 		setImageBitmap(image);
 	}
-
+	
 	@Override
 	public int getInputSize() {
 		return 1;
 	}
-
+	
 	@Override
 	public boolean setSender(Sender... senders) throws IdumoException {
-		if(senders.length==getInputSize()){
+		if (senders.length == getInputSize()) {
 			Sender sender = senders[0];
 			ArrayList<Class<?>> list = new ArrayList<Class<?>>(sender.getDataType());
-			if(list.get(0)==Bitmap.class){
+			if (list.get(0) == Bitmap.class) {
 				return true;
 			}
 		}
 		return false;
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		// TODO 自動生成されたメソッド・スタブ
 		return false;
 	}
-
+	
 }

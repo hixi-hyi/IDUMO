@@ -16,7 +16,6 @@
 
 package com.google.api.client.sample.docs.v3.model;
 
-
 /**
  * @author Yaniv Inbar
  */

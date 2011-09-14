@@ -2,35 +2,32 @@ package com.hixi_hyi.idumo.android.sample.sensor;
 
 import java.util.ArrayList;
 
-import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
-import com.hixi_hyi.idumo.android.handler.ThroughHandler;
-import com.hixi_hyi.idumo.android.provider.MagneticFiledProvider;
-import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
-import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
-import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
-import com.hixi_hyi.idumo.android.util.AndroidLogger;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
-import com.hixi_hyi.idumo.core.util.LogManager;
-
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
+import com.hixi_hyi.idumo.android.provider.MagneticFiledProvider;
+import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
+import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
+import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
+import com.hixi_hyi.idumo.core.util.LogManager;
+
 public class Magnetic2View extends Activity implements Runnable {
-
-	private ArrayList<ApplicationControllerForAndroid> android;
-	private MagneticFiledProvider mag;
-	private TextViewReceiptor textView;
-	private Thread thread;
-	private boolean isDo;
-	private Handler handler;
-
+	
+	private ArrayList<ApplicationControllerForAndroid>	android;
+	private MagneticFiledProvider						mag;
+	private TextViewReceiptor							textView;
+	private Thread										thread;
+	private boolean										isDo;
+	private Handler										handler;
+	
 	@Override
 	public void run() {
-		while(isDo){
+		while (isDo) {
 			LogManager.log();
 			handler.post(textView);
 			try {
@@ -38,21 +35,21 @@ public class Magnetic2View extends Activity implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
+			
 		}
 	}
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		android = new ArrayList<ApplicationControllerForAndroid>();
 		handler = new Handler();
-
+		
 		SensorManager sensor = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
 		MagneticFieldSensor magneticFieldSensor = MagneticFieldSensor.INSTANCE;
 		magneticFieldSensor.init(sensor);
 		android.add(magneticFieldSensor);
-
+		
 		MagneticFiledProvider mag1 = new MagneticFiledProvider(magneticFieldSensor);
 		MagneticFiledProvider mag2 = new MagneticFiledProvider(magneticFieldSensor);
 		MagneticFiledProvider mag3 = new MagneticFiledProvider(magneticFieldSensor);
@@ -63,72 +60,71 @@ public class Magnetic2View extends Activity implements Runnable {
 		} catch (IdumoException e) {
 			e.printStackTrace();
 		}
-
+		
 		StringConcatHandler s1 = new StringConcatHandler("X:");
 		StringConcatHandler s2 = new StringConcatHandler("Y:");
 		StringConcatHandler s3 = new StringConcatHandler("Z:");
-
+		
 		textView = new TextViewReceiptor(this);
-
+		
 		s1.setSender(mag1);
 		s2.setSender(mag2);
 		s3.setSender(mag3);
-
-		textView.setSender(s1,s2,s3);
-
-
+		
+		textView.setSender(s1, s2, s3);
+		
 	}
-
+	
 	@Override
 	public void onStart() {
 		super.onStart();
-		for(ApplicationControllerForAndroid a:android){
+		for (ApplicationControllerForAndroid a : android) {
 			a.onIdumoStart();
 		}
 	}
-
+	
 	@Override
 	public void onRestart() {
-		for(ApplicationControllerForAndroid a:android){
+		for (ApplicationControllerForAndroid a : android) {
 			a.onIdumoRestart();
 		}
 		super.onRestart();
 	}
-
+	
 	@Override
 	public void onResume() {
 		super.onResume();
-		for(ApplicationControllerForAndroid a:android){
+		for (ApplicationControllerForAndroid a : android) {
 			a.onIdumoResume();
 		}
 		isDo = true;
 		thread = new Thread(this);
 		thread.start();
 	}
-
+	
 	@Override
 	public void onPause() {
-		for(ApplicationControllerForAndroid a:android){
+		for (ApplicationControllerForAndroid a : android) {
 			a.onIdumoPause();
 		}
 		isDo = false;
 		super.onPause();
 	}
-
+	
 	@Override
 	public void onStop() {
-		for(ApplicationControllerForAndroid a:android){
+		for (ApplicationControllerForAndroid a : android) {
 			a.onIdumoStop();
 		}
 		super.onStop();
 	}
-
+	
 	@Override
 	public void onDestroy() {
-		for(ApplicationControllerForAndroid a:android){
+		for (ApplicationControllerForAndroid a : android) {
 			a.onIdumoDestroy();
 		}
 		super.onDestroy();
 	}
-
+	
 }

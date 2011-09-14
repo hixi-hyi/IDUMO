@@ -18,13 +18,13 @@ package com.google.api.client.sample.calendar.android.model;
  * @author Yaniv Inbar
  */
 public class CalendarEntry extends Entry {
-
-  public String getEventFeedLink() {
-    return Link.find(links, "http://schemas.google.com/gCal/2005#eventFeed");
-  }
-
-  @Override
-  public CalendarEntry clone() {
-    return (CalendarEntry) super.clone();
-  }
+	
+	public String getEventFeedLink() {
+		return Link.find(links, "http://schemas.google.com/gCal/2005#eventFeed");
+	}
+	
+	@Override
+	public CalendarEntry clone() {
+		return (CalendarEntry) super.clone();
+	}
 }

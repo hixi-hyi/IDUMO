@@ -14,23 +14,23 @@
 
 package com.google.api.client.sample.calendar.android.model;
 
-import com.google.api.client.util.Key;
-
 import java.util.List;
+
+import com.google.api.client.util.Key;
 
 /**
  * @author Yaniv Inbar
  */
 public class Feed {
-
-  @Key("link")
-  public List<Link> links;
-
-  public String getNextLink() {
-    return Link.find(links, "next");
-  }
-
-  public String getBatchLink() {
-    return Link.find(links, "http://schemas.google.com/g/2005#batch");
-  }
+	
+	@Key("link")
+	public List<Link>	links;
+	
+	public String getNextLink() {
+		return Link.find(links, "next");
+	}
+	
+	public String getBatchLink() {
+		return Link.find(links, "http://schemas.google.com/g/2005#batch");
+	}
 }

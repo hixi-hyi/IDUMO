@@ -20,26 +20,19 @@ import com.google.api.client.sample.docs.v3.model.Link;
 import com.google.api.client.xml.XmlNamespaceDictionary;
 import com.google.api.client.xml.atom.AtomParser;
 import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
-import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
-public class GoogleDocs implements ApplicationControllerForAndroid{
-
-
-	public GoogleDocs(Activity activity){
+public class GoogleDocs implements ApplicationControllerForAndroid {
+	
+	public GoogleDocs(Activity activity) {
 		// AccountManager を通じてGoogleアカウントを取得
 		AccountManager manager = AccountManager.get(activity);
-		Account[] accounts =
-			manager.getAccountsByType("com.google");
+		Account[] accounts = manager.getAccountsByType("com.google");
 		Bundle bundle = null;
 		try {
-			bundle = manager.getAuthToken(
-					accounts[0], // テストなので固定
-					"writely",   // ※1
-					null,
-					activity,
-					null,
-					null).getResult();
+			bundle = manager.getAuthToken(accounts[0], // テストなので固定
+			"writely", // ※1
+			null, activity, null, null).getResult();
 		} catch (OperationCanceledException e) {
 			LogManager.debug(e);
 		} catch (AuthenticatorException e) {
@@ -47,7 +40,7 @@ public class GoogleDocs implements ApplicationControllerForAndroid{
 		} catch (IOException e) {
 			LogManager.debug(e);
 		}
-
+		
 		String authToken = "";
 		if (bundle.containsKey(AccountManager.KEY_INTENT)) {
 			// 認証が必要な場合
@@ -62,22 +55,21 @@ public class GoogleDocs implements ApplicationControllerForAndroid{
 			// 認証用トークン取得
 			authToken = bundle.getString(AccountManager.KEY_AUTHTOKEN);
 		}
-
+		
 		// 送信準備
-//		HttpTransport transport = GoogleTransport.create();
+		// HttpTransport transport = GoogleTransport.create();
 		HttpTransport transport = AndroidHttp.newCompatibleTransport();
 		GoogleHeaders headers = (GoogleHeaders) transport.defaultHeaders;
 		headers.setApplicationName("Kokufu-GoogleDocsTest/1.0");
 		headers.gdataVersion = "3";
 		headers.setGoogleLogin(authToken); // 認証トークン設定
-
+		
 		// Parser を準備して Transport にセットする
 		AtomParser parser = new AtomParser();
 		// 空の Dictionary でとりあえず問題なさげ
-		parser.namespaceDictionary =
-			new XmlNamespaceDictionary();
+		parser.namespaceDictionary = new XmlNamespaceDictionary();
 		transport.addParser(parser);
-
+		
 		// 送信
 		Feed feed = null;
 		try {
@@ -87,46 +79,36 @@ public class GoogleDocs implements ApplicationControllerForAndroid{
 		} catch (IOException e) {
 			LogManager.debug(e);
 		}
-
+		
 		// 結果を表示
 		String tmp = "";
 		for (Link link : feed.links) {
 			LogManager.debug(link);
 		}
-//		TextView v = new TextView(this);
-//		v.setText(tmp);
-//		this.addContentView(
-//				v,
-//				new LayoutParams(LayoutParams.WRAP_CONTENT,
-//						LayoutParams.WRAP_CONTENT));
+		// TextView v = new TextView(this);
+		// v.setText(tmp);
+		// this.addContentView(
+		// v,
+		// new LayoutParams(LayoutParams.WRAP_CONTENT,
+		// LayoutParams.WRAP_CONTENT));
 	}
-
-
-
-
-
+	
 	@Override
-	public void onIdumoStart() {
-	}
-
+	public void onIdumoStart() {}
+	
 	@Override
-	public void onIdumoRestart() {
-	}
-
+	public void onIdumoRestart() {}
+	
 	@Override
-	public void onIdumoResume() {
-	}
-
+	public void onIdumoResume() {}
+	
 	@Override
-	public void onIdumoPause() {
-	}
-
+	public void onIdumoPause() {}
+	
 	@Override
-	public void onIdumoStop() {
-	}
-
+	public void onIdumoStop() {}
+	
 	@Override
-	public void onIdumoDestroy() {
-	}
-
+	public void onIdumoDestroy() {}
+	
 }

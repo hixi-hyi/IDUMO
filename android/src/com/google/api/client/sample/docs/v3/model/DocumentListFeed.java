@@ -16,25 +16,22 @@
 
 package com.google.api.client.sample.docs.v3.model;
 
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.util.Key;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.util.Key;
 
 /**
  * @author Yaniv Inbar
  */
 public class DocumentListFeed extends Feed {
-
-  @Key("entry")
-  public List<DocumentListEntry> docs = new ArrayList<DocumentListEntry>();
-
-  public static DocumentListFeed executeGet(
-      HttpTransport transport, DocsUrl url) throws IOException {
-    return (DocumentListFeed) Feed.executeGet(
-        transport, url, DocumentListFeed.class);
-  }
+	
+	@Key("entry")
+	public List<DocumentListEntry>	docs	= new ArrayList<DocumentListEntry>();
+	
+	public static DocumentListFeed executeGet(HttpTransport transport, DocsUrl url) throws IOException {
+		return (DocumentListFeed) Feed.executeGet(transport, url, DocumentListFeed.class);
+	}
 }
