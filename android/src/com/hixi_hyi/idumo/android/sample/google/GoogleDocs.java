@@ -19,10 +19,10 @@ import com.google.api.client.sample.docs.v3.model.Feed;
 import com.google.api.client.sample.docs.v3.model.Link;
 import com.google.api.client.xml.XmlNamespaceDictionary;
 import com.google.api.client.xml.atom.AtomParser;
-import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
+import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
-public class GoogleDocs implements ApplicationControllerForAndroid {
+public class GoogleDocs implements AndroidController {
 	
 	public GoogleDocs(Activity activity) {
 		// AccountManager を通じてGoogleアカウントを取得

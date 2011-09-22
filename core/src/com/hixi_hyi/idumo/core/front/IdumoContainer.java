@@ -13,13 +13,13 @@ import com.hixi_hyi.idumo.core.Receiver;
 import com.hixi_hyi.idumo.core.Sender;
 
 public class IdumoContainer {
-	
+
 	private ArrayList<IdumoComponent>			items		= new ArrayList<IdumoComponent>();
 	private ArrayList<IdumoRunnable>			runnables	= new ArrayList<IdumoRunnable>();
 	private ArrayList<ApplicationController>	controllers	= new ArrayList<ApplicationController>();
-	
+
 	private HashMap<Receiver, Connect>			connector	= new HashMap<Receiver, Connect>();
-	
+
 	public void add(IdumoComponent item) {
 		items.add(item);
 		if (item instanceof ApplicationController) {
@@ -29,7 +29,7 @@ public class IdumoContainer {
 			runnables.add((IdumoRunnable) item);
 		}
 	}
-	
+
 	public void connect(Sender sender, Receiver receiver) {
 		if (!connector.containsKey(receiver)) {
 			Connect connect = new Connect();
@@ -40,34 +40,38 @@ public class IdumoContainer {
 			connect.add(sender);
 		}
 	}
-	
-	public void compile() throws IdumoException {
+
+	public void setup() throws IdumoException {
 		for (Map.Entry<Receiver, Connect> entry : connector.entrySet()) {
 			Receiver receiver = entry.getKey();
 			Connect connect = entry.getValue();
 			receiver.setSender(connect.getSenders());
 		}
-		
+
 	}
-	
+
 	public Collection<IdumoRunnable> getRunnables() {
 		return runnables;
 	}
-	
-	public Collection<ApplicationController> getController() {
+
+	public IdumoRunnable getRunnable() {
+		return runnables.get(0);
+	}
+
+	public Collection<ApplicationController> getApplicationControllers() {
 		return controllers;
 	}
-	
+
 	public class Connect {
 		private ArrayList<Sender>	senders	= new ArrayList<Sender>();
-		
+
 		public void add(Sender sender) {
 			senders.add(sender);
 		}
-		
+
 		public Sender[] getSenders() {
 			return senders.toArray(new Sender[0]);
 		}
 	}
-	
+
 }

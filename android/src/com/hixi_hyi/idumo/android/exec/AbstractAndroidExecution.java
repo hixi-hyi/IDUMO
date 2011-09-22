@@ -1,5 +1,11 @@
-package com.hixi_hyi.idumo.console.exec;
+package com.hixi_hyi.idumo.android.exec;
 
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.Handler;
+
+import com.hixi_hyi.idumo.android.AndroidController;
+import com.hixi_hyi.idumo.android.front.AndroidContainer;
 import com.hixi_hyi.idumo.core.ApplicationController;
 import com.hixi_hyi.idumo.core.IdumoComponent;
 import com.hixi_hyi.idumo.core.IdumoException;
@@ -8,21 +14,23 @@ import com.hixi_hyi.idumo.core.IdumoRunnable;
 import com.hixi_hyi.idumo.core.IdumoRuntimeException;
 import com.hixi_hyi.idumo.core.Receiver;
 import com.hixi_hyi.idumo.core.Sender;
-import com.hixi_hyi.idumo.core.front.IdumoContainer;
 import com.hixi_hyi.idumo.core.front.IdumoExecutionSetting;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
-public abstract class AbstractConsoleExecution implements IdumoExecution {
+public abstract class AbstractAndroidExecution extends Activity implements IdumoExecution,IdumoRunnable {
 
-	private IdumoContainer	container = new IdumoContainer();
+	private AndroidContainer	container = new AndroidContainer();
 	private IdumoExecutionSetting setting = new IdumoExecutionSetting();
-	private boolean isReady;
+	protected Thread										thread;
+	protected boolean										isReady;
+	protected Handler handler = new Handler();
 
-	/**
-	 * @return isReady
-	 */
+	@Override
 	public boolean isReady() {
 		return isReady;
+	}
+
+	public void run(){
+		onIdumoExec();
 	}
 
 	@Override
@@ -30,7 +38,6 @@ public abstract class AbstractConsoleExecution implements IdumoExecution {
 		for (ApplicationController controller : container.getApplicationControllers()) {
 			controller.onIdumoStart();
 		}
-		isReady=true;
 	}
 
 	@Override
@@ -38,7 +45,6 @@ public abstract class AbstractConsoleExecution implements IdumoExecution {
 		for (ApplicationController controller : container.getApplicationControllers()) {
 			controller.onIdumoStop();
 		}
-		isReady=false;
 	}
 
 	@Override
@@ -51,13 +57,13 @@ public abstract class AbstractConsoleExecution implements IdumoExecution {
 		}
 		int count = getLoopCount();
 		if(count==-1){
-			runnable.run();
+			handler.post(runnable);
 			try {
 				Thread.sleep(getSleepTime());
 			} catch (InterruptedException e) {}
 		}else{
 			for(int i = 0; i < count; i++){
-				runnable.run();
+				handler.post(runnable);
 				try {
 					Thread.sleep(getSleepTime());
 				} catch (InterruptedException e) {}
@@ -66,6 +72,74 @@ public abstract class AbstractConsoleExecution implements IdumoExecution {
 
 	}
 
+
+
+
+	/* (非 Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		try {
+			onIdumoMakeFlowChart();
+			onIdumoPrepare();
+		} catch (IdumoException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		for (AndroidController controller : container.getAndroidControllers()) {
+			controller.onIdumoStart();
+		}
+	}
+
+	@Override
+	public void onRestart() {
+		for (AndroidController controller : container.getAndroidControllers()) {
+			controller.onIdumoRestart();
+		}
+		super.onRestart();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		for (AndroidController controller : container.getAndroidControllers()) {
+			controller.onIdumoResume();
+		}
+		isReady = true;
+		thread = new Thread(this);
+		thread.start();
+	}
+
+	@Override
+	public void onPause() {
+		for (AndroidController controller : container.getAndroidControllers()) {
+			controller.onIdumoPause();
+		}
+		isReady = false;
+		super.onPause();
+	}
+
+	@Override
+	public void onStop() {
+		for (AndroidController controller : container.getAndroidControllers()) {
+			controller.onIdumoStop();
+		}
+		super.onStop();
+	}
+
+	@Override
+	public void onDestroy() {
+		for (AndroidController controller : container.getAndroidControllers()) {
+			controller.onIdumoDestroy();
+		}
+		super.onDestroy();
+	}
 
 	/**
 	 * @param item

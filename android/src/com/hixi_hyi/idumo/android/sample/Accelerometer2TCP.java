@@ -8,7 +8,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
+import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.handler.ThroughHandler;
 import com.hixi_hyi.idumo.android.provider.AccelerometerProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
@@ -17,7 +17,7 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 
 public class Accelerometer2TCP extends Activity implements Runnable {
 	
-	private ArrayList<ApplicationControllerForAndroid>	android;
+	private ArrayList<AndroidController>	android;
 	private SensorManager								sensormanager;
 	private AccelerometerProvider						accelerometer;
 	private ThroughHandler								through;
@@ -48,7 +48,7 @@ public class Accelerometer2TCP extends Activity implements Runnable {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		android = new ArrayList<ApplicationControllerForAndroid>();
+		android = new ArrayList<AndroidController>();
 		handler = new Handler();
 		
 		sensormanager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
@@ -70,14 +70,14 @@ public class Accelerometer2TCP extends Activity implements Runnable {
 	@Override
 	public void onStart() {
 		super.onStart();
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoStart();
 		}
 	}
 	
 	@Override
 	public void onRestart() {
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoRestart();
 		}
 		super.onRestart();
@@ -86,7 +86,7 @@ public class Accelerometer2TCP extends Activity implements Runnable {
 	@Override
 	public void onResume() {
 		super.onResume();
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoResume();
 		}
 		isDo = true;
@@ -96,7 +96,7 @@ public class Accelerometer2TCP extends Activity implements Runnable {
 	
 	@Override
 	public void onPause() {
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoPause();
 		}
 		isDo = false;
@@ -105,7 +105,7 @@ public class Accelerometer2TCP extends Activity implements Runnable {
 	
 	@Override
 	public void onStop() {
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoStop();
 		}
 		super.onStop();
@@ -113,7 +113,7 @@ public class Accelerometer2TCP extends Activity implements Runnable {
 	
 	@Override
 	public void onDestroy() {
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoDestroy();
 		}
 		super.onDestroy();

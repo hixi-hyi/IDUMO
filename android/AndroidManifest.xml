@@ -96,6 +96,31 @@
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
             </intent-filter>
         </activity>
+        <activity android:name=".sample.app.GPS2LocationExecution"
+        		 android:label="@string/activity_gps2locationexecution">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+
+        <!-- ************************************* -->
+        <!--          SEMI APP   SAMPLES                -->
+        <!-- ************************************* -->
+        <activity android:name=".sample.seminer.GPS2LocationSeminer"
+        		 android:label="@string/activity_seminer_gps">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".sample.seminer.TodayWeatherSeminer"
+        		 android:label="@string/activity_seminer_weather">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
 
 
         <activity android:name=".sample.Accelerometer2TCP"

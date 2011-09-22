@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
+import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.handler.ThroughHandler;
 import com.hixi_hyi.idumo.android.receiptor.TCPByteStreamReceiptor;
 import com.hixi_hyi.idumo.core.IdumoException;
@@ -18,7 +18,7 @@ public class RandomByte2TCP extends Activity implements Runnable {
 	private static final String							IP		= "192.168.12.10";
 	private static final int							PORT	= 10000;
 	
-	private ArrayList<ApplicationControllerForAndroid>	android;
+	private ArrayList<AndroidController>	android;
 	private RandomByteProvider							ramdombyte;
 	private ThroughHandler								through;
 	private TCPByteStreamReceiptor						tcp;
@@ -43,7 +43,7 @@ public class RandomByte2TCP extends Activity implements Runnable {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		android = new ArrayList<ApplicationControllerForAndroid>();
+		android = new ArrayList<AndroidController>();
 		
 		ramdombyte = new RandomByteProvider();
 		
@@ -67,14 +67,14 @@ public class RandomByte2TCP extends Activity implements Runnable {
 	@Override
 	public void onStart() {
 		super.onStart();
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoStart();
 		}
 	}
 	
 	@Override
 	public void onRestart() {
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoRestart();
 		}
 		super.onRestart();
@@ -83,7 +83,7 @@ public class RandomByte2TCP extends Activity implements Runnable {
 	@Override
 	public void onResume() {
 		super.onResume();
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoResume();
 		}
 		isDo = true;
@@ -93,7 +93,7 @@ public class RandomByte2TCP extends Activity implements Runnable {
 	
 	@Override
 	public void onPause() {
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoPause();
 		}
 		isDo = false;
@@ -102,7 +102,7 @@ public class RandomByte2TCP extends Activity implements Runnable {
 	
 	@Override
 	public void onStop() {
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoStop();
 		}
 		super.onStop();
@@ -110,7 +110,7 @@ public class RandomByte2TCP extends Activity implements Runnable {
 	
 	@Override
 	public void onDestroy() {
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoDestroy();
 		}
 		super.onDestroy();

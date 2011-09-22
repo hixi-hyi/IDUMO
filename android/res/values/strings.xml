@@ -15,4 +15,7 @@
     <string name="activity_gdocs2view">Unfinished/Google/GDocs2View</string>
     <string name="activity_lweather2mview">APP/TodaysWeather</string>
     <string name="activity_gps2location">APP/ReversedGeocode</string>
+    <string name="activity_gps2locationexecution">APP/Execution</string>
+    <string name="activity_seminer_gps">Semi/GPS2Location</string>
+    <string name="activity_seminer_weather">Semi/Weather</string>
 </resources>

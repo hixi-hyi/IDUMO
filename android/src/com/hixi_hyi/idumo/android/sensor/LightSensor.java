@@ -5,7 +5,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
+import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
@@ -14,7 +14,7 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public enum LightSensor implements SensorEventListener, ApplicationControllerForAndroid {
+public enum LightSensor implements SensorEventListener, AndroidController {
 	
 	INSTANCE;
 	

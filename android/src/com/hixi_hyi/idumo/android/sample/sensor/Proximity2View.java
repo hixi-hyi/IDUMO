@@ -8,7 +8,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
+import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.provider.ProximityProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.android.sensor.ProximitySensor;
@@ -17,7 +17,7 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 
 public class Proximity2View extends Activity implements Runnable {
 	
-	private ArrayList<ApplicationControllerForAndroid>	android;
+	private ArrayList<AndroidController>	android;
 	private ProximityProvider							prom;
 	private TextViewReceiptor							textView;
 	private Thread										thread;
@@ -41,7 +41,7 @@ public class Proximity2View extends Activity implements Runnable {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		android = new ArrayList<ApplicationControllerForAndroid>();
+		android = new ArrayList<AndroidController>();
 		handler = new Handler();
 		
 		SensorManager sensor = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
@@ -63,14 +63,14 @@ public class Proximity2View extends Activity implements Runnable {
 	@Override
 	public void onStart() {
 		super.onStart();
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoStart();
 		}
 	}
 	
 	@Override
 	public void onRestart() {
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoRestart();
 		}
 		super.onRestart();
@@ -79,7 +79,7 @@ public class Proximity2View extends Activity implements Runnable {
 	@Override
 	public void onResume() {
 		super.onResume();
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoResume();
 		}
 		isDo = true;
@@ -89,7 +89,7 @@ public class Proximity2View extends Activity implements Runnable {
 	
 	@Override
 	public void onPause() {
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoPause();
 		}
 		isDo = false;
@@ -98,7 +98,7 @@ public class Proximity2View extends Activity implements Runnable {
 	
 	@Override
 	public void onStop() {
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoStop();
 		}
 		super.onStop();
@@ -106,7 +106,7 @@ public class Proximity2View extends Activity implements Runnable {
 	
 	@Override
 	public void onDestroy() {
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoDestroy();
 		}
 		super.onDestroy();

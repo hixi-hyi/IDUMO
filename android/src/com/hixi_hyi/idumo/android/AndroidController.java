@@ -8,7 +8,7 @@ import com.hixi_hyi.idumo.core.ApplicationController;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public interface ApplicationControllerForAndroid extends ApplicationController {
+public interface AndroidController extends ApplicationController {
 	void onIdumoRestart();
 	
 	void onIdumoResume();

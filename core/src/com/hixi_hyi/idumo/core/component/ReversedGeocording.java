@@ -9,29 +9,29 @@ import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
 
 /**
- * 
+ *
  * 緯度経度の情報から現在地を推測するクラス．
- * 
+ *
  * 簡易逆ジオコーディングサービス / Finds Webサービス
  * http://www.finds.jp/wsdocs/rgeocode/index.html#APPTOU
- * 
+ *
  * @author Hiroyoshi
- * 
+ *
  */
 public class ReversedGeocording {
-	
+
 	private static final String	REQUEST_URL	= "http://www.finds.jp/ws/rgeocode.php?lat=%f&lon=%f";
-	
+
 	private String				requestURL;
 	private boolean				isReady;
-	
+
 	private String				location;
-	
+
 	public ReversedGeocording(double lat, double lon) {
 		requestURL = String.format(REQUEST_URL, lat, lon);
 		init();
 	}
-	
+
 	public void init() {
 		try {
 			URL accessURL = new URL(requestURL);
@@ -45,10 +45,11 @@ public class ReversedGeocording {
 			location = pref + mun + sec;
 			isReady = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			location = "住所が特定できません";
+			isReady = true;
 		}
 	}
-	
+
 	public boolean isReady() {
 		if (isReady) {
 			return true;
@@ -56,9 +57,9 @@ public class ReversedGeocording {
 		init();
 		return isReady;
 	}
-	
+
 	public String getLocation() {
 		return location;
 	}
-	
+
 }

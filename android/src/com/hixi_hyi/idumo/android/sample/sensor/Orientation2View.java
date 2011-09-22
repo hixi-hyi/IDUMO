@@ -8,7 +8,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.hixi_hyi.idumo.android.ApplicationControllerForAndroid;
+import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.provider.OrientationProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
@@ -20,7 +20,7 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 
 public class Orientation2View extends Activity implements Runnable {
 	
-	private ArrayList<ApplicationControllerForAndroid>	android;
+	private ArrayList<AndroidController>	android;
 	private SensorManager								sensorManager;
 	private TextViewReceiptor							textView;
 	private Thread										thread;
@@ -45,7 +45,7 @@ public class Orientation2View extends Activity implements Runnable {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		android = new ArrayList<ApplicationControllerForAndroid>();
+		android = new ArrayList<AndroidController>();
 		handler = new Handler();
 		
 		sensorManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
@@ -87,14 +87,14 @@ public class Orientation2View extends Activity implements Runnable {
 	@Override
 	public void onStart() {
 		super.onStart();
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoStart();
 		}
 	}
 	
 	@Override
 	public void onRestart() {
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoRestart();
 		}
 		super.onRestart();
@@ -103,7 +103,7 @@ public class Orientation2View extends Activity implements Runnable {
 	@Override
 	public void onResume() {
 		super.onResume();
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoResume();
 		}
 		isDo = true;
@@ -113,7 +113,7 @@ public class Orientation2View extends Activity implements Runnable {
 	
 	@Override
 	public void onPause() {
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoPause();
 		}
 		isDo = false;
@@ -122,7 +122,7 @@ public class Orientation2View extends Activity implements Runnable {
 	
 	@Override
 	public void onStop() {
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoStop();
 		}
 		super.onStop();
@@ -130,7 +130,7 @@ public class Orientation2View extends Activity implements Runnable {
 	
 	@Override
 	public void onDestroy() {
-		for (ApplicationControllerForAndroid a : android) {
+		for (AndroidController a : android) {
 			a.onIdumoDestroy();
 		}
 		super.onDestroy();

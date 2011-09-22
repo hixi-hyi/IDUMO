@@ -1,69 +1,76 @@
 package com.hixi_hyi.idumo.console.sample;
 
-import com.hixi_hyi.idumo.console.exec.AbstractConsoleOneExecution;
+import com.hixi_hyi.idumo.console.exec.AbstractConsoleExecution;
+
 import com.hixi_hyi.idumo.console.receiptor.SystemOutReceiptor;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.front.IdumoContainer;
 import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.provider.LivedoorWeatherProvider;
 
-public class Weather2Console extends AbstractConsoleOneExecution {
-	
+public class TodayWeather extends AbstractConsoleExecution {
+
 	@Override
-	public void onIdumoBuild() throws IdumoException {
-		container = new IdumoContainer();
-		
+	public void onIdumoMakeFlowChart() throws IdumoException {
+
 		LivedoorWeatherProvider date = new LivedoorWeatherProvider(63);
-		container.add(date);
+		add(date);
 		LivedoorWeatherProvider locate = new LivedoorWeatherProvider(63);
-		container.add(locate);
+		add(locate);
 		LivedoorWeatherProvider maxtemp = new LivedoorWeatherProvider(63);
-		container.add(maxtemp);
+		add(maxtemp);
 		LivedoorWeatherProvider mintemp = new LivedoorWeatherProvider(63);
-		container.add(mintemp);
+		add(mintemp);
 		LivedoorWeatherProvider weather = new LivedoorWeatherProvider(63);
-		container.add(weather);
+		add(weather);
 		LivedoorWeatherProvider description = new LivedoorWeatherProvider(63);
-		container.add(description);
-		
+		add(description);
+
 		date.setOption(LivedoorWeatherProvider.Type.DATE);
 		locate.setOption(LivedoorWeatherProvider.Type.LOCATION);
 		maxtemp.setOption(LivedoorWeatherProvider.Type.MAX_TEMP);
 		mintemp.setOption(LivedoorWeatherProvider.Type.MIN_TEMP);
 		weather.setOption(LivedoorWeatherProvider.Type.WEATHER);
 		description.setOption(LivedoorWeatherProvider.Type.DESCRIPTION);
-		
+
 		StringConcatHandler s1 = new StringConcatHandler("DATE:");
-		container.add(s1);
+		add(s1);
 		StringConcatHandler s2 = new StringConcatHandler("Location:");
-		container.add(s2);
+		add(s2);
 		StringConcatHandler s3 = new StringConcatHandler("Max:");
-		container.add(s3);
+		add(s3);
 		StringConcatHandler s4 = new StringConcatHandler("Min:");
-		container.add(s4);
+		add(s4);
 		StringConcatHandler s5 = new StringConcatHandler("Weather:");
-		container.add(s5);
+		add(s5);
 		StringConcatHandler s6 = new StringConcatHandler("Desc:");
-		container.add(s6);
-		
+		add(s6);
+
 		SystemOutReceiptor console = new SystemOutReceiptor();
-		container.add(console);
-		
-		container.connect(date, s1);
-		container.connect(locate, s2);
-		container.connect(maxtemp, s3);
-		container.connect(mintemp, s4);
-		container.connect(weather, s5);
-		container.connect(description, s6);
-		
-		container.connect(s1, console);
-		container.connect(s2, console);
-		container.connect(s3, console);
-		container.connect(s4, console);
-		container.connect(s5, console);
-		container.connect(s6, console);
-		
-		container.compile();
-		
+		add(console);
+
+		connect(date, s1);
+		connect(locate, s2);
+		connect(maxtemp, s3);
+		connect(mintemp, s4);
+		connect(weather, s5);
+		connect(description, s6);
+
+		connect(s1, console);
+		connect(s2, console);
+		connect(s3, console);
+		connect(s4, console);
+		connect(s5, console);
+		connect(s6, console);
+
+		setup();
+
+	}
+
+	@Override
+	public void onIdumoPrepare() {
+		setLoopCount(1);
+		setSleepTime(1000);
+
 	}
 }
