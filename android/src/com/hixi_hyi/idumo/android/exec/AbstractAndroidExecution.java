@@ -49,6 +49,11 @@ public abstract class AbstractAndroidExecution extends Activity implements Idumo
 
 	@Override
 	public void onIdumoExec() throws IdumoRuntimeException {
+		while(!isReady()){
+			try {
+				Thread.sleep(getSleepTime());
+			} catch (InterruptedException e) {}
+		}
 		IdumoRunnable runnable = getRunnable();
 		while (!runnable.isReady()) {
 			try {

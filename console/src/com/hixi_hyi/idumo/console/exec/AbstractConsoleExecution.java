@@ -43,6 +43,11 @@ public abstract class AbstractConsoleExecution implements IdumoExecution {
 
 	@Override
 	public void onIdumoExec() throws IdumoRuntimeException {
+		while(!isReady()){
+			try {
+				Thread.sleep(getSleepTime());
+			} catch (InterruptedException e) {}
+		}
 		IdumoRunnable runnable = getRunnable();
 		while (!runnable.isReady()) {
 			try {
