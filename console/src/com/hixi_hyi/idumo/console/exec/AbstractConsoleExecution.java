@@ -26,7 +26,15 @@ public abstract class AbstractConsoleExecution implements IdumoExecution {
 	}
 
 	@Override
+	public void onIdumoCreated() throws IdumoException{
+		onIdumoMakeFlowChart();
+		setup();
+		onIdumoPrepare();
+	}
+
+	@Override
 	public void onIdumoStart() {
+		onIdumoPrepare();
 		for (ApplicationController controller : container.getApplicationControllers()) {
 			controller.onIdumoStart();
 		}

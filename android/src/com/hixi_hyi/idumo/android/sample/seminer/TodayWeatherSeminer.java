@@ -21,7 +21,6 @@ public class TodayWeatherSeminer extends AbstractAndroidExecution {
 
 		connect(weather, view);
 
-		setup();
 	}
 
 	@Override

@@ -21,8 +21,6 @@ public class TodayWeatherSeminer extends AbstractConsoleExecution {
 		add(view);
 
 		connect(weather, view);
-
-		setup();
 	}
 
 	@Override

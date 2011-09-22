@@ -5,9 +5,12 @@ public interface IdumoExecution {
 
 	public void onIdumoPrepare();
 
+	public void onIdumoCreated() throws IdumoException;
+
 	public void onIdumoStart();
+
+	public void onIdumoExec() throws IdumoRuntimeException;
 
 	public void onIdumoStop();
 
-	public void onIdumoExec() throws IdumoRuntimeException;
 }

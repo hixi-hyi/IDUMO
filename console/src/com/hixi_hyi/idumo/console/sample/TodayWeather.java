@@ -63,8 +63,6 @@ public class TodayWeather extends AbstractConsoleExecution {
 		connect(s5, console);
 		connect(s6, console);
 
-		setup();
-
 	}
 
 	@Override

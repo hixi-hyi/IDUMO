@@ -52,9 +52,12 @@ public class GPS2LocationExecution extends AbstractAndroidExecution {
 		connect(gps1, rgh);
 
 		connect(gps2, rgh);
+
+		connect(gps1, textview);
+		connect(gps2, textview);
+
 		connect(rgh, textview);
 
-		setup();
 	}
 
 	@Override

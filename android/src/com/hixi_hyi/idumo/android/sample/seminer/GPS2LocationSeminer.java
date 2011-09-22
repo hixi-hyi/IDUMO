@@ -34,7 +34,6 @@ public class GPS2LocationSeminer extends AbstractAndroidExecution {
 		connect(gps1, rgh);
 		connect(gps2, rgh);
 		connect(rgh, textview);
-		setup();
 	}
 
 	@Override

@@ -34,6 +34,13 @@ public abstract class AbstractAndroidExecution extends Activity implements Idumo
 	}
 
 	@Override
+	public void onIdumoCreated() throws IdumoException{
+		onIdumoMakeFlowChart();
+		setup();
+		onIdumoPrepare();
+	}
+
+	@Override
 	public void onIdumoStart() {
 		for (ApplicationController controller : container.getApplicationControllers()) {
 			controller.onIdumoStart();
@@ -78,8 +85,6 @@ public abstract class AbstractAndroidExecution extends Activity implements Idumo
 	}
 
 
-
-
 	/* (非 Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -87,8 +92,7 @@ public abstract class AbstractAndroidExecution extends Activity implements Idumo
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		try {
-			onIdumoMakeFlowChart();
-			onIdumoPrepare();
+			onIdumoCreated();
 		} catch (IdumoException e) {
 			e.printStackTrace();
 		}

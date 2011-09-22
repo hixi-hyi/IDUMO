@@ -11,8 +11,7 @@ public class TodayWeatherMain {
 
 		TodayWeather weather = new TodayWeather();
 		try {
-			weather.onIdumoMakeFlowChart();
-			weather.onIdumoPrepare();
+			weather.onIdumoCreated();
 			weather.onIdumoStart();
 			weather.onIdumoExec();
 			weather.onIdumoStop();
