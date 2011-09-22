@@ -1,10 +1,6 @@
 package com.hixi_hyi.idumo.core;
 
 public interface IdumoExecution {
-	public void onIdumoMakeFlowChart() throws IdumoException;
-
-	public void onIdumoPrepare();
-
 	public void onIdumoCreated() throws IdumoException;
 
 	public void onIdumoStart();

@@ -1,14 +1,13 @@
 package com.hixi_hyi.idumo.console.sample;
 
-import com.hixi_hyi.idumo.console.exec.AbstractConsoleExecution;
+import com.hixi_hyi.idumo.console.exec.AbstractConsoleExecutionComponent;
 
 import com.hixi_hyi.idumo.console.receiptor.SystemOutReceiptor;
 import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.front.IdumoContainer;
 import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.provider.LivedoorWeatherProvider;
 
-public class TodayWeather extends AbstractConsoleExecution {
+public class TodayWeather extends AbstractConsoleExecutionComponent {
 
 	@Override
 	public void onIdumoMakeFlowChart() throws IdumoException {

@@ -1,9 +1,12 @@
 package com.hixi_hyi.idumo.console.exec;
 
+import java.util.Collection;
+
 import com.hixi_hyi.idumo.core.ApplicationController;
 import com.hixi_hyi.idumo.core.IdumoComponent;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoExecution;
+import com.hixi_hyi.idumo.core.IdumoExecutionComponent;
 import com.hixi_hyi.idumo.core.IdumoRunnable;
 import com.hixi_hyi.idumo.core.IdumoRuntimeException;
 import com.hixi_hyi.idumo.core.Receiver;
@@ -12,71 +15,24 @@ import com.hixi_hyi.idumo.core.front.IdumoContainer;
 import com.hixi_hyi.idumo.core.front.IdumoExecutionSetting;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
-public abstract class AbstractConsoleExecution implements IdumoExecution {
+public abstract class AbstractConsoleExecutionComponent implements IdumoExecutionComponent {
 
 	private IdumoContainer	container = new IdumoContainer();
 	private IdumoExecutionSetting setting = new IdumoExecutionSetting();
 	private boolean isReady;
 
 	/**
+	 * @param isReady セットする isReady
+	 */
+	public void setReady(boolean isReady) {
+		this.isReady = isReady;
+	}
+
+	/**
 	 * @return isReady
 	 */
 	public boolean isReady() {
 		return isReady;
-	}
-
-	@Override
-	public void onIdumoCreated() throws IdumoException{
-		onIdumoMakeFlowChart();
-		setup();
-		onIdumoPrepare();
-	}
-
-	@Override
-	public void onIdumoStart() {
-		onIdumoPrepare();
-		for (ApplicationController controller : container.getApplicationControllers()) {
-			controller.onIdumoStart();
-		}
-		isReady=true;
-	}
-
-	@Override
-	public void onIdumoStop() {
-		for (ApplicationController controller : container.getApplicationControllers()) {
-			controller.onIdumoStop();
-		}
-		isReady=false;
-	}
-
-	@Override
-	public void onIdumoExec() throws IdumoRuntimeException {
-		while(!isReady()){
-			try {
-				Thread.sleep(getSleepTime());
-			} catch (InterruptedException e) {}
-		}
-		IdumoRunnable runnable = getRunnable();
-		while (!runnable.isReady()) {
-			try {
-				Thread.sleep(getSleepTime());
-			} catch (InterruptedException e) {}
-		}
-		int count = getLoopCount();
-		if(count==-1){
-			runnable.run();
-			try {
-				Thread.sleep(getSleepTime());
-			} catch (InterruptedException e) {}
-		}else{
-			for(int i = 0; i < count; i++){
-				runnable.run();
-				try {
-					Thread.sleep(getSleepTime());
-				} catch (InterruptedException e) {}
-			}
-		}
-
 	}
 
 
@@ -144,6 +100,15 @@ public abstract class AbstractConsoleExecution implements IdumoExecution {
 	public void setSleepTime(int sleepTime) {
 		setting.setSleepTime(sleepTime);
 	}
+
+	/**
+	 * @return
+	 * @see com.hixi_hyi.idumo.core.front.IdumoContainer#getApplicationControllers()
+	 */
+	public Collection<ApplicationController> getApplicationControllers() {
+		return container.getApplicationControllers();
+	}
+
 
 
 
