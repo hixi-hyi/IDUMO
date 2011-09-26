@@ -1,24 +1,34 @@
-package com.hixi_hyi.idumo.android.sample.sensor;
+package com.hixi_hyi.idumo.android.execution.app;
 
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
-import android.hardware.SensorManager;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.hixi_hyi.idumo.android.AndroidController;
-import com.hixi_hyi.idumo.android.provider.ProximityProvider;
+import com.hixi_hyi.idumo.android.provider.GPSProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
-import com.hixi_hyi.idumo.android.sensor.ProximitySensor;
-import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
+import com.hixi_hyi.idumo.android.sensor.GPSSensor;
+import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.handler.ReversedGeocordingHandler;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
-public class Proximity2View extends Activity implements Runnable {
+/**
+ * AndroidのGPS情報から現在地を推測します．
+ * 
+ * @author Hiroyoshi
+ * 
+ */
+public class GPS2Location extends Activity implements Runnable {
 	
 	private ArrayList<AndroidController>	android;
-	private ProximityProvider				prom;
+	private GPSProvider						gps;
+	private GPSProvider						gps2;
+	
+	private ReversedGeocordingHandler		rgh;
 	private TextViewReceiptor				textView;
 	private Thread							thread;
 	private boolean							isDo;
@@ -26,15 +36,18 @@ public class Proximity2View extends Activity implements Runnable {
 	
 	@Override
 	public void run() {
-		while (isDo) {
+		while (true) {
 			LogManager.log();
-			handler.post(textView);
 			try {
+				if (textView.isReady()) {
+					handler.post(textView);
+					Thread.sleep(20000);
+				}
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
+				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
-			
 		}
 	}
 	
@@ -44,19 +57,26 @@ public class Proximity2View extends Activity implements Runnable {
 		android = new ArrayList<AndroidController>();
 		handler = new Handler();
 		
-		SensorManager sensor = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
-		ProximitySensor proximitySensor = ProximitySensor.INSTANCE;
-		proximitySensor.init(sensor);
-		android.add(proximitySensor);
+		LocationManager location = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+		GPSSensor gpsSensor = GPSSensor.INSTANCE;
+		gpsSensor.init(location);
+		android.add(gpsSensor);
 		
-		prom = new ProximityProvider(proximitySensor);
-		
-		StringConcatHandler s1 = new StringConcatHandler("Proximity:");
-		
-		textView = new TextViewReceiptor(this);
-		
-		s1.setSender(prom);
-		textView.setSender(s1);
+		try {
+			gps = new GPSProvider(gpsSensor);
+			gps2 = new GPSProvider(gpsSensor);
+			gps.setOption(GPSProvider.Type.LATITUDE);
+			gps2.setOption(GPSProvider.Type.LONGITUDE);
+			
+			rgh = new ReversedGeocordingHandler();
+			
+			textView = new TextViewReceiptor(this);
+			
+			rgh.setSender(gps, gps2);
+			textView.setSender(gps, gps2, rgh);
+		} catch (IdumoException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

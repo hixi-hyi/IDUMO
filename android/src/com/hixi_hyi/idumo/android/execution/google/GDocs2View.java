@@ -1,24 +1,20 @@
-package com.hixi_hyi.idumo.android.sample.sensor;
+package com.hixi_hyi.idumo.android.execution.google;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
-import android.content.Context;
-import android.hardware.SensorManager;
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.hixi_hyi.idumo.android.AndroidController;
-import com.hixi_hyi.idumo.android.provider.LightProvider;
+import com.hixi_hyi.idumo.android.handler.ThroughHandler;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
-import com.hixi_hyi.idumo.android.sensor.LightSensor;
-import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
-import com.hixi_hyi.idumo.core.util.LogManager;
 
-public class Light2View extends Activity implements Runnable {
+public class GDocs2View extends ListActivity implements Runnable {
 	
 	private ArrayList<AndroidController>	android;
-	private LightProvider					light;
+	private GoogleDocs						document;
+	private ThroughHandler					through;
 	private TextViewReceiptor				textView;
 	private Thread							thread;
 	private boolean							isDo;
@@ -26,16 +22,17 @@ public class Light2View extends Activity implements Runnable {
 	
 	@Override
 	public void run() {
-		while (isDo) {
-			LogManager.log();
-			handler.post(textView);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			
-		}
+		// while(isDo){
+		// AndroidLogger.d();
+		// handler.post(textView);
+		// try {
+		// Thread.sleep(1000);
+		// } catch (InterruptedException e) {
+		// // TODO 自動生成された catch ブロック
+		// e.printStackTrace();
+		// }
+		//
+		// }
 	}
 	
 	@Override
@@ -44,20 +41,22 @@ public class Light2View extends Activity implements Runnable {
 		android = new ArrayList<AndroidController>();
 		handler = new Handler();
 		
-		SensorManager sensor = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
+		document = new GoogleDocs(this);
+		android.add(document);
 		
-		LightSensor lightSensor = LightSensor.INSTANCE;
-		lightSensor.init(sensor);
-		android.add(lightSensor);
-		
-		light = new LightProvider(lightSensor);
-		
-		StringConcatHandler s1 = new StringConcatHandler("Light:");
-		
-		textView = new TextViewReceiptor(this);
-		
-		s1.setSender(light);
-		textView.setSender(s1);
+		// through = new ThroughHandler();
+		//
+		// textView = new TextViewReceiptor(this);
+		//
+		//
+		// if(!textView.setSender(through)){
+		// throw new RuntimeException();
+		// }
+		// if(!through.setSender(document)){
+		// throw new RuntimeException();
+		// }
+		//
+		// document.setMethodType(AccelerometerProvider.Type.X);
 		
 	}
 	
@@ -83,9 +82,9 @@ public class Light2View extends Activity implements Runnable {
 		for (AndroidController a : android) {
 			a.onIdumoResume();
 		}
-		isDo = true;
-		thread = new Thread(this);
-		thread.start();
+		// isDo = true;
+		// thread = new Thread(this);
+		// thread.start();
 	}
 	
 	@Override
@@ -93,7 +92,7 @@ public class Light2View extends Activity implements Runnable {
 		for (AndroidController a : android) {
 			a.onIdumoPause();
 		}
-		isDo = false;
+		// isDo = false;
 		super.onPause();
 	}
 	

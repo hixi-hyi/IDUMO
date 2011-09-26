@@ -151,7 +151,7 @@
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
             </intent-filter>
         </activity>
-        <activity android:name=".sample.google.GDocs2Viewd.sample.google.GDocs2Viewd.sample.google.GDocs2Viewd.sample.google.GDocs2View"
+        <activity android:name=".sample.google.GDocs2Viewd.sample.google.GDocs2Viewd.sample.google.GDocs2Viewd.sample.google.GDocs2Viewiewiew"
         		 android:label="@string/activity_gdocs2view">
             <intent-filter>
  	            <action android:name="android.intent.action.MAIN" />

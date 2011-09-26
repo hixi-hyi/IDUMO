@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.android.sample.exec;
+package com.hixi_hyi.idumo.android.execution.exec;
 
 import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
 import com.hixi_hyi.idumo.android.exec.AbstractAndroidActivity;

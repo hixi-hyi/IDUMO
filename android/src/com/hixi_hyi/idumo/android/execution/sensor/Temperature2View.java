@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.android.sample.sensor;
+package com.hixi_hyi.idumo.android.execution.sensor;
 
 import java.util.ArrayList;
 
@@ -9,17 +9,17 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.hixi_hyi.idumo.android.AndroidController;
-import com.hixi_hyi.idumo.android.provider.AccelerometerProvider;
+import com.hixi_hyi.idumo.android.handler.ThroughHandler;
+import com.hixi_hyi.idumo.android.provider.TemperatureProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
-import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
-import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
+import com.hixi_hyi.idumo.android.sensor.TemperatureSensor;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
-public class Accelerometer2View extends Activity implements Runnable {
+public class Temperature2View extends Activity implements Runnable {
 	
 	private ArrayList<AndroidController>	android;
-	private SensorManager					sensor;
-	private AccelerometerProvider			accelerometer;
+	private TemperatureProvider				provider;
+	private ThroughHandler					through;
 	private TextViewReceiptor				textView;
 	private Thread							thread;
 	private boolean							isDo;
@@ -33,7 +33,6 @@ public class Accelerometer2View extends Activity implements Runnable {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
 			
@@ -46,28 +45,23 @@ public class Accelerometer2View extends Activity implements Runnable {
 		android = new ArrayList<AndroidController>();
 		handler = new Handler();
 		
-		sensor = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
-		AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
-		accelerometerSensor.init(sensor);
-		android.add(accelerometerSensor);
+		SensorManager sensor = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
+		TemperatureSensor temperatureSensor = TemperatureSensor.INSTANCE;
+		temperatureSensor.init(sensor);
+		android.add(temperatureSensor);
 		
-		accelerometer = new AccelerometerProvider(accelerometerSensor);
-		accelerometer.setOption(AccelerometerProvider.Type.X);
-		AccelerometerProvider accelerometer2 = new AccelerometerProvider(accelerometerSensor);
-		accelerometer2.setOption(AccelerometerProvider.Type.Y);
-		AccelerometerProvider accelerometer3 = new AccelerometerProvider(accelerometerSensor);
-		accelerometer3.setOption(AccelerometerProvider.Type.Z);
+		provider = new TemperatureProvider(temperatureSensor);
 		
-		StringConcatHandler concat = new StringConcatHandler("X:");
-		StringConcatHandler concat2 = new StringConcatHandler("Y:");
-		StringConcatHandler concat3 = new StringConcatHandler("Z:");
+		through = new ThroughHandler();
 		
 		textView = new TextViewReceiptor(this);
 		
-		concat.setSender(accelerometer);
-		concat2.setSender(accelerometer2);
-		concat3.setSender(accelerometer3);
-		textView.setSender(concat, concat2, concat3);
+		if (!textView.setSender(through)) {
+			throw new RuntimeException();
+		}
+		if (!through.setSender(provider)) {
+			throw new RuntimeException();
+		}
 		
 	}
 	

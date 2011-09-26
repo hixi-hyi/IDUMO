@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.android.sample.sensor;
+package com.hixi_hyi.idumo.android.execution.sensor;
 
 import java.util.ArrayList;
 
@@ -9,17 +9,17 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.hixi_hyi.idumo.android.AndroidController;
-import com.hixi_hyi.idumo.android.provider.MagneticFiledProvider;
+import com.hixi_hyi.idumo.android.provider.AccelerometerProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
-import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
-import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
 import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
-public class Magnetic2View extends Activity implements Runnable {
+public class Accelerometer2View extends Activity implements Runnable {
 	
 	private ArrayList<AndroidController>	android;
-	private MagneticFiledProvider			mag;
+	private SensorManager					sensor;
+	private AccelerometerProvider			accelerometer;
 	private TextViewReceiptor				textView;
 	private Thread							thread;
 	private boolean							isDo;
@@ -33,6 +33,7 @@ public class Magnetic2View extends Activity implements Runnable {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
+				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
 			
@@ -45,33 +46,28 @@ public class Magnetic2View extends Activity implements Runnable {
 		android = new ArrayList<AndroidController>();
 		handler = new Handler();
 		
-		SensorManager sensor = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
-		MagneticFieldSensor magneticFieldSensor = MagneticFieldSensor.INSTANCE;
-		magneticFieldSensor.init(sensor);
-		android.add(magneticFieldSensor);
+		sensor = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
+		AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
+		accelerometerSensor.init(sensor);
+		android.add(accelerometerSensor);
 		
-		MagneticFiledProvider mag1 = new MagneticFiledProvider(magneticFieldSensor);
-		MagneticFiledProvider mag2 = new MagneticFiledProvider(magneticFieldSensor);
-		MagneticFiledProvider mag3 = new MagneticFiledProvider(magneticFieldSensor);
-		try {
-			mag1.setOption(MagneticFiledProvider.Type.X);
-			mag2.setOption(MagneticFiledProvider.Type.Y);
-			mag3.setOption(MagneticFiledProvider.Type.Z);
-		} catch (IdumoException e) {
-			e.printStackTrace();
-		}
+		accelerometer = new AccelerometerProvider(accelerometerSensor);
+		accelerometer.setOption(AccelerometerProvider.Type.X);
+		AccelerometerProvider accelerometer2 = new AccelerometerProvider(accelerometerSensor);
+		accelerometer2.setOption(AccelerometerProvider.Type.Y);
+		AccelerometerProvider accelerometer3 = new AccelerometerProvider(accelerometerSensor);
+		accelerometer3.setOption(AccelerometerProvider.Type.Z);
 		
-		StringConcatHandler s1 = new StringConcatHandler("X:");
-		StringConcatHandler s2 = new StringConcatHandler("Y:");
-		StringConcatHandler s3 = new StringConcatHandler("Z:");
+		StringConcatHandler concat = new StringConcatHandler("X:");
+		StringConcatHandler concat2 = new StringConcatHandler("Y:");
+		StringConcatHandler concat3 = new StringConcatHandler("Z:");
 		
 		textView = new TextViewReceiptor(this);
 		
-		s1.setSender(mag1);
-		s2.setSender(mag2);
-		s3.setSender(mag3);
-		
-		textView.setSender(s1, s2, s3);
+		concat.setSender(accelerometer);
+		concat2.setSender(accelerometer2);
+		concat3.setSender(accelerometer3);
+		textView.setSender(concat, concat2, concat3);
 		
 	}
 	

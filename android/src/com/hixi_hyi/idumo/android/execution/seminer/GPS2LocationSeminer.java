@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.android.sample.seminer;
+package com.hixi_hyi.idumo.android.execution.seminer;
 
 import android.content.Context;
 import android.location.LocationManager;

@@ -1,51 +1,40 @@
-package com.hixi_hyi.idumo.android.sample.app;
+package com.hixi_hyi.idumo.android.execution;
 
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.Context;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
 
 import com.hixi_hyi.idumo.android.AndroidController;
-import com.hixi_hyi.idumo.android.provider.GPSProvider;
-import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
-import com.hixi_hyi.idumo.android.sensor.GPSSensor;
+import com.hixi_hyi.idumo.android.handler.ThroughHandler;
+import com.hixi_hyi.idumo.android.receiptor.TCPByteStreamReceiptor;
 import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.handler.ReversedGeocordingHandler;
+import com.hixi_hyi.idumo.core.provider.RandomByteProvider;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
-/**
- * AndroidのGPS情報から現在地を推測します．
- * 
- * @author Hiroyoshi
- * 
- */
-public class GPS2Location extends Activity implements Runnable {
+public class RandomByte2TCP extends Activity implements Runnable {
+	
+	// private static final String IP="172.21.67.142";
+	private static final String				IP		= "192.168.12.10";
+	private static final int				PORT	= 10000;
 	
 	private ArrayList<AndroidController>	android;
-	private GPSProvider						gps;
-	private GPSProvider						gps2;
+	private RandomByteProvider				ramdombyte;
+	private ThroughHandler					through;
+	private TCPByteStreamReceiptor			tcp;
 	
-	private ReversedGeocordingHandler		rgh;
-	private TextViewReceiptor				textView;
 	private Thread							thread;
 	private boolean							isDo;
-	private Handler							handler;
 	
 	@Override
 	public void run() {
-		while (true) {
+		while (isDo) {
 			LogManager.log();
+			tcp.run();
+			// handler.post(tcp);
 			try {
-				if (textView.isReady()) {
-					handler.post(textView);
-					Thread.sleep(20000);
-				}
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
 		}
@@ -55,26 +44,21 @@ public class GPS2Location extends Activity implements Runnable {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		android = new ArrayList<AndroidController>();
-		handler = new Handler();
 		
-		LocationManager location = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-		GPSSensor gpsSensor = GPSSensor.INSTANCE;
-		gpsSensor.init(location);
-		android.add(gpsSensor);
+		ramdombyte = new RandomByteProvider();
 		
+		through = new ThroughHandler();
+		
+		tcp = new TCPByteStreamReceiptor(IP, PORT);
+		android.add(tcp);
+		
+		if (!through.setSender(ramdombyte)) {
+			throw new RuntimeException();
+		}
 		try {
-			gps = new GPSProvider(gpsSensor);
-			gps2 = new GPSProvider(gpsSensor);
-			gps.setOption(GPSProvider.Type.LATITUDE);
-			gps2.setOption(GPSProvider.Type.LONGITUDE);
-			
-			rgh = new ReversedGeocordingHandler();
-			
-			textView = new TextViewReceiptor(this);
-			
-			rgh.setSender(gps, gps2);
-			textView.setSender(gps, gps2, rgh);
+			tcp.setSender(through);
 		} catch (IdumoException e) {
+			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 		

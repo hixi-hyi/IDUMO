@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.android.sample.app;
+package com.hixi_hyi.idumo.android.execution.app;
 
 import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecution;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;

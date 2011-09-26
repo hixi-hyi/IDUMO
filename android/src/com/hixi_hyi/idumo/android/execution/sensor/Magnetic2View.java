@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.android.sample.sensor;
+package com.hixi_hyi.idumo.android.execution.sensor;
 
 import java.util.ArrayList;
 
@@ -9,17 +9,17 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.hixi_hyi.idumo.android.AndroidController;
-import com.hixi_hyi.idumo.android.handler.ThroughHandler;
-import com.hixi_hyi.idumo.android.provider.TemperatureProvider;
+import com.hixi_hyi.idumo.android.provider.MagneticFiledProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
-import com.hixi_hyi.idumo.android.sensor.TemperatureSensor;
+import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
+import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
-public class Temperature2View extends Activity implements Runnable {
+public class Magnetic2View extends Activity implements Runnable {
 	
 	private ArrayList<AndroidController>	android;
-	private TemperatureProvider				provider;
-	private ThroughHandler					through;
+	private MagneticFiledProvider			mag;
 	private TextViewReceiptor				textView;
 	private Thread							thread;
 	private boolean							isDo;
@@ -46,22 +46,32 @@ public class Temperature2View extends Activity implements Runnable {
 		handler = new Handler();
 		
 		SensorManager sensor = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
-		TemperatureSensor temperatureSensor = TemperatureSensor.INSTANCE;
-		temperatureSensor.init(sensor);
-		android.add(temperatureSensor);
+		MagneticFieldSensor magneticFieldSensor = MagneticFieldSensor.INSTANCE;
+		magneticFieldSensor.init(sensor);
+		android.add(magneticFieldSensor);
 		
-		provider = new TemperatureProvider(temperatureSensor);
+		MagneticFiledProvider mag1 = new MagneticFiledProvider(magneticFieldSensor);
+		MagneticFiledProvider mag2 = new MagneticFiledProvider(magneticFieldSensor);
+		MagneticFiledProvider mag3 = new MagneticFiledProvider(magneticFieldSensor);
+		try {
+			mag1.setOption(MagneticFiledProvider.Type.X);
+			mag2.setOption(MagneticFiledProvider.Type.Y);
+			mag3.setOption(MagneticFiledProvider.Type.Z);
+		} catch (IdumoException e) {
+			e.printStackTrace();
+		}
 		
-		through = new ThroughHandler();
+		StringConcatHandler s1 = new StringConcatHandler("X:");
+		StringConcatHandler s2 = new StringConcatHandler("Y:");
+		StringConcatHandler s3 = new StringConcatHandler("Z:");
 		
 		textView = new TextViewReceiptor(this);
 		
-		if (!textView.setSender(through)) {
-			throw new RuntimeException();
-		}
-		if (!through.setSender(provider)) {
-			throw new RuntimeException();
-		}
+		s1.setSender(mag1);
+		s2.setSender(mag2);
+		s3.setSender(mag3);
+		
+		textView.setSender(s1, s2, s3);
 		
 	}
 	

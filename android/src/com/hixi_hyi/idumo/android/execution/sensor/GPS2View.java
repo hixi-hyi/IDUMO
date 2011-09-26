@@ -1,27 +1,24 @@
-package com.hixi_hyi.idumo.android.sample.sensor;
+package com.hixi_hyi.idumo.android.execution.sensor;
 
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
-import android.hardware.SensorManager;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.hixi_hyi.idumo.android.AndroidController;
-import com.hixi_hyi.idumo.android.provider.OrientationProvider;
+import com.hixi_hyi.idumo.android.provider.GPSProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
-import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
-import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
-import com.hixi_hyi.idumo.android.sensor.OrientationSensor;
+import com.hixi_hyi.idumo.android.sensor.GPSSensor;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
-public class Orientation2View extends Activity implements Runnable {
+public class GPS2View extends Activity implements Runnable {
 	
 	private ArrayList<AndroidController>	android;
-	private SensorManager					sensorManager;
 	private TextViewReceiptor				textView;
 	private Thread							thread;
 	private boolean							isDo;
@@ -48,39 +45,50 @@ public class Orientation2View extends Activity implements Runnable {
 		android = new ArrayList<AndroidController>();
 		handler = new Handler();
 		
-		sensorManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
-		AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
-		accelerometerSensor.init(sensorManager);
-		android.add(accelerometerSensor);
-		MagneticFieldSensor magneticFieldSensor = MagneticFieldSensor.INSTANCE;
-		magneticFieldSensor.init(sensorManager);
-		android.add(magneticFieldSensor);
-		OrientationSensor orientationSensor = OrientationSensor.INSTANCE;
-		orientationSensor.init(accelerometerSensor, magneticFieldSensor);
+		LocationManager location = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+		GPSSensor gpsSensor = GPSSensor.INSTANCE;
+		gpsSensor.init(location);
+		android.add(gpsSensor);
 		
-		OrientationProvider o1 = new OrientationProvider(orientationSensor);
-		OrientationProvider o2 = new OrientationProvider(orientationSensor);
-		OrientationProvider o3 = new OrientationProvider(orientationSensor);
-		
+		GPSProvider gps = new GPSProvider(gpsSensor);
+		GPSProvider gps2 = new GPSProvider(gpsSensor);
+		GPSProvider gps3 = new GPSProvider(gpsSensor);
+		GPSProvider gps4 = new GPSProvider(gpsSensor);
+		GPSProvider gps5 = new GPSProvider(gpsSensor);
+		GPSProvider gps6 = new GPSProvider(gpsSensor);
+		GPSProvider gps7 = new GPSProvider(gpsSensor);
 		try {
-			o1.setOption(OrientationProvider.Type.AZMUTH);
-			o2.setOption(OrientationProvider.Type.PITCH);
-			o3.setOption(OrientationProvider.Type.ROLL);
+			gps.setOption(GPSProvider.Type.ACCURARY);
+			gps2.setOption(GPSProvider.Type.ALTITUDE);
+			gps3.setOption(GPSProvider.Type.BEARING);
+			gps4.setOption(GPSProvider.Type.LATITUDE);
+			gps5.setOption(GPSProvider.Type.LONGITUDE);
+			gps6.setOption(GPSProvider.Type.SPEED);
+			gps7.setOption(GPSProvider.Type.TIME);
 		} catch (IdumoException e) {
+			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 		
-		StringConcatHandler s1 = new StringConcatHandler("Azmuth:");
-		StringConcatHandler s2 = new StringConcatHandler("Pitch:");
-		StringConcatHandler s3 = new StringConcatHandler("Roll:");
-		
-		s1.setSender(o1);
-		s2.setSender(o2);
-		s3.setSender(o3);
+		StringConcatHandler s1 = new StringConcatHandler("Accuary:");
+		StringConcatHandler s2 = new StringConcatHandler("Altitude:");
+		StringConcatHandler s3 = new StringConcatHandler("Bearing:");
+		StringConcatHandler s4 = new StringConcatHandler("Latitude:");
+		StringConcatHandler s5 = new StringConcatHandler("Longitude:");
+		StringConcatHandler s6 = new StringConcatHandler("Speed:");
+		StringConcatHandler s7 = new StringConcatHandler("Time:");
 		
 		textView = new TextViewReceiptor(this);
 		
-		textView.setSender(s1, s2, s3);
+		s1.setSender(gps);
+		s2.setSender(gps2);
+		s3.setSender(gps3);
+		s4.setSender(gps4);
+		s5.setSender(gps5);
+		s6.setSender(gps6);
+		s7.setSender(gps7);
+		
+		textView.setSender(s1, s2, s3, s4, s5, s6, s7);
 		
 	}
 	

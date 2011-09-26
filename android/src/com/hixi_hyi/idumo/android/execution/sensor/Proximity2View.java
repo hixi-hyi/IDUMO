@@ -1,42 +1,40 @@
-package com.hixi_hyi.idumo.android.sample;
+package com.hixi_hyi.idumo.android.execution.sensor;
 
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Context;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.hixi_hyi.idumo.android.AndroidController;
-import com.hixi_hyi.idumo.android.handler.ThroughHandler;
-import com.hixi_hyi.idumo.android.receiptor.TCPByteStreamReceiptor;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.provider.RandomByteProvider;
+import com.hixi_hyi.idumo.android.provider.ProximityProvider;
+import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
+import com.hixi_hyi.idumo.android.sensor.ProximitySensor;
+import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
-public class RandomByte2TCP extends Activity implements Runnable {
-	
-	// private static final String IP="172.21.67.142";
-	private static final String				IP		= "192.168.12.10";
-	private static final int				PORT	= 10000;
+public class Proximity2View extends Activity implements Runnable {
 	
 	private ArrayList<AndroidController>	android;
-	private RandomByteProvider				ramdombyte;
-	private ThroughHandler					through;
-	private TCPByteStreamReceiptor			tcp;
-	
+	private ProximityProvider				prom;
+	private TextViewReceiptor				textView;
 	private Thread							thread;
 	private boolean							isDo;
+	private Handler							handler;
 	
 	@Override
 	public void run() {
 		while (isDo) {
 			LogManager.log();
-			tcp.run();
-			// handler.post(tcp);
+			handler.post(textView);
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			
 		}
 	}
 	
@@ -44,23 +42,21 @@ public class RandomByte2TCP extends Activity implements Runnable {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		android = new ArrayList<AndroidController>();
+		handler = new Handler();
 		
-		ramdombyte = new RandomByteProvider();
+		SensorManager sensor = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
+		ProximitySensor proximitySensor = ProximitySensor.INSTANCE;
+		proximitySensor.init(sensor);
+		android.add(proximitySensor);
 		
-		through = new ThroughHandler();
+		prom = new ProximityProvider(proximitySensor);
 		
-		tcp = new TCPByteStreamReceiptor(IP, PORT);
-		android.add(tcp);
+		StringConcatHandler s1 = new StringConcatHandler("Proximity:");
 		
-		if (!through.setSender(ramdombyte)) {
-			throw new RuntimeException();
-		}
-		try {
-			tcp.setSender(through);
-		} catch (IdumoException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
+		textView = new TextViewReceiptor(this);
+		
+		s1.setSender(prom);
+		textView.setSender(s1);
 		
 	}
 	

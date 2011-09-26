@@ -1,19 +1,25 @@
-package com.hixi_hyi.idumo.android.sample.google;
+package com.hixi_hyi.idumo.android.execution;
 
 import java.util.ArrayList;
 
-import android.app.ListActivity;
+import android.app.Activity;
+import android.content.Context;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.handler.ThroughHandler;
+import com.hixi_hyi.idumo.android.provider.AccelerometerProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
+import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
-public class GCalendar2View extends ListActivity implements Runnable {
+public class Accelerometer2TCP extends Activity implements Runnable {
 	
 	private ArrayList<AndroidController>	android;
-	private GoogleCalendar					document;
+	private SensorManager					sensormanager;
+	private AccelerometerProvider			accelerometer;
 	private ThroughHandler					through;
 	private TextViewReceiptor				textView;
 	private Thread							thread;
@@ -22,42 +28,43 @@ public class GCalendar2View extends ListActivity implements Runnable {
 	
 	@Override
 	public void run() {
-		// while(isDo){
-		// AndroidLogger.d();
-		// handler.post(textView);
-		// try {
-		// Thread.sleep(1000);
-		// } catch (InterruptedException e) {
-		// // TODO 自動生成された catch ブロック
-		// e.printStackTrace();
-		// }
-		//
-		// }
+		while (isDo) {
+			LogManager.log();
+			handler.post(textView);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+		}
 	}
 	
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		android = new ArrayList<AndroidController>();
 		handler = new Handler();
 		
-		document = new GoogleCalendar(this);
-		android.add(document);
+		sensormanager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
+		AccelerometerSensor accelSensor = AccelerometerSensor.INSTANCE;
+		accelSensor.init(sensormanager);
+		android.add(accelSensor);
+		accelerometer = new AccelerometerProvider(accelSensor);
 		
-		// through = new ThroughHandler();
-		//
-		// textView = new TextViewReceiptor(this);
-		//
-		//
-		// if(!textView.setSender(through)){
-		// throw new RuntimeException();
-		// }
-		// if(!through.setSender(document)){
-		// throw new RuntimeException();
-		// }
-		//
-		// document.setMethodType(AccelerometerProvider.Type.X);
+		through = new ThroughHandler();
 		
+		textView = new TextViewReceiptor(this);
+		
+		textView.setSender(through);
+		through.setSender(accelerometer);
+		
+		accelerometer.setOption(AccelerometerProvider.Type.X);
 	}
 	
 	@Override
@@ -82,9 +89,9 @@ public class GCalendar2View extends ListActivity implements Runnable {
 		for (AndroidController a : android) {
 			a.onIdumoResume();
 		}
-		// isDo = true;
-		// thread = new Thread(this);
-		// thread.start();
+		isDo = true;
+		thread = new Thread(this);
+		thread.start();
 	}
 	
 	@Override
@@ -92,7 +99,7 @@ public class GCalendar2View extends ListActivity implements Runnable {
 		for (AndroidController a : android) {
 			a.onIdumoPause();
 		}
-		// isDo = false;
+		isDo = false;
 		super.onPause();
 	}
 	

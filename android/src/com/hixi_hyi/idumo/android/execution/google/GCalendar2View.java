@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.android.sample.google;
+package com.hixi_hyi.idumo.android.execution.google;
 
 import java.util.ArrayList;
 
@@ -10,10 +10,10 @@ import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.handler.ThroughHandler;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 
-public class GDocs2View extends ListActivity implements Runnable {
+public class GCalendar2View extends ListActivity implements Runnable {
 	
 	private ArrayList<AndroidController>	android;
-	private GoogleDocs						document;
+	private GoogleCalendar					document;
 	private ThroughHandler					through;
 	private TextViewReceiptor				textView;
 	private Thread							thread;
@@ -41,7 +41,7 @@ public class GDocs2View extends ListActivity implements Runnable {
 		android = new ArrayList<AndroidController>();
 		handler = new Handler();
 		
-		document = new GoogleDocs(this);
+		document = new GoogleCalendar(this);
 		android.add(document);
 		
 		// through = new ThroughHandler();
