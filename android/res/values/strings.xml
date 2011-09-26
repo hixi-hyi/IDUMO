@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World</string><string name="app_name">IDUMO</string>
-    <string name="activity_accel2view">Sensor/Accel2View</string>
-    <string name="activity_accel2tcp">Accel2TCP</string>
-    <string name="activity_gps2view">Sensor/GPS2View</string>
-    <string name="activity_light2view">Sensor/Light2View</string>
-    <string name="activity_mag2view">Sensor/Mag2View</string>
-    <string name="activity_orient2view">Sensor/Orient2View</string>
-    <string name="activity_proximity2view">Sensor/Proximity2View</string>
-    <string name="activity_ramdom2tcp">Random2TCP</string>
-    <string name="activity_temp2view">Sensor/Unsupport/Temp2View</string>
-
-    <string name="activity_gcal2view">Unfinished/Google/GCal2View</string>
-    <string name="activity_gdocs2view">Unfinished/Google/GDocs2View</string>
-    <string name="activity_lweather2mview">APP/TodaysWeather</string>
-    <string name="activity_gps2location">APP/ReversedGeocode</string>
-    <string name="activity_gps2locationexecution">APP/Execution</string>
-    <string name="activity_seminer_gps">Semi/GPS2Location</string>
-    <string name="activity_seminer_weather">Semi/Weather</string>
+    <string name="activity_accelerometer">Sensor/Accelerometer</string>
+    <string name="activity_accel2tcp">Network/Accel2TCP</string>
+    <string name="activity_gps">Sensor/GPS2View</string>
+    <string name="activity_light">Sensor/Light</string>
+    <string name="activity_magnetic">Sensor/Magnetic</string>
+    <string name="activity_orientation">Sensor/Orientation</string>
+    <string name="activity_proximity">Sensor/Proximity</string>
+    <string name="activity_ramdom2tcp">Network/Random2TCP</string>
+    <string name="activity_temperature">Sensor/Unsupport/Temperature</string>
+    <string name="activity_todaysweather">APP/TodaysWeather</string>
+    <string name="activity_rgeolocation">APP/ReversedGeoLocation</string>
 </resources>

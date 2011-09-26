@@ -29,50 +29,50 @@
         <!-- ************************************* -->
         <!--          SENSOR SAMPLES                -->
         <!-- ************************************* -->
-        <activity android:name=".sample.sensor.Accelerometer2View"
-        		 android:label="@string/activity_accel2view">
+        <activity android:name=".activity.sensor.AccelerometerActivity"
+        		 android:label="@string/activity_accelerometer">
             <intent-filter>
  	            <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
             </intent-filter>
         </activity>
-        <activity android:name=".sample.sensor.GPS2View"
-        		 android:label="@string/activity_gps2view">
+        <activity android:name=".activity.sensor.GPSActivity"
+        		 android:label="@string/activity_gps">
             <intent-filter>
  	            <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
             </intent-filter>
         </activity>
-        <activity android:name=".sample.sensor.Magnetic2View"
-        		 android:label="@string/activity_mag2view">
+        <activity android:name=".activity.sensor.MagneticActivity"
+        		 android:label="@string/activity_magnetic">
             <intent-filter>
  	            <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
             </intent-filter>
         </activity>
-        <activity android:name=".sample.sensor.Proximity2View"
-        		 android:label="@string/activity_proximity2view">
+        <activity android:name=".activity.sensor.ProximityActivity"
+        		 android:label="@string/activity_proximity">
             <intent-filter>
  	            <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
             </intent-filter>
         </activity>
-        <activity android:name=".sample.sensor.Light2View"
-        		 android:label="@string/activity_light2view">
+        <activity android:name=".activity.sensor.LightActivity"
+        		 android:label="@string/activity_light">
             <intent-filter>
  	            <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
             </intent-filter>
         </activity>
-        <activity android:name=".sample.sensor.Temperature2View"
-        		 android:label="@string/activity_temp2view">
+        <activity android:name=".activity.sensor.TemperatureActivity"
+        		 android:label="@string/activity_temperature">
             <intent-filter>
  	            <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
             </intent-filter>
         </activity>
-        <activity android:name=".sample.sensor.Orientation2View"
-        		 android:label="@string/activity_orient2view">
+        <activity android:name=".activity.sensor.OrientationActivity"
+        		 android:label="@string/activity_orientation">
             <intent-filter>
  	            <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
@@ -82,22 +82,15 @@
         <!-- ************************************* -->
         <!--          APP   SAMPLES                -->
         <!-- ************************************* -->
-        <activity android:name=".sample.app.LivedoorWeather2MultiView"
-        		 android:label="@string/activity_lweather2mview">
+        <activity android:name=".activity.app.TodaysWeatherActivity"
+        		 android:label="@string/activity_todaysweather">
             <intent-filter>
  	            <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
             </intent-filter>
         </activity>
-        <activity android:name=".sample.app.GPS2Location"
-        		 android:label="@string/activity_gps2location">
-            <intent-filter>
- 	            <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.IDUMO_SAMPLES" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".sample.app.GPS2LocationExecution"
-        		 android:label="@string/activity_gps2locationexecution">
+        <activity android:name=".activity.app.ReverseGeoLocationActivity"
+        		 android:label="@string/activity_rgeolocation">
             <intent-filter>
  	            <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
@@ -105,30 +98,8 @@
         </activity>
 
         <!-- ************************************* -->
-        <!--          SEMI APP   SAMPLES                -->
+        <!--          TCP   SAMPLES                -->
         <!-- ************************************* -->
-        <activity android:name=".sample.seminer.GPS2LocationSeminer"
-        		 android:label="@string/activity_seminer_gps">
-            <intent-filter>
- 	            <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.IDUMO_SAMPLES" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".sample.exec.GPS2LocationActivity"
-        		 android:label="test">
-            <intent-filter>
- 	            <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.IDUMO_SAMPLES" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".sample.seminer.TodayWeatherSeminer"
-        		 android:label="@string/activity_seminer_weather">
-            <intent-filter>
- 	            <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.IDUMO_SAMPLES" />
-            </intent-filter>
-        </activity>
-
 
         <activity android:name=".sample.Accelerometer2TCP"
         		 android:label="@string/activity_accel2tcp">
@@ -139,20 +110,6 @@
         </activity>
         <activity android:name=".sample.RandomByte2TCP"
         		 android:label="@string/activity_ramdom2tcp">
-            <intent-filter>
- 	            <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.IDUMO_SAMPLES" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".sample.google.GCalendar2View"
-        		 android:label="@string/activity_gcal2view">
-            <intent-filter>
- 	            <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.IDUMO_SAMPLES" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".sample.google.GDocs2Viewd.sample.google.GDocs2Viewd.sample.google.GDocs2Viewd.sample.google.GDocs2Viewiewiew"
-        		 android:label="@string/activity_gdocs2view">
             <intent-filter>
  	            <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />

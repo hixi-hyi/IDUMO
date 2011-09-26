@@ -64,10 +64,12 @@ public class AndroidExecution implements IdumoExecution, Runnable {
 		}
 		int count = component.getLoopCount();
 		if (count == -1) {
-			handler.post(runnable);
-			try {
-				Thread.sleep(component.getSleepTime());
-			} catch (InterruptedException e) {}
+			while(true){
+				handler.post(runnable);
+				try {
+					Thread.sleep(component.getSleepTime());
+				} catch (InterruptedException e) {}
+			}
 		} else {
 			for (int i = 0; i < count; i++) {
 				handler.post(runnable);
