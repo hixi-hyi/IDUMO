@@ -6,7 +6,7 @@ import com.hixi_hyi.idumo.core.exec.AbstractExecutionComponent;
 import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.provider.LivedoorWeatherProvider;
 
-public class TodayWeather extends AbstractExecutionComponent {
+public class TodaysWeatherComponent extends AbstractExecutionComponent {
 	
 	@Override
 	public void onIdumoMakeFlowChart() throws IdumoException {
