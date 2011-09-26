@@ -15,16 +15,16 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 public class RandomByte2TCP extends Activity implements Runnable {
 	
 	// private static final String IP="172.21.67.142";
-	private static final String							IP		= "192.168.12.10";
-	private static final int							PORT	= 10000;
+	private static final String				IP		= "192.168.12.10";
+	private static final int				PORT	= 10000;
 	
 	private ArrayList<AndroidController>	android;
-	private RandomByteProvider							ramdombyte;
-	private ThroughHandler								through;
-	private TCPByteStreamReceiptor						tcp;
+	private RandomByteProvider				ramdombyte;
+	private ThroughHandler					through;
+	private TCPByteStreamReceiptor			tcp;
 	
-	private Thread										thread;
-	private boolean										isDo;
+	private Thread							thread;
+	private boolean							isDo;
 	
 	@Override
 	public void run() {

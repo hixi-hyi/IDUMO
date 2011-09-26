@@ -18,13 +18,13 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 public class Accelerometer2TCP extends Activity implements Runnable {
 	
 	private ArrayList<AndroidController>	android;
-	private SensorManager								sensormanager;
-	private AccelerometerProvider						accelerometer;
-	private ThroughHandler								through;
-	private TextViewReceiptor							textView;
-	private Thread										thread;
-	private boolean										isDo;
-	private Handler										handler;
+	private SensorManager					sensormanager;
+	private AccelerometerProvider			accelerometer;
+	private ThroughHandler					through;
+	private TextViewReceiptor				textView;
+	private Thread							thread;
+	private boolean							isDo;
+	private Handler							handler;
 	
 	@Override
 	public void run() {

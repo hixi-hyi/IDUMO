@@ -114,6 +114,13 @@
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
             </intent-filter>
         </activity>
+        <activity android:name=".sample.exec.GPS2LocationActivity"
+        		 android:label="test">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
         <activity android:name=".sample.seminer.TodayWeatherSeminer"
         		 android:label="@string/activity_seminer_weather">
             <intent-filter>

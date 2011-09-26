@@ -21,11 +21,11 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 public class Orientation2View extends Activity implements Runnable {
 	
 	private ArrayList<AndroidController>	android;
-	private SensorManager								sensorManager;
-	private TextViewReceiptor							textView;
-	private Thread										thread;
-	private boolean										isDo;
-	private Handler										handler;
+	private SensorManager					sensorManager;
+	private TextViewReceiptor				textView;
+	private Thread							thread;
+	private boolean							isDo;
+	private Handler							handler;
 	
 	@Override
 	public void run() {

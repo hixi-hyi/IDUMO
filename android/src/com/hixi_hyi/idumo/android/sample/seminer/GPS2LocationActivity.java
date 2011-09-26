@@ -10,7 +10,7 @@ import com.hixi_hyi.idumo.android.sensor.GPSSensor;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.handler.ReversedGeocordingHandler;
 
-public class GPS2LocationSeminer extends AbstractAndroidExecution {
+public class GPS2LocationActivity extends AbstractAndroidExecution {
 	
 	@Override
 	public void onIdumoMakeFlowChart() throws IdumoException {

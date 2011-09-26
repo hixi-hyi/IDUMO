@@ -13,23 +13,24 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * GPSセンサ
- *
+ * 
  * @author Hiroyoshi HOUCHI
- *
+ * 
  */
-public enum GPSSensor implements LocationListener, AndroidController,IdumoComponent {
-
+public enum GPSSensor implements LocationListener, AndroidController, IdumoComponent {
+	
 	INSTANCE;
-
+	
 	private LocationManager	locationManager;
 	private Location		location;
-
+	
 	public void init(LocationManager manager) {
 		this.locationManager = manager;
 		location = locationManager.getLastKnownLocation(locationManager.getBestProvider(new Criteria(), true));
 		// AndroidLogger.d(location);
 	}
-
+	
+	@Override
 	public boolean isReady() {
 		if (location != null) {
 			return true;
@@ -37,7 +38,7 @@ public enum GPSSensor implements LocationListener, AndroidController,IdumoCompon
 		return false;
 		// return isReady;
 	}
-
+	
 	/**
 	 * @return
 	 * @see android.location.Location#getAccuracy()
@@ -45,7 +46,7 @@ public enum GPSSensor implements LocationListener, AndroidController,IdumoCompon
 	public float getAccuracy() {
 		return location.getAccuracy();
 	}
-
+	
 	/**
 	 * @return
 	 * @see android.location.Location#getAltitude()
@@ -53,7 +54,7 @@ public enum GPSSensor implements LocationListener, AndroidController,IdumoCompon
 	public double getAltitude() {
 		return location.getAltitude();
 	}
-
+	
 	/**
 	 * @return
 	 * @see android.location.Location#getBearing()
@@ -61,7 +62,7 @@ public enum GPSSensor implements LocationListener, AndroidController,IdumoCompon
 	public float getBearing() {
 		return location.getBearing();
 	}
-
+	
 	/**
 	 * @return
 	 * @see android.location.Location#getLatitude()
@@ -69,7 +70,7 @@ public enum GPSSensor implements LocationListener, AndroidController,IdumoCompon
 	public double getLatitude() {
 		return location.getLatitude();
 	}
-
+	
 	/**
 	 * @return
 	 * @see android.location.Location#getLongitude()
@@ -77,7 +78,7 @@ public enum GPSSensor implements LocationListener, AndroidController,IdumoCompon
 	public double getLongitude() {
 		return location.getLongitude();
 	}
-
+	
 	/**
 	 * @return
 	 * @see android.location.Location#getSpeed()
@@ -85,7 +86,7 @@ public enum GPSSensor implements LocationListener, AndroidController,IdumoCompon
 	public float getSpeed() {
 		return location.getSpeed();
 	}
-
+	
 	/**
 	 * @return
 	 * @see android.location.Location#getTime()
@@ -93,7 +94,7 @@ public enum GPSSensor implements LocationListener, AndroidController,IdumoCompon
 	public long getTime() {
 		return location.getTime();
 	}
-
+	
 	@Override
 	public void onLocationChanged(Location location) {
 		this.location = location;
@@ -104,21 +105,21 @@ public enum GPSSensor implements LocationListener, AndroidController,IdumoCompon
 		LogManager.debug("Time:" + String.valueOf(location.getTime()));
 		LogManager.debug("Speed:" + String.valueOf(location.getSpeed()));
 		LogManager.debug("Bearing:" + String.valueOf(location.getBearing()));
-
+		
 	}
-
+	
 	@Override
 	public void onProviderDisabled(String provider) {
 		// TODO 自動生成されたメソッド・スタブ
-
+		
 	}
-
+	
 	@Override
 	public void onProviderEnabled(String provider) {
 		// TODO 自動生成されたメソッド・スタブ
-
+		
 	}
-
+	
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 		switch (status) {
@@ -133,32 +134,32 @@ public enum GPSSensor implements LocationListener, AndroidController,IdumoCompon
 				break;
 		}
 	}
-
+	
 	public String useSensorType() {
 		return LocationManager.GPS_PROVIDER;
 	}
-
+	
 	// 必須機能なのでここに実装してみた
 	@Override
 	public void onIdumoResume() {
 		locationManager.requestLocationUpdates(useSensorType(), 0, 0, this);
 	}
-
+	
 	@Override
 	public void onIdumoPause() {
 		locationManager.removeUpdates(this);
 	}
-
+	
 	@Override
 	public void onIdumoStart() {}
-
+	
 	@Override
 	public void onIdumoRestart() {}
-
+	
 	@Override
 	public void onIdumoStop() {}
-
+	
 	@Override
 	public void onIdumoDestroy() {}
-
+	
 }

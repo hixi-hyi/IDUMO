@@ -13,12 +13,12 @@ import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 public class GCalendar2View extends ListActivity implements Runnable {
 	
 	private ArrayList<AndroidController>	android;
-	private GoogleCalendar								document;
-	private ThroughHandler								through;
-	private TextViewReceiptor							textView;
-	private Thread										thread;
-	private boolean										isDo;
-	private Handler										handler;
+	private GoogleCalendar					document;
+	private ThroughHandler					through;
+	private TextViewReceiptor				textView;
+	private Thread							thread;
+	private boolean							isDo;
+	private Handler							handler;
 	
 	@Override
 	public void run() {

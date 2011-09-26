@@ -19,11 +19,11 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 public class Magnetic2View extends Activity implements Runnable {
 	
 	private ArrayList<AndroidController>	android;
-	private MagneticFiledProvider						mag;
-	private TextViewReceiptor							textView;
-	private Thread										thread;
-	private boolean										isDo;
-	private Handler										handler;
+	private MagneticFiledProvider			mag;
+	private TextViewReceiptor				textView;
+	private Thread							thread;
+	private boolean							isDo;
+	private Handler							handler;
 	
 	@Override
 	public void run() {

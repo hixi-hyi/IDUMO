@@ -18,11 +18,11 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 public class Proximity2View extends Activity implements Runnable {
 	
 	private ArrayList<AndroidController>	android;
-	private ProximityProvider							prom;
-	private TextViewReceiptor							textView;
-	private Thread										thread;
-	private boolean										isDo;
-	private Handler										handler;
+	private ProximityProvider				prom;
+	private TextViewReceiptor				textView;
+	private Thread							thread;
+	private boolean							isDo;
+	private Handler							handler;
 	
 	@Override
 	public void run() {

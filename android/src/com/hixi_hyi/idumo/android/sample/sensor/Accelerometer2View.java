@@ -18,12 +18,12 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 public class Accelerometer2View extends Activity implements Runnable {
 	
 	private ArrayList<AndroidController>	android;
-	private SensorManager								sensor;
-	private AccelerometerProvider						accelerometer;
-	private TextViewReceiptor							textView;
-	private Thread										thread;
-	private boolean										isDo;
-	private Handler										handler;
+	private SensorManager					sensor;
+	private AccelerometerProvider			accelerometer;
+	private TextViewReceiptor				textView;
+	private Thread							thread;
+	private boolean							isDo;
+	private Handler							handler;
 	
 	@Override
 	public void run() {

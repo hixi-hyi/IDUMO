@@ -10,31 +10,34 @@ import com.hixi_hyi.idumo.core.ApplicationController;
 import com.hixi_hyi.idumo.core.IdumoComponent;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoExecution;
+import com.hixi_hyi.idumo.core.IdumoExecutionComponent;
 import com.hixi_hyi.idumo.core.IdumoRunnable;
 import com.hixi_hyi.idumo.core.IdumoRuntimeException;
 import com.hixi_hyi.idumo.core.Receiver;
 import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.front.IdumoExecutionSetting;
 
-public abstract class AbstractAndroidExecution extends Activity implements IdumoExecution,IdumoRunnable {
+@Deprecated
+public abstract class AbstractAndroidExecution extends Activity implements IdumoExecution, IdumoRunnable, IdumoExecutionComponent {
 
-	private AndroidContainer	container = new AndroidContainer();
-	private IdumoExecutionSetting setting = new IdumoExecutionSetting();
-	protected Thread										thread;
-	protected boolean										isReady;
-	protected Handler handler = new Handler();
+	private AndroidContainer		container	= new AndroidContainer();
+	private IdumoExecutionSetting	setting		= new IdumoExecutionSetting();
+	protected Thread				thread;
+	protected boolean				isReady;
+	protected Handler				handler		= new Handler();
 
 	@Override
 	public boolean isReady() {
 		return isReady;
 	}
 
-	public void run(){
+	@Override
+	public void run() {
 		onIdumoExec();
 	}
 
 	@Override
-	public void onIdumoCreated() throws IdumoException{
+	public void onIdumoCreated() throws IdumoException {
 		onIdumoMakeFlowChart();
 		setup();
 		onIdumoPrepare();
@@ -56,7 +59,7 @@ public abstract class AbstractAndroidExecution extends Activity implements Idumo
 
 	@Override
 	public void onIdumoExec() throws IdumoRuntimeException {
-		while(!isReady()){
+		while (!isReady()) {
 			try {
 				Thread.sleep(getSleepTime());
 			} catch (InterruptedException e) {}
@@ -68,13 +71,13 @@ public abstract class AbstractAndroidExecution extends Activity implements Idumo
 			} catch (InterruptedException e) {}
 		}
 		int count = getLoopCount();
-		if(count==-1){
+		if (count == -1) {
 			handler.post(runnable);
 			try {
 				Thread.sleep(getSleepTime());
 			} catch (InterruptedException e) {}
-		}else{
-			for(int i = 0; i < count; i++){
+		} else {
+			for (int i = 0; i < count; i++) {
 				handler.post(runnable);
 				try {
 					Thread.sleep(getSleepTime());
@@ -84,8 +87,9 @@ public abstract class AbstractAndroidExecution extends Activity implements Idumo
 
 	}
 
-
-	/* (非 Javadoc)
+	/*
+	 * (非 Javadoc)
+	 *
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
@@ -161,7 +165,8 @@ public abstract class AbstractAndroidExecution extends Activity implements Idumo
 	/**
 	 * @param sender
 	 * @param receiver
-	 * @see com.hixi_hyi.idumo.core.front.IdumoContainer#connect(com.hixi_hyi.idumo.core.Sender, com.hixi_hyi.idumo.core.Receiver)
+	 * @see com.hixi_hyi.idumo.core.front.IdumoContainer#connect(com.hixi_hyi.idumo.core.Sender,
+	 *      com.hixi_hyi.idumo.core.Receiver)
 	 */
 	public void connect(Sender sender, Receiver receiver) {
 		container.connect(sender, receiver);
@@ -214,7 +219,5 @@ public abstract class AbstractAndroidExecution extends Activity implements Idumo
 	public void setSleepTime(int sleepTime) {
 		setting.setSleepTime(sleepTime);
 	}
-
-
 
 }
