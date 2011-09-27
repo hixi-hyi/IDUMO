@@ -11,11 +11,11 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 
 public abstract class AbstractAndroidExecutionComponent extends AbstractExecutionComponent {
 
-	private Activity activity;
+	protected Activity activity;
 
-	public Activity getActivity() {
-		return activity;
-	}
+//	public Activity getActivity() {
+//		return activity;
+//	}
 
 	public void setActivity(Activity activity) {
 		this.activity = activity;

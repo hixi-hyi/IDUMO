@@ -7,33 +7,33 @@ import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.provider.LivedoorWeatherProvider;
 
 public class TodaysWeatherComponent extends AbstractAndroidExecutionComponent {
-
+	
 	@Override
 	public void onIdumoMakeFlowChart() throws IdumoException {
 		LivedoorWeatherProvider date = new LivedoorWeatherProvider(63);
 		date.setOption(LivedoorWeatherProvider.Type.DATE);
 		add(date);
-
+		
 		LivedoorWeatherProvider locate = new LivedoorWeatherProvider(63);
 		locate.setOption(LivedoorWeatherProvider.Type.LOCATION);
 		add(locate);
-
+		
 		LivedoorWeatherProvider maxtemp = new LivedoorWeatherProvider(63);
 		maxtemp.setOption(LivedoorWeatherProvider.Type.MAX_TEMP);
 		add(maxtemp);
-
+		
 		LivedoorWeatherProvider mintemp = new LivedoorWeatherProvider(63);
 		mintemp.setOption(LivedoorWeatherProvider.Type.MIN_TEMP);
 		add(mintemp);
-
+		
 		LivedoorWeatherProvider weather = new LivedoorWeatherProvider(63);
 		weather.setOption(LivedoorWeatherProvider.Type.WEATHER);
 		add(weather);
-
+		
 		LivedoorWeatherProvider description = new LivedoorWeatherProvider(63);
 		description.setOption(LivedoorWeatherProvider.Type.DESCRIPTION);
 		add(description);
-
+		
 		StringConcatHandler s1 = new StringConcatHandler("DATE:");
 		add(s1);
 		StringConcatHandler s2 = new StringConcatHandler("Location:");
@@ -46,30 +46,30 @@ public class TodaysWeatherComponent extends AbstractAndroidExecutionComponent {
 		add(s5);
 		StringConcatHandler s6 = new StringConcatHandler("Desc:");
 		add(s6);
-
-		TextViewReceiptor textView = new TextViewReceiptor(getActivity());
+		
+		TextViewReceiptor textView = new TextViewReceiptor(activity);
 		add(textView);
-
+		
 		connect(date, s1);
 		connect(locate, s2);
 		connect(maxtemp, s3);
 		connect(mintemp, s4);
 		connect(weather, s5);
 		connect(description, s6);
-
+		
 		connect(s1, textView);
 		connect(s2, textView);
 		connect(s3, textView);
 		connect(s4, textView);
 		connect(s5, textView);
 		connect(s6, textView);
-
+		
 	}
-
+	
 	@Override
 	public void onIdumoPrepare() {
 		setLoopCount(-1);
 		setSleepTime(1000);
 	}
-
+	
 }
