@@ -18,22 +18,22 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * AndroidのGPS情報から現在地を推測します．
- * 
+ *
  * @author Hiroyoshi
- * 
+ *
  */
 public class GPS2Location extends Activity implements Runnable {
-	
+
 	private ArrayList<AndroidController>	android;
 	private GPSProvider						gps;
 	private GPSProvider						gps2;
-	
+
 	private ReversedGeocordingHandler		rgh;
 	private TextViewReceiptor				textView;
 	private Thread							thread;
 	private boolean							isDo;
 	private Handler							handler;
-	
+
 	@Override
 	public void run() {
 		while (true) {
@@ -50,36 +50,31 @@ public class GPS2Location extends Activity implements Runnable {
 			}
 		}
 	}
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		android = new ArrayList<AndroidController>();
 		handler = new Handler();
-		
-		LocationManager location = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-		GPSSensor gpsSensor = GPSSensor.INSTANCE;
-		gpsSensor.init(location);
-		android.add(gpsSensor);
-		
+
 		try {
-			gps = new GPSProvider(gpsSensor);
-			gps2 = new GPSProvider(gpsSensor);
+			gps = new GPSProvider(this);
+			gps2 = new GPSProvider(this);
 			gps.setOption(GPSProvider.Type.LATITUDE);
 			gps2.setOption(GPSProvider.Type.LONGITUDE);
-			
+
 			rgh = new ReversedGeocordingHandler();
-			
+
 			textView = new TextViewReceiptor(this);
-			
+
 			rgh.setSender(gps, gps2);
 			textView.setSender(gps, gps2, rgh);
 		} catch (IdumoException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	@Override
 	public void onStart() {
 		super.onStart();
@@ -87,7 +82,7 @@ public class GPS2Location extends Activity implements Runnable {
 			a.onIdumoStart();
 		}
 	}
-	
+
 	@Override
 	public void onRestart() {
 		for (AndroidController a : android) {
@@ -95,7 +90,7 @@ public class GPS2Location extends Activity implements Runnable {
 		}
 		super.onRestart();
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -106,7 +101,7 @@ public class GPS2Location extends Activity implements Runnable {
 		thread = new Thread(this);
 		thread.start();
 	}
-	
+
 	@Override
 	public void onPause() {
 		for (AndroidController a : android) {
@@ -115,7 +110,7 @@ public class GPS2Location extends Activity implements Runnable {
 		isDo = false;
 		super.onPause();
 	}
-	
+
 	@Override
 	public void onStop() {
 		for (AndroidController a : android) {
@@ -123,7 +118,7 @@ public class GPS2Location extends Activity implements Runnable {
 		}
 		super.onStop();
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		for (AndroidController a : android) {
@@ -131,5 +126,5 @@ public class GPS2Location extends Activity implements Runnable {
 		}
 		super.onDestroy();
 	}
-	
+
 }

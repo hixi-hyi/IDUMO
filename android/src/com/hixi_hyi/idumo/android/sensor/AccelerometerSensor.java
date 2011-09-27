@@ -15,13 +15,13 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  *
  */
-public enum AccelerometerSensor implements SensorEventListener, AndroidController,IdumoComponent {
+public enum AccelerometerSensor implements SensorEventListener {
 
 	INSTANCE;
 
 	private int				accurary;
 	private float[]			accel	= new float[3];
-	private Sensor			accelerometer;
+	private Sensor			sensor;
 	private SensorManager	sensorManager;
 	private boolean			isReady;
 
@@ -77,35 +77,26 @@ public enum AccelerometerSensor implements SensorEventListener, AndroidControlle
 		return accel;
 	}
 
-	@Override
-	public void onIdumoResume() {
-		accelerometer = sensorManager.getDefaultSensor(useSensorType());
-		sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
-	}
-
 	public int useSensorType() {
 		return Sensor.TYPE_ACCELEROMETER;
 	}
 
-	@Override
-	public void onIdumoPause() {
-		sensorManager.unregisterListener(this);
-	}
-
-	@Override
-	public void onIdumoStart() {}
-
-	@Override
-	public void onIdumoRestart() {}
-
-	@Override
-	public void onIdumoStop() {}
-
-	@Override
-	public void onIdumoDestroy() {}
-
 	public boolean isReady() {
 		return isReady;
+	}
+
+	public void register() {
+		if(sensor==null){
+			sensor = sensorManager.getDefaultSensor(useSensorType());
+			sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI);
+		}
+	}
+
+	public void unregister() {
+		if(sensor!=null){
+			sensor=null;
+			sensorManager.unregisterListener(this);
+		}
 	}
 
 }

@@ -15,11 +15,12 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  *
  */
-public enum MagneticFieldSensor implements SensorEventListener, AndroidController,IdumoComponent {
+public enum MagneticFieldSensor implements SensorEventListener {
 
 	INSTANCE;
 
 	private SensorManager	sensorManager;
+	private Sensor sensor;
 	private int				accurary;
 	private float[]			magnet	= new float[3];
 	private boolean			isReady;
@@ -32,28 +33,6 @@ public enum MagneticFieldSensor implements SensorEventListener, AndroidControlle
 		return Sensor.TYPE_MAGNETIC_FIELD;
 	}
 
-	@Override
-	public void onIdumoResume() {
-		Sensor magnet = sensorManager.getDefaultSensor(useSensorType());
-		sensorManager.registerListener(this, magnet, SensorManager.SENSOR_DELAY_UI);
-	}
-
-	@Override
-	public void onIdumoStart() {}
-
-	@Override
-	public void onIdumoRestart() {}
-
-	@Override
-	public void onIdumoPause() {
-		sensorManager.unregisterListener(this);
-	}
-
-	@Override
-	public void onIdumoStop() {}
-
-	@Override
-	public void onIdumoDestroy() {}
 
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
@@ -67,9 +46,6 @@ public enum MagneticFieldSensor implements SensorEventListener, AndroidControlle
 		LogManager.log();
 		if (event.sensor.getType() == useSensorType()) {
 			magnet = event.values.clone();
-			// x = event.values[0];
-			// y = event.values[1];
-			// z = event.values[2];
 			isReady = true;
 		}
 	}
@@ -111,6 +87,20 @@ public enum MagneticFieldSensor implements SensorEventListener, AndroidControlle
 	 */
 	public boolean isReady() {
 		return isReady;
+	}
+
+	public void register() {
+		if(sensor==null){
+			sensor = sensorManager.getDefaultSensor(useSensorType());
+			sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI);
+		}
+	}
+
+	public void unregister() {
+		if(sensor!=null){
+			sensor = null;
+			sensorManager.unregisterListener(this);
+		}
 	}
 
 }

@@ -15,11 +15,12 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  *
  */
-public enum LightSensor implements SensorEventListener, AndroidController,IdumoComponent {
+public enum LightSensor implements SensorEventListener {
 
 	INSTANCE;
 
 	private SensorManager	sensorManager;
+	private Sensor sensor;
 	private int				accurary;
 	private float			light;
 	private boolean			isReady;
@@ -38,29 +39,6 @@ public enum LightSensor implements SensorEventListener, AndroidController,IdumoC
 	public int useSensorType() {
 		return Sensor.TYPE_LIGHT;
 	}
-
-	@Override
-	public void onIdumoResume() {
-		Sensor magnet = sensorManager.getDefaultSensor(useSensorType());
-		sensorManager.registerListener(this, magnet, SensorManager.SENSOR_DELAY_UI);
-	}
-
-	@Override
-	public void onIdumoStart() {}
-
-	@Override
-	public void onIdumoRestart() {}
-
-	@Override
-	public void onIdumoPause() {
-		sensorManager.unregisterListener(this);
-	}
-
-	@Override
-	public void onIdumoStop() {}
-
-	@Override
-	public void onIdumoDestroy() {}
 
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
@@ -90,6 +68,20 @@ public enum LightSensor implements SensorEventListener, AndroidController,IdumoC
 	 */
 	public boolean isReady() {
 		return isReady;
+	}
+
+	public void register() {
+		if(sensor==null){
+			sensor = sensorManager.getDefaultSensor(useSensorType());
+			sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI);
+		}
+	}
+
+	public void unregister() {
+		if(sensor!=null){
+			sensor=null;
+			sensorManager.unregisterListener(this);
+		}
 	}
 
 }

@@ -16,7 +16,7 @@ import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 public class Accelerometer2TCP extends Activity implements Runnable {
-	
+
 	private ArrayList<AndroidController>	android;
 	private SensorManager					sensormanager;
 	private AccelerometerProvider			accelerometer;
@@ -25,7 +25,7 @@ public class Accelerometer2TCP extends Activity implements Runnable {
 	private Thread							thread;
 	private boolean							isDo;
 	private Handler							handler;
-	
+
 	@Override
 	public void run() {
 		while (isDo) {
@@ -39,10 +39,10 @@ public class Accelerometer2TCP extends Activity implements Runnable {
 			}
 		}
 	}
-	
+
 	/*
 	 * (非 Javadoc)
-	 * 
+	 *
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
@@ -50,23 +50,23 @@ public class Accelerometer2TCP extends Activity implements Runnable {
 		super.onCreate(savedInstanceState);
 		android = new ArrayList<AndroidController>();
 		handler = new Handler();
-		
+
 		sensormanager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
 		AccelerometerSensor accelSensor = AccelerometerSensor.INSTANCE;
 		accelSensor.init(sensormanager);
-		android.add(accelSensor);
-		accelerometer = new AccelerometerProvider(accelSensor);
-		
+//		android.add(accelSensor);
+//		accelerometer = new AccelerometerProvider(accelSensor);
+
 		through = new ThroughHandler();
-		
+
 		textView = new TextViewReceiptor(this);
-		
+
 		textView.setSender(through);
 		through.setSender(accelerometer);
-		
+
 		accelerometer.setOption(AccelerometerProvider.Type.X);
 	}
-	
+
 	@Override
 	public void onStart() {
 		super.onStart();
@@ -74,7 +74,7 @@ public class Accelerometer2TCP extends Activity implements Runnable {
 			a.onIdumoStart();
 		}
 	}
-	
+
 	@Override
 	public void onRestart() {
 		for (AndroidController a : android) {
@@ -82,7 +82,7 @@ public class Accelerometer2TCP extends Activity implements Runnable {
 		}
 		super.onRestart();
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -93,7 +93,7 @@ public class Accelerometer2TCP extends Activity implements Runnable {
 		thread = new Thread(this);
 		thread.start();
 	}
-	
+
 	@Override
 	public void onPause() {
 		for (AndroidController a : android) {
@@ -102,7 +102,7 @@ public class Accelerometer2TCP extends Activity implements Runnable {
 		isDo = false;
 		super.onPause();
 	}
-	
+
 	@Override
 	public void onStop() {
 		for (AndroidController a : android) {
@@ -110,7 +110,7 @@ public class Accelerometer2TCP extends Activity implements Runnable {
 		}
 		super.onStop();
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		for (AndroidController a : android) {
@@ -118,5 +118,5 @@ public class Accelerometer2TCP extends Activity implements Runnable {
 		}
 		super.onDestroy();
 	}
-	
+
 }

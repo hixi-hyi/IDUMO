@@ -15,11 +15,12 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  *
  */
-public enum TemperatureSensor implements SensorEventListener, AndroidController,IdumoComponent {
+public enum TemperatureSensor implements SensorEventListener {
 
 	INSTANCE;
 
 	private SensorManager	sensorManager;
+	private Sensor sensor;
 	private int				accurary;
 	private float			temp;
 	private boolean			isReady;
@@ -38,29 +39,6 @@ public enum TemperatureSensor implements SensorEventListener, AndroidController,
 	public int useSensorType() {
 		return Sensor.TYPE_TEMPERATURE;
 	}
-
-	@Override
-	public void onIdumoResume() {
-		Sensor magnet = sensorManager.getDefaultSensor(useSensorType());
-		sensorManager.registerListener(this, magnet, SensorManager.SENSOR_DELAY_UI);
-	}
-
-	@Override
-	public void onIdumoStart() {}
-
-	@Override
-	public void onIdumoRestart() {}
-
-	@Override
-	public void onIdumoPause() {
-		sensorManager.unregisterListener(this);
-	}
-
-	@Override
-	public void onIdumoStop() {}
-
-	@Override
-	public void onIdumoDestroy() {}
 
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
@@ -91,5 +69,20 @@ public enum TemperatureSensor implements SensorEventListener, AndroidController,
 	public boolean isReady() {
 		return isReady;
 	}
+
+	public void register() {
+		if(sensor==null){
+			sensor = sensorManager.getDefaultSensor(useSensorType());
+			sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI);
+		}
+	}
+
+	public void unregister() {
+		if(sensor!=null){
+			sensor=null;
+			sensorManager.unregisterListener(this);
+		}
+	}
+
 
 }

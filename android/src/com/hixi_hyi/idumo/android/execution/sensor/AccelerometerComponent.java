@@ -11,53 +11,49 @@ import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
 
 public class AccelerometerComponent extends AbstractAndroidExecutionComponent {
-	
+
 	@Override
 	public void onIdumoMakeFlowChart() throws IdumoException {
-		SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-		AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
-		accelerometerSensor.init(sensor);
-		add(accelerometerSensor);
-		
-		AccelerometerProvider accelerometer = new AccelerometerProvider(accelerometerSensor);
+
+		AccelerometerProvider accelerometer = new AccelerometerProvider(activity);
 		accelerometer.setOption(AccelerometerProvider.Type.X);
 		add(accelerometer);
-		
-		AccelerometerProvider accelerometer2 = new AccelerometerProvider(accelerometerSensor);
+
+		AccelerometerProvider accelerometer2 = new AccelerometerProvider(activity);
 		accelerometer2.setOption(AccelerometerProvider.Type.Y);
 		add(accelerometer2);
-		
-		AccelerometerProvider accelerometer3 = new AccelerometerProvider(accelerometerSensor);
+
+		AccelerometerProvider accelerometer3 = new AccelerometerProvider(activity);
 		accelerometer3.setOption(AccelerometerProvider.Type.Z);
 		add(accelerometer3);
-		
+
 		StringConcatHandler concat = new StringConcatHandler("X:");
 		add(concat);
-		
+
 		StringConcatHandler concat2 = new StringConcatHandler("Y:");
 		add(concat2);
-		
+
 		StringConcatHandler concat3 = new StringConcatHandler("Z:");
 		add(concat3);
-		
+
 		TextViewReceiptor textView = new TextViewReceiptor(activity);
 		add(textView);
-		
+
 		connect(accelerometer, concat);
 		connect(accelerometer2, concat2);
 		connect(accelerometer3, concat3);
-		
+
 		connect(concat, textView);
 		connect(concat2, textView);
 		connect(concat3, textView);
-		
+
 	}
-	
+
 	@Override
 	public void onIdumoPrepare() {
 		setLoopCount(-1);
 		setSleepTime(1000);
-		
+
 	}
-	
+
 }

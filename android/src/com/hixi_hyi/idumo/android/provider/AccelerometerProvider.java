@@ -5,6 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.Activity;
+import android.content.Context;
+import android.hardware.SensorManager;
+
+import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
 import com.hixi_hyi.idumo.core.IdumoRuntimeException;
 import com.hixi_hyi.idumo.core.OptionMethodType;
@@ -14,40 +19,43 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * Android上の加速度センサの値を提供するProvider
- * 
+ *
  * @author Hiroyoshi HOUCHI
- * 
+ *
  */
-public class AccelerometerProvider implements SenderWithOption {
-	
+public class AccelerometerProvider implements SenderWithOption,AndroidController {
+
 	public enum Type implements OptionMethodType {
 		X("Get Accelerometer X"), Y("Get Accelerometer Y"), Z("Get Accelerometer Z");
 		private final String	description;
-		
+
 		Type(String description) {
 			this.description = description;
 		}
-		
+
 		@Override
 		public String getDescription() {
 			return description;
 		}
 	}
-	
+
 	private Type				methodType;
 	private AccelerometerSensor	accel;
-	
-	public AccelerometerProvider(AccelerometerSensor accel) {
-		this.accel = accel;
+
+	public AccelerometerProvider(Activity activity) {
+		SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+		AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
+		accelerometerSensor.init(sensor);
+		this.accel = accelerometerSensor;
 	}
-	
+
 	@Override
 	public List<Class<?>> getDataType() {
 		ArrayList<Class<?>> type = new ArrayList<Class<?>>();
 		type.add(Float.class);
 		return type;
 	}
-	
+
 	@Override
 	public PipeData getData() {
 		LogManager.log();
@@ -67,7 +75,7 @@ public class AccelerometerProvider implements SenderWithOption {
 		}
 		return p;
 	}
-	
+
 	@Override
 	public void setOption(OptionMethodType type) {
 		if (type instanceof Type) {
@@ -76,12 +84,12 @@ public class AccelerometerProvider implements SenderWithOption {
 			throw new IdumoRuntimeException();
 		}
 	}
-	
+
 	@Override
 	public boolean isReady() {
 		return accel.isReady();
 	}
-	
+
 	@Override
 	public Map<String, String> getOptions() {
 		Map<String, String> map = new HashMap<String, String>();
@@ -90,5 +98,27 @@ public class AccelerometerProvider implements SenderWithOption {
 		}
 		return map;
 	}
-	
+
+	@Override
+	public void onIdumoResume() {
+		accel.register();
+	}
+
+	@Override
+	public void onIdumoPause() {
+		accel.unregister();
+	}
+
+	@Override
+	public void onIdumoStart() {}
+
+	@Override
+	public void onIdumoRestart() {}
+
+	@Override
+	public void onIdumoStop() {}
+
+	@Override
+	public void onIdumoDestroy() {}
+
 }

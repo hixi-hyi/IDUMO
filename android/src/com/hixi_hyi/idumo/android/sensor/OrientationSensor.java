@@ -10,7 +10,7 @@ import android.hardware.SensorManager;
  * @author Hiroyoshi HOUCHI
  *
  */
-public enum OrientationSensor implements IdumoComponent {
+public enum OrientationSensor {
 
 	INSTANCE;
 
@@ -63,4 +63,13 @@ public enum OrientationSensor implements IdumoComponent {
 		return accel.isReady() && mag.isReady();
 	}
 
+	public void register(){
+		accel.register();
+		mag.register();
+	}
+
+	public void unregister(){
+		accel.unregister();
+		mag.unregister();
+	}
 }

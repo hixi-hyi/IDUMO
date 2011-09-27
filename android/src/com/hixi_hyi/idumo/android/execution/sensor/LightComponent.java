@@ -11,28 +11,23 @@ import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
 
 public class LightComponent extends AbstractAndroidExecutionComponent {
-	
+
 	@Override
 	public void onIdumoMakeFlowChart() throws IdumoException {
-		SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-		LightSensor lightSensor = LightSensor.INSTANCE;
-		lightSensor.init(sensor);
-		add(lightSensor);
-		
-		LightProvider light = new LightProvider(lightSensor);
+		LightProvider light = new LightProvider(activity);
 		add(light);
-		
+
 		StringConcatHandler s1 = new StringConcatHandler("Light:");
 		add(s1);
-		
+
 		TextViewReceiptor textView = new TextViewReceiptor(activity);
 		add(textView);
-		
+
 		connect(light, s1);
 		connect(s1, textView);
-		
+
 	}
-	
+
 	@Override
 	public void onIdumoPrepare() {
 		setLoopCount(-1);
