@@ -2,12 +2,16 @@ package com.hixi_hyi.idumo.console.exec;
 
 import com.hixi_hyi.idumo.console.util.ConsoleLogger;
 import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.exec.AbstractExecutionComponent;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 public abstract class AbstractConsoleMain {
 
 	private ConsoleExecution execution;
 
+	public void setExecution(AbstractExecutionComponent component) {
+		this.execution = new ConsoleExecution(component);
+	}
 	public void setExecution(ConsoleExecution execution) {
 		this.execution = execution;
 	}

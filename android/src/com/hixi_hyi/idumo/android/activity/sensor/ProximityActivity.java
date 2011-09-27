@@ -15,9 +15,10 @@ public class ProximityActivity extends AbstractAndroidActivity {
 
 	@Override
 	public void init() {
-		AbstractAndroidExecutionComponent component = new ProximityComponent();
-		AndroidExecution execution = new AndroidExecution(component);
-		setExecution(execution);
+		setExecutionWithComponent(new ProximityComponent());
+//		AbstractAndroidExecutionComponent component = new ProximityComponent();
+//		AndroidExecution execution = new AndroidExecution(component);
+//		setExecution(execution);
 	}
 
 }

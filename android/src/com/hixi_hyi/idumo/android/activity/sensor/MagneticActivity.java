@@ -13,9 +13,10 @@ public class MagneticActivity extends AbstractAndroidActivity {
 
 	@Override
 	public void init() {
-		AbstractAndroidExecutionComponent component = new MagneticComponent();
-		AndroidExecution execution = new AndroidExecution(component);
-		setExecution(execution);
+		setExecutionWithComponent(new MagneticComponent());
+//		AbstractAndroidExecutionComponent component = new MagneticComponent();
+//		AndroidExecution execution = new AndroidExecution(component);
+//		setExecution(execution);
 	}
 
 }

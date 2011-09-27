@@ -14,9 +14,10 @@ public class OrientationActivity extends AbstractAndroidActivity {
 
 	@Override
 	public void init() {
-		AbstractAndroidExecutionComponent component = new OrientationComponent();
-		AndroidExecution execution = new AndroidExecution(component);
-		setExecution(execution);
+		setExecutionWithComponent(new OrientationComponent());
+//		AbstractAndroidExecutionComponent component = new OrientationComponent();
+//		AndroidExecution execution = new AndroidExecution(component);
+//		setExecution(execution);
 	}
 
 }

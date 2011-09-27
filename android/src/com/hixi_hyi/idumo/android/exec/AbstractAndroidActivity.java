@@ -10,6 +10,10 @@ public abstract class AbstractAndroidActivity extends Activity {
 
 	private AndroidExecution	execution;
 
+	public void setExecutionWithComponent(AbstractAndroidExecutionComponent component){
+		this.execution = new AndroidExecution(component);
+	}
+
 	public void setExecution(AndroidExecution execution) {
 		this.execution = execution;
 	}

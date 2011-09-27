@@ -21,6 +21,7 @@ public class GPS2Component extends AbstractAndroidExecutionComponent {
 
 	@Override
 	public void onIdumoMakeFlowChart() throws IdumoException {
+		
 		LocationManager location = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 		GPSSensor gpsSensor = GPSSensor.INSTANCE;
 		gpsSensor.init(location);

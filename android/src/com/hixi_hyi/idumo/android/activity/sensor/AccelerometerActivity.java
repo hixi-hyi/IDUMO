@@ -10,9 +10,10 @@ public class AccelerometerActivity extends AbstractAndroidActivity {
 
 	@Override
 	public void init() {
-		AbstractAndroidExecutionComponent component = new AccelerometerComponent();
-		AndroidExecution execution = new AndroidExecution(component);
-		setExecution(execution);
+		setExecutionWithComponent(new AccelerometerComponent());
+//		AbstractAndroidExecutionComponent component = new AccelerometerComponent();
+//		AndroidExecution execution = new AndroidExecution(component);
+//		setExecution(execution);
 	}
 
 }

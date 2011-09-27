@@ -10,9 +10,10 @@ public class TodaysWeatherActivity extends AbstractAndroidActivity {
 
 	@Override
 	public void init() {
-		AbstractAndroidExecutionComponent component = new TodaysWeatherComponent();
-		AndroidExecution execution = new AndroidExecution(component);
-		setExecution(execution);
+		setExecutionWithComponent(new TodaysWeatherComponent());
+//		AbstractAndroidExecutionComponent component = new TodaysWeatherComponent();
+//		AndroidExecution execution = new AndroidExecution(component);
+//		setExecution(execution);
 	}
 
 }

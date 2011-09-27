@@ -9,9 +9,10 @@ public class ReverseGeoLocationActivity extends AbstractAndroidActivity {
 
 	@Override
 	public void init() {
-		AbstractAndroidExecutionComponent component = new ReverseGeoLocationComponent();
-		AndroidExecution execution = new AndroidExecution(component);
-		setExecution(execution);
+		setExecutionWithComponent(new ReverseGeoLocationComponent());
+//		AbstractAndroidExecutionComponent component = new ReverseGeoLocationComponent();
+//		AndroidExecution execution = new AndroidExecution(component);
+//		setExecution(execution);
 	}
 
 }
