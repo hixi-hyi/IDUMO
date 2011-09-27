@@ -15,28 +15,23 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * Android上の光センサの情報を取得できるProvider
- *
+ * 
  * @author Hiroyoshi HOUCHI
- *
+ * 
  */
-public class LightProvider implements Sender,AndroidController {
-
+public class LightProvider implements Sender, AndroidController {
+	
 	private LightSensor	light;
-
+	
 	public LightProvider(Activity activity) {
-		SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
 		LightSensor lightSensor = LightSensor.INSTANCE;
-		lightSensor.init(sensor);
+		if (!lightSensor.isInit()) {
+			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+			lightSensor.init(sensor);
+		}
 		this.light = lightSensor;
 	}
-
-	@Override
-	public List<Class<?>> getDataType() {
-		ArrayList<Class<?>> type = new ArrayList<Class<?>>();
-		type.add(Float.class);
-		return type;
-	}
-
+	
 	@Override
 	public PipeData getData() {
 		LogManager.log();
@@ -44,35 +39,38 @@ public class LightProvider implements Sender,AndroidController {
 		p.add(light.getLight());
 		return p;
 	}
-
+	
+	@Override
+	public List<Class<?>> getDataType() {
+		ArrayList<Class<?>> type = new ArrayList<Class<?>>();
+		type.add(Float.class);
+		return type;
+	}
+	
 	@Override
 	public boolean isReady() {
 		return light.isReady();
 	}
-
+	
 	@Override
-	public void onIdumoStart() {
-	}
-
-	@Override
-	public void onIdumoStop() {
-	}
-
-	@Override
-	public void onIdumoRestart() {
-	}
-
-	@Override
-	public void onIdumoResume() {
-		light.register();
-	}
-
+	public void onIdumoDestroy() {}
+	
 	@Override
 	public void onIdumoPause() {
 		light.unregister();
 	}
-
+	
 	@Override
-	public void onIdumoDestroy() {
+	public void onIdumoRestart() {}
+	
+	@Override
+	public void onIdumoResume() {
+		light.register();
 	}
+	
+	@Override
+	public void onIdumoStart() {}
+	
+	@Override
+	public void onIdumoStop() {}
 }

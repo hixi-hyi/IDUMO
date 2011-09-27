@@ -22,48 +22,47 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * Android上の傾きの情報を取得できるProvider 地磁気センサと加速度センサにより傾きを算出
- *
+ * 
  * @author Hiroyoshi HOUCHI
- *
+ * 
  */
-public class OrientationProvider implements SenderWithOption,AndroidController {
-
+public class OrientationProvider implements SenderWithOption, AndroidController {
+	
 	public enum Type implements OptionMethodType {
 		PITCH("Get ORIENTATION"), AZMUTH("Get ORIENTATION"), ROLL("Get ORIENTATION");
 		private final String	description;
-
+		
 		Type(String description) {
 			this.description = description;
 		}
-
+		
 		@Override
 		public String getDescription() {
 			return description;
 		}
 	}
-
+	
 	private Type				methodType;
 	private OrientationSensor	sensor;
-
+	
 	public OrientationProvider(Activity activity) {
-		SensorManager sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-		AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
-		accelerometerSensor.init(sensorManager);
-		MagneticFieldSensor magneticFieldSensor = MagneticFieldSensor.INSTANCE;
-		magneticFieldSensor.init(sensorManager);
 		OrientationSensor orientationSensor = OrientationSensor.INSTANCE;
-		orientationSensor.init(accelerometerSensor, magneticFieldSensor);
-
+		if (!orientationSensor.isInit()) {
+			AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
+			if (!accelerometerSensor.isInit()) {
+				SensorManager sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+				accelerometerSensor.init(sensorManager);
+			}
+			MagneticFieldSensor magneticFieldSensor = MagneticFieldSensor.INSTANCE;
+			if (!magneticFieldSensor.isInit()) {
+				SensorManager sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+				magneticFieldSensor.init(sensorManager);
+			}
+			orientationSensor.init(accelerometerSensor, magneticFieldSensor);
+		}
 		sensor = orientationSensor;
 	}
-
-	@Override
-	public List<Class<?>> getDataType() {
-		ArrayList<Class<?>> type = new ArrayList<Class<?>>();
-		type.add(Float.class);
-		return type;
-	}
-
+	
 	@Override
 	public PipeData getData() {
 		LogManager.log();
@@ -83,21 +82,14 @@ public class OrientationProvider implements SenderWithOption,AndroidController {
 		}
 		return p;
 	}
-
+	
 	@Override
-	public void setOption(OptionMethodType type) throws IdumoException {
-		if (type instanceof Type) {
-			methodType = (Type) type;
-		} else {
-			throw new IdumoException();
-		}
+	public List<Class<?>> getDataType() {
+		ArrayList<Class<?>> type = new ArrayList<Class<?>>();
+		type.add(Float.class);
+		return type;
 	}
-
-	@Override
-	public boolean isReady() {
-		return sensor.isReady();
-	}
-
+	
 	@Override
 	public Map<String, String> getOptions() {
 		Map<String, String> map = new HashMap<String, String>();
@@ -106,30 +98,40 @@ public class OrientationProvider implements SenderWithOption,AndroidController {
 		}
 		return map;
 	}
-
+	
 	@Override
-	public void onIdumoStart() {
+	public boolean isReady() {
+		return sensor.isReady();
 	}
-
+	
 	@Override
-	public void onIdumoStop() {
-	}
-
-	@Override
-	public void onIdumoRestart() {
-	}
-
-	@Override
-	public void onIdumoResume() {
-		sensor.register();
-	}
-
+	public void onIdumoDestroy() {}
+	
 	@Override
 	public void onIdumoPause() {
 		sensor.unregister();
 	}
-
+	
 	@Override
-	public void onIdumoDestroy() {
+	public void onIdumoRestart() {}
+	
+	@Override
+	public void onIdumoResume() {
+		sensor.register();
+	}
+	
+	@Override
+	public void onIdumoStart() {}
+	
+	@Override
+	public void onIdumoStop() {}
+	
+	@Override
+	public void setOption(OptionMethodType type) throws IdumoException {
+		if (type instanceof Type) {
+			methodType = (Type) type;
+		} else {
+			throw new IdumoException();
+		}
 	}
 }

@@ -42,13 +42,6 @@ public class CameraProvider implements SenderWithOption {
 	}
 	
 	@Override
-	public List<Class<?>> getDataType() {
-		ArrayList<Class<?>> type = new ArrayList<Class<?>>();
-		type.add(Bitmap.class);
-		return type;
-	}
-	
-	@Override
 	public PipeData getData() {
 		activity.setContentView(camera);
 		camera.takePicture();
@@ -56,9 +49,10 @@ public class CameraProvider implements SenderWithOption {
 	}
 	
 	@Override
-	public boolean isReady() {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
+	public List<Class<?>> getDataType() {
+		ArrayList<Class<?>> type = new ArrayList<Class<?>>();
+		type.add(Bitmap.class);
+		return type;
 	}
 	
 	@Override
@@ -68,6 +62,12 @@ public class CameraProvider implements SenderWithOption {
 			map.put(t.toString(), t.getDescription());
 		}
 		return map;
+	}
+	
+	@Override
+	public boolean isReady() {
+		// TODO 自動生成されたメソッド・スタブ
+		return false;
 	}
 	
 	@Override

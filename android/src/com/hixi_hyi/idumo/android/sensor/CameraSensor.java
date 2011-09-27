@@ -24,6 +24,23 @@ public class CameraSensor extends SurfaceView implements Callback, PictureCallba
 		holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 	}
 	
+	/**
+	 * @return picture
+	 */
+	public Bitmap getPicture() {
+		return picture;
+	}
+	
+	public boolean isReady() {
+		return isReady;
+	}
+	
+	@Override
+	public void onPictureTaken(byte[] data, Camera camera) {
+		picture = BitmapFactory.decodeByteArray(data, 0, data.length, null);
+		// camera.startPreview();
+	}
+	
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 		Parameters p = camera.getParameters();
@@ -47,26 +64,9 @@ public class CameraSensor extends SurfaceView implements Callback, PictureCallba
 		camera.release();
 	}
 	
-	@Override
-	public void onPictureTaken(byte[] data, Camera camera) {
-		picture = BitmapFactory.decodeByteArray(data, 0, data.length, null);
-		// camera.startPreview();
-	}
-	
 	public void takePicture() {
 		camera.takePicture(null, null, this);
 		isReady = true;
-	}
-	
-	/**
-	 * @return picture
-	 */
-	public Bitmap getPicture() {
-		return picture;
-	}
-	
-	public boolean isReady() {
-		return isReady;
 	}
 	
 }

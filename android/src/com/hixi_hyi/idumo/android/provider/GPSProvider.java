@@ -19,36 +19,74 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * GPS情報を取得できるProvider
- *
+ * 
  * @author Hiroyoshi HOUCHI
- *
+ * 
  */
-public class GPSProvider implements SenderWithOption, AndroidController{
-
+public class GPSProvider implements SenderWithOption, AndroidController {
+	
 	public enum Type implements OptionMethodType {
 		ACCURARY(""), ALTITUDE(""), BEARING(""), LATITUDE(""), LONGITUDE(""), SPEED(""), TIME("");
 		private final String	description;
-
+		
 		Type(String description) {
 			this.description = description;
 		}
-
+		
 		@Override
 		public String getDescription() {
 			return description;
 		}
 	}
-
+	
 	private GPSSensor	gps;
 	private Type		methodType;
-
+	
 	public GPSProvider(Activity activity) {
-		LocationManager location = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
 		GPSSensor gpsSensor = GPSSensor.INSTANCE;
-		gpsSensor.init(location);
+		if (!gpsSensor.isInit()) {
+			LocationManager location = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+			gpsSensor.init(location);
+		}
 		this.gps = gpsSensor;
 	}
-
+	
+	@Override
+	public PipeData getData() {
+		LogManager.log();
+		if (!isReady()) {
+			return null;
+		}
+		
+		PipeData p = new PipeData();
+		switch (methodType) {
+			case ACCURARY:
+				p.add(gps.getAccuracy());
+				break;
+			case ALTITUDE:
+				p.add(gps.getAltitude());
+				break;
+			case BEARING:
+				p.add(gps.getBearing());
+				break;
+			case LATITUDE:
+				p.add(gps.getLatitude());
+				break;
+			case LONGITUDE:
+				p.add(gps.getLongitude());
+				break;
+			case SPEED:
+				p.add(gps.getSpeed());
+				break;
+			case TIME:
+				p.add(gps.getTime());
+				break;
+			default:
+				break;
+		}
+		return p;
+	}
+	
 	@Override
 	public List<Class<?>> getDataType() throws IdumoException {
 		List<Class<?>> type = new ArrayList<Class<?>>();
@@ -79,48 +117,7 @@ public class GPSProvider implements SenderWithOption, AndroidController{
 		}
 		return type;
 	}
-
-	@Override
-	public PipeData getData() {
-		LogManager.log();
-		if (!isReady()) {
-			return null;
-		}
-
-		PipeData p = new PipeData();
-		switch (methodType) {
-			case ACCURARY:
-				p.add(gps.getAccuracy());
-				break;
-			case ALTITUDE:
-				p.add(gps.getAltitude());
-				break;
-			case BEARING:
-				p.add(gps.getBearing());
-				break;
-			case LATITUDE:
-				p.add(gps.getLatitude());
-				break;
-			case LONGITUDE:
-				p.add(gps.getLongitude());
-				break;
-			case SPEED:
-				p.add(gps.getSpeed());
-				break;
-			case TIME:
-				p.add(gps.getTime());
-				break;
-			default:
-				break;
-		}
-		return p;
-	}
-
-	@Override
-	public boolean isReady() {
-		return gps.isReady();
-	}
-
+	
 	@Override
 	public Map<String, String> getOptions() {
 		Map<String, String> map = new HashMap<String, String>();
@@ -129,7 +126,34 @@ public class GPSProvider implements SenderWithOption, AndroidController{
 		}
 		return map;
 	}
-
+	
+	@Override
+	public boolean isReady() {
+		return gps.isReady();
+	}
+	
+	@Override
+	public void onIdumoDestroy() {}
+	
+	@Override
+	public void onIdumoPause() {
+		gps.unregister();
+	}
+	
+	@Override
+	public void onIdumoRestart() {}
+	
+	@Override
+	public void onIdumoResume() {
+		gps.register();
+	}
+	
+	@Override
+	public void onIdumoStart() {}
+	
+	@Override
+	public void onIdumoStop() {}
+	
 	@Override
 	public void setOption(OptionMethodType type) throws IdumoException {
 		if (type instanceof Type) {
@@ -138,31 +162,5 @@ public class GPSProvider implements SenderWithOption, AndroidController{
 			throw new IdumoException();
 		}
 	}
-
-	@Override
-	public void onIdumoStart() {
-	}
-
-	@Override
-	public void onIdumoStop() {
-	}
-
-	@Override
-	public void onIdumoRestart() {
-	}
-
-	@Override
-	public void onIdumoResume() {
-		gps.register();
-	}
-
-	@Override
-	public void onIdumoPause() {
-		gps.unregister();
-	}
-
-	@Override
-	public void onIdumoDestroy() {
-	}
-
+	
 }
