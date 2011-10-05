@@ -12,4 +12,5 @@
     <string name="activity_temperature">Sensor/Unsupport/Temperature</string>
     <string name="activity_todaysweather">APP/TodaysWeather</string>
     <string name="activity_rgeolocation">APP/ReversedGeoLocation</string>
+    <string name="auto_todaysweather">Auto/TodaysWeather</string>
 </resources>
