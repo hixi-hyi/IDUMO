@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<idumo ver='0.1' type='android' name='MagneticField' base='AbstractAndroidActivity' package='com.hixi_hyi.idumo.android.auto.app'>
+<items>
+<item class='MagneticFieldProvider' name='g1' option='MagneticFieldProvider.Type.X' init='activity'/>
+<item class='MagneticFieldProvider' name='g2' option='MagneticFieldProvider.Type.Y' init='activity'/>
+<item class='MagneticFieldProvider' name='g3' option='MagneticFieldProvider.Type.Z' init='activity'/>
+<item class='StringConcatHandler' name='s1' init='"X:"'/>
+<item class='StringConcatHandler' name='s2' init='"Y:"'/>
+<item class='StringConcatHandler' name='s3' init='"Z:"'/>
+<item class='TextViewReceiptor' name='textView' init='activity'/>
+</items>
+<connections>
+<connect src='g1' sink='s1'/>
+<connect src='g2' sink='s2'/>
+<connect src='g3' sink='s3'/>
+<connect src='s1' sink='textView'/>
+<connect src='s2' sink='textView'/>
+<connect src='s3' sink='textView'/>
+</connections>
+<executions>
+<loop count='-1'/>
+<sleep time='1000'/>
+</executions>
+</idumo>

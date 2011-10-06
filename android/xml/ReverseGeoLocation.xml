@@ -7,7 +7,7 @@
 <item class="GPSProvider" name="gps1" option="GPSProvider.Type.LATITUDE" init="activity"/>
 <item class="GPSProvider" name="gps2" option="GPSProvider.Type.LONGITUDE" init="activity"/>
 <item class="ReversedGeocordingHandler" name="rgh"/>
-<item class="TextViewReceiptor" name="textView" init="activity"/>
+<item class="TextViewReceiptor" name="textview" init="activity"/>
 </items>
 <connections>
 <connect src="gps1" sink="rgh"/>

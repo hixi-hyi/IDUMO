@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<idumo ver='0.1' type='android' name='GPS' base='AbstractAndroidActivity' package='com.hixi_hyi.idumo.android.auto.app'>
+<items>
+<item class='GPSProvider' name='g1' option='GPSProvider.Type.ACCURARY' init='activity'/>
+<item class='GPSProvider' name='g2' option='GPSProvider.Type.ALTITUDE' init='activity'/>
+<item class='GPSProvider' name='g3' option='GPSProvider.Type.BEARING' init='activity'/>
+<item class='GPSProvider' name='g4' option='GPSProvider.Type.LATITUDE' init='activity'/>
+<item class='GPSProvider' name='g5' option='GPSProvider.Type.LONGITUDE' init='activity'/>
+<item class='GPSProvider' name='g6' option='GPSProvider.Type.SPEED' init='activity'/>
+<item class='GPSProvider' name='g7' option='GPSProvider.Type.TIME' init='activity'/>
+<item class='StringConcatHandler' name='s1' init='"Accurary:"'/>
+<item class='StringConcatHandler' name='s2' init='"Altitude:"'/>
+<item class='StringConcatHandler' name='s3' init='"Bearing:"'/>
+<item class='StringConcatHandler' name='s4' init='"Latitude:"'/>
+<item class='StringConcatHandler' name='s5' init='"Longitude:"'/>
+<item class='StringConcatHandler' name='s6' init='"Speed:"'/>
+<item class='StringConcatHandler' name='s7' init='"Time:"'/>
+<item class='TextViewReceiptor' name='textView' init='activity'/>
+</items>
+<connections>
+<connect src='g1' sink='s1'/>
+<connect src='g2' sink='s2'/>
+<connect src='g3' sink='s3'/>
+<connect src='g4' sink='s4'/>
+<connect src='g5' sink='s5'/>
+<connect src='g6' sink='s6'/>
+<connect src='g7' sink='s7'/>
+<connect src='s1' sink='textView'/>
+<connect src='s2' sink='textView'/>
+<connect src='s3' sink='textView'/>
+<connect src='s4' sink='textView'/>
+<connect src='s5' sink='textView'/>
+<connect src='s6' sink='textView'/>
+<connect src='s7' sink='textView'/>
+</connections>
+<executions>
+<loop count='-1'/>
+<sleep time='1000'/>
+</executions>
+</idumo>

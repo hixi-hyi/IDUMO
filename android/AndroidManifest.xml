@@ -120,12 +120,72 @@
         <!--          Auto  SAMPLES                -->
         <!-- ************************************* -->
         <activity android:name=".auto.app.TodaysWeatherActivity"
-        		  android:label="@string/auto_todaysweather">
+        		  android:label="Auto/Todaysweather">
             <intent-filter>
  	            <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".auto.app.ReverseGeoLocationActivity"
+        		  android:label="Auto/ReverseGeoLocation">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".auto.app.AccelerometerActivity"
+        		  android:label="Auto/Sensor/Accelerometer">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".auto.app.GPSActivity"
+        		  android:label="Auto/Sensor/GPS">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".auto.app.LightActivity"
+        		  android:label="Auto/Sensor/Light">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".auto.app.MagneticFieldActivity"
+        		  android:label="Auto/Sensor/MagneticField">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".auto.app.OrientationActivity"
+        		  android:label="Auto/Sensor/Orientation">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".auto.app.ProximityActivity"
+        		  android:label="Auto/Sensor/Proximity">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+
 
 
 
