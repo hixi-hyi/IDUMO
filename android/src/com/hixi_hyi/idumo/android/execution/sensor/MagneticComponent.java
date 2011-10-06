@@ -1,7 +1,7 @@
 package com.hixi_hyi.idumo.android.execution.sensor;
 
 import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
-import com.hixi_hyi.idumo.android.provider.MagneticFiledProvider;
+import com.hixi_hyi.idumo.android.provider.MagneticFieldProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
@@ -11,16 +11,16 @@ public class MagneticComponent extends AbstractAndroidExecutionComponent {
 	@Override
 	public void onIdumoMakeFlowChart() throws IdumoException {
 		
-		MagneticFiledProvider mag1 = new MagneticFiledProvider(activity);
-		mag1.setOption(MagneticFiledProvider.Type.X);
+		MagneticFieldProvider mag1 = new MagneticFieldProvider(activity);
+		mag1.setOption(MagneticFieldProvider.Type.X);
 		add(mag1);
 		
-		MagneticFiledProvider mag2 = new MagneticFiledProvider(activity);
-		mag2.setOption(MagneticFiledProvider.Type.Y);
+		MagneticFieldProvider mag2 = new MagneticFieldProvider(activity);
+		mag2.setOption(MagneticFieldProvider.Type.Y);
 		add(mag2);
 		
-		MagneticFiledProvider mag3 = new MagneticFiledProvider(activity);
-		mag3.setOption(MagneticFiledProvider.Type.Z);
+		MagneticFieldProvider mag3 = new MagneticFieldProvider(activity);
+		mag3.setOption(MagneticFieldProvider.Type.Z);
 		add(mag3);
 		
 		StringConcatHandler s1 = new StringConcatHandler("X:");
