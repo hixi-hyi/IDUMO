@@ -1,7 +1,7 @@
 package com.hixi_hyi.idumo.console.main;
 
 import com.hixi_hyi.idumo.console.exec.AbstractConsoleMain;
-import com.hixi_hyi.idumo.console.receiptor.SystemOutReceiptor;
+import com.hixi_hyi.idumo.console.receiptor.ConsoleViewReceiptor;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.exec.AbstractExecutionComponent;
 import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
@@ -52,7 +52,7 @@ public class TodaysWeatherMain extends AbstractConsoleMain {
 			StringConcatHandler s6 = new StringConcatHandler("Desc:");
 			add(s6);
 
-			SystemOutReceiptor console = new SystemOutReceiptor();
+			ConsoleViewReceiptor console = new ConsoleViewReceiptor();
 			add(console);
 
 			connect(date, s1);

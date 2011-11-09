@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<idumo ver='0.1' type='console' name='TodaysWeather' base='AbstractConsoleMain' package='com.hixi_hyi.idumo.console.auto.app'>
+<idumo ver='0.1' type='console' name='TodaysWeather' package='com.hixi_hyi.idumo.console.auto.app'>
 <items>
 <item class='LivedoorWeatherProvider' name='weather1' option='LivedoorWeatherProvider.Type.DATE' init='63'/>
 <item class='LivedoorWeatherProvider' name='weather2' option='LivedoorWeatherProvider.Type.LOCATION' init='63'/>

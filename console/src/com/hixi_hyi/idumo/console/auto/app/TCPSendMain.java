@@ -9,30 +9,29 @@ import com.hixi_hyi.idumo.core.exec.*;
 import com.hixi_hyi.idumo.core.provider.*;
 import com.hixi_hyi.idumo.core.handler.*;
 import com.hixi_hyi.idumo.core.receiptor.*;
-public class TodaysWeatherMain extends AbstractConsoleMain {
+public class TCPSendMain extends AbstractConsoleMain {
   @Override
   public void init() {
-    setExecutionWithComponent(new TodaysWeatherComponent());
+    setExecutionWithComponent(new TCPSendComponent());
   }
-  public static void main(String[] args){ 
-    TodaysWeatherMain main = new TodaysWeatherMain(); 
-    main.exec(); 
+  public static void main(String[] args){
+    TCPSendMain main = new TCPSendMain();
+    main.exec();
   }
 }
-class TodaysWeatherComponent extends AbstractExecutionComponent {
+class TCPSendComponent extends AbstractExecutionComponent {
   @Override
   public void onIdumoMakeFlowChart() throws IdumoException {
-    LivedoorWeatherProvider w1 = new LivedoorWeatherProvider(63);
-    w1.setOption(LivedoorWeatherProvider.Type.WEATHER);
-    add(w1);
-    ConsoleViewReceiptor console = new ConsoleViewReceiptor();
-    add(console);
+    StringProvider s = new StringProvider("IDUMO");
+    add(s);
+    SendTCPReceiptor r = new SendTCPReceiptor("192.168.12.2",10000);
+    add(r);
 
-    connect(w1, console);
+    connect(s, r);
   }
   @Override
   public void onIdumoPrepare() {
-    setLoopCount(1);
+    setLoopCount(-1);
     setSleepTime(1000);
   }
 }

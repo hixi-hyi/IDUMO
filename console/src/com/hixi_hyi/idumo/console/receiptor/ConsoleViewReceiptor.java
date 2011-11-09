@@ -12,11 +12,11 @@ import com.hixi_hyi.idumo.core.Sender;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class SystemOutReceiptor implements Receiver, IdumoRunnable {
+public class ConsoleViewReceiptor implements Receiver, IdumoRunnable {
 	
 	private ArrayList<Sender>	senders;
 	
-	public SystemOutReceiptor() {
+	public ConsoleViewReceiptor() {
 		senders = new ArrayList<Sender>();
 	}
 	
