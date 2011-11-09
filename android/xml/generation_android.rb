@@ -20,19 +20,19 @@ end
 
 def gen_class(node)
  s = ""
- s += "public class #{node.attributes['name']}Activity extends #{node.attributes['base']} {\n"
+ s += "public class #{node.attributes['name']}Activity extends AbstractAndroidActivity {\n"
  s += gen_idumo_init(node.attributes['name']) + "\n"
- s += gen_create_component(node) + "\n"
  s += "}\n"
+ s += gen_create_component(node) + "\n"
  return s
 end
 
 def gen_create_component(node)
  s = ""
- s += "  public class #{node.attributes['name']}Component extends AbstractAndroidExecutionComponent {\n"
+ s += "class #{node.attributes['name']}Component extends AbstractAndroidExecutionComponent {\n"
  s += gen_idumo_flow_chart(node) + "\n"
  s += gen_idumo_prepare(node.elements['executions'])
- s += "  }\n"
+ s += "}\n"
  return s
 end
 
@@ -55,26 +55,26 @@ end
 
 def gen_item_instance(node)
  s = ""
- s += "      #{node.attributes['class']} #{node.attributes['name']} = new #{node.attributes['class']}(#{node.attributes['init']});\n"
+ s += "    #{node.attributes['class']} #{node.attributes['name']} = new #{node.attributes['class']}(#{node.attributes['init']});\n"
  if node.attributes['option'] then
    node.attributes['option'].split(",").each{|opt|
-     s += "      #{node.attributes['name']}.setOption(#{opt});\n"
+     s += "    #{node.attributes['name']}.setOption(#{opt});\n"
    }
  end
- s += "      add(#{node.attributes['name']});";
+ s += "    add(#{node.attributes['name']});";
  s += "\n"
  return s
 end
 
 def gen_connection(node)
- return "      connect(#{node.attributes['src']}, #{node.attributes['sink']});\n"
+ return "    connect(#{node.attributes['src']}, #{node.attributes['sink']});\n"
 end
 
 
 def gen_idumo_flow_chart(node)
  s = ""
- s += "    @Override\n"
- s += "    public void onIdumoMakeFlowChart() throws IdumoException {\n"
+ s += "  @Override\n"
+ s += "  public void onIdumoMakeFlowChart() throws IdumoException {\n"
  node.elements['items'].elements.each("item"){|n|
    s += gen_item_instance(n) 
  }
@@ -82,18 +82,33 @@ def gen_idumo_flow_chart(node)
  node.elements['connections'].elements.each("connect"){|n|
    s += gen_connection(n)
  }
- s += "    }\n"
+ s += "  }\n"
  return s
 end
 
 
 def gen_idumo_prepare(node)
  s = ""
- s += "    @Override\n"
- s += "    public void onIdumoPrepare() {\n"
- s += "      setLoopCount(#{node.elements['loop'].attributes['count']});\n"
- s += "      setSleepTime(#{node.elements['sleep'].attributes['time']});\n"
- s += "    }\n"
+ s += "  @Override\n"
+ s += "  public void onIdumoPrepare() {\n"
+ s += "    setLoopCount(#{node.elements['loop'].attributes['count']});\n"
+ s += "    setSleepTime(#{node.elements['sleep'].attributes['time']});\n"
+ s += "  }\n"
+ return s
+end
+
+def gen_manifest(node)
+ s =""
+ s += "/*\n"
+ s += "        <activity android:name=\".auto.app.#{node.attributes['name']}Activity\"\n"
+ s += "       		  android:label=\"#{node.attributes['name']}\">\n"
+ s += "           <intent-filter>\n"
+ s += "	            <action android:name=\"android.intent.action.MAIN\" />\n"
+ s += "               <category android:name=\"android.intent.category.IDUMO_SAMPLES\" />\n"
+ s += "               <category android:name=\"android.intent.category.LAUNCHER\" />\n"
+ s += "           </intent-filter>\n"
+ s += "       </activity>\n"	
+ s +="*/\n"
  return s
 end
 
@@ -101,6 +116,7 @@ def parse_and_generate(node)
  puts gen_package_statement(node.attributes['package'])
  puts IMPORT_LIST
  puts gen_class(node)
+ puts gen_manifest(node)
 end
 
 ARGV.each{|argv|

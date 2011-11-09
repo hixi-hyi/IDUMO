@@ -128,7 +128,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".auto.app.ReverseGeoLocationActivity"
-        		  android:label="Auto/ReverseGeoLocation">
+        		  android:label="ReverseGeoLocation">
             <intent-filter>
  	            <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
@@ -177,6 +177,14 @@
         </activity>
         <activity android:name=".auto.app.ProximityActivity"
         		  android:label="Auto/Sensor/Proximity">
+            <intent-filter>
+ 	            <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".auto.app.TCPSendActivity"
+        		  android:label="TCPSendActivityaa">
             <intent-filter>
  	            <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />

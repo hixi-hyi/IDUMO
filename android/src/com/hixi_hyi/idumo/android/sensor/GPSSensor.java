@@ -11,20 +11,20 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * GPSセンサ
- * 
+ *
  * @author Hiroyoshi HOUCHI
- * 
+ *
  */
 public enum GPSSensor implements LocationListener {
-	
+
 	INSTANCE;
-	
+
 	private LocationManager	locationManager;
 	private Location		location;
 	private boolean			isReady;
 	private boolean			isRegister;
 	private boolean			isInit;
-	
+
 	/**
 	 * @return
 	 * @see android.location.Location#getAccuracy()
@@ -32,7 +32,7 @@ public enum GPSSensor implements LocationListener {
 	public float getAccuracy() {
 		return location.getAccuracy();
 	}
-	
+
 	/**
 	 * @return
 	 * @see android.location.Location#getAltitude()
@@ -40,7 +40,7 @@ public enum GPSSensor implements LocationListener {
 	public double getAltitude() {
 		return location.getAltitude();
 	}
-	
+
 	/**
 	 * @return
 	 * @see android.location.Location#getBearing()
@@ -48,7 +48,7 @@ public enum GPSSensor implements LocationListener {
 	public float getBearing() {
 		return location.getBearing();
 	}
-	
+
 	/**
 	 * @return
 	 * @see android.location.Location#getLatitude()
@@ -56,7 +56,7 @@ public enum GPSSensor implements LocationListener {
 	public double getLatitude() {
 		return location.getLatitude();
 	}
-	
+
 	/**
 	 * @return
 	 * @see android.location.Location#getLongitude()
@@ -64,7 +64,7 @@ public enum GPSSensor implements LocationListener {
 	public double getLongitude() {
 		return location.getLongitude();
 	}
-	
+
 	/**
 	 * @return
 	 * @see android.location.Location#getSpeed()
@@ -72,7 +72,7 @@ public enum GPSSensor implements LocationListener {
 	public float getSpeed() {
 		return location.getSpeed();
 	}
-	
+
 	/**
 	 * @return
 	 * @see android.location.Location#getTime()
@@ -80,23 +80,23 @@ public enum GPSSensor implements LocationListener {
 	public long getTime() {
 		return location.getTime();
 	}
-	
+
 	public void init(LocationManager manager) {
 		isInit = true;
 		this.locationManager = manager;
 		location = locationManager.getLastKnownLocation(locationManager.getBestProvider(new Criteria(), true));
-		isReady = true;
+//		isReady = true;
 		// AndroidLogger.d(location);
 	}
-	
+
 	public boolean isInit() {
 		return isInit;
 	}
-	
+
 	public boolean isReady() {
 		return isReady;
 	}
-	
+
 	@Override
 	public void onLocationChanged(Location location) {
 		this.location = location;
@@ -108,15 +108,15 @@ public enum GPSSensor implements LocationListener {
 		LogManager.debug("Time:" + String.valueOf(location.getTime()));
 		LogManager.debug("Speed:" + String.valueOf(location.getSpeed()));
 		LogManager.debug("Bearing:" + String.valueOf(location.getBearing()));
-		
+
 	}
-	
+
 	@Override
 	public void onProviderDisabled(String provider) {}
-	
+
 	@Override
 	public void onProviderEnabled(String provider) {}
-	
+
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 		switch (status) {
@@ -131,23 +131,23 @@ public enum GPSSensor implements LocationListener {
 				break;
 		}
 	}
-	
+
 	public void register() {
 		if (!isRegister) {
 			isRegister = true;
 			locationManager.requestLocationUpdates(useSensorType(), 0, 0, this);
 		}
 	}
-	
+
 	public void unregister() {
 		if (isRegister) {
 			isRegister = false;
 			locationManager.removeUpdates(this);
 		}
 	}
-	
+
 	public String useSensorType() {
 		return LocationManager.GPS_PROVIDER;
 	}
-	
+
 }

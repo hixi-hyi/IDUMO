@@ -1,21 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<idumo ver="0.1" type="android" name="ReverseGeoLocation" base="AbstractAndroidActivity" package="com.hixi_hyi.idumo.android.auto.app">
-<options>
-<use device="GPSSensor" name="gpsSensor"/>
-</options>
+<?xml version='1.0' encoding='UTF-8'?>
+<idumo ver='0.1' type='android' name='ReverseGeoLocation'
+ package='com.hixi_hyi.idumo.android.auto.app'>
 <items>
-<item class="GPSProvider" name="gps1" option="GPSProvider.Type.LATITUDE" init="activity"/>
-<item class="GPSProvider" name="gps2" option="GPSProvider.Type.LONGITUDE" init="activity"/>
-<item class="ReversedGeocordingHandler" name="rgh"/>
-<item class="TextViewReceiptor" name="textview" init="activity"/>
+<item class='GPSProvider' name='gps1' option='GPSProvider.Type.LATITUDE' init='activity'/>
+<item class='GPSProvider' name='gps2' option='GPSProvider.Type.LONGITUDE' init='activity'/>
+<item class='ReversedGeocordingHandler' name='rgh'/>
+<item class='TextViewReceiptor' name='textview' init='activity'/>
 </items>
 <connections>
-<connect src="gps1" sink="rgh"/>
-<connect src="gps2" sink="rgh"/>
-<connect src="rgh"  sink="textview"/>
+<connect src='gps1' sink='rgh'/>
+<connect src='gps2' sink='rgh'/>
+<connect src='rgh'  sink='textview'/>
 </connections>
 <executions>
-<loop count="-1"/>
-<sleep time="1000"/>
+<loop count='-1'/>
+<sleep time='1000'/>
 </executions>
 </idumo>
