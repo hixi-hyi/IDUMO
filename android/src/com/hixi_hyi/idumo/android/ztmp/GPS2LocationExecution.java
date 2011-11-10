@@ -8,7 +8,7 @@ import com.hixi_hyi.idumo.android.provider.GPSProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.android.sensor.GPSSensor;
 import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.handler.ReversedGeocordingHandler;
+import com.hixi_hyi.idumo.common.handler.ReversedGeocordingHandler;
 
 /**
  * AndroidのGPS情報から現在地を推測します．

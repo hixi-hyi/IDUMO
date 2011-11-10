@@ -5,7 +5,7 @@ import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
 import com.hixi_hyi.idumo.android.provider.GPSProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.handler.ReversedGeocordingHandler;
+import com.hixi_hyi.idumo.common.handler.ReversedGeocordingHandler;
 
 public class ReverseGeoLocationActivity extends AbstractAndroidActivity {
 

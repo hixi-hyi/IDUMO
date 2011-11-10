@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.core.provider;
+package com.hixi_hyi.idumo.common.provider;
 
 import java.util.ArrayList;
 import java.util.List;

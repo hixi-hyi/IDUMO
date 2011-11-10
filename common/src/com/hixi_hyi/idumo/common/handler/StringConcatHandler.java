@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.core.handler;
+package com.hixi_hyi.idumo.common.handler;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -7,9 +7,9 @@ import com.hixi_hyi.idumo.console.handler.*;
 import com.hixi_hyi.idumo.console.receiptor.*;
 import com.hixi_hyi.idumo.core.*;
 import com.hixi_hyi.idumo.core.exec.*;
-import com.hixi_hyi.idumo.core.provider.*;
-import com.hixi_hyi.idumo.core.handler.*;
-import com.hixi_hyi.idumo.core.receiptor.*;
+import com.hixi_hyi.idumo.common.provider.*;
+import com.hixi_hyi.idumo.common.handler.*;
+import com.hixi_hyi.idumo.common.receiptor.*;
 
 public class SerialSendMain extends AbstractConsoleMain {
 	@Override

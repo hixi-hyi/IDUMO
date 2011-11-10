@@ -3,8 +3,8 @@ package com.hixi_hyi.idumo.android.execution.app;
 import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.handler.StringConcatHandler;
-import com.hixi_hyi.idumo.core.provider.LivedoorWeatherProvider;
+import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
+import com.hixi_hyi.idumo.common.provider.LivedoorWeatherProvider;
 
 public class TodaysWeatherComponent extends AbstractAndroidExecutionComponent {
 	

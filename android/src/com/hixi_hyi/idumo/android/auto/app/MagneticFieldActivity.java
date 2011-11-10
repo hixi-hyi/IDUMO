@@ -6,9 +6,9 @@ import com.hixi_hyi.idumo.android.handler.*;
 import com.hixi_hyi.idumo.android.receiptor.*;
 import com.hixi_hyi.idumo.core.*;
 import com.hixi_hyi.idumo.core.exec.*;
-import com.hixi_hyi.idumo.core.provider.*;
-import com.hixi_hyi.idumo.core.handler.*;
-import com.hixi_hyi.idumo.core.receiptor.*;
+import com.hixi_hyi.idumo.common.provider.*;
+import com.hixi_hyi.idumo.common.handler.*;
+import com.hixi_hyi.idumo.common.receiptor.*;
 public class MagneticFieldActivity extends AbstractAndroidActivity {
   @Override
   public void init() {

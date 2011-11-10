@@ -9,7 +9,7 @@ import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.handler.ThroughHandler;
 import com.hixi_hyi.idumo.android.receiptor.TCPByteStreamReceiptor;
 import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.provider.RandomByteProvider;
+import com.hixi_hyi.idumo.common.provider.RandomByteProvider;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 public class RandomByte2TCP extends Activity implements Runnable {

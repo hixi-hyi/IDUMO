@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.core.component;
+package com.hixi_hyi.idumo.common.component;
 
 import java.net.URL;
 import java.net.URLConnection;

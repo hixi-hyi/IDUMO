@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.core.provider;
+package com.hixi_hyi.idumo.common.receiptor;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -17,12 +17,12 @@ import com.hixi_hyi.idumo.core.data.PipeData;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
- * バイト情報を受け取ることが出来るProvider
+ * バイト情報をTCP通信を用いて送ることが出来るReceiptor
  *
  * @author Hiroyoshi HOUCHI
  *
  */
-public class ReceiveTCPProvider implements ReceiverWithOption, ApplicationController, IdumoRunnable {
+public class SendTCPReceiptor implements ReceiverWithOption, ApplicationController, IdumoRunnable {
 	private String			ip;
 	private int				port;
 	private Socket			socket;
@@ -30,7 +30,7 @@ public class ReceiveTCPProvider implements ReceiverWithOption, ApplicationContro
 	private OutputStream	outstream;
 	private Sender			sender;
 
-	public ReceiveTCPProvider(String ip, int port) {
+	public SendTCPReceiptor(String ip, int port) {
 		this.ip = ip;
 		this.port = port;
 		socket = new Socket();
@@ -52,7 +52,7 @@ public class ReceiveTCPProvider implements ReceiverWithOption, ApplicationContro
 			return false;
 		}
 		for (Object o : senders[0].getDataType()) {
-			if (o != Byte.class) {
+			if (o != String.class) {
 				return false;
 			}
 		}
@@ -86,10 +86,14 @@ public class ReceiveTCPProvider implements ReceiverWithOption, ApplicationContro
 	@Override
 	public void run() {
 		LogManager.log();
+		if (!sender.isReady()) {
+			return;
+		}
 		PipeData data = sender.getData();
 		for (Object o : data) {
 			LogManager.debug(o.toString());
 			pw.println(o.toString());
+			pw.flush();
 		}
 	}
 
