@@ -1,0 +1,8 @@
+## Mac ##
+.DS_Store
+
+##Javadoc
+javadoc.xml
+
+##
+bin/
