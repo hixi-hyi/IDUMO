@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="lib/guava-r09.jar"/>
 	<classpathentry kind="lib" path="lib/jdom.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/IDUMOCore"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/IDUMOCommon"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
