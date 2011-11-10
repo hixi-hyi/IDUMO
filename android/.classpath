@@ -9,6 +9,6 @@
 	<classpathentry kind="lib" path="lib/google-api-client-googleapis-extensions-android2-1.4.1-beta.jar"/>
 	<classpathentry kind="lib" path="lib/guava-r09.jar"/>
 	<classpathentry kind="lib" path="lib/jdom.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/IdumoCore"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/IDUMOCore"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
