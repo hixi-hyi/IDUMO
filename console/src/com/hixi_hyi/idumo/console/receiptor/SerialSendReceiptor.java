@@ -27,6 +27,9 @@ public class SerialSendReceiptor implements IdumoRunnable, ReceiverWithOption, A
 	@Override
 	public void run() {
 		LogManager.log();
+		if(!sender.isReady()){
+			return ;
+		}
 		PipeData data = sender.getData();
 		byte[] bytedata = new byte[data.size()];
 		int i = 0;
