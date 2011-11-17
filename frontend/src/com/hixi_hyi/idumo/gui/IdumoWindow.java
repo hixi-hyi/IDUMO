@@ -16,7 +16,7 @@ import com.hixi_hyi.idumo.gui.element.ItemCreateDialog;
 
 public class IdumoWindow {
 
-	public JFrame				frame;
+	private JFrame				frame;
 	private IdumoCanvas			canvas;
 	private IdumoContainer		container;
 	private ItemCreateDialog	itemDialog;
@@ -46,7 +46,7 @@ public class IdumoWindow {
 		canvas.repaint();
 	}
 
-	public JMenuItem getJMenuItem(String label, ActionListener listner) {
+	public JMenuItem createJMenuItem(String label, ActionListener listner) {
 		JMenuItem item = new JMenuItem(label);
 		item.addActionListener(listner);
 		return item;
@@ -63,14 +63,14 @@ public class IdumoWindow {
 		{
 			JMenu menu = new JMenu("File");
 			menu.add(getJMenuItem("Import", false));
-			menu.add(getJMenuItem("Export", new ActionListener() {
+			menu.add(createJMenuItem("Export", new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					exportDialog.open();
 				}
 			}));
 			menu.addSeparator();
-			menu.add(getJMenuItem("Quit", new ActionListener() {
+			menu.add(createJMenuItem("Quit", new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					System.exit(0);
@@ -80,13 +80,13 @@ public class IdumoWindow {
 		}
 		{
 			JMenu menu = new JMenu("Edit");
-			menu.add(getJMenuItem("Add Item", new ActionListener() {
+			menu.add(createJMenuItem("Add Item", new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					itemDialog.open();
 				}
 			}));
-			menu.add(getJMenuItem("Delete", new ActionListener(){
+			menu.add(createJMenuItem("Delete", new ActionListener(){
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					IdumoItem selectedItem = canvas.selectedItem();
@@ -109,6 +109,13 @@ public class IdumoWindow {
 	public static void main(String args[]) {
 		IdumoContainer container = new IdumoContainer();
 		new IdumoWindow(container);
+	}
+
+	/**
+	 * @return frame
+	 */
+	public JFrame getFrame() {
+		return frame;
 	}
 
 }

@@ -27,7 +27,7 @@ public class ItemCreateDialog implements ActionListener {
 	public ItemCreateDialog(IdumoWindow win, IdumoContainer container) {
 		this.win = win;
 		this.container = container;
-		dialog = new JDialog(win.frame);
+		dialog = new JDialog(win.getFrame());
 		dialog.setTitle("Add new item");
 		dialog.setLayout(new GridLayout(5, 0));
 		dialog.getContentPane().add(classField = new JTextField("class", 40));

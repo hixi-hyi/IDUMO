@@ -1,6 +1,8 @@
 package com.hixi_hyi.idumo.gui.data;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
 
 public class IdumoContainer {
 
@@ -50,9 +52,10 @@ public class IdumoContainer {
 	}
 	
 	public void removeEdge(IdumoItem item){
-		for(IdumoEdge edge: edges){
+		for(Iterator<IdumoEdge> it = edges.iterator(); it.hasNext();){
+			IdumoEdge edge = it.next();
 			if(edge.getSrcItem()==item || edge.getDestItem()==item){
-				removeEdge(edge);
+				it.remove();
 			}
 		}
 	}

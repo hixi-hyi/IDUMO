@@ -15,18 +15,18 @@ import com.hixi_hyi.idumo.gui.data.IdumoEdge;
 import com.hixi_hyi.idumo.gui.data.IdumoItem;
 
 public class ExportDialog implements ActionListener {
-
+	
 	private IdumoContainer	container;
-
+	
 	private JDialog			dialog;
-
+	
 	private JTextField		typeField;
 	private JTextField		nameField;
 	private JButton			btn;
-
+	
 	public ExportDialog(IdumoWindow win, IdumoContainer container) {
 		this.container = container;
-		this.dialog = new JDialog(win.frame);
+		this.dialog = new JDialog(win.getFrame());
 		this.dialog.setTitle("Add new item");
 		this.dialog.setLayout(new GridLayout(3, 0));
 		dialog.getContentPane().add(typeField = new JTextField("type", 40));
@@ -36,11 +36,11 @@ public class ExportDialog implements ActionListener {
 		dialog.pack();
 		dialog.setVisible(false);
 	}
-
+	
 	public void open() {
 		dialog.setVisible(true);
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btn) {
@@ -52,10 +52,10 @@ public class ExportDialog implements ActionListener {
 			}
 		}
 	}
-
+	
 	public void output(PrintStream out, String type, String name) {
 		out.printf("<?xml version='1.0' encoding='UTF-8'>\n");
-		out.printf("<idumo ver='1.0' type='%s' name='%s' package='com.hixi_hyi.idumo.android.auto.app'>\n", type, name);
+		out.printf("<idumo ver='1.0' type='%s' name='%s' package='com.hixi_hyi.idumo.%s.auto.app'>\n", type, name, type);
 		out.printf("<items>\n");
 		for (IdumoItem item : container.getItems()) {
 			out.printf("<item class='%s' name='%s' option='%s' init='%s'/>\n", item.getKlass(), item.getName(), item.getOption(), item.getInit());
@@ -72,5 +72,5 @@ public class ExportDialog implements ActionListener {
 		out.printf("</executions>\n");
 		out.printf("</idumo>\n");
 	}
-
+	
 }
