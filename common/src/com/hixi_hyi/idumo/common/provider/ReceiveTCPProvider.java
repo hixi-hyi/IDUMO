@@ -1,12 +1,20 @@
 package com.hixi_hyi.idumo.common.provider;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
+
+import sun.awt.windows.ThemeReader;
 
 import com.hixi_hyi.idumo.core.ApplicationController;
 import com.hixi_hyi.idumo.core.IdumoException;
@@ -22,75 +30,115 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  *
  */
-public class ReceiveTCPProvider implements ReceiverWithOption, ApplicationController, IdumoRunnable {
-	private String			ip;
-	private int				port;
-	private Socket			socket;
-	private PrintWriter		pw;
-	private OutputStream	outstream;
-	private Sender			sender;
+public class ReceiveTCPProvider implements Sender, ApplicationController {
+	private int					port;
+	private Socket				socket;
+	private BufferedReader		br;
+	private InputStream			in;
+	private ArrayList<String>	strs;
+	private AcceptServer		server;
 
-	public ReceiveTCPProvider(String ip, int port) {
-		this.ip = ip;
+	public ReceiveTCPProvider(int port) {
 		this.port = port;
-		socket = new Socket();
-	}
-
-	@Override
-	public int getInputSize() {
-		return 1;
+		this.strs = new ArrayList<String>();
+		try {
+			this.server = new AcceptServer(port);
+		} catch (IOException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public boolean isReady() {
-		return socket.isConnected();
-	}
-
-	@Override
-	public boolean setSender(Sender... senders) throws IdumoException {
-		if (senders.length != getInputSize()) {
-			return false;
-		}
-		for (Object o : senders[0].getDataType()) {
-			if (o != Byte.class) {
+		if (socket == null) {
+			if(server.getSocket()==null){
 				return false;
+			}else {
+				socket = server.getSocket();
+				try {
+					in = socket.getInputStream();
+				} catch (IOException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
+				br = new BufferedReader( new InputStreamReader(in));
 			}
 		}
-		this.sender = senders[0];
-		return true;
+
+		if (strs.size() != 0) {
+			return true;
+		} else {
+			String s;
+			try {
+				if ((s = br.readLine()) != null) {
+					strs.add(s);
+					return true;
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
 	}
 
 	@Override
 	public void onIdumoStart() {
-		try {
-			socket.connect(new InetSocketAddress(ip, port));
-			outstream = socket.getOutputStream();
-			pw = new PrintWriter(new OutputStreamWriter(outstream));
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		new Thread(server).run();
 	}
 
 	@Override
 	public void onIdumoStop() {
 		try {
 			socket.close();
-			outstream.close();
+			in.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public void run() {
-		LogManager.log();
-		PipeData data = sender.getData();
-		for (Object o : data) {
-			LogManager.debug(o.toString());
-			pw.println(o.toString());
-		}
+	public List<Class<?>> getDataType() throws IdumoException {
+		List<Class<?>> type = new ArrayList<Class<?>>();
+		type.add(String.class);
+		return type;
 	}
 
+	@Override
+	public PipeData getData() {
+		PipeData p = new PipeData();
+		String s = strs.remove(0);
+		p.add(s);
+		return p;
+	}
+
+	class AcceptServer implements Runnable {
+
+		int				port;
+		ServerSocket	server;
+		Socket			socket;
+
+		public AcceptServer(int port) throws IOException {
+			this.port = port;
+			server = new ServerSocket(port);
+		}
+
+		@Override
+		public void run() {
+			try {
+				socket = server.accept();
+			} catch (IOException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+		}
+
+		/**
+		 * @return socket
+		 */
+		public Socket getSocket() {
+			return socket;
+		}
+
+	}
 }
