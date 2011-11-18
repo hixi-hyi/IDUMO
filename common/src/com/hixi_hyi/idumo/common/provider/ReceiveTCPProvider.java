@@ -14,6 +14,8 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.stream.events.StartDocument;
+
 import sun.awt.windows.ThemeReader;
 
 import com.hixi_hyi.idumo.core.ApplicationController;
@@ -44,26 +46,30 @@ public class ReceiveTCPProvider implements Sender, ApplicationController {
 		try {
 			this.server = new AcceptServer(port);
 		} catch (IOException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public boolean isReady() {
-		if (socket == null) {
-			if(server.getSocket()==null){
-				return false;
-			}else {
-				socket = server.getSocket();
-				try {
-					in = socket.getInputStream();
-				} catch (IOException e) {
-					// TODO 自動生成された catch ブロック
-					e.printStackTrace();
-				}
-				br = new BufferedReader( new InputStreamReader(in));
+		LogManager.log();
+
+		if (server.getSocket() == null) {
+			LogManager.debug("null");
+			socket = null;
+			if(!server.bool){
+				new Thread(server).start();
 			}
+			return false;
+		}
+		if (socket != server.getSocket()) {
+			socket = server.getSocket();
+			try {
+				in = socket.getInputStream();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			br = new BufferedReader(new InputStreamReader(in));
 		}
 
 		if (strs.size() != 0) {
@@ -80,6 +86,15 @@ public class ReceiveTCPProvider implements Sender, ApplicationController {
 			}
 		}
 		return false;
+
+		/*
+		 * if (server.getSocket() == null) { return false; } socket =
+		 * server.getSocket(); try { in = socket.getInputStream(); } catch
+		 * (IOException e) { e.printStackTrace(); } br = new BufferedReader(new
+		 * InputStreamReader(in)); String s; try { if ((s = br.readLine()) !=
+		 * null) { strs.add(s); } server.socket = null; return true; } catch
+		 * (IOException e) { e.printStackTrace(); } return false;
+		 */
 	}
 
 	@Override
@@ -109,6 +124,7 @@ public class ReceiveTCPProvider implements Sender, ApplicationController {
 		PipeData p = new PipeData();
 		String s = strs.remove(0);
 		p.add(s);
+		server.restart();
 		return p;
 	}
 
@@ -117,7 +133,7 @@ public class ReceiveTCPProvider implements Sender, ApplicationController {
 		int				port;
 		ServerSocket	server;
 		Socket			socket;
-
+		boolean         bool;
 		public AcceptServer(int port) throws IOException {
 			this.port = port;
 			server = new ServerSocket(port);
@@ -126,7 +142,9 @@ public class ReceiveTCPProvider implements Sender, ApplicationController {
 		@Override
 		public void run() {
 			try {
+				bool = true;
 				socket = server.accept();
+				bool = false;
 			} catch (IOException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
@@ -137,7 +155,22 @@ public class ReceiveTCPProvider implements Sender, ApplicationController {
 		 * @return socket
 		 */
 		public Socket getSocket() {
+			// if (socket.isClosed()) {
+			// LogManager.log();
+			// new Thread(this).run();
+			// socket = null;
+			// }
 			return socket;
+		}
+
+		public void restart() {
+			try {
+				socket.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			socket = null;
+			new Thread(this).start();
 		}
 
 	}

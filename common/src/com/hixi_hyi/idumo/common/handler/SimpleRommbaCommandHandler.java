@@ -8,20 +8,21 @@ import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.ReceiverWithOption;
 import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.util.LogManager;
 import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class SimpleRommbaCommandHandler implements Sender, ReceiverWithOption {
-	
+
 	private Sender	sender;
-	
+
 	public SimpleRommbaCommandHandler() {}
-	
+
 	@Override
 	public boolean isReady() {
 		return sender.isReady();
 	}
-	
+
 	@Override
 	public boolean setSender(Sender... senders) throws IdumoException {
 		if (senders.length != getInputSize()) {
@@ -34,25 +35,26 @@ public class SimpleRommbaCommandHandler implements Sender, ReceiverWithOption {
 		this.sender = senders[0];
 		return true;
 	}
-	
+
 	@Override
 	public int getInputSize() {
 		return 1;
 	}
-	
+
 	@Override
 	public List<Class<?>> getDataType() throws IdumoException {
 		List<Class<?>> type = new ArrayList<Class<?>>();
 		type.add(Byte.class);
 		return type;
 	}
-	
+
 	@Override
 	public PipeData getData() {
+		LogManager.log();
 		String command = (String) sender.getData().get(0);
 		PipeData p = new PipeData();
 		if (false) {
-			
+
 		} else if (command.equals("SAFE")) {
 			p.add(ConvertRoombaCommand.getCommand(command));
 		} else if (command.equals("CLEAN")) {
@@ -115,5 +117,5 @@ public class SimpleRommbaCommandHandler implements Sender, ReceiverWithOption {
 		}
 		return p;
 	}
-	
+
 }

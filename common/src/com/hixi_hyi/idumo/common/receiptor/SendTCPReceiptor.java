@@ -31,6 +31,7 @@ public class SendTCPReceiptor implements ReceiverWithOption, ApplicationControll
 	private Sender			sender;
 
 	public SendTCPReceiptor(String ip, int port) {
+		LogManager.log();
 		this.ip = ip;
 		this.port = port;
 		socket = new Socket();
@@ -43,6 +44,7 @@ public class SendTCPReceiptor implements ReceiverWithOption, ApplicationControll
 
 	@Override
 	public boolean isReady() {
+		LogManager.log();
 		return socket.isConnected();
 	}
 
@@ -62,6 +64,7 @@ public class SendTCPReceiptor implements ReceiverWithOption, ApplicationControll
 
 	@Override
 	public void onIdumoStart() {
+		LogManager.log();
 		try {
 			socket.connect(new InetSocketAddress(ip, port));
 			outstream = socket.getOutputStream();
