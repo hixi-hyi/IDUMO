@@ -5,21 +5,21 @@ import android.os.Handler;
 
 import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.front.AndroidContainer;
+import com.hixi_hyi.idumo.core.ApplicationController;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoExecution;
 import com.hixi_hyi.idumo.core.IdumoRunnable;
 import com.hixi_hyi.idumo.core.IdumoRuntimeException;
 import com.hixi_hyi.idumo.core.exec.AbstractExecutionComponent;
 import com.hixi_hyi.idumo.core.front.IdumoContainer;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 public class AndroidExecution implements IdumoExecution, Runnable {
-
 
 	private AbstractAndroidExecutionComponent	component;
 	private Handler								handler	= new Handler();
 
-
-	public AndroidExecution(AbstractAndroidExecutionComponent component){
+	public AndroidExecution(AbstractAndroidExecutionComponent component) {
 		this.component = component;
 		this.component.setContainer(new AndroidContainer());
 	}
@@ -37,6 +37,9 @@ public class AndroidExecution implements IdumoExecution, Runnable {
 			controller.onIdumoStart();
 			controller.onIdumoResume();
 		}
+		for (ApplicationController controller : component.getApplicationControllers()) {
+			controller.onIdumoStart();
+		}
 		component.setReady(true);
 	}
 
@@ -44,6 +47,9 @@ public class AndroidExecution implements IdumoExecution, Runnable {
 	public void onIdumoStop() {
 		for (AndroidController controller : component.getAndroidControllers()) {
 			controller.onIdumoPause();
+			controller.onIdumoStop();
+		}
+		for (ApplicationController controller : component.getApplicationControllers()) {
 			controller.onIdumoStop();
 		}
 		component.setReady(false);
@@ -64,18 +70,24 @@ public class AndroidExecution implements IdumoExecution, Runnable {
 		}
 		int count = component.getLoopCount();
 		if (count == -1) {
-			while(true){
-				handler.post(runnable);
+			while (true) {
+				if (runnable.isReady()) {
+					handler.post(runnable);
+				}
 				try {
 					Thread.sleep(component.getSleepTime());
 				} catch (InterruptedException e) {}
 			}
 		} else {
-			for (int i = 0; i < count; i++) {
-				handler.post(runnable);
+			for (int i = 0; i < count; ) {
+				if (runnable.isReady()) {
+					handler.post(runnable);
+					i++;
+				}
 				try {
 					Thread.sleep(component.getSleepTime());
 				} catch (InterruptedException e) {}
+
 			}
 		}
 	}
@@ -92,6 +104,5 @@ public class AndroidExecution implements IdumoExecution, Runnable {
 	public void setActivity(Activity activity) {
 		component.setActivity(activity);
 	}
-
 
 }
