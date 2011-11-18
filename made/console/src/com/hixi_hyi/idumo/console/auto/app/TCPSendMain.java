@@ -24,7 +24,7 @@ class TCPSendComponent extends AbstractExecutionComponent {
   public void onIdumoMakeFlowChart() throws IdumoException {
     StringProvider s = new StringProvider("IDUMO");
     add(s);
-    SendTCPReceiptor r = new SendTCPReceiptor("192.168.12.2",10000);
+    SendTCPReceiptor r = new SendTCPReceiptor("192.168.12.4",10000);
     add(r);
 
     connect(s, r);

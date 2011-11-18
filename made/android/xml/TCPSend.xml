@@ -3,7 +3,7 @@
  package='com.hixi_hyi.idumo.android.auto.app'>
 <items>
 <item class='StringProvider' name='s' init='"IDUMO"'/>
-<item class='SendTCPReceiptor' name='r' init='"192.168.11.1",10000'/>
+<item class='SendTCPReceiptor' name='r' init='"192.168.12.4",10000'/>
 </items>
 <connections>
 <connect src='s' sink='r'/>
