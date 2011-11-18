@@ -10,19 +10,19 @@ import com.hixi_hyi.idumo.core.front.IdumoContainer;
 
 public class ConsoleExecution implements IdumoExecution {
 	private AbstractExecutionComponent	component;
-
+	
 	public ConsoleExecution(AbstractExecutionComponent component) {
 		this.component = component;
 		this.component.setContainer(new IdumoContainer());
 	}
-
+	
 	@Override
 	public void onIdumoCreated() throws IdumoException {
 		component.onIdumoMakeFlowChart();
 		component.setup();
 		component.onIdumoPrepare();
 	}
-
+	
 	@Override
 	public void onIdumoStart() {
 		component.onIdumoPrepare();
@@ -31,7 +31,7 @@ public class ConsoleExecution implements IdumoExecution {
 		}
 		component.setReady(true);
 	}
-
+	
 	@Override
 	public void onIdumoStop() {
 		for (ApplicationController controller : component.getApplicationControllers()) {
@@ -39,7 +39,7 @@ public class ConsoleExecution implements IdumoExecution {
 		}
 		component.setReady(false);
 	}
-
+	
 	@Override
 	public void onIdumoExec() throws IdumoRuntimeException {
 		while (!component.isReady()) {
@@ -55,20 +55,25 @@ public class ConsoleExecution implements IdumoExecution {
 		}
 		int count = component.getLoopCount();
 		if (count == -1) {
-			while(true){
-				runnable.run();
+			while (true) {
+				if (runnable.isReady()) {
+					runnable.run();
+				}
 				try {
 					Thread.sleep(component.getSleepTime());
 				} catch (InterruptedException e) {}
 			}
 		} else {
-			for (int i = 0; i < count; i++) {
-				runnable.run();
+			for (int i = 0; i < count;) {
+				if (runnable.isReady()) {
+					runnable.run();
+					i++;
+				}
 				try {
 					Thread.sleep(component.getSleepTime());
 				} catch (InterruptedException e) {}
 			}
 		}
-
+		
 	}
 }
