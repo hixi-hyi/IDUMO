@@ -52,7 +52,6 @@ public class AccelerometerProvider_Y implements Sender, AndroidController {
 		return type;
 	}
 	
-
 	@Override
 	public boolean isReady() {
 		return accel.isReady();
@@ -80,5 +79,4 @@ public class AccelerometerProvider_Y implements Sender, AndroidController {
 	@Override
 	public void onIdumoStop() {}
 	
-
 }
