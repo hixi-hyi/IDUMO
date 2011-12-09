@@ -1,9 +1,7 @@
 package com.hixi_hyi.idumo.android.provider;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,10 +9,7 @@ import android.hardware.SensorManager;
 
 import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
-import com.hixi_hyi.idumo.core.IdumoRuntimeException;
-import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.Sender;
-import com.hixi_hyi.idumo.core.SenderWithOption;
 import com.hixi_hyi.idumo.core.data.PipeData;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
@@ -52,7 +47,6 @@ public class AccelerometerProvider_Z implements Sender, AndroidController {
 		return type;
 	}
 	
-
 	@Override
 	public boolean isReady() {
 		return accel.isReady();
@@ -80,5 +74,4 @@ public class AccelerometerProvider_Z implements Sender, AndroidController {
 	@Override
 	public void onIdumoStop() {}
 	
-
 }

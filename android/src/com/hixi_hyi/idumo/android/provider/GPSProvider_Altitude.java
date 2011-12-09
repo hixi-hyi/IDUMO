@@ -1,9 +1,7 @@
 package com.hixi_hyi.idumo.android.provider;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,9 +10,7 @@ import android.location.LocationManager;
 import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.sensor.GPSSensor;
 import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.Sender;
-import com.hixi_hyi.idumo.core.SenderWithOption;
 import com.hixi_hyi.idumo.core.data.PipeData;
 import com.hixi_hyi.idumo.core.util.LogManager;
 

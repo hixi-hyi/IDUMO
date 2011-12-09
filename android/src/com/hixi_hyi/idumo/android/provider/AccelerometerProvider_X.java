@@ -15,14 +15,14 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * Android上の加速度センサXの値を提供するProvider
- *
+ * 
  * @author Hiroyoshi HOUCHI
- *
+ * 
  */
 public class AccelerometerProvider_X implements Sender, AndroidController {
-
+	
 	private AccelerometerSensor	accel;
-
+	
 	public AccelerometerProvider_X(Activity activity) {
 		AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
 		if (!accelerometerSensor.isInit()) {
@@ -31,7 +31,7 @@ public class AccelerometerProvider_X implements Sender, AndroidController {
 		}
 		this.accel = accelerometerSensor;
 	}
-
+	
 	@Override
 	public PipeData getData() {
 		LogManager.log();
@@ -39,39 +39,39 @@ public class AccelerometerProvider_X implements Sender, AndroidController {
 		p.add(accel.getX());
 		return p;
 	}
-
+	
 	@Override
 	public List<Class<?>> getDataType() {
 		ArrayList<Class<?>> type = new ArrayList<Class<?>>();
 		type.add(Float.class);
 		return type;
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		return accel.isReady();
 	}
-
+	
 	@Override
 	public void onIdumoDestroy() {}
-
+	
 	@Override
 	public void onIdumoPause() {
 		accel.unregister();
 	}
-
+	
 	@Override
 	public void onIdumoRestart() {}
-
+	
 	@Override
 	public void onIdumoResume() {
 		accel.register();
 	}
-
+	
 	@Override
 	public void onIdumoStart() {}
-
+	
 	@Override
 	public void onIdumoStop() {}
-
+	
 }
