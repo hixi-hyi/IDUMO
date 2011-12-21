@@ -5,14 +5,14 @@ import java.util.List;
 
 import com.hixi_hyi.idumo.common.component.ConvertRoombaCommand;
 import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.ReceiverWithOption;
+import com.hixi_hyi.idumo.core.ReceiverWithInputSize;
 import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
 import com.hixi_hyi.idumo.core.util.LogManager;
 import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
-public class SimpleRommbaCommandHandler implements Sender, ReceiverWithOption {
+public class SimpleRommbaCommandHandler implements Sender, ReceiverWithInputSize {
 
 	private Sender	sender;
 

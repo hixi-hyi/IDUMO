@@ -11,7 +11,7 @@ import java.net.UnknownHostException;
 import com.hixi_hyi.idumo.core.ApplicationController;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoRunnable;
-import com.hixi_hyi.idumo.core.ReceiverWithOption;
+import com.hixi_hyi.idumo.core.ReceiverWithInputSize;
 import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
 import com.hixi_hyi.idumo.core.util.LogManager;
@@ -22,7 +22,7 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  *
  */
-public class SendTCPReceiptor implements ReceiverWithOption, ApplicationController, IdumoRunnable {
+public class SendTCPReceiptor implements ReceiverWithInputSize, ApplicationController, IdumoRunnable {
 	private String			ip;
 	private int				port;
 	private Socket			socket;

@@ -9,12 +9,12 @@ import com.hixi_hyi.idumo.core.ApplicationController;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoRunnable;
 import com.hixi_hyi.idumo.core.Receiver;
-import com.hixi_hyi.idumo.core.ReceiverWithOption;
+import com.hixi_hyi.idumo.core.ReceiverWithInputSize;
 import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
-public class SerialSendReceiptor implements IdumoRunnable, ReceiverWithOption, ApplicationController {
+public class SerialSendReceiptor implements IdumoRunnable, ReceiverWithInputSize, ApplicationController {
 	
 	private OutputStream	out;
 	private Sender			sender;

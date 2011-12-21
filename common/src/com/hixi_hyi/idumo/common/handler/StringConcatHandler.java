@@ -8,12 +8,12 @@ import java.util.Map;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoRuntimeException;
 import com.hixi_hyi.idumo.core.OptionMethodType;
-import com.hixi_hyi.idumo.core.ReceiverWithOption;
+import com.hixi_hyi.idumo.core.ReceiverWithInputSize;
 import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.SenderWithOption;
 import com.hixi_hyi.idumo.core.data.PipeData;
 
-public class StringConcatHandler implements SenderWithOption, ReceiverWithOption {
+public class StringConcatHandler implements SenderWithOption, ReceiverWithInputSize {
 	
 	public enum Type implements OptionMethodType {
 		PREFIX("Get Accelerometer X"), SUFFIX("Get Accelerometer Y"), ;

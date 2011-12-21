@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.hixi_hyi.idumo.common.component.ReversedGeocording;
 import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.ReceiverWithOption;
+import com.hixi_hyi.idumo.core.ReceiverWithInputSize;
 import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
 
@@ -15,7 +15,7 @@ import com.hixi_hyi.idumo.core.data.PipeData;
  * @author Hiroyoshi
  * 
  */
-public class ReversedGeocordingHandler implements Sender, ReceiverWithOption {
+public class ReversedGeocordingHandler implements Sender, ReceiverWithInputSize {
 	
 	private ArrayList<Sender>	senders	= new ArrayList<Sender>();
 	

@@ -3,12 +3,12 @@ package com.hixi_hyi.idumo.android.handler;
 import java.util.List;
 
 import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.ReceiverWithOption;
+import com.hixi_hyi.idumo.core.ReceiverWithInputSize;
 import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
-public class ThroughHandler implements Sender, ReceiverWithOption {
+public class ThroughHandler implements Sender, ReceiverWithInputSize {
 	
 	private Sender	provider;
 	

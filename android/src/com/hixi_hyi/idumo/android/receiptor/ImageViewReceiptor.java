@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoRunnable;
-import com.hixi_hyi.idumo.core.ReceiverWithOption;
+import com.hixi_hyi.idumo.core.ReceiverWithInputSize;
 import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
 
@@ -20,7 +20,7 @@ import com.hixi_hyi.idumo.core.data.PipeData;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class ImageViewReceiptor extends ImageView implements ReceiverWithOption, IdumoRunnable {
+public class ImageViewReceiptor extends ImageView implements ReceiverWithInputSize, IdumoRunnable {
 	
 	private Sender		sender;
 	private Activity	activity;
