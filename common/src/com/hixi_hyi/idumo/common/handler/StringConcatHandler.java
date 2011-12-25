@@ -8,12 +8,15 @@ import java.util.Map;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoRuntimeException;
 import com.hixi_hyi.idumo.core.OptionMethodType;
+import com.hixi_hyi.idumo.core.Receiver;
 import com.hixi_hyi.idumo.core.ReceiverWithInputSize;
 import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.SenderWithOption;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
-public class StringConcatHandler implements SenderWithOption, ReceiverWithInputSize {
+public class StringConcatHandler implements SenderWithOption, Receiver {
 	
 	public enum Type implements OptionMethodType {
 		PREFIX("Get Accelerometer X"), SUFFIX("Get Accelerometer Y"), ;
@@ -32,6 +35,7 @@ public class StringConcatHandler implements SenderWithOption, ReceiverWithInputS
 	private Sender				provider;
 	private String				fixWord;
 	private OptionMethodType	type;
+	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
 	
 	public StringConcatHandler(String fixWord) {
 		this.fixWord = fixWord;
@@ -64,18 +68,12 @@ public class StringConcatHandler implements SenderWithOption, ReceiverWithInputS
 	}
 	
 	@Override
-	public boolean setSender(Sender... provider) {
-		if (provider.length == getInputSize()) {
-			this.provider = provider[0];
-			return true;
-		}
-		return false;
+	public boolean setSender(Sender... senders) throws IdumoException {
+		vSize.validate(senders);
+		this.provider = senders[0];
+		return true;
 	}
 	
-	@Override
-	public int getInputSize() {
-		return 1;
-	}
 	
 	@Override
 	public boolean isReady() {

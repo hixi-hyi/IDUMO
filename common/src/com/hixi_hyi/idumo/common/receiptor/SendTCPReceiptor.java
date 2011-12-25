@@ -11,10 +11,14 @@ import java.net.UnknownHostException;
 import com.hixi_hyi.idumo.core.ApplicationController;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoRunnable;
+import com.hixi_hyi.idumo.core.Receiver;
 import com.hixi_hyi.idumo.core.ReceiverWithInputSize;
 import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
 import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
 /**
  * バイト情報をTCP通信を用いて送ることが出来るReceiptor
@@ -22,24 +26,21 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  *
  */
-public class SendTCPReceiptor implements ReceiverWithInputSize, ApplicationController, IdumoRunnable {
+public class SendTCPReceiptor implements Receiver, ApplicationController, IdumoRunnable {
 	private String			ip;
 	private int				port;
 	private Socket			socket;
 	private PrintWriter		pw;
 	private OutputStream	outstream;
 	private Sender			sender;
-
+	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
+	private ReceiveValidator vType = new ReceiveValidatorType(1,String.class);
+	
 	public SendTCPReceiptor(String ip, int port) {
 		LogManager.log();
 		this.ip = ip;
 		this.port = port;
 		socket = new Socket();
-	}
-
-	@Override
-	public int getInputSize() {
-		return 1;
 	}
 
 	@Override
@@ -50,14 +51,8 @@ public class SendTCPReceiptor implements ReceiverWithInputSize, ApplicationContr
 
 	@Override
 	public boolean setSender(Sender... senders) throws IdumoException {
-		if (senders.length != getInputSize()) {
-			return false;
-		}
-		for (Object o : senders[0].getDataType()) {
-			if (o != String.class) {
-				return false;
-			}
-		}
+		vSize.validate(senders);
+		vType.validate(senders);
 		this.sender = senders[0];
 		return true;
 	}

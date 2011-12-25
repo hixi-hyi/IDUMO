@@ -3,14 +3,18 @@ package com.hixi_hyi.idumo.android.handler;
 import java.util.List;
 
 import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.Receiver;
 import com.hixi_hyi.idumo.core.ReceiverWithInputSize;
 import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
 import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
-public class ThroughHandler implements Sender, ReceiverWithInputSize {
+public class ThroughHandler implements Sender, Receiver {
 	
 	private Sender	provider;
+	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
 	
 	@Override
 	public PipeData getData() {
@@ -27,18 +31,12 @@ public class ThroughHandler implements Sender, ReceiverWithInputSize {
 	}
 	
 	@Override
-	public boolean setSender(Sender... provider) {
-		if (provider.length == getInputSize()) {
-			this.provider = provider[0];
-			return true;
-		}
-		return false;
+	public boolean setSender(Sender... provider) throws IdumoException {
+		vSize.validate(provider);
+		this.provider = provider[0];
+		return true;
 	}
 	
-	@Override
-	public int getInputSize() {
-		return 1;
-	}
 	
 	@Override
 	public boolean isReady() {
