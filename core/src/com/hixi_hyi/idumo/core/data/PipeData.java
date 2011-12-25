@@ -11,19 +11,23 @@ public class PipeData implements Iterable<Object> {
 	{
 		datalist = new ArrayList<Object>();
 	}
-	
+
+	public static PipeData generatePipeData(Object...objects){
+		return new PipeData(objects);
+	}
+
 	public PipeData() {}
-	
+
 	public PipeData(Object... objects) {
 		for (Object o : objects) {
 			datalist.add(o);
 		}
 	}
-	
+
 	public Collection<Object> getData() {
 		return datalist;
 	}
-	
+
 	public Collection<Class<?>> getDataType() {
 		ArrayList<Class<?>> types = new ArrayList<Class<?>>();
 		for (Object o : datalist) {
@@ -31,11 +35,11 @@ public class PipeData implements Iterable<Object> {
 		}
 		return types;
 	}
-	
+
 	// public Object poll() {
 	// return remove(0);
 	// }
-	
+
 	/**
 	 * @param index
 	 * @param object
@@ -44,7 +48,7 @@ public class PipeData implements Iterable<Object> {
 	public void add(int index, Object object) {
 		datalist.add(index, object);
 	}
-	
+
 	/**
 	 * @param object
 	 * @return
@@ -53,7 +57,7 @@ public class PipeData implements Iterable<Object> {
 	public boolean add(Object object) {
 		return datalist.add(object);
 	}
-	
+
 	/**
 	 * @param collection
 	 * @return
@@ -62,7 +66,7 @@ public class PipeData implements Iterable<Object> {
 	public boolean addAll(Collection<? extends Object> collection) {
 		return datalist.addAll(collection);
 	}
-	
+
 	/**
 	 * @param index
 	 * @param collection
@@ -72,15 +76,15 @@ public class PipeData implements Iterable<Object> {
 	public boolean addAll(int index, Collection<? extends Object> collection) {
 		return datalist.addAll(index, collection);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @see java.util.ArrayList#clear()
 	 */
 	public void clear() {
 		datalist.clear();
 	}
-	
+
 	/**
 	 * @return
 	 * @see java.util.ArrayList#clone()
@@ -89,7 +93,7 @@ public class PipeData implements Iterable<Object> {
 	public Object clone() {
 		return datalist.clone();
 	}
-	
+
 	/**
 	 * @param object
 	 * @return
@@ -98,7 +102,7 @@ public class PipeData implements Iterable<Object> {
 	public boolean contains(Object object) {
 		return datalist.contains(object);
 	}
-	
+
 	/**
 	 * @param collection
 	 * @return
@@ -107,7 +111,7 @@ public class PipeData implements Iterable<Object> {
 	public boolean containsAll(Collection<?> collection) {
 		return datalist.containsAll(collection);
 	}
-	
+
 	/**
 	 * @param minimumCapacity
 	 * @see java.util.ArrayList#ensureCapacity(int)
@@ -115,7 +119,7 @@ public class PipeData implements Iterable<Object> {
 	public void ensureCapacity(int minimumCapacity) {
 		datalist.ensureCapacity(minimumCapacity);
 	}
-	
+
 	/**
 	 * @param o
 	 * @return
@@ -125,7 +129,7 @@ public class PipeData implements Iterable<Object> {
 	public boolean equals(Object o) {
 		return datalist.equals(o);
 	}
-	
+
 	/**
 	 * @param index
 	 * @return
@@ -134,7 +138,7 @@ public class PipeData implements Iterable<Object> {
 	public Object get(int index) {
 		return datalist.get(index);
 	}
-	
+
 	/**
 	 * @return
 	 * @see java.util.ArrayList#hashCode()
@@ -143,7 +147,7 @@ public class PipeData implements Iterable<Object> {
 	public int hashCode() {
 		return datalist.hashCode();
 	}
-	
+
 	/**
 	 * @param object
 	 * @return
@@ -152,7 +156,7 @@ public class PipeData implements Iterable<Object> {
 	public int indexOf(Object object) {
 		return datalist.indexOf(object);
 	}
-	
+
 	/**
 	 * @return
 	 * @see java.util.ArrayList#isEmpty()
@@ -160,7 +164,7 @@ public class PipeData implements Iterable<Object> {
 	public boolean isEmpty() {
 		return datalist.isEmpty();
 	}
-	
+
 	/**
 	 * @return
 	 * @see java.util.ArrayList#iterator()
@@ -169,7 +173,7 @@ public class PipeData implements Iterable<Object> {
 	public Iterator<Object> iterator() {
 		return datalist.iterator();
 	}
-	
+
 	/**
 	 * @param object
 	 * @return
@@ -178,7 +182,7 @@ public class PipeData implements Iterable<Object> {
 	public int lastIndexOf(Object object) {
 		return datalist.lastIndexOf(object);
 	}
-	
+
 	/**
 	 * @return
 	 * @see java.util.AbstractList#listIterator()
@@ -186,7 +190,7 @@ public class PipeData implements Iterable<Object> {
 	public ListIterator<Object> listIterator() {
 		return datalist.listIterator();
 	}
-	
+
 	/**
 	 * @param location
 	 * @return
@@ -195,7 +199,7 @@ public class PipeData implements Iterable<Object> {
 	public ListIterator<Object> listIterator(int location) {
 		return datalist.listIterator(location);
 	}
-	
+
 	/**
 	 * @param index
 	 * @return
@@ -204,7 +208,7 @@ public class PipeData implements Iterable<Object> {
 	public Object remove(int index) {
 		return datalist.remove(index);
 	}
-	
+
 	/**
 	 * @param object
 	 * @return
@@ -213,7 +217,7 @@ public class PipeData implements Iterable<Object> {
 	public boolean remove(Object object) {
 		return datalist.remove(object);
 	}
-	
+
 	/**
 	 * @param collection
 	 * @return
@@ -222,7 +226,7 @@ public class PipeData implements Iterable<Object> {
 	public boolean removeAll(Collection<?> collection) {
 		return datalist.removeAll(collection);
 	}
-	
+
 	/**
 	 * @param collection
 	 * @return
@@ -231,7 +235,7 @@ public class PipeData implements Iterable<Object> {
 	public boolean retainAll(Collection<?> collection) {
 		return datalist.retainAll(collection);
 	}
-	
+
 	/**
 	 * @param index
 	 * @param object
@@ -241,7 +245,7 @@ public class PipeData implements Iterable<Object> {
 	public Object set(int index, Object object) {
 		return datalist.set(index, object);
 	}
-	
+
 	/**
 	 * @return
 	 * @see java.util.ArrayList#size()
@@ -249,7 +253,7 @@ public class PipeData implements Iterable<Object> {
 	public int size() {
 		return datalist.size();
 	}
-	
+
 	/**
 	 * @param start
 	 * @param end
@@ -259,7 +263,7 @@ public class PipeData implements Iterable<Object> {
 	public List<Object> subList(int start, int end) {
 		return datalist.subList(start, end);
 	}
-	
+
 	/**
 	 * @return
 	 * @see java.util.ArrayList#toArray()
@@ -267,7 +271,7 @@ public class PipeData implements Iterable<Object> {
 	public Object[] toArray() {
 		return datalist.toArray();
 	}
-	
+
 	/**
 	 * @param <T>
 	 * @param contents
@@ -277,7 +281,7 @@ public class PipeData implements Iterable<Object> {
 	public <T> T[] toArray(T[] contents) {
 		return datalist.toArray(contents);
 	}
-	
+
 	/**
 	 * @return
 	 * @see java.util.AbstractCollection#toString()
@@ -286,13 +290,13 @@ public class PipeData implements Iterable<Object> {
 	public String toString() {
 		return datalist.toString();
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @see java.util.ArrayList#trimToSize()
 	 */
 	public void trimToSize() {
 		datalist.trimToSize();
 	}
-	
+
 }
