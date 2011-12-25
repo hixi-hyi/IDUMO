@@ -21,7 +21,7 @@ public class SimpleRommbaCommandHandler implements Sender, Receiver {
 	private Sender	sender;
 	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
 	private ReceiveValidator vType = new ReceiveValidatorType(1,String.class);
-	
+
 	public SimpleRommbaCommandHandler() {}
 
 	@Override
@@ -47,6 +47,9 @@ public class SimpleRommbaCommandHandler implements Sender, Receiver {
 
 	@Override
 	public PipeData getData() {
+		if(sender.getData()==null){
+			return null;
+		}
 		LogManager.log();
 		String command = (String) sender.getData().get(0);
 		PipeData p = new PipeData();

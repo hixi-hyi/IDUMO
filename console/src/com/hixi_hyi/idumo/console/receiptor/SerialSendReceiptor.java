@@ -15,15 +15,15 @@ import com.hixi_hyi.idumo.core.data.PipeData;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 public class SerialSendReceiptor implements IdumoRunnable, ReceiverWithInputSize, ApplicationController {
-	
+
 	private OutputStream	out;
 	private Sender			sender;
 	private String			serial;
-	
+
 	public SerialSendReceiptor(String serial) {
 		this.serial = serial;
 	}
-	
+
 	@Override
 	public void run() {
 		LogManager.log();
@@ -31,6 +31,9 @@ public class SerialSendReceiptor implements IdumoRunnable, ReceiverWithInputSize
 			return ;
 		}
 		PipeData data = sender.getData();
+		if(data==null){
+			return;
+		}
 		byte[] bytedata = new byte[data.size()];
 		int i = 0;
 		LogManager.debug("size: " + data.size());
@@ -39,21 +42,21 @@ public class SerialSendReceiptor implements IdumoRunnable, ReceiverWithInputSize
 			bytedata[i] = (Byte) o;
 			i++;
 		}
-		
+
 		try {
 			out.write(bytedata);
 			out.flush();
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-		
+
 	}
-	
+
 	@Override
 	public boolean isReady() {
 		return sender.isReady();
 	}
-	
+
 	@Override
 	public boolean setSender(Sender... senders) throws IdumoException {
 		if (senders.length != getInputSize()) {
@@ -67,12 +70,12 @@ public class SerialSendReceiptor implements IdumoRunnable, ReceiverWithInputSize
 		this.sender = senders[0];
 		return true;
 	}
-	
+
 	@Override
 	public int getInputSize() {
 		return 1;
 	}
-	
+
 	@Override
 	public void onIdumoStart() {
 		try {
@@ -81,7 +84,7 @@ public class SerialSendReceiptor implements IdumoRunnable, ReceiverWithInputSize
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void onIdumoStop() {
 		try {
@@ -90,5 +93,5 @@ public class SerialSendReceiptor implements IdumoRunnable, ReceiverWithInputSize
 			e.printStackTrace();
 		}
 	}
-	
+
 }
