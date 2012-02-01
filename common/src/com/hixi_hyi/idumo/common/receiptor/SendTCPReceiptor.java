@@ -35,7 +35,7 @@ public class SendTCPReceiptor implements Receiver, ApplicationController, IdumoR
 	private Sender			sender;
 	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
 	private ReceiveValidator vType = new ReceiveValidatorType(1,String.class);
-	
+
 	public SendTCPReceiptor(String ip, int port) {
 		LogManager.log();
 		this.ip = ip;
@@ -88,6 +88,9 @@ public class SendTCPReceiptor implements Receiver, ApplicationController, IdumoR
 			return;
 		}
 		PipeData data = sender.getData();
+		if(data==null){
+			return ;
+		}
 		for (Object o : data) {
 			LogManager.debug(o.toString());
 			pw.println(o.toString());

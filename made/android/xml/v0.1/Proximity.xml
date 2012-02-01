@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<idumo ver='0.1' type='android' name='Proximity' base='AbstractAndroidActivity' package='com.hixi_hyi.idumo.android.auto.app'>
+<items>
+<item class='ProximityProvider' name='l1' init='activity'/>
+<item class='StringConcatHandler' name='s1' init='"Accurary:"'/>
+<item class='TextViewReceiptor' name='textView' init='activity'/>
+</items>
+<connections>
+<connect src='l1' sink='s1'/>
+<connect src='s1' sink='textView'/>
+</connections>
+<executions>
+<loop count='-1'/>
+<sleep time='1000'/>
+</executions>
+</idumo>

@@ -122,6 +122,7 @@ public class ReceiveTCPProvider implements Sender, ApplicationController {
 	@Override
 	public PipeData getData() {
 		PipeData p = new PipeData();
+		LogManager.debug(p);
 		String s = strs.remove(0);
 		p.add(s);
 		server.restart();

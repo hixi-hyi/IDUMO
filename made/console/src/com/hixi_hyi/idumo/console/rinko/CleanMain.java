@@ -22,7 +22,7 @@ public class CleanMain extends AbstractConsoleMain {
 class CleanComponent extends AbstractExecutionComponent {
   @Override
   public void onIdumoMakeFlowChart() throws IdumoException {
-    StringProvider s = new StringProvider("CLEAN");
+    StringProvider s = new StringProvider("SPOT");
     add(s);
     SimpleRommbaCommandHandler converter = new SimpleRommbaCommandHandler();
     add(converter);

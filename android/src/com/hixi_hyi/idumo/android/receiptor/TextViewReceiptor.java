@@ -40,6 +40,9 @@ public class TextViewReceiptor extends TextView implements Receiver, IdumoRunnab
 		}
 		StringBuilder sb = new StringBuilder();
 		for (Sender sender : senders) {
+			if(sender.getData()==null){
+				return;
+			}
 			for (Object o : sender.getData()) {
 				LogManager.debug(o);
 				sb.append(o.toString());
