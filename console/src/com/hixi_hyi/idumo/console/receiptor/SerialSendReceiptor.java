@@ -5,18 +5,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import com.hixi_hyi.idumo.core.ApplicationController;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.IdumoRunnable;
-import com.hixi_hyi.idumo.core.Receiver;
-import com.hixi_hyi.idumo.core.Sender;
+import com.hixi_hyi.idumo.core.IDUMOController;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
+import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
-public class SerialSendReceiptor implements IdumoRunnable, Receiver, ApplicationController {
+public class SerialSendReceiptor implements IDUMORunnable, IDUMOReceiver, IDUMOController {
 
 	private OutputStream	out;
-	private Sender			sender;
+	private IDUMOSender			sender;
 	private String			serial;
 
 	public SerialSendReceiptor(String serial) {
@@ -57,7 +57,7 @@ public class SerialSendReceiptor implements IdumoRunnable, Receiver, Application
 	}
 
 	@Override
-	public boolean setSender(Sender... senders) throws IdumoException {
+	public boolean setSender(IDUMOSender... senders) throws IDUMOException {
 		if (senders.length != 1) {
 			return false;
 		}

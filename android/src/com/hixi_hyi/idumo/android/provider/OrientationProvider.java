@@ -13,11 +13,11 @@ import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
 import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
 import com.hixi_hyi.idumo.android.sensor.OrientationSensor;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.IdumoRuntimeException;
 import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.SenderWithOption;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
@@ -78,7 +78,7 @@ public class OrientationProvider implements SenderWithOption, AndroidController 
 				p.add(sensor.getAzmuth());
 				break;
 			default:
-				throw new IdumoRuntimeException();
+				throw new IDUMORuntimeException();
 		}
 		return p;
 	}
@@ -127,11 +127,11 @@ public class OrientationProvider implements SenderWithOption, AndroidController 
 	public void onIdumoStop() {}
 	
 	@Override
-	public void setOption(OptionMethodType type) throws IdumoException {
+	public void setOption(OptionMethodType type) throws IDUMOException {
 		if (type instanceof Type) {
 			methodType = (Type) type;
 		} else {
-			throw new IdumoException();
+			throw new IDUMOException();
 		}
 	}
 }

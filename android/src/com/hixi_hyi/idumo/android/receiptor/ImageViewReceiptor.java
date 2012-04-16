@@ -7,11 +7,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.IdumoRunnable;
-import com.hixi_hyi.idumo.core.Receiver;
-import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
+import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 
 // TODO 非検証
 /**
@@ -20,9 +20,9 @@ import com.hixi_hyi.idumo.core.data.PipeData;
  * @author Hiroyoshi HOUCHI
  *
  */
-public class ImageViewReceiptor extends ImageView implements Receiver, IdumoRunnable {
+public class ImageViewReceiptor extends ImageView implements IDUMOReceiver, IDUMORunnable {
 
-	private Sender		sender;
+	private IDUMOSender		sender;
 	private Activity	activity;
 
 	public ImageViewReceiptor(Context context) {
@@ -39,8 +39,8 @@ public class ImageViewReceiptor extends ImageView implements Receiver, IdumoRunn
 	}
 
 	@Override
-	public boolean setSender(Sender... senders) throws IdumoException {
-			Sender sender = senders[0];
+	public boolean setSender(IDUMOSender... senders) throws IDUMOException {
+			IDUMOSender sender = senders[0];
 			ArrayList<Class<?>> list = new ArrayList<Class<?>>(sender.getDataType());
 			if (list.get(0) == Bitmap.class) {
 				return true;

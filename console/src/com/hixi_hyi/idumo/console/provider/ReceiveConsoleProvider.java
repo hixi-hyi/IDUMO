@@ -6,12 +6,12 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.IdumoRuntimeException;
-import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 
-public class ReceiveConsoleProvider implements Sender {
+public class ReceiveConsoleProvider implements IDUMOSender {
 
 	private BufferedReader	br;
 
@@ -26,7 +26,7 @@ public class ReceiveConsoleProvider implements Sender {
 	}
 
 	@Override
-	public List<Class<?>> getDataType() throws IdumoException {
+	public List<Class<?>> getDataType() throws IDUMOException {
 		List<Class<?>> type = new ArrayList<Class<?>>();
 		type.add(String.class);
 		return type;
@@ -38,7 +38,7 @@ public class ReceiveConsoleProvider implements Sender {
 		try {
 			p.add(br.readLine());
 		} catch (IOException e) {
-			throw new IdumoRuntimeException(e);
+			throw new IDUMORuntimeException(e);
 		}
 		return p;
 	}

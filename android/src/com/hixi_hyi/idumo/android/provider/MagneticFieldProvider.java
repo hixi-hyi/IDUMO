@@ -11,11 +11,11 @@ import android.hardware.SensorManager;
 
 import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.IdumoRuntimeException;
 import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.SenderWithOption;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
@@ -67,7 +67,7 @@ public class MagneticFieldProvider implements SenderWithOption, AndroidControlle
 				p.add(magnet.getZ());
 				break;
 			default:
-				throw new IdumoRuntimeException();
+				throw new IDUMORuntimeException();
 		}
 		return p;
 	}
@@ -116,11 +116,11 @@ public class MagneticFieldProvider implements SenderWithOption, AndroidControlle
 	public void onIdumoStop() {}
 	
 	@Override
-	public void setOption(OptionMethodType type) throws IdumoException {
+	public void setOption(OptionMethodType type) throws IDUMOException {
 		if (type instanceof Type) {
 			methodType = (Type) type;
 		} else {
-			throw new IdumoException();
+			throw new IDUMOException();
 		}
 	}
 	

@@ -4,12 +4,12 @@ import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.common.provider.LivedoorWeatherProvider;
-import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
 public class TodaysWeatherComponent extends AbstractAndroidExecutionComponent {
 	
 	@Override
-	public void onIdumoMakeFlowChart() throws IdumoException {
+	public void onIdumoMakeFlowChart() throws IDUMOException {
 		LivedoorWeatherProvider date = new LivedoorWeatherProvider(63);
 		date.setOption(LivedoorWeatherProvider.Type.DATE);
 		add(date);

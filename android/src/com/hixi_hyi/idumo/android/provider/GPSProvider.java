@@ -11,10 +11,10 @@ import android.location.LocationManager;
 
 import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.sensor.GPSSensor;
-import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.SenderWithOption;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
@@ -88,7 +88,7 @@ public class GPSProvider implements SenderWithOption, AndroidController {
 	}
 	
 	@Override
-	public List<Class<?>> getDataType() throws IdumoException {
+	public List<Class<?>> getDataType() throws IDUMOException {
 		List<Class<?>> type = new ArrayList<Class<?>>();
 		switch (methodType) {
 			case ACCURARY:
@@ -113,7 +113,7 @@ public class GPSProvider implements SenderWithOption, AndroidController {
 				type.add(Long.class);
 				break;
 			default:
-				throw new IdumoException();
+				throw new IDUMOException();
 		}
 		return type;
 	}
@@ -155,11 +155,11 @@ public class GPSProvider implements SenderWithOption, AndroidController {
 	public void onIdumoStop() {}
 	
 	@Override
-	public void setOption(OptionMethodType type) throws IdumoException {
+	public void setOption(OptionMethodType type) throws IDUMOException {
 		if (type instanceof Type) {
 			methodType = (Type) type;
 		} else {
-			throw new IdumoException();
+			throw new IDUMOException();
 		}
 	}
 	

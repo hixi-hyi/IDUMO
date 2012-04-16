@@ -3,8 +3,8 @@ package com.hixi_hyi.idumo.console.debug;
 import com.hixi_hyi.idumo.common.provider.RandomByteProvider;
 import com.hixi_hyi.idumo.console.exec.AbstractConsoleMain;
 import com.hixi_hyi.idumo.console.receiptor.SerialSendReceiptor;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.exec.AbstractExecutionComponent;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
 
 public class SerialSendMain extends AbstractConsoleMain {
 	@Override
@@ -18,9 +18,9 @@ public class SerialSendMain extends AbstractConsoleMain {
 	}
 }
 
-class SerialSendComponent extends AbstractExecutionComponent {
+class SerialSendComponent extends IDUMOComponent {
 	@Override
-	public void onIdumoMakeFlowChart() throws IdumoException {
+	public void onIdumoMakeFlowChart() throws IDUMOException {
 		RandomByteProvider provider = new RandomByteProvider();
 		add(provider);
 		SerialSendReceiptor serial = new SerialSendReceiptor("/dev/stdout");

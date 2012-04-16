@@ -5,7 +5,7 @@ import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
 import com.hixi_hyi.idumo.android.provider.AccelerometerProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
-import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
 public class AccelerometerActivity extends AbstractAndroidActivity {
 
@@ -17,7 +17,7 @@ public class AccelerometerActivity extends AbstractAndroidActivity {
 	public class AccelerometerComponent extends AbstractAndroidExecutionComponent {
 
 		@Override
-		public void onIdumoMakeFlowChart() throws IdumoException {
+		public void onIdumoMakeFlowChart() throws IDUMOException {
 
 			AccelerometerProvider accelerometer = new AccelerometerProvider(activity);
 			accelerometer.setOption(AccelerometerProvider.Type.X);

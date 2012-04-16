@@ -2,9 +2,9 @@ package com.hixi_hyi.idumo.console.receiptor;
 
 import java.util.ArrayList;
 
-import com.hixi_hyi.idumo.core.IdumoRunnable;
-import com.hixi_hyi.idumo.core.Receiver;
-import com.hixi_hyi.idumo.core.Sender;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
+import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 
 /**
  * Systemoutに出力するReceiptor
@@ -12,23 +12,23 @@ import com.hixi_hyi.idumo.core.Sender;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class ConsoleViewReceiptor implements Receiver, IdumoRunnable {
+public class ConsoleViewReceiptor implements IDUMOReceiver, IDUMORunnable {
 	
-	private ArrayList<Sender>	senders;
+	private ArrayList<IDUMOSender>	senders;
 	
 	public ConsoleViewReceiptor() {
-		senders = new ArrayList<Sender>();
+		senders = new ArrayList<IDUMOSender>();
 	}
 	
 	@Override
 	public void run() {
-		for (Sender sender : senders) {
+		for (IDUMOSender sender : senders) {
 			if (!sender.isReady()) {
 				return;
 			}
 		}
 		StringBuilder sb = new StringBuilder();
-		for (Sender sender : senders) {
+		for (IDUMOSender sender : senders) {
 			for (Object o : sender.getData()) {
 				sb.append(o.toString());
 			}
@@ -40,9 +40,9 @@ public class ConsoleViewReceiptor implements Receiver, IdumoRunnable {
 	}
 	
 	@Override
-	public boolean setSender(Sender... handler) {
+	public boolean setSender(IDUMOSender... handler) {
 		senders.clear();
-		for (Sender s : handler) {
+		for (IDUMOSender s : handler) {
 			senders.add(s);
 		}
 		return true;
@@ -53,7 +53,7 @@ public class ConsoleViewReceiptor implements Receiver, IdumoRunnable {
 		if (senders.size() == 0) {
 			return false;
 		}
-		for (Sender sender : senders) {
+		for (IDUMOSender sender : senders) {
 			if (!sender.isReady()) {
 				return false;
 			}

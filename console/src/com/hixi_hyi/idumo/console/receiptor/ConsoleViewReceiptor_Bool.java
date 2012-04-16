@@ -1,9 +1,9 @@
 package com.hixi_hyi.idumo.console.receiptor;
 
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.IdumoRunnable;
-import com.hixi_hyi.idumo.core.Receiver;
-import com.hixi_hyi.idumo.core.Sender;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
+import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
@@ -13,9 +13,9 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class ConsoleViewReceiptor_Bool implements Receiver, IdumoRunnable {
+public class ConsoleViewReceiptor_Bool implements IDUMOReceiver, IDUMORunnable {
 	
-	private Sender	sender;
+	private IDUMOSender	sender;
 	private ReceiveValidatorType vType = new ReceiveValidatorType(1,Boolean.class);
 	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
 	
@@ -33,7 +33,7 @@ public class ConsoleViewReceiptor_Bool implements Receiver, IdumoRunnable {
 	}
 	
 	@Override
-	public boolean setSender(Sender... handler) throws IdumoException {
+	public boolean setSender(IDUMOSender... handler) throws IDUMOException {
 		vType.validate(handler);
 		vSize.validate(handler);
 		sender = handler[0];

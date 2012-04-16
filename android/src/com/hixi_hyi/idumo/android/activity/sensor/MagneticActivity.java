@@ -5,7 +5,7 @@ import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
 import com.hixi_hyi.idumo.android.provider.MagneticFieldProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
-import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
 public class MagneticActivity extends AbstractAndroidActivity {
 
@@ -17,7 +17,7 @@ public class MagneticActivity extends AbstractAndroidActivity {
 	public class MagneticComponent extends AbstractAndroidExecutionComponent {
 
 		@Override
-		public void onIdumoMakeFlowChart() throws IdumoException {
+		public void onIdumoMakeFlowChart() throws IDUMOException {
 
 			MagneticFieldProvider mag1 = new MagneticFieldProvider(activity);
 			mag1.setOption(MagneticFieldProvider.Type.X);

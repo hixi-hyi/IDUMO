@@ -4,7 +4,7 @@ import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
 import com.hixi_hyi.idumo.android.provider.ProximityProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
-import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
 public class ProximityActivity extends AbstractAndroidActivity {
   @Override
   public void init() {
@@ -13,7 +13,7 @@ public class ProximityActivity extends AbstractAndroidActivity {
 
   public class ProximityComponent extends AbstractAndroidExecutionComponent {
     @Override
-    public void onIdumoMakeFlowChart() throws IdumoException {
+    public void onIdumoMakeFlowChart() throws IDUMOException {
       ProximityProvider l1 = new ProximityProvider(activity);
       add(l1);
       StringConcatHandler s1 = new StringConcatHandler("Accurary:");

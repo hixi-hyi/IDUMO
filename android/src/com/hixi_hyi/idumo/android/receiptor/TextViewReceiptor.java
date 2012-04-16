@@ -6,9 +6,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.widget.TextView;
 
-import com.hixi_hyi.idumo.core.IdumoRunnable;
-import com.hixi_hyi.idumo.core.Receiver;
-import com.hixi_hyi.idumo.core.Sender;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
+import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
@@ -17,14 +17,14 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class TextViewReceiptor extends TextView implements Receiver, IdumoRunnable {
+public class TextViewReceiptor extends TextView implements IDUMOReceiver, IDUMORunnable {
 	
-	private ArrayList<Sender>	senders;
+	private ArrayList<IDUMOSender>	senders;
 	private Activity			activity;
 	
 	public TextViewReceiptor(Context context) {
 		super(context);
-		senders = new ArrayList<Sender>();
+		senders = new ArrayList<IDUMOSender>();
 		activity = (Activity) context;
 		activity.setContentView(this);
 		setTextSize(30.0f);
@@ -33,13 +33,13 @@ public class TextViewReceiptor extends TextView implements Receiver, IdumoRunnab
 	@Override
 	public void run() {
 		LogManager.log();
-		for (Sender sender : senders) {
+		for (IDUMOSender sender : senders) {
 			if (!sender.isReady()) {
 				return;
 			}
 		}
 		StringBuilder sb = new StringBuilder();
-		for (Sender sender : senders) {
+		for (IDUMOSender sender : senders) {
 			if(sender.getData()==null){
 				return;
 			}
@@ -57,9 +57,9 @@ public class TextViewReceiptor extends TextView implements Receiver, IdumoRunnab
 	}
 	
 	@Override
-	public boolean setSender(Sender... handler) {
+	public boolean setSender(IDUMOSender... handler) {
 		senders.clear();
-		for (Sender s : handler) {
+		for (IDUMOSender s : handler) {
 			senders.add(s);
 		}
 		return true;
@@ -70,7 +70,7 @@ public class TextViewReceiptor extends TextView implements Receiver, IdumoRunnab
 		if (senders.size() == 0) {
 			return false;
 		}
-		for (Sender sender : senders) {
+		for (IDUMOSender sender : senders) {
 			if (!sender.isReady()) {
 				return false;
 			}

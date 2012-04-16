@@ -4,12 +4,12 @@ import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
 import com.hixi_hyi.idumo.android.provider.OrientationProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
-import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
 public class OrientationComponent extends AbstractAndroidExecutionComponent {
 	
 	@Override
-	public void onIdumoMakeFlowChart() throws IdumoException {
+	public void onIdumoMakeFlowChart() throws IDUMOException {
 		
 		OrientationProvider o1 = new OrientationProvider(activity);
 		o1.setOption(OrientationProvider.Type.AZMUTH);

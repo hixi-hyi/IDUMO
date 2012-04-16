@@ -2,18 +2,18 @@ package com.hixi_hyi.idumo.common.handler;
 
 import java.util.List;
 
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.Receiver;
-import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.DataType;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.util.LogManager;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
-public class ConditionMoreNumberHandler implements Sender, Receiver {
+public class ConditionMoreNumberHandler implements IDUMOSender, IDUMOReceiver {
 
-	private Sender sender;
+	private IDUMOSender sender;
 	private float condition;
 	private ReceiveValidatorSize validator = new ReceiveValidatorSize(1);
 	private ReceiveValidatorType vType = new ReceiveValidatorType(1,Float.class);
@@ -28,7 +28,7 @@ public class ConditionMoreNumberHandler implements Sender, Receiver {
 	}
 
 	@Override
-	public boolean setSender(Sender... senders) throws IdumoException {
+	public boolean setSender(IDUMOSender... senders) throws IDUMOException {
 		validator.validate(senders);
 		vType.validate(senders);
 		this.sender = senders[0];
@@ -36,7 +36,7 @@ public class ConditionMoreNumberHandler implements Sender, Receiver {
 	}
 
 	@Override
-	public List<Class<?>> getDataType() throws IdumoException {
+	public List<Class<?>> getDataType() throws IDUMOException {
 		return DataType.generateDataType(Boolean.class);
 	}
 

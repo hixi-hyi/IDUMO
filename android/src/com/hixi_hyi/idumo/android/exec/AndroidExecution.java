@@ -5,13 +5,13 @@ import android.os.Handler;
 
 import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.front.AndroidContainer;
-import com.hixi_hyi.idumo.core.ApplicationController;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.IdumoExecution;
-import com.hixi_hyi.idumo.core.IdumoRunnable;
-import com.hixi_hyi.idumo.core.IdumoRuntimeException;
+import com.hixi_hyi.idumo.core.IDUMOController;
+import com.hixi_hyi.idumo.core.IDUMOActivity;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
+import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 
-public class AndroidExecution implements IdumoExecution, Runnable {
+public class AndroidExecution implements IDUMOActivity, Runnable {
 
 	private AbstractAndroidExecutionComponent	component;
 	private Handler								handler	= new Handler();
@@ -22,7 +22,7 @@ public class AndroidExecution implements IdumoExecution, Runnable {
 	}
 
 	@Override
-	public void onIdumoCreated() throws IdumoException {
+	public void onIdumoCreated() throws IDUMOException {
 		component.onIdumoMakeFlowChart();
 		component.setup();
 		component.onIdumoPrepare();
@@ -34,7 +34,7 @@ public class AndroidExecution implements IdumoExecution, Runnable {
 			controller.onIdumoStart();
 			controller.onIdumoResume();
 		}
-		for (ApplicationController controller : component.getApplicationControllers()) {
+		for (IDUMOController controller : component.getApplicationControllers()) {
 			controller.onIdumoStart();
 		}
 		component.setReady(true);
@@ -46,20 +46,20 @@ public class AndroidExecution implements IdumoExecution, Runnable {
 			controller.onIdumoPause();
 			controller.onIdumoStop();
 		}
-		for (ApplicationController controller : component.getApplicationControllers()) {
+		for (IDUMOController controller : component.getApplicationControllers()) {
 			controller.onIdumoStop();
 		}
 		component.setReady(false);
 	}
 
 	@Override
-	public void onIdumoExec() throws IdumoRuntimeException {
+	public void onIdumoExec() throws IDUMORuntimeException {
 		while (!component.isReady()) {
 			try {
 				Thread.sleep(component.getSleepTime());
 			} catch (InterruptedException e) {}
 		}
-		IdumoRunnable runnable = component.getRunnable();
+		IDUMORunnable runnable = component.getRunnable();
 		while (!runnable.isReady()) {
 			try {
 				Thread.sleep(component.getSleepTime());

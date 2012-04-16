@@ -4,7 +4,7 @@ import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
 import com.hixi_hyi.idumo.android.provider.GPSProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.ReversedGeocordingHandler;
-import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
 public class ReverseGeoLocationActivity extends AbstractAndroidActivity {
   @Override
   public void init() {
@@ -13,7 +13,7 @@ public class ReverseGeoLocationActivity extends AbstractAndroidActivity {
 
   public class ReverseGeoLocationComponent extends AbstractAndroidExecutionComponent {
     @Override
-    public void onIdumoMakeFlowChart() throws IdumoException {
+    public void onIdumoMakeFlowChart() throws IDUMOException {
       GPSProvider gps1 = new GPSProvider(activity);
       gps1.setOption(GPSProvider.Type.LATITUDE);
       add(gps1);

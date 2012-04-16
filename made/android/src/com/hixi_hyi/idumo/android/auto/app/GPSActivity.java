@@ -4,7 +4,7 @@ import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
 import com.hixi_hyi.idumo.android.provider.GPSProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
-import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
 public class GPSActivity extends AbstractAndroidActivity {
   @Override
   public void init() {
@@ -13,7 +13,7 @@ public class GPSActivity extends AbstractAndroidActivity {
 
   public class GPSComponent extends AbstractAndroidExecutionComponent {
     @Override
-    public void onIdumoMakeFlowChart() throws IdumoException {
+    public void onIdumoMakeFlowChart() throws IDUMOException {
       GPSProvider g1 = new GPSProvider(activity);
       g1.setOption(GPSProvider.Type.ACCURARY);
       add(g1);

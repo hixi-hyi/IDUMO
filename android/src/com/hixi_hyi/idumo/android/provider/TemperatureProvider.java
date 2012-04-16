@@ -9,8 +9,8 @@ import android.hardware.SensorManager;
 
 import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.sensor.TemperatureSensor;
-import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
@@ -19,7 +19,7 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class TemperatureProvider implements Sender, AndroidController {
+public class TemperatureProvider implements IDUMOSender, AndroidController {
 	
 	private TemperatureSensor	sensor;
 	

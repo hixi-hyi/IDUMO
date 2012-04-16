@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hixi_hyi.idumo.common.component.ReversedGeocording;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.Receiver;
-import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
@@ -17,9 +17,9 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
  * @author Hiroyoshi
  *
  */
-public class ReversedGeocordingHandler implements Sender, Receiver {
+public class ReversedGeocordingHandler implements IDUMOSender, IDUMOReceiver {
 
-	private ArrayList<Sender>	senders	= new ArrayList<Sender>();
+	private ArrayList<IDUMOSender>	senders	= new ArrayList<IDUMOSender>();
 	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(2);
 	private ReceiveValidatorType v1Type = new ReceiveValidatorType(1,Double.class);
 	private ReceiveValidatorType v2Type = new ReceiveValidatorType(2,Double.class);
@@ -45,12 +45,12 @@ public class ReversedGeocordingHandler implements Sender, Receiver {
 	}
 
 	@Override
-	public boolean setSender(Sender... senders) throws IdumoException {
+	public boolean setSender(IDUMOSender... senders) throws IDUMOException {
 		vSize.validate(senders);
 		v1Type.validate(senders);
 		v2Type.validate(senders);
 		this.senders.clear();
-		for(Sender s: senders){
+		for(IDUMOSender s: senders){
 			this.senders.add(s);
 		}
 		return true;
@@ -58,7 +58,7 @@ public class ReversedGeocordingHandler implements Sender, Receiver {
 
 	@Override
 	public boolean isReady() {
-		for (Sender sender : senders) {
+		for (IDUMOSender sender : senders) {
 			if (!sender.isReady()) {
 				return false;
 			}

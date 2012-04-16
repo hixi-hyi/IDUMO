@@ -11,10 +11,10 @@ import android.hardware.SensorManager;
 
 import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
-import com.hixi_hyi.idumo.core.IdumoRuntimeException;
 import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.SenderWithOption;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
@@ -66,7 +66,7 @@ public class AccelerometerProvider implements SenderWithOption, AndroidControlle
 				p.add(accel.getZ());
 				break;
 			default:
-				throw new IdumoRuntimeException();
+				throw new IDUMORuntimeException();
 		}
 		return p;
 	}
@@ -119,7 +119,7 @@ public class AccelerometerProvider implements SenderWithOption, AndroidControlle
 		if (type instanceof Type) {
 			methodType = (Type) type;
 		} else {
-			throw new IdumoRuntimeException();
+			throw new IDUMORuntimeException();
 		}
 	}
 	

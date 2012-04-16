@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.hixi_hyi.idumo.common.component.LivedoorWeather;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.IdumoRuntimeException;
 import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.SenderWithOption;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
@@ -73,7 +73,7 @@ public class LivedoorWeatherProvider_MaxTemp implements SenderWithOption {
 				p.add(weather.getDescription());
 				break;
 			default:
-				throw new IdumoRuntimeException();
+				throw new IDUMORuntimeException();
 		}
 		
 		return p;
@@ -95,11 +95,11 @@ public class LivedoorWeatherProvider_MaxTemp implements SenderWithOption {
 	}
 	
 	@Override
-	public void setOption(OptionMethodType type) throws IdumoException {
+	public void setOption(OptionMethodType type) throws IDUMOException {
 		if (type instanceof Type) {
 			this.type = (Type) type;
 		} else {
-			throw new IdumoException();
+			throw new IDUMOException();
 		}
 	}
 	

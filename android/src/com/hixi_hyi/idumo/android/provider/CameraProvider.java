@@ -10,10 +10,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 
 import com.hixi_hyi.idumo.android.sensor.CameraSensor;
-import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.SenderWithOption;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
 public class CameraProvider implements SenderWithOption {
 	
@@ -71,11 +71,11 @@ public class CameraProvider implements SenderWithOption {
 	}
 	
 	@Override
-	public void setOption(OptionMethodType type) throws IdumoException {
+	public void setOption(OptionMethodType type) throws IDUMOException {
 		if (type instanceof Type) {
 			methodType = (Type) type;
 		} else {
-			throw new IdumoException();
+			throw new IDUMOException();
 		}
 	}
 	

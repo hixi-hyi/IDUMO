@@ -4,8 +4,8 @@ import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.common.provider.LivedoorWeatherProvider;
 import com.hixi_hyi.idumo.console.exec.AbstractConsoleMain;
 import com.hixi_hyi.idumo.console.receiptor.ConsoleViewReceiptor;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.exec.AbstractExecutionComponent;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
 
 public class TodaysWeatherMain extends AbstractConsoleMain {
 
@@ -14,10 +14,10 @@ public class TodaysWeatherMain extends AbstractConsoleMain {
 		setExecutionWithComponent(new TodaysWeatherComponent());
 	}
 
-	public class TodaysWeatherComponent extends AbstractExecutionComponent {
+	public class TodaysWeatherComponent extends IDUMOComponent {
 
 		@Override
-		public void onIdumoMakeFlowChart() throws IdumoException {
+		public void onIdumoMakeFlowChart() throws IDUMOException {
 
 			LivedoorWeatherProvider date = new LivedoorWeatherProvider(63);
 			add(date);

@@ -4,8 +4,8 @@ import com.hixi_hyi.idumo.common.handler.ConvertRommbaCommandHandler;
 import com.hixi_hyi.idumo.common.provider.StringProvider;
 import com.hixi_hyi.idumo.console.exec.AbstractConsoleMain;
 import com.hixi_hyi.idumo.console.receiptor.SerialSendReceiptor;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.exec.AbstractExecutionComponent;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
 
 public class RommbaCommandMain extends AbstractConsoleMain {
 	@Override
@@ -19,9 +19,9 @@ public class RommbaCommandMain extends AbstractConsoleMain {
 	}
 }
 
-class RommbaCommandComponent extends AbstractExecutionComponent {
+class RommbaCommandComponent extends IDUMOComponent {
 	@Override
-	public void onIdumoMakeFlowChart() throws IdumoException {
+	public void onIdumoMakeFlowChart() throws IDUMOException {
 		StringProvider provider = new StringProvider("CLEAN");
 		add(provider);
 		ConvertRommbaCommandHandler converter = new ConvertRommbaCommandHandler();

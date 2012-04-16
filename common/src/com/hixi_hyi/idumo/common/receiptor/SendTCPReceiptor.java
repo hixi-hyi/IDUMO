@@ -8,12 +8,12 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import com.hixi_hyi.idumo.core.ApplicationController;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.IdumoRunnable;
-import com.hixi_hyi.idumo.core.Receiver;
-import com.hixi_hyi.idumo.core.Sender;
+import com.hixi_hyi.idumo.core.IDUMOController;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
+import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.util.LogManager;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
@@ -25,13 +25,13 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
  * @author Hiroyoshi HOUCHI
  *
  */
-public class SendTCPReceiptor implements Receiver, ApplicationController, IdumoRunnable {
+public class SendTCPReceiptor implements IDUMOReceiver, IDUMOController, IDUMORunnable {
 	private String			ip;
 	private int				port;
 	private Socket			socket;
 	private PrintWriter		pw;
 	private OutputStream	outstream;
-	private Sender			sender;
+	private IDUMOSender			sender;
 	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
 	private ReceiveValidator vType = new ReceiveValidatorType(1,String.class);
 
@@ -49,7 +49,7 @@ public class SendTCPReceiptor implements Receiver, ApplicationController, IdumoR
 	}
 
 	@Override
-	public boolean setSender(Sender... senders) throws IdumoException {
+	public boolean setSender(IDUMOSender... senders) throws IDUMOException {
 		vSize.validate(senders);
 		vType.validate(senders);
 		this.sender = senders[0];

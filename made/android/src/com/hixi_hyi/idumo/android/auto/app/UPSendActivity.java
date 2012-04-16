@@ -3,7 +3,7 @@ import com.hixi_hyi.idumo.android.exec.AbstractAndroidActivity;
 import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
 import com.hixi_hyi.idumo.common.provider.StringProvider;
 import com.hixi_hyi.idumo.common.receiptor.SendTCPReceiptor;
-import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.util.LogManager;
 public class UPSendActivity extends AbstractAndroidActivity {
   @Override
@@ -14,7 +14,7 @@ public class UPSendActivity extends AbstractAndroidActivity {
 }
 class UPSendComponent extends AbstractAndroidExecutionComponent {
   @Override
-  public void onIdumoMakeFlowChart() throws IdumoException {
+  public void onIdumoMakeFlowChart() throws IDUMOException {
 	  LogManager.log();
 	StringProvider s = new StringProvider("CLEAN");
     add(s);

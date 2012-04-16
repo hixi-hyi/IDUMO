@@ -5,7 +5,7 @@ import com.hixi_hyi.idumo.android.provider.AccelerometerProvider_Z;
 import com.hixi_hyi.idumo.common.handler.ConditionMoreNumberHandler;
 import com.hixi_hyi.idumo.common.handler.StringHandler;
 import com.hixi_hyi.idumo.common.receiptor.SendTCPReceiptor;
-import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
 public class AccelerometerCleanActivity extends AbstractAndroidActivity {
 	@Override
 	public void init() {
@@ -14,7 +14,7 @@ public class AccelerometerCleanActivity extends AbstractAndroidActivity {
 }
 class AccelerometerCleanComponent extends AbstractAndroidExecutionComponent {
 	@Override
-	public void onIdumoMakeFlowChart() throws IdumoException {
+	public void onIdumoMakeFlowChart() throws IDUMOException {
 		AccelerometerProvider_Z a = new AccelerometerProvider_Z(activity);
 		add(a);
 		ConditionMoreNumberHandler h = new ConditionMoreNumberHandler(0.0f);

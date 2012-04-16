@@ -3,7 +3,7 @@ import com.hixi_hyi.idumo.android.exec.AbstractAndroidActivity;
 import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
 import com.hixi_hyi.idumo.common.provider.StringProvider;
 import com.hixi_hyi.idumo.common.receiptor.SendTCPReceiptor;
-import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
 public class RoombaCleanActivity extends AbstractAndroidActivity {
   @Override
   public void init() {
@@ -13,7 +13,7 @@ public class RoombaCleanActivity extends AbstractAndroidActivity {
 }
 class RoombaCleanComponent extends AbstractAndroidExecutionComponent {
   @Override
-  public void onIdumoMakeFlowChart() throws IdumoException {
+  public void onIdumoMakeFlowChart() throws IDUMOException {
     StringProvider s = new StringProvider("CLEAN");
     add(s);
     SendTCPReceiptor r = new SendTCPReceiptor("192.168.11.4",10000);

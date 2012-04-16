@@ -2,8 +2,8 @@ package com.hixi_hyi.idumo.console.auto.app;
 import com.hixi_hyi.idumo.common.provider.StringProvider;
 import com.hixi_hyi.idumo.common.receiptor.SendTCPReceiptor;
 import com.hixi_hyi.idumo.console.exec.AbstractConsoleMain;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.exec.AbstractExecutionComponent;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
 public class RoombaSafeMain extends AbstractConsoleMain {
   @Override
   public void init() {
@@ -14,9 +14,9 @@ public class RoombaSafeMain extends AbstractConsoleMain {
     main.exec(); 
   }
 }
-class RoombaSafeComponent extends AbstractExecutionComponent {
+class RoombaSafeComponent extends IDUMOComponent {
   @Override
-  public void onIdumoMakeFlowChart() throws IdumoException {
+  public void onIdumoMakeFlowChart() throws IDUMOException {
     StringProvider s = new StringProvider("SAFE");
     add(s);
     SendTCPReceiptor r = new SendTCPReceiptor("192.168.11.4",10000);

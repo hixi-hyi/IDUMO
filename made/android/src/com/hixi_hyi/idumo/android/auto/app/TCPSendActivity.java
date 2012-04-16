@@ -5,7 +5,7 @@ import com.hixi_hyi.idumo.android.util.AndroidLogger;
 import com.hixi_hyi.idumo.android.util.DeployUtil;
 import com.hixi_hyi.idumo.common.provider.StringProvider;
 import com.hixi_hyi.idumo.common.receiptor.SendTCPReceiptor;
-import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.util.LogManager;
 public class TCPSendActivity
  extends AbstractAndroidActivity {
@@ -20,7 +20,7 @@ public class TCPSendActivity
 class TCPSendComponent
  extends AbstractAndroidExecutionComponent {
   @Override
-  public void onIdumoMakeFlowChart() throws IdumoException {
+  public void onIdumoMakeFlowChart() throws IDUMOException {
     StringProvider s = new StringProvider("IDUMO");
     add(s);
     SendTCPReceiptor r = new SendTCPReceiptor("192.168.12.4",10000);

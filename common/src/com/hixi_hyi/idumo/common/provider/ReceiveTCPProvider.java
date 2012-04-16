@@ -9,10 +9,10 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hixi_hyi.idumo.core.ApplicationController;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.Sender;
+import com.hixi_hyi.idumo.core.IDUMOController;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
@@ -21,7 +21,7 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  *
  */
-public class ReceiveTCPProvider implements Sender, ApplicationController {
+public class ReceiveTCPProvider implements IDUMOSender, IDUMOController {
 	private int					port;
 	private Socket				socket;
 	private BufferedReader		br;
@@ -102,7 +102,7 @@ public class ReceiveTCPProvider implements Sender, ApplicationController {
 	}
 
 	@Override
-	public List<Class<?>> getDataType() throws IdumoException {
+	public List<Class<?>> getDataType() throws IDUMOException {
 		List<Class<?>> type = new ArrayList<Class<?>>();
 		type.add(String.class);
 		return type;

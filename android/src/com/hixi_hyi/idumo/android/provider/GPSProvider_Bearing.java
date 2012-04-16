@@ -9,9 +9,9 @@ import android.location.LocationManager;
 
 import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.sensor.GPSSensor;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
@@ -20,7 +20,7 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class GPSProvider_Bearing implements Sender, AndroidController {
+public class GPSProvider_Bearing implements IDUMOSender, AndroidController {
 	
 	private GPSSensor	gps;
 	
@@ -73,7 +73,7 @@ public class GPSProvider_Bearing implements Sender, AndroidController {
 	public void onIdumoStop() {}
 	
 	@Override
-	public List<Class<?>> getDataType() throws IdumoException {
+	public List<Class<?>> getDataType() throws IDUMOException {
 		List<Class<?>> type = new ArrayList<Class<?>>();
 		type.add(Float.class);
 		return type;

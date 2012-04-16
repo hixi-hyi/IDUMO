@@ -7,11 +7,11 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import com.hixi_hyi.idumo.android.AndroidController;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.IdumoRunnable;
-import com.hixi_hyi.idumo.core.Receiver;
-import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
+import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
@@ -20,12 +20,12 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  *
  */
-public class TCPByteStreamReceiptor implements Receiver, AndroidController, IdumoRunnable {
+public class TCPByteStreamReceiptor implements IDUMOReceiver, AndroidController, IDUMORunnable {
 	private String			ip;
 	private int				port;
 	private Socket			socket;
 	private OutputStream	outstream;
-	private Sender			sender;
+	private IDUMOSender			sender;
 
 	public TCPByteStreamReceiptor(String ip, int port) {
 		this.ip = ip;
@@ -39,7 +39,7 @@ public class TCPByteStreamReceiptor implements Receiver, AndroidController, Idum
 	}
 
 	@Override
-	public boolean setSender(Sender... senders) throws IdumoException {
+	public boolean setSender(IDUMOSender... senders) throws IDUMOException {
 		if (senders.length != 1) {
 			return false;
 		}

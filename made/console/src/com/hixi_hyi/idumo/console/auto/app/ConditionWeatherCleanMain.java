@@ -5,8 +5,8 @@ import com.hixi_hyi.idumo.common.handler.StringHandler;
 import com.hixi_hyi.idumo.common.provider.LivedoorWeatherProvider_Weather;
 import com.hixi_hyi.idumo.console.exec.AbstractConsoleMain;
 import com.hixi_hyi.idumo.console.receiptor.SerialSendReceiptor;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.exec.AbstractExecutionComponent;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
 public class ConditionWeatherCleanMain extends AbstractConsoleMain {
   @Override
   public void init() {
@@ -17,9 +17,9 @@ public class ConditionWeatherCleanMain extends AbstractConsoleMain {
     main.exec(); 
   }
 }
-class ConditionWeatherCleanComponent extends AbstractExecutionComponent {
+class ConditionWeatherCleanComponent extends IDUMOComponent {
   @Override
-  public void onIdumoMakeFlowChart() throws IdumoException {
+  public void onIdumoMakeFlowChart() throws IDUMOException {
     LivedoorWeatherProvider_Weather w = new LivedoorWeatherProvider_Weather(63);
     add(w);
     ConditionStringHandler i = new ConditionStringHandler("晴れ");

@@ -5,8 +5,8 @@ import com.hixi_hyi.idumo.common.provider.ReceiveTCPProvider;
 import com.hixi_hyi.idumo.console.exec.AbstractConsoleMain;
 import com.hixi_hyi.idumo.console.receiptor.SerialSendReceiptor;
 import com.hixi_hyi.idumo.console.util.ConsoleLogger;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.exec.AbstractExecutionComponent;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 public class TCP2RommbaMain extends AbstractConsoleMain {
@@ -23,9 +23,9 @@ public class TCP2RommbaMain extends AbstractConsoleMain {
 	}
 }
 
-class TCP2RommbaComponent extends AbstractExecutionComponent {
+class TCP2RommbaComponent extends IDUMOComponent {
 	@Override
-	public void onIdumoMakeFlowChart() throws IdumoException {
+	public void onIdumoMakeFlowChart() throws IDUMOException {
 		ReceiveTCPProvider provider = new ReceiveTCPProvider(10000);
 		add(provider);
 		ConvertRommbaCommandHandler converter = new ConvertRommbaCommandHandler();

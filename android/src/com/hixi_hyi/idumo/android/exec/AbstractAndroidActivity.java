@@ -3,7 +3,7 @@ package com.hixi_hyi.idumo.android.exec;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
 public abstract class AbstractAndroidActivity extends Activity {
 
@@ -26,7 +26,7 @@ public abstract class AbstractAndroidActivity extends Activity {
 		execution.setActivity((Activity)this);
 		try {
 			execution.onIdumoCreated();
-		} catch (IdumoException e) {
+		} catch (IDUMOException e) {
 			e.printStackTrace();
 		}
 	}

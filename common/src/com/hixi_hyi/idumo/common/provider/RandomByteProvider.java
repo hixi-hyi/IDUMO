@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 
 /**
  * ランダムなバイト情報を送るためのProvider(DebugClass)
@@ -13,7 +13,7 @@ import com.hixi_hyi.idumo.core.data.PipeData;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class RandomByteProvider implements Sender {
+public class RandomByteProvider implements IDUMOSender {
 	
 	private Random	ramdom;
 	

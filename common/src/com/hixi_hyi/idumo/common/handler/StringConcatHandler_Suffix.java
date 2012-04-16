@@ -3,15 +3,15 @@ package com.hixi_hyi.idumo.common.handler;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.OptionMethodType;
-import com.hixi_hyi.idumo.core.Receiver;
-import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
-public class StringConcatHandler_Suffix implements Sender,Receiver{ 
+public class StringConcatHandler_Suffix implements IDUMOSender,IDUMOReceiver{ 
 	
 	public enum Type implements OptionMethodType {
 		PREFIX("Get Accelerometer X"), SUFFIX("Get Accelerometer Y"), ;
@@ -27,7 +27,7 @@ public class StringConcatHandler_Suffix implements Sender,Receiver{
 		}
 	}
 	
-	private Sender				provider;
+	private IDUMOSender				provider;
 	private String				fixWord;
 	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
 	
@@ -49,14 +49,14 @@ public class StringConcatHandler_Suffix implements Sender,Receiver{
 	}
 	
 	@Override
-	public List<Class<?>> getDataType() throws IdumoException {
+	public List<Class<?>> getDataType() throws IDUMOException {
 		List<Class<?>> type = new ArrayList<Class<?>>();
 		type.add(String.class);
 		return type;
 	}
 	
 	@Override
-	public boolean setSender(Sender... senders) throws IdumoException {
+	public boolean setSender(IDUMOSender... senders) throws IDUMOException {
 		vSize.validate(senders);
 		this.provider = senders[0];
 		return true;

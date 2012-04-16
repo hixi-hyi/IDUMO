@@ -3,8 +3,8 @@ package com.hixi_hyi.idumo.common.provider;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
@@ -13,7 +13,7 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @author Hiroyoshi HOUCHI
  *
  */
-public class StringProvider implements Sender {
+public class StringProvider implements IDUMOSender {
 
 	private String str;
 

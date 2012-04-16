@@ -2,17 +2,17 @@ package com.hixi_hyi.idumo.android.handler;
 
 import java.util.List;
 
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.Receiver;
-import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.util.LogManager;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
-public class ThroughHandler implements Sender, Receiver {
+public class ThroughHandler implements IDUMOSender, IDUMOReceiver {
 	
-	private Sender	provider;
+	private IDUMOSender	provider;
 	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
 	
 	@Override
@@ -25,12 +25,12 @@ public class ThroughHandler implements Sender, Receiver {
 	}
 	
 	@Override
-	public List<Class<?>> getDataType() throws IdumoException {
+	public List<Class<?>> getDataType() throws IDUMOException {
 		return provider.getDataType();
 	}
 	
 	@Override
-	public boolean setSender(Sender... provider) throws IdumoException {
+	public boolean setSender(IDUMOSender... provider) throws IDUMOException {
 		vSize.validate(provider);
 		this.provider = provider[0];
 		return true;

@@ -2,8 +2,8 @@ package com.hixi_hyi.idumo.console.auto.app;
 import com.hixi_hyi.idumo.common.provider.LivedoorWeatherProvider;
 import com.hixi_hyi.idumo.console.exec.AbstractConsoleMain;
 import com.hixi_hyi.idumo.console.receiptor.ConsoleViewReceiptor;
-import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.exec.AbstractExecutionComponent;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
 public class TodaysWeatherMain extends AbstractConsoleMain {
   @Override
   public void init() {
@@ -14,9 +14,9 @@ public class TodaysWeatherMain extends AbstractConsoleMain {
     main.exec(); 
   }
 }
-class TodaysWeatherComponent extends AbstractExecutionComponent {
+class TodaysWeatherComponent extends IDUMOComponent {
   @Override
-  public void onIdumoMakeFlowChart() throws IdumoException {
+  public void onIdumoMakeFlowChart() throws IDUMOException {
     LivedoorWeatherProvider w1 = new LivedoorWeatherProvider(63);
     w1.setOption(LivedoorWeatherProvider.Type.WEATHER);
     add(w1);

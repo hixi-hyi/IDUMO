@@ -6,9 +6,9 @@ import android.app.Activity;
 
 import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.front.AndroidContainer;
-import com.hixi_hyi.idumo.core.exec.AbstractExecutionComponent;
+import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
 
-public abstract class AbstractAndroidExecutionComponent extends AbstractExecutionComponent {
+public abstract class AbstractAndroidExecutionComponent extends IDUMOComponent {
 
 	protected Activity activity;
 
