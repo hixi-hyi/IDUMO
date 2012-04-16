@@ -4,8 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.exec.IDUMOWrapper;
 
-public abstract class IDUMOAndroidWrapper extends Activity {
+public abstract class IDUMOAndroidWrapper extends Activity implements IDUMOWrapper{
 
 	private IDUMOAndroidActivity	execution;
 
