@@ -11,10 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.hixi_hyi.idumo.android.util.AndroidLogger;
-import com.hixi_hyi.idumo.android.util.DeployUtil;
-import com.hixi_hyi.idumo.core.util.LogManager;
-
 import android.app.ListActivity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,6 +20,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import com.hixi_hyi.idumo.android.util.AndroidLogger;
+import com.hixi_hyi.idumo.android.util.DeployUtil;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 //import com.hixi_hyi.idumo.android.util.AndroidLogger;
 //import com.hixi_hyi.idumo.android.util.DeployUtil;

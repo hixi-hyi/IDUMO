@@ -7,7 +7,7 @@ import android.os.Handler;
 import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.front.AndroidContainer;
 import com.hixi_hyi.idumo.core.ApplicationController;
-import com.hixi_hyi.idumo.core.IdumoComponent;
+import com.hixi_hyi.idumo.core.IdumoParts;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoExecution;
 import com.hixi_hyi.idumo.core.IdumoExecutionComponent;
@@ -156,9 +156,9 @@ public abstract class AbstractAndroidExecution extends Activity implements Idumo
 
 	/**
 	 * @param item
-	 * @see com.hixi_hyi.idumo.core.front.IdumoContainer#add(com.hixi_hyi.idumo.core.IdumoComponent)
+	 * @see com.hixi_hyi.idumo.core.front.IdumoContainer#add(com.hixi_hyi.idumo.core.IdumoParts)
 	 */
-	public void add(IdumoComponent item) {
+	public void add(IdumoParts item) {
 		container.add(item);
 	}
 

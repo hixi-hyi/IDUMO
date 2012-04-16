@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.hixi_hyi.idumo.core.IdumoException;
-import com.hixi_hyi.idumo.core.util.LogManager;
 
 public abstract class AbstractAndroidActivity extends Activity {
 

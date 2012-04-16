@@ -3,17 +3,14 @@ package com.hixi_hyi.idumo.android.ztmp;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.Context;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.hixi_hyi.idumo.android.AndroidController;
 import com.hixi_hyi.idumo.android.provider.GPSProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
-import com.hixi_hyi.idumo.android.sensor.GPSSensor;
-import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.common.handler.ReversedGeocordingHandler;
+import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**

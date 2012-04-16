@@ -1,7 +1,5 @@
 package com.hixi_hyi.idumo.console.receiptor;
 
-import java.util.ArrayList;
-
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoRunnable;
 import com.hixi_hyi.idumo.core.Receiver;

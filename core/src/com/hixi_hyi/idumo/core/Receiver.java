@@ -6,7 +6,7 @@ package com.hixi_hyi.idumo.core;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public interface Receiver extends IdumoComponent {
+public interface Receiver extends IdumoParts {
 	/**
 	 * データを受け取るSender(Provider,Handlerに相当)をsetするメソッド
 	 * 

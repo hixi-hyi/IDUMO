@@ -9,12 +9,11 @@ import com.hixi_hyi.idumo.core.ApplicationController;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoRunnable;
 import com.hixi_hyi.idumo.core.Receiver;
-import com.hixi_hyi.idumo.core.ReceiverWithInputSize;
 import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.PipeData;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
-public class SerialSendReceiptor implements IdumoRunnable, ReceiverWithInputSize, ApplicationController {
+public class SerialSendReceiptor implements IdumoRunnable, Receiver, ApplicationController {
 
 	private OutputStream	out;
 	private Sender			sender;
@@ -59,7 +58,7 @@ public class SerialSendReceiptor implements IdumoRunnable, ReceiverWithInputSize
 
 	@Override
 	public boolean setSender(Sender... senders) throws IdumoException {
-		if (senders.length != getInputSize()) {
+		if (senders.length != 1) {
 			return false;
 		}
 		for (Object o : senders[0].getDataType()) {
@@ -69,11 +68,6 @@ public class SerialSendReceiptor implements IdumoRunnable, ReceiverWithInputSize
 		}
 		this.sender = senders[0];
 		return true;
-	}
-
-	@Override
-	public int getInputSize() {
-		return 1;
 	}
 
 	@Override

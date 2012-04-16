@@ -1,14 +1,10 @@
 package com.hixi_hyi.idumo.console.rinko;
-import com.hixi_hyi.idumo.console.*;
-import com.hixi_hyi.idumo.console.exec.*;
-import com.hixi_hyi.idumo.console.provider.*;
-import com.hixi_hyi.idumo.console.handler.*;
-import com.hixi_hyi.idumo.console.receiptor.*;
-import com.hixi_hyi.idumo.core.*;
-import com.hixi_hyi.idumo.core.exec.*;
-import com.hixi_hyi.idumo.common.provider.*;
-import com.hixi_hyi.idumo.common.handler.*;
-import com.hixi_hyi.idumo.common.receiptor.*;
+import com.hixi_hyi.idumo.common.handler.SimpleRommbaCommandHandler;
+import com.hixi_hyi.idumo.common.provider.StringProvider;
+import com.hixi_hyi.idumo.console.exec.AbstractConsoleMain;
+import com.hixi_hyi.idumo.console.receiptor.SerialSendReceiptor;
+import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.exec.AbstractExecutionComponent;
 public class SafeMain extends AbstractConsoleMain {
   @Override
   public void init() {

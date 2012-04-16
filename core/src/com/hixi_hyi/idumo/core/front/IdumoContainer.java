@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.hixi_hyi.idumo.core.ApplicationController;
-import com.hixi_hyi.idumo.core.IdumoComponent;
+import com.hixi_hyi.idumo.core.IdumoParts;
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoRunnable;
 import com.hixi_hyi.idumo.core.Receiver;
@@ -14,13 +14,13 @@ import com.hixi_hyi.idumo.core.Sender;
 
 public class IdumoContainer {
 	
-	private ArrayList<IdumoComponent>			items		= new ArrayList<IdumoComponent>();
+	private ArrayList<IdumoParts>			items		= new ArrayList<IdumoParts>();
 	private ArrayList<IdumoRunnable>			runnables	= new ArrayList<IdumoRunnable>();
 	private ArrayList<ApplicationController>	controllers	= new ArrayList<ApplicationController>();
 	
 	private HashMap<Receiver, Connect>			connector	= new HashMap<Receiver, Connect>();
 	
-	public void add(IdumoComponent item) {
+	public void add(IdumoParts item) {
 		items.add(item);
 		if (item instanceof ApplicationController) {
 			controllers.add((ApplicationController) item);

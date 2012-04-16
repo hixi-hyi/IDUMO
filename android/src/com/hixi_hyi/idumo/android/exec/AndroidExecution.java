@@ -10,9 +10,6 @@ import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.IdumoExecution;
 import com.hixi_hyi.idumo.core.IdumoRunnable;
 import com.hixi_hyi.idumo.core.IdumoRuntimeException;
-import com.hixi_hyi.idumo.core.exec.AbstractExecutionComponent;
-import com.hixi_hyi.idumo.core.front.IdumoContainer;
-import com.hixi_hyi.idumo.core.util.LogManager;
 
 public class AndroidExecution implements IdumoExecution, Runnable {
 

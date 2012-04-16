@@ -10,7 +10,7 @@ import com.hixi_hyi.idumo.core.data.PipeData;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public interface Sender extends IdumoComponent {
+public interface Sender extends IdumoParts {
 	/**
 	 * getDataで取得できるPipeData(List)に保存されているデータタイプ(Class)を返す
 	 * 

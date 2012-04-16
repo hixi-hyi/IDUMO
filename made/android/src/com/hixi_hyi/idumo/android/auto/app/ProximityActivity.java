@@ -1,14 +1,10 @@
 package com.hixi_hyi.idumo.android.auto.app;
-import com.hixi_hyi.idumo.android.*;
-import com.hixi_hyi.idumo.android.exec.*;
-import com.hixi_hyi.idumo.android.provider.*;
-import com.hixi_hyi.idumo.android.handler.*;
-import com.hixi_hyi.idumo.android.receiptor.*;
-import com.hixi_hyi.idumo.core.*;
-import com.hixi_hyi.idumo.core.exec.*;
-import com.hixi_hyi.idumo.common.provider.*;
-import com.hixi_hyi.idumo.common.handler.*;
-import com.hixi_hyi.idumo.common.receiptor.*;
+import com.hixi_hyi.idumo.android.exec.AbstractAndroidActivity;
+import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
+import com.hixi_hyi.idumo.android.provider.ProximityProvider;
+import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
+import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
+import com.hixi_hyi.idumo.core.IdumoException;
 public class ProximityActivity extends AbstractAndroidActivity {
   @Override
   public void init() {

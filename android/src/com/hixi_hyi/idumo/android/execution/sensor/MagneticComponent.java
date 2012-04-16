@@ -3,8 +3,8 @@ package com.hixi_hyi.idumo.android.execution.sensor;
 import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
 import com.hixi_hyi.idumo.android.provider.MagneticFieldProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
-import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
+import com.hixi_hyi.idumo.core.IdumoException;
 
 public class MagneticComponent extends AbstractAndroidExecutionComponent {
 	

@@ -1,14 +1,9 @@
 package com.hixi_hyi.idumo.console.auto.app;
-import com.hixi_hyi.idumo.console.*;
-import com.hixi_hyi.idumo.console.exec.*;
-import com.hixi_hyi.idumo.console.provider.*;
-import com.hixi_hyi.idumo.console.handler.*;
-import com.hixi_hyi.idumo.console.receiptor.*;
-import com.hixi_hyi.idumo.core.*;
-import com.hixi_hyi.idumo.core.exec.*;
-import com.hixi_hyi.idumo.common.provider.*;
-import com.hixi_hyi.idumo.common.handler.*;
-import com.hixi_hyi.idumo.common.receiptor.*;
+import com.hixi_hyi.idumo.common.provider.StringProvider;
+import com.hixi_hyi.idumo.common.receiptor.SendTCPReceiptor;
+import com.hixi_hyi.idumo.console.exec.AbstractConsoleMain;
+import com.hixi_hyi.idumo.core.IdumoException;
+import com.hixi_hyi.idumo.core.exec.AbstractExecutionComponent;
 public class RoombaBackMain extends AbstractConsoleMain {
   @Override
   public void init() {

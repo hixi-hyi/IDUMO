@@ -4,14 +4,12 @@ import java.util.List;
 
 import com.hixi_hyi.idumo.core.IdumoException;
 import com.hixi_hyi.idumo.core.Receiver;
-import com.hixi_hyi.idumo.core.ReceiverWithInputSize;
 import com.hixi_hyi.idumo.core.Sender;
 import com.hixi_hyi.idumo.core.data.DataType;
 import com.hixi_hyi.idumo.core.data.PipeData;
 import com.hixi_hyi.idumo.core.util.LogManager;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class ConditionMoreNumberHandler implements Sender, Receiver {
 
