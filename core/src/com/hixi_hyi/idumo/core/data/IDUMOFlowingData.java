@@ -1,14 +1,14 @@
 /**
  * Copyright (c) <2012>, <Hiroyoshi Houchi> All rights reserved.
- * 
+ *
  * http://www.hixi-hyi.com/
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the  following conditions are met:
- * 
+ *
  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
  * The names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -23,19 +23,19 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class PipeData implements Iterable<Object> {
+public class IDUMOFlowingData implements Iterable<Object> {
 	private ArrayList<Object>	datalist;
 	{
 		datalist = new ArrayList<Object>();
 	}
 
-	public static PipeData generatePipeData(Object...objects){
-		return new PipeData(objects);
+	public static IDUMOFlowingData generatePipeData(Object...objects){
+		return new IDUMOFlowingData(objects);
 	}
 
-	public PipeData() {}
+	public IDUMOFlowingData() {}
 
-	public PipeData(Object... objects) {
+	public IDUMOFlowingData(Object... objects) {
 		for (Object o : objects) {
 			datalist.add(o);
 		}
