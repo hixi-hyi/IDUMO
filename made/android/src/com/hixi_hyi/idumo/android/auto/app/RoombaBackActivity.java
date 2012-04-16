@@ -1,10 +1,10 @@
 package com.hixi_hyi.idumo.android.auto.app;
-import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidVirtualMachine;
+import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidWrapper;
 import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidComponent;
 import com.hixi_hyi.idumo.common.provider.StringProvider;
 import com.hixi_hyi.idumo.common.receiptor.SendTCPReceiptor;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-public class RoombaBackActivity extends IDUMOAndroidVirtualMachine {
+public class RoombaBackActivity extends IDUMOAndroidWrapper {
   @Override
   public void init() {
     setExecutionWithComponent(new RoombaBackComponent());

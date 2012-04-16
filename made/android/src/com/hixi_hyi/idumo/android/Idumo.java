@@ -21,13 +21,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.hixi_hyi.idumo.android.core.util.AndroidLogger;
+import com.hixi_hyi.idumo.android.core.util.IDUMOAndroidLogger;
 import com.hixi_hyi.idumo.android.core.util.DeployUtil;
-import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
-//import com.hixi_hyi.idumo.android.core.util.AndroidLogger;
+//import com.hixi_hyi.idumo.android.core.util.IDUMOAndroidLogger;
 //import com.hixi_hyi.idumo.android.core.util.DeployUtil;
-//import com.hixi_hyi.idumo.core.util.LogManager;
+//import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * @author Hiroyoshi HOUCHI
@@ -43,11 +43,11 @@ public class Idumo extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// AndroidLogger
-		LogManager.DEBUG = DeployUtil.isDebuggable(this);
-		LogManager.LOGGER = new AndroidLogger(TAG);
-		// AndroidLogger.isDebug = DeployUtil.isDebuggable(this);
-		// AndroidLogger.TAG = TAG;
+		// IDUMOAndroidLogger
+		IDUMOLogManager.DEBUG = DeployUtil.isDebuggable(this);
+		IDUMOLogManager.LOGGER = new IDUMOAndroidLogger(TAG);
+		// IDUMOAndroidLogger.isDebug = DeployUtil.isDebuggable(this);
+		// IDUMOAndroidLogger.TAG = TAG;
 
 		Intent intent = getIntent();
 		String path = intent.getStringExtra(CATEGORY_PATH);
@@ -55,7 +55,7 @@ public class Idumo extends ListActivity {
 		if (path == null) {
 			path = "";
 		}
-//		LogManager.debug(path);
+//		IDUMOLogManager.debug(path);
 		List<Action> data = getData(path);
 		ListAdapter adapter = new ArrayAdapter<Action>(this, android.R.layout.simple_list_item_1, data);
 		setListAdapter(adapter);

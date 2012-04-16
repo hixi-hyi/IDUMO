@@ -76,7 +76,7 @@ public enum AccelerometerSensor implements SensorEventListener {
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-//		LogManager.log();
+//		IDUMOLogManager.log();
 		if (event.sensor.getType() == useSensorType()) {
 			accel = event.values.clone();
 			isReady = true;

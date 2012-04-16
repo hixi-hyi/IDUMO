@@ -1,11 +1,11 @@
 package com.hixi_hyi.idumo.console.auto.app;
 import com.hixi_hyi.idumo.common.handler.ConditionStringHandler;
 import com.hixi_hyi.idumo.common.provider.LivedoorWeatherProvider_Weather;
-import com.hixi_hyi.idumo.console.exec.AbstractConsoleMain;
+import com.hixi_hyi.idumo.console.core.exec.IDUMOConsoleWrapper;
 import com.hixi_hyi.idumo.console.receiptor.ConsoleViewReceiptor_Bool;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
-public class ConditionWeatherMain extends AbstractConsoleMain {
+public class ConditionWeatherMain extends IDUMOConsoleWrapper {
   @Override
   public void init() {
     setExecutionWithComponent(new ConditionWeatherComponent());

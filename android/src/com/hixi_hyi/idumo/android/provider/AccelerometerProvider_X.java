@@ -9,9 +9,9 @@ import android.hardware.SensorManager;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
-import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * Android上の加速度センサXの値を提供するProvider
@@ -33,9 +33,9 @@ public class AccelerometerProvider_X implements IDUMOSender, AndroidController {
 	}
 	
 	@Override
-	public PipeData getData() {
-		LogManager.log();
-		PipeData p = new PipeData();
+	public IDUMOFlowingData getData() {
+		IDUMOLogManager.log();
+		IDUMOFlowingData p = new IDUMOFlowingData();
 		p.add(accel.getX());
 		return p;
 	}

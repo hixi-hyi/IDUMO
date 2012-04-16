@@ -3,7 +3,7 @@ package com.hixi_hyi.idumo.common.handler;
 import java.util.List;
 
 import com.hixi_hyi.idumo.core.data.DataType;
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
@@ -40,11 +40,11 @@ public class ConditionStringHandler implements IDUMOSender, IDUMOReceiver {
 	}
 
 	@Override
-	public PipeData getData() {
+	public IDUMOFlowingData getData() {
 		String str = (String)sender.getData().get(0);
 		if(condition.equals(str)){
-			return PipeData.generatePipeData(new Boolean(true));
+			return IDUMOFlowingData.generatePipeData(new Boolean(true));
 		}
-		return PipeData.generatePipeData(new Boolean(false));
+		return IDUMOFlowingData.generatePipeData(new Boolean(false));
 	}
 }

@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
-import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * Android上にテキスト情報を出力するReceiptorです
@@ -32,7 +32,7 @@ public class TextViewReceiptor extends TextView implements IDUMOReceiver, IDUMOR
 	
 	@Override
 	public void run() {
-		LogManager.log();
+		IDUMOLogManager.log();
 		for (IDUMOSender sender : senders) {
 			if (!sender.isReady()) {
 				return;
@@ -44,13 +44,13 @@ public class TextViewReceiptor extends TextView implements IDUMOReceiver, IDUMOR
 				return;
 			}
 			for (Object o : sender.getData()) {
-				LogManager.debug(o);
+				IDUMOLogManager.debug(o);
 				sb.append(o.toString());
 			}
 			sb.append("\n");
 		}
 		
-		LogManager.debug(sb.toString());
+		IDUMOLogManager.debug(sb.toString());
 		
 		setText(sb.toString());
 		

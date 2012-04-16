@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
@@ -33,8 +33,8 @@ public class ReceiveConsoleProvider implements IDUMOSender {
 	}
 
 	@Override
-	public PipeData getData() {
-		PipeData p = new PipeData();
+	public IDUMOFlowingData getData() {
+		IDUMOFlowingData p = new IDUMOFlowingData();
 		try {
 			p.add(br.readLine());
 		} catch (IOException e) {

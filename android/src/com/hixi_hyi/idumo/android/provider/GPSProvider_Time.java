@@ -9,10 +9,10 @@ import android.location.LocationManager;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.android.sensor.GPSSensor;
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
-import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * GPS情報を取得できるProvider
@@ -34,13 +34,13 @@ public class GPSProvider_Time implements IDUMOSender, AndroidController {
 	}
 	
 	@Override
-	public PipeData getData() {
-		LogManager.log();
+	public IDUMOFlowingData getData() {
+		IDUMOLogManager.log();
 		if (!isReady()) {
 			return null;
 		}
 		
-		PipeData p = new PipeData();
+		IDUMOFlowingData p = new IDUMOFlowingData();
 		p.add(gps.getSpeed());
 		return p;
 	}

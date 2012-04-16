@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hixi_hyi.idumo.common.component.ConvertRoombaCommand;
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
-import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
@@ -43,13 +43,13 @@ public class SimpleRommbaCommandHandler implements IDUMOSender, IDUMOReceiver {
 	}
 
 	@Override
-	public PipeData getData() {
+	public IDUMOFlowingData getData() {
 		if(sender.getData()==null){
 			return null;
 		}
-		LogManager.log();
+		IDUMOLogManager.log();
 		String command = (String) sender.getData().get(0);
-		PipeData p = new PipeData();
+		IDUMOFlowingData p = new IDUMOFlowingData();
 		if (false) {
 
 		} else if (command.equals("SAFE")) {

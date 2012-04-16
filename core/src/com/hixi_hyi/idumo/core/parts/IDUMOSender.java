@@ -19,7 +19,7 @@ package com.hixi_hyi.idumo.core.parts;
 
 import java.util.List;
 
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
 /**
@@ -42,5 +42,5 @@ public interface IDUMOSender extends IDUMOParts {
 	 *
 	 * @return
 	 */
-	public PipeData getData();
+	public IDUMOFlowingData getData();
 }

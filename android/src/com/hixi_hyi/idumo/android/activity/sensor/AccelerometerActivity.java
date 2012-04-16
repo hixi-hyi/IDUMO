@@ -1,13 +1,13 @@
 package com.hixi_hyi.idumo.android.activity.sensor;
 
 import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidComponent;
-import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidVirtualMachine;
+import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidWrapper;
 import com.hixi_hyi.idumo.android.provider.AccelerometerProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
-public class AccelerometerActivity extends IDUMOAndroidVirtualMachine {
+public class AccelerometerActivity extends IDUMOAndroidWrapper {
 
 	@Override
 	public void init() {

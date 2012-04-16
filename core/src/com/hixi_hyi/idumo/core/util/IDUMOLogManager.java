@@ -17,9 +17,9 @@
  */
 package com.hixi_hyi.idumo.core.util;
 
-public class LogManager {
+public class IDUMOLogManager {
 	public static boolean	DEBUG;
-	public static Logger	LOGGER;
+	public static IDUMOLogger	LOGGER;
 
 	public static void debug(Object o) {
 		if (DEBUG && (LOGGER != null)) {

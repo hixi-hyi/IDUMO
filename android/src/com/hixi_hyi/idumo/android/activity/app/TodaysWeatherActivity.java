@@ -1,13 +1,13 @@
 package com.hixi_hyi.idumo.android.activity.app;
 
 import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidComponent;
-import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidVirtualMachine;
+import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidWrapper;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.common.provider.LivedoorWeatherProvider;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
-public class TodaysWeatherActivity extends IDUMOAndroidVirtualMachine {
+public class TodaysWeatherActivity extends IDUMOAndroidWrapper {
 
 	@Override
 	public void init() {

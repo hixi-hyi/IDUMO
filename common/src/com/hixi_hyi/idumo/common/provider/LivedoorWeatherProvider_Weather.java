@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hixi_hyi.idumo.common.component.LivedoorWeather;
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
-import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * LivedoorWeatherからデータを取得し，提供するプロバイダ
@@ -30,10 +30,10 @@ public class LivedoorWeatherProvider_Weather implements IDUMOSender {
 	}
 	
 	@Override
-	public PipeData getData() {
-		LogManager.log();
+	public IDUMOFlowingData getData() {
+		IDUMOLogManager.log();
 		System.out.println(weather.getWeather());
-		return PipeData.generatePipeData(weather.getWeather());
+		return IDUMOFlowingData.generatePipeData(weather.getWeather());
 		
 	}
 	

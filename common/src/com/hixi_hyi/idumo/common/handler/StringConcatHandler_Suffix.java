@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hixi_hyi.idumo.core.OptionMethodType;
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
@@ -36,14 +36,14 @@ public class StringConcatHandler_Suffix implements IDUMOSender,IDUMOReceiver{
 	}
 	
 	@Override
-	public PipeData getData() {
+	public IDUMOFlowingData getData() {
 		// LogUtil.d();
 		StringBuilder sb = new StringBuilder();
 		for (Object o : provider.getData()) {
 			sb.append(o.toString());
 		}
 		sb.append(fixWord);
-		PipeData p = new PipeData();
+		IDUMOFlowingData p = new IDUMOFlowingData();
 		p.add(sb.toString());
 		return p;
 	}

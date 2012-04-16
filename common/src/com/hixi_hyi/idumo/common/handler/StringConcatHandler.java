@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.SenderWithOption;
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
@@ -42,7 +42,7 @@ public class StringConcatHandler implements SenderWithOption, IDUMOReceiver {
 	}
 	
 	@Override
-	public PipeData getData() {
+	public IDUMOFlowingData getData() {
 		// LogUtil.d();
 		StringBuilder sb = new StringBuilder();
 		if (type == Type.PREFIX) {
@@ -54,7 +54,7 @@ public class StringConcatHandler implements SenderWithOption, IDUMOReceiver {
 		if (type == Type.SUFFIX) {
 			sb.append(fixWord);
 		}
-		PipeData p = new PipeData();
+		IDUMOFlowingData p = new IDUMOFlowingData();
 		p.add(sb.toString());
 		return p;
 	}

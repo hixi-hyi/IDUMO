@@ -2,22 +2,22 @@ package com.hixi_hyi.idumo.console.debug;
 
 import com.hixi_hyi.idumo.common.handler.ConvertRommbaCommandHandler;
 import com.hixi_hyi.idumo.common.provider.ReceiveTCPProvider;
-import com.hixi_hyi.idumo.console.exec.AbstractConsoleMain;
+import com.hixi_hyi.idumo.console.core.exec.IDUMOConsoleWrapper;
+import com.hixi_hyi.idumo.console.core.util.IDUMOConsoleLogger;
 import com.hixi_hyi.idumo.console.receiptor.SerialSendReceiptor;
-import com.hixi_hyi.idumo.console.util.ConsoleLogger;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
-import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
-public class TCP2RommbaMain extends AbstractConsoleMain {
+public class TCP2RommbaMain extends IDUMOConsoleWrapper {
 	@Override
 	public void init() {
 		setExecutionWithComponent(new TCP2RommbaComponent());
 	}
 
 	public static void main(String[] args) {
-		LogManager.DEBUG = true;
-		LogManager.LOGGER = new ConsoleLogger();
+		IDUMOLogManager.DEBUG = true;
+		IDUMOLogManager.LOGGER = new IDUMOConsoleLogger();
 		TCP2RommbaMain main = new TCP2RommbaMain();
 		main.exec();
 	}

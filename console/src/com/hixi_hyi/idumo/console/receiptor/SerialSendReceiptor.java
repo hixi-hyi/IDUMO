@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import com.hixi_hyi.idumo.core.IDUMOController;
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
-import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 public class SerialSendReceiptor implements IDUMORunnable, IDUMOReceiver, IDUMOController {
 
@@ -25,19 +25,19 @@ public class SerialSendReceiptor implements IDUMORunnable, IDUMOReceiver, IDUMOC
 
 	@Override
 	public void run() {
-		LogManager.log();
+		IDUMOLogManager.log();
 		if(!sender.isReady()){
 			return ;
 		}
-		PipeData data = sender.getData();
+		IDUMOFlowingData data = sender.getData();
 		if(data==null){
 			return;
 		}
 		byte[] bytedata = new byte[data.size()];
 		int i = 0;
-		LogManager.debug("size: " + data.size());
+		IDUMOLogManager.debug("size: " + data.size());
 		for (Object o : data) {
-			LogManager.debug(o.toString());
+			IDUMOLogManager.debug(o.toString());
 			bytedata[i] = (Byte) o;
 			i++;
 		}

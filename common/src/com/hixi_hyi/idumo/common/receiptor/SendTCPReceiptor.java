@@ -9,12 +9,12 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import com.hixi_hyi.idumo.core.IDUMOController;
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
-import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
@@ -36,7 +36,7 @@ public class SendTCPReceiptor implements IDUMOReceiver, IDUMOController, IDUMORu
 	private ReceiveValidator vType = new ReceiveValidatorType(1,String.class);
 
 	public SendTCPReceiptor(String ip, int port) {
-		LogManager.log();
+		IDUMOLogManager.log();
 		this.ip = ip;
 		this.port = port;
 		socket = new Socket();
@@ -44,7 +44,7 @@ public class SendTCPReceiptor implements IDUMOReceiver, IDUMOController, IDUMORu
 
 	@Override
 	public boolean isReady() {
-		LogManager.log();
+		IDUMOLogManager.log();
 		return socket.isConnected();
 	}
 
@@ -58,7 +58,7 @@ public class SendTCPReceiptor implements IDUMOReceiver, IDUMOController, IDUMORu
 
 	@Override
 	public void onIdumoStart() {
-		LogManager.log();
+		IDUMOLogManager.log();
 		try {
 			socket.connect(new InetSocketAddress(ip, port));
 			outstream = socket.getOutputStream();
@@ -82,16 +82,16 @@ public class SendTCPReceiptor implements IDUMOReceiver, IDUMOController, IDUMORu
 
 	@Override
 	public void run() {
-		LogManager.log();
+		IDUMOLogManager.log();
 		if (!sender.isReady()) {
 			return;
 		}
-		PipeData data = sender.getData();
+		IDUMOFlowingData data = sender.getData();
 		if(data==null){
 			return ;
 		}
 		for (Object o : data) {
-			LogManager.debug(o.toString());
+			IDUMOLogManager.debug(o.toString());
 			pw.println(o.toString());
 			pw.flush();
 		}

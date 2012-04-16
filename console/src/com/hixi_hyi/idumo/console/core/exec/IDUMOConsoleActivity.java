@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.console.exec;
+package com.hixi_hyi.idumo.console.core.exec;
 
 import com.hixi_hyi.idumo.core.IDUMOController;
 import com.hixi_hyi.idumo.core.IDUMOActivity;
@@ -8,10 +8,10 @@ import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
 import com.hixi_hyi.idumo.core.exec.IDUMOContainer;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 
-public class ConsoleExecution implements IDUMOActivity {
+public class IDUMOConsoleActivity implements IDUMOActivity {
 	private IDUMOComponent	component;
 	
-	public ConsoleExecution(IDUMOComponent component) {
+	public IDUMOConsoleActivity(IDUMOComponent component) {
 		this.component = component;
 		this.component.setContainer(new IDUMOContainer());
 	}

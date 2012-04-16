@@ -15,43 +15,14 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.android.core.util;
+package com.hixi_hyi.idumo.core.util;
 
-import android.util.Log;
+public interface IDUMOLogger {
+	public void debug(String s);
 
-import com.hixi_hyi.idumo.core.util.Logger;
+	public void info(String s);
 
-public class AndroidLogger implements Logger {
-	private String	tag;
+	public void warning(String s);
 
-	public AndroidLogger(String tag) {
-		this.tag = tag;
-	}
-
-	public String getFileLineMethod() {
-		int number = Thread.currentThread().getStackTrace()[5].getLineNumber();
-		String classname = Thread.currentThread().getStackTrace()[5].getFileName();
-		String methodname = Thread.currentThread().getStackTrace()[5].getMethodName();
-		return String.format("【%3d:%s->%s】", number, classname, methodname);
-	}
-
-	@Override
-	public void debug(String s) {
-		Log.d(tag, String.format("%-10s %s", s, getFileLineMethod()));
-	}
-
-	@Override
-	public void info(String s) {
-		Log.i(tag, String.format("%-10s %s", s, getFileLineMethod()));
-	}
-
-	@Override
-	public void warning(String s) {
-		Log.w(tag, String.format("%-10s %s", s, getFileLineMethod()));
-	}
-
-	@Override
-	public void log() {
-		Log.d(tag, getFileLineMethod());
-	}
+	public void log();
 }

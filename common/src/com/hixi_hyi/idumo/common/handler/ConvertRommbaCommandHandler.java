@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hixi_hyi.idumo.common.component.ConvertRoombaCommand;
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
@@ -40,9 +40,9 @@ public class ConvertRommbaCommandHandler implements IDUMOSender, IDUMOReceiver {
 	}
 
 	@Override
-	public PipeData getData() {
+	public IDUMOFlowingData getData() {
 		String command = (String) sender.getData().get(0);
-		PipeData p = new PipeData();
+		IDUMOFlowingData p = new IDUMOFlowingData();
 		if(ConvertRoombaCommand.containsKey(command)){
 			p.add(ConvertRoombaCommand.getCommand(command));
 		}

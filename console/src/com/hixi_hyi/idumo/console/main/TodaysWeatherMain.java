@@ -2,12 +2,12 @@ package com.hixi_hyi.idumo.console.main;
 
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.common.provider.LivedoorWeatherProvider;
-import com.hixi_hyi.idumo.console.exec.AbstractConsoleMain;
+import com.hixi_hyi.idumo.console.core.exec.IDUMOConsoleWrapper;
 import com.hixi_hyi.idumo.console.receiptor.ConsoleViewReceiptor;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
 
-public class TodaysWeatherMain extends AbstractConsoleMain {
+public class TodaysWeatherMain extends IDUMOConsoleWrapper {
 
 	@Override
 	public void init() {

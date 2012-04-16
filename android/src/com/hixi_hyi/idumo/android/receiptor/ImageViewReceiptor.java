@@ -7,7 +7,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
@@ -33,7 +33,7 @@ public class ImageViewReceiptor extends ImageView implements IDUMOReceiver, IDUM
 
 	@Override
 	public void run() {
-		PipeData p = sender.getData();
+		IDUMOFlowingData p = sender.getData();
 		Bitmap image = (Bitmap) p.get(0);
 		setImageBitmap(image);
 	}

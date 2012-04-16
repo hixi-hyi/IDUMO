@@ -3,11 +3,11 @@ import com.hixi_hyi.idumo.common.handler.ConditionStringHandler;
 import com.hixi_hyi.idumo.common.handler.SimpleRommbaCommandHandler;
 import com.hixi_hyi.idumo.common.handler.StringHandler;
 import com.hixi_hyi.idumo.common.provider.LivedoorWeatherProvider_Weather;
-import com.hixi_hyi.idumo.console.exec.AbstractConsoleMain;
+import com.hixi_hyi.idumo.console.core.exec.IDUMOConsoleWrapper;
 import com.hixi_hyi.idumo.console.receiptor.SerialSendReceiptor;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
-public class ConditionWeatherCleanMain extends AbstractConsoleMain {
+public class ConditionWeatherCleanMain extends IDUMOConsoleWrapper {
   @Override
   public void init() {
     setExecutionWithComponent(new ConditionWeatherCleanComponent());

@@ -1,12 +1,12 @@
 package com.hixi_hyi.idumo.android.auto.app;
-import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidVirtualMachine;
+import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidWrapper;
 import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidComponent;
 import com.hixi_hyi.idumo.android.provider.AccelerometerProvider_Z;
 import com.hixi_hyi.idumo.common.handler.ConditionMoreNumberHandler;
 import com.hixi_hyi.idumo.common.handler.StringHandler;
 import com.hixi_hyi.idumo.common.receiptor.SendTCPReceiptor;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-public class AccelerometerCleanActivity extends IDUMOAndroidVirtualMachine {
+public class AccelerometerCleanActivity extends IDUMOAndroidWrapper {
 	@Override
 	public void init() {
 		setExecutionWithComponent(new AccelerometerCleanComponent());

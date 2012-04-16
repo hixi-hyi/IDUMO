@@ -1,11 +1,11 @@
 package com.hixi_hyi.idumo.android.auto.app;
-import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidVirtualMachine;
+import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidWrapper;
 import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidComponent;
 import com.hixi_hyi.idumo.android.provider.ProximityProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-public class ProximityActivity extends IDUMOAndroidVirtualMachine {
+public class ProximityActivity extends IDUMOAndroidWrapper {
   @Override
   public void init() {
     setExecutionWithComponent(new ProximityComponent());

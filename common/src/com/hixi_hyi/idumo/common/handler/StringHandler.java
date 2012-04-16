@@ -3,7 +3,7 @@ package com.hixi_hyi.idumo.common.handler;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
@@ -23,11 +23,11 @@ public class StringHandler implements IDUMOSender, IDUMOReceiver {
 	}
 
 	@Override
-	public PipeData getData() {
+	public IDUMOFlowingData getData() {
 		if((Boolean)sender.getData().get(0)){
-			return PipeData.generatePipeData(word);
+			return IDUMOFlowingData.generatePipeData(word);
 		}else{
-//			return PipeData.generatePipeData("");
+//			return IDUMOFlowingData.generatePipeData("");
 			return null;
 		}
 	}

@@ -7,12 +7,12 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
-import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * バイト情報をTCP通信を用いて送ることが出来るReceiptor
@@ -88,13 +88,13 @@ public class TCPByteStreamReceiptor implements IDUMOReceiver, AndroidController,
 
 	@Override
 	public void run() {
-		LogManager.log();
-		PipeData data = sender.getData();
+		IDUMOLogManager.log();
+		IDUMOFlowingData data = sender.getData();
 		byte[] bytedata = new byte[data.size()];
 		int i = 0;
-		LogManager.debug("size: " + data.size());
+		IDUMOLogManager.debug("size: " + data.size());
 		for (Object o : data) {
-			LogManager.debug(o.toString());
+			IDUMOLogManager.debug(o.toString());
 			bytedata[i] = (Byte) o;
 			i++;
 		}

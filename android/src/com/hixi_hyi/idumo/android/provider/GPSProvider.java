@@ -13,9 +13,9 @@ import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.android.sensor.GPSSensor;
 import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.SenderWithOption;
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * GPS情報を取得できるProvider
@@ -52,13 +52,13 @@ public class GPSProvider implements SenderWithOption, AndroidController {
 	}
 	
 	@Override
-	public PipeData getData() {
-		LogManager.log();
+	public IDUMOFlowingData getData() {
+		IDUMOLogManager.log();
 		if (!isReady()) {
 			return null;
 		}
 		
-		PipeData p = new PipeData();
+		IDUMOFlowingData p = new IDUMOFlowingData();
 		switch (methodType) {
 			case ACCURARY:
 				p.add(gps.getAccuracy());

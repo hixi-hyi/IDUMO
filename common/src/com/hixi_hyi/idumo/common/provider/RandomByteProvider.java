@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 
 /**
@@ -29,9 +29,9 @@ public class RandomByteProvider implements IDUMOSender {
 	}
 	
 	@Override
-	public PipeData getData() {
+	public IDUMOFlowingData getData() {
 		// LogUtil.d();
-		PipeData pipes = new PipeData();
+		IDUMOFlowingData pipes = new IDUMOFlowingData();
 		byte buf[] = new byte[1];
 		ramdom.nextBytes(buf);
 		pipes.add(buf[0]);

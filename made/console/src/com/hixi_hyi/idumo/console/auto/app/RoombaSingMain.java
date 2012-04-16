@@ -1,10 +1,10 @@
 package com.hixi_hyi.idumo.console.auto.app;
 import com.hixi_hyi.idumo.common.provider.StringProvider;
 import com.hixi_hyi.idumo.common.receiptor.SendTCPReceiptor;
-import com.hixi_hyi.idumo.console.exec.AbstractConsoleMain;
+import com.hixi_hyi.idumo.console.core.exec.IDUMOConsoleWrapper;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
-public class RoombaSingMain extends AbstractConsoleMain {
+public class RoombaSingMain extends IDUMOConsoleWrapper {
   @Override
   public void init() {
     setExecutionWithComponent(new RoombaSingComponent());

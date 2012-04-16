@@ -1,12 +1,12 @@
 package com.hixi_hyi.idumo.console.debug;
 
 import com.hixi_hyi.idumo.common.provider.RandomByteProvider;
-import com.hixi_hyi.idumo.console.exec.AbstractConsoleMain;
+import com.hixi_hyi.idumo.console.core.exec.IDUMOConsoleWrapper;
 import com.hixi_hyi.idumo.console.receiptor.SerialSendReceiptor;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
 
-public class SerialSendMain extends AbstractConsoleMain {
+public class SerialSendMain extends IDUMOConsoleWrapper {
 	@Override
 	public void init() {
 		setExecutionWithComponent(new SerialSendComponent());

@@ -1,11 +1,11 @@
 package com.hixi_hyi.idumo.console.rinko;
 import com.hixi_hyi.idumo.common.handler.SimpleRommbaCommandHandler;
 import com.hixi_hyi.idumo.common.provider.StringProvider;
-import com.hixi_hyi.idumo.console.exec.AbstractConsoleMain;
+import com.hixi_hyi.idumo.console.core.exec.IDUMOConsoleWrapper;
 import com.hixi_hyi.idumo.console.receiptor.SerialSendReceiptor;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
-public class RecordMain extends AbstractConsoleMain {
+public class RecordMain extends IDUMOConsoleWrapper {
   @Override
   public void init() {
     setExecutionWithComponent(new RecordComponent());

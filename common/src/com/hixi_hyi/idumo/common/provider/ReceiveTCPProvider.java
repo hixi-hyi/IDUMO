@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hixi_hyi.idumo.core.IDUMOController;
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
-import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * バイト情報を受け取ることが出来るProvider
@@ -41,10 +41,10 @@ public class ReceiveTCPProvider implements IDUMOSender, IDUMOController {
 
 	@Override
 	public boolean isReady() {
-		LogManager.log();
+		IDUMOLogManager.log();
 
 		if (server.getSocket() == null) {
-			LogManager.debug("null");
+			IDUMOLogManager.debug("null");
 			socket = null;
 			if(!server.bool){
 				new Thread(server).start();
@@ -109,9 +109,9 @@ public class ReceiveTCPProvider implements IDUMOSender, IDUMOController {
 	}
 
 	@Override
-	public PipeData getData() {
-		PipeData p = new PipeData();
-		LogManager.debug(p);
+	public IDUMOFlowingData getData() {
+		IDUMOFlowingData p = new IDUMOFlowingData();
+		IDUMOLogManager.debug(p);
 		String s = strs.remove(0);
 		p.add(s);
 		server.restart();
@@ -146,7 +146,7 @@ public class ReceiveTCPProvider implements IDUMOSender, IDUMOController {
 		 */
 		public Socket getSocket() {
 			// if (socket.isClosed()) {
-			// LogManager.log();
+			// IDUMOLogManager.log();
 			// new Thread(this).run();
 			// socket = null;
 			// }

@@ -3,7 +3,7 @@ package com.hixi_hyi.idumo.common.handler;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
@@ -21,14 +21,14 @@ public class StringConcatHandler_Prefix implements IDUMOSender, IDUMOReceiver {
 	}
 	
 	@Override
-	public PipeData getData() {
+	public IDUMOFlowingData getData() {
 		// LogUtil.d();
 		StringBuilder sb = new StringBuilder();
 		sb.append(fixWord);
 		for (Object o : provider.getData()) {
 			sb.append(o.toString());
 		}
-		PipeData p = new PipeData();
+		IDUMOFlowingData p = new IDUMOFlowingData();
 		p.add(sb.toString());
 		return p;
 	}

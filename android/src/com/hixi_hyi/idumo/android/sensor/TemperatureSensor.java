@@ -5,7 +5,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * 温度センサ
@@ -63,7 +63,7 @@ public enum TemperatureSensor implements SensorEventListener {
 	
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-		LogManager.log();
+		IDUMOLogManager.log();
 		if (event.sensor.getType() == useSensorType()) {
 			temp = event.values[0];
 			isReady = true;

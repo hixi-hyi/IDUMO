@@ -8,10 +8,10 @@ import java.util.Map;
 import com.hixi_hyi.idumo.common.component.LivedoorWeather;
 import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.SenderWithOption;
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
-import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * LivedoorWeatherからデータを取得し，提供するプロバイダ
@@ -50,9 +50,9 @@ public class LivedoorWeatherProvider_MaxTemp implements SenderWithOption {
 	}
 	
 	@Override
-	public PipeData getData() {
-		LogManager.log();
-		PipeData p = new PipeData();
+	public IDUMOFlowingData getData() {
+		IDUMOLogManager.log();
+		IDUMOFlowingData p = new IDUMOFlowingData();
 		switch (type) {
 			case LOCATION:
 				p.add(weather.getLocation());

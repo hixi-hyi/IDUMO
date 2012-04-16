@@ -3,7 +3,7 @@ include REXML
 
 IMPORT_LIST = <<EOI
 import com.hixi_hyi.idumo.console.*;
-import com.hixi_hyi.idumo.console.exec.*;
+import com.hixi_hyi.idumo.console.core.exec.*;
 import com.hixi_hyi.idumo.console.provider.*;
 import com.hixi_hyi.idumo.console.handler.*;
 import com.hixi_hyi.idumo.console.receiptor.*;

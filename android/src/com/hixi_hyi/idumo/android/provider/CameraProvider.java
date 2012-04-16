@@ -12,7 +12,7 @@ import android.graphics.Bitmap;
 import com.hixi_hyi.idumo.android.sensor.CameraSensor;
 import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.SenderWithOption;
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
 public class CameraProvider implements SenderWithOption {
@@ -42,7 +42,7 @@ public class CameraProvider implements SenderWithOption {
 	}
 	
 	@Override
-	public PipeData getData() {
+	public IDUMOFlowingData getData() {
 		activity.setContentView(camera);
 		camera.takePicture();
 		return null;

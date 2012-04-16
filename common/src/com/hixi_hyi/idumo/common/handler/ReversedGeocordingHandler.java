@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hixi_hyi.idumo.common.component.ReversedGeocording;
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
@@ -25,13 +25,13 @@ public class ReversedGeocordingHandler implements IDUMOSender, IDUMOReceiver {
 	private ReceiveValidatorType v2Type = new ReceiveValidatorType(2,Double.class);
 
 	@Override
-	public PipeData getData() {
+	public IDUMOFlowingData getData() {
 		double lat = (Double) senders.get(0).getData().get(0);
 		double lon = (Double) senders.get(1).getData().get(0);
 
 		ReversedGeocording rg = new ReversedGeocording(lat, lon);
 
-		PipeData p = new PipeData();
+		IDUMOFlowingData p = new IDUMOFlowingData();
 		p.add(rg.getLocation());
 
 		return p;

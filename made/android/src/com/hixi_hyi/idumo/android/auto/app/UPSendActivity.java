@@ -1,11 +1,11 @@
 package com.hixi_hyi.idumo.android.auto.app;
-import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidVirtualMachine;
+import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidWrapper;
 import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidComponent;
 import com.hixi_hyi.idumo.common.provider.StringProvider;
 import com.hixi_hyi.idumo.common.receiptor.SendTCPReceiptor;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.util.LogManager;
-public class UPSendActivity extends IDUMOAndroidVirtualMachine {
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+public class UPSendActivity extends IDUMOAndroidWrapper {
   @Override
   public void init() {
     setExecutionWithComponent(new UPSendComponent());
@@ -15,15 +15,15 @@ public class UPSendActivity extends IDUMOAndroidVirtualMachine {
 class UPSendComponent extends IDUMOAndroidComponent {
   @Override
   public void onIdumoMakeFlowChart() throws IDUMOException {
-	  LogManager.log();
+	  IDUMOLogManager.log();
 	StringProvider s = new StringProvider("CLEAN");
     add(s);
-    LogManager.debug("string ok");
+    IDUMOLogManager.debug("string ok");
     SendTCPReceiptor r = new SendTCPReceiptor("192.168.12.4",10000);
     add(r);
-    LogManager.debug("tcp ok");
+    IDUMOLogManager.debug("tcp ok");
     connect(s, r);
-    LogManager.debug("connection ok");
+    IDUMOLogManager.debug("connection ok");
   }
 
   @Override

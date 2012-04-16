@@ -3,9 +3,9 @@ package com.hixi_hyi.idumo.common.provider;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
-import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * ランダムなバイト情報を送るためのProvider(DebugClass)
@@ -18,7 +18,7 @@ public class StringProvider implements IDUMOSender {
 	private String str;
 
 	public StringProvider(String str) {
-		LogManager.debug(str);
+		IDUMOLogManager.debug(str);
 		this.str = str;
 	}
 
@@ -30,9 +30,9 @@ public class StringProvider implements IDUMOSender {
 	}
 
 	@Override
-	public PipeData getData() {
-		LogManager.log();
-		PipeData pipes = new PipeData();
+	public IDUMOFlowingData getData() {
+		IDUMOLogManager.log();
+		IDUMOFlowingData pipes = new IDUMOFlowingData();
 		pipes.add(str);
 		return pipes;
 	}

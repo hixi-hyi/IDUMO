@@ -11,9 +11,9 @@ import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
 import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
 import com.hixi_hyi.idumo.android.sensor.OrientationSensor;
-import com.hixi_hyi.idumo.core.data.PipeData;
+import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
-import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * Android上の傾きの情報を取得できるProvider 地磁気センサと加速度センサにより傾きを算出
@@ -44,9 +44,9 @@ public class OrientationProvider_Roll implements IDUMOSender, AndroidController 
 	}
 	
 	@Override
-	public PipeData getData() {
-		LogManager.log();
-		PipeData p = new PipeData();
+	public IDUMOFlowingData getData() {
+		IDUMOLogManager.log();
+		IDUMOFlowingData p = new IDUMOFlowingData();
 		p.add(sensor.getRoll());
 		return p;
 	}

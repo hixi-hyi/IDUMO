@@ -5,7 +5,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * 地磁気センサ
@@ -81,7 +81,7 @@ public enum MagneticFieldSensor implements SensorEventListener {
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-		LogManager.log();
+		IDUMOLogManager.log();
 		if (event.sensor.getType() == useSensorType()) {
 			magnet = event.values.clone();
 			isReady = true;
@@ -90,7 +90,7 @@ public enum MagneticFieldSensor implements SensorEventListener {
 
 	public void register() {
 		if (sensor == null) {
-			LogManager.log();
+			IDUMOLogManager.log();
 			sensor = sensorManager.getDefaultSensor(useSensorType());
 			sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI);
 		}
@@ -98,7 +98,7 @@ public enum MagneticFieldSensor implements SensorEventListener {
 
 	public void unregister() {
 		if (sensor != null) {
-			LogManager.log();
+			IDUMOLogManager.log();
 			sensor = null;
 			sensorManager.unregisterListener(this);
 		}

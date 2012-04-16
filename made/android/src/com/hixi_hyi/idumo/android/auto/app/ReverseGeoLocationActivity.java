@@ -1,11 +1,11 @@
 package com.hixi_hyi.idumo.android.auto.app;
-import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidVirtualMachine;
+import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidWrapper;
 import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidComponent;
 import com.hixi_hyi.idumo.android.provider.GPSProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.ReversedGeocordingHandler;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-public class ReverseGeoLocationActivity extends IDUMOAndroidVirtualMachine {
+public class ReverseGeoLocationActivity extends IDUMOAndroidWrapper {
   @Override
   public void init() {
     setExecutionWithComponent(new ReverseGeoLocationComponent());

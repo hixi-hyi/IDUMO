@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
-public abstract class IDUMOAndroidVirtualMachine extends Activity {
+public abstract class IDUMOAndroidWrapper extends Activity {
 
 	private IDUMOAndroidActivity	execution;
 
