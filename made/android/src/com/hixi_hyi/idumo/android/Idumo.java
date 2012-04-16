@@ -21,8 +21,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.hixi_hyi.idumo.android.util.AndroidLogger;
-import com.hixi_hyi.idumo.android.util.DeployUtil;
+import com.hixi_hyi.idumo.android.core.util.AndroidLogger;
+import com.hixi_hyi.idumo.android.core.util.DeployUtil;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 //import com.hixi_hyi.idumo.android.core.util.AndroidLogger;
