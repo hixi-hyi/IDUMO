@@ -176,7 +176,30 @@
                <category android:name="android.intent.category.LAUNCHER" />
            </intent-filter>
        </activity>
-
+        <activity android:name=".hc.TVOnActivity"
+       		  android:label="TVOn">
+           <intent-filter>
+	            <action android:name="android.intent.action.MAIN" />
+               <category android:name="android.intent.category.IDUMO_SAMPLES" />
+               <category android:name="android.intent.category.LAUNCHER" />
+           </intent-filter>
+       </activity>
+        <activity android:name=".hc.ThermoViewActivity"
+       		  android:label="ThermoView">
+           <intent-filter>
+	            <action android:name="android.intent.action.MAIN" />
+               <category android:name="android.intent.category.IDUMO_SAMPLES" />
+               <category android:name="android.intent.category.LAUNCHER" />
+           </intent-filter>
+       </activity>
+	<activity android:name=".auto.app.TCPReceiveActivity"
+       		  android:label="TCPReceive">
+           <intent-filter>
+	            <action android:name="android.intent.action.MAIN" />
+               <category android:name="android.intent.category.IDUMO_SAMPLES" />
+               <category android:name="android.intent.category.LAUNCHER" />
+           </intent-filter>
+       </activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
