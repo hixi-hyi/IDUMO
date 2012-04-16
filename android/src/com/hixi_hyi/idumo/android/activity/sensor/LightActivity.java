@@ -1,20 +1,20 @@
 package com.hixi_hyi.idumo.android.activity.sensor;
 
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidActivity;
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
+import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidComponent;
+import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidVirtualMachine;
 import com.hixi_hyi.idumo.android.provider.LightProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
-public class LightActivity extends AbstractAndroidActivity {
+public class LightActivity extends IDUMOAndroidVirtualMachine {
 
 	@Override
 	public void init() {
 		setExecutionWithComponent(new LightComponent());
 	}
 
-	public class LightComponent extends AbstractAndroidExecutionComponent {
+	public class LightComponent extends IDUMOAndroidComponent {
 
 		@Override
 		public void onIdumoMakeFlowChart() throws IDUMOException {

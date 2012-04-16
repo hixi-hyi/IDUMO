@@ -1,20 +1,20 @@
 package com.hixi_hyi.idumo.android.activity.sensor;
 
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidActivity;
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
+import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidComponent;
+import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidVirtualMachine;
 import com.hixi_hyi.idumo.android.provider.GPSProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
-public class GPSActivity extends AbstractAndroidActivity {
+public class GPSActivity extends IDUMOAndroidVirtualMachine {
 
 	@Override
 	public void init() {
 		setExecutionWithComponent(new GPS2Component());
 	}
 
-	public class GPS2Component extends AbstractAndroidExecutionComponent {
+	public class GPS2Component extends IDUMOAndroidComponent {
 
 		@Override
 		public void onIdumoMakeFlowChart() throws IDUMOException {

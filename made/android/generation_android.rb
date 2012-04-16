@@ -3,7 +3,7 @@ include REXML
 
 IMPORT_LIST = <<EOI
 import com.hixi_hyi.idumo.android.*;
-import com.hixi_hyi.idumo.android.exec.*;
+import com.hixi_hyi.idumo.android.core.exec.*;
 import com.hixi_hyi.idumo.android.provider.*;
 import com.hixi_hyi.idumo.android.handler.*;
 import com.hixi_hyi.idumo.android.receiptor.*;

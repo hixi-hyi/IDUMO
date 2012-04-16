@@ -1,14 +1,13 @@
-package com.hixi_hyi.idumo.android.exec;
+package com.hixi_hyi.idumo.android.core.exec;
 
 import java.util.Collection;
 
 import android.app.Activity;
 
-import com.hixi_hyi.idumo.android.AndroidController;
-import com.hixi_hyi.idumo.android.front.AndroidContainer;
+import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
 
-public abstract class AbstractAndroidExecutionComponent extends IDUMOComponent {
+public abstract class IDUMOAndroidComponent extends IDUMOComponent {
 
 	protected Activity activity;
 
@@ -21,7 +20,7 @@ public abstract class AbstractAndroidExecutionComponent extends IDUMOComponent {
 	}
 
 	public Collection<AndroidController> getAndroidControllers() {
-		AndroidContainer container = (AndroidContainer) getContainer();
+		IDUMOAndroidContainer container = (IDUMOAndroidContainer) getContainer();
 		return container.getAndroidControllers();
 	}
 

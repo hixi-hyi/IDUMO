@@ -7,7 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.hardware.SensorManager;
 
-import com.hixi_hyi.idumo.android.AndroidController;
+import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.android.sensor.ProximitySensor;
 import com.hixi_hyi.idumo.core.data.PipeData;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;

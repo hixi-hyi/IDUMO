@@ -1,13 +1,13 @@
-package com.hixi_hyi.idumo.android.front;
+package com.hixi_hyi.idumo.android.core.exec;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.hixi_hyi.idumo.android.AndroidController;
+import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.core.exec.IDUMOContainer;
 import com.hixi_hyi.idumo.core.parts.IDUMOParts;
 
-public class AndroidContainer extends IDUMOContainer {
+public class IDUMOAndroidContainer extends IDUMOContainer {
 	private ArrayList<AndroidController>	androidControllers	= new ArrayList<AndroidController>();
 
 	@Override

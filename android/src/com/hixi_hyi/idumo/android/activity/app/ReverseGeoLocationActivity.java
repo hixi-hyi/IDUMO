@@ -1,20 +1,20 @@
 package com.hixi_hyi.idumo.android.activity.app;
 
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidActivity;
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
+import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidComponent;
+import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidVirtualMachine;
 import com.hixi_hyi.idumo.android.provider.GPSProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.ReversedGeocordingHandler;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
-public class ReverseGeoLocationActivity extends AbstractAndroidActivity {
+public class ReverseGeoLocationActivity extends IDUMOAndroidVirtualMachine {
 
 	@Override
 	public void init() {
 		setExecutionWithComponent(new ReverseGeoLocationComponent());
 	}
 
-	public class ReverseGeoLocationComponent extends AbstractAndroidExecutionComponent {
+	public class ReverseGeoLocationComponent extends IDUMOAndroidComponent {
 
 		@Override
 		public void onIdumoMakeFlowChart() throws IDUMOException {

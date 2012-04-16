@@ -7,7 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.hardware.SensorManager;
 
-import com.hixi_hyi.idumo.android.AndroidController;
+import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
 import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
 import com.hixi_hyi.idumo.android.sensor.OrientationSensor;

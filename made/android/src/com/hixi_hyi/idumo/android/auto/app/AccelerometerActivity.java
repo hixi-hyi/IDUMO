@@ -1,17 +1,17 @@
 package com.hixi_hyi.idumo.android.auto.app;
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidActivity;
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
+import com.hixi_hyi.idumo.android.exec.IDUMOAndroidVirtualMachine;
+import com.hixi_hyi.idumo.android.exec.IDUMOAndroidComponent;
 import com.hixi_hyi.idumo.android.provider.AccelerometerProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-public class AccelerometerActivity extends AbstractAndroidActivity {
+public class AccelerometerActivity extends IDUMOAndroidVirtualMachine {
 	@Override
 	public void init() {
 		setExecutionWithComponent(new AccelerometerComponent());
 	}
 }
-class AccelerometerComponent extends AbstractAndroidExecutionComponent {
+class AccelerometerComponent extends IDUMOAndroidComponent {
 	@Override
 	public void onIdumoMakeFlowChart() throws IDUMOException {
 		AccelerometerProvider a1 = new AccelerometerProvider(activity);

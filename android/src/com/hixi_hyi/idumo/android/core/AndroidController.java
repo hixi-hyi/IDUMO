@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.android;
+package com.hixi_hyi.idumo.android.core;
 
 import com.hixi_hyi.idumo.core.IDUMOController;
 

@@ -1,17 +1,17 @@
 package com.hixi_hyi.idumo.android.auto.app;
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidActivity;
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
+import com.hixi_hyi.idumo.android.exec.IDUMOAndroidVirtualMachine;
+import com.hixi_hyi.idumo.android.exec.IDUMOAndroidComponent;
 import com.hixi_hyi.idumo.android.provider.GPSProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-public class GPSActivity extends AbstractAndroidActivity {
+public class GPSActivity extends IDUMOAndroidVirtualMachine {
   @Override
   public void init() {
     setExecutionWithComponent(new GPSComponent());
   }
 
-  public class GPSComponent extends AbstractAndroidExecutionComponent {
+  public class GPSComponent extends IDUMOAndroidComponent {
     @Override
     public void onIdumoMakeFlowChart() throws IDUMOException {
       GPSProvider g1 = new GPSProvider(activity);

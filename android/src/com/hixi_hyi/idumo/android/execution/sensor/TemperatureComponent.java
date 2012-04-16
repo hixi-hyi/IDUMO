@@ -1,12 +1,12 @@
 package com.hixi_hyi.idumo.android.execution.sensor;
 
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
+import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidComponent;
 import com.hixi_hyi.idumo.android.provider.TemperatureProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
-public class TemperatureComponent extends AbstractAndroidExecutionComponent {
+public class TemperatureComponent extends IDUMOAndroidComponent {
 	
 	@Override
 	public void onIdumoMakeFlowChart() throws IDUMOException {

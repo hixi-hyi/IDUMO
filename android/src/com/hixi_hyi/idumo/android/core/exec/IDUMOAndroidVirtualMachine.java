@@ -1,19 +1,19 @@
-package com.hixi_hyi.idumo.android.exec;
+package com.hixi_hyi.idumo.android.core.exec;
 
 import android.app.Activity;
 import android.os.Bundle;
 
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
-public abstract class AbstractAndroidActivity extends Activity {
+public abstract class IDUMOAndroidVirtualMachine extends Activity {
 
-	private AndroidExecution	execution;
+	private IDUMOAndroidActivity	execution;
 
-	public void setExecutionWithComponent(AbstractAndroidExecutionComponent component){
-		this.execution = new AndroidExecution(component);
+	public void setExecutionWithComponent(IDUMOAndroidComponent component){
+		this.execution = new IDUMOAndroidActivity(component);
 	}
 
-	public void setExecution(AndroidExecution execution) {
+	public void setExecution(IDUMOAndroidActivity execution) {
 		this.execution = execution;
 	}
 

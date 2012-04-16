@@ -1,20 +1,20 @@
 package com.hixi_hyi.idumo.android.activity.sensor;
 
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidActivity;
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
+import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidComponent;
+import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidVirtualMachine;
 import com.hixi_hyi.idumo.android.provider.MagneticFieldProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
-public class MagneticActivity extends AbstractAndroidActivity {
+public class MagneticActivity extends IDUMOAndroidVirtualMachine {
 
 	@Override
 	public void init() {
 		setExecutionWithComponent(new MagneticComponent());
 	}
 
-	public class MagneticComponent extends AbstractAndroidExecutionComponent {
+	public class MagneticComponent extends IDUMOAndroidComponent {
 
 		@Override
 		public void onIdumoMakeFlowChart() throws IDUMOException {

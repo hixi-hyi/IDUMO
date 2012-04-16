@@ -1,17 +1,17 @@
 package com.hixi_hyi.idumo.android.auto.app;
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidActivity;
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
+import com.hixi_hyi.idumo.android.exec.IDUMOAndroidVirtualMachine;
+import com.hixi_hyi.idumo.android.exec.IDUMOAndroidComponent;
 import com.hixi_hyi.idumo.android.provider.MagneticFieldProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-public class MagneticFieldActivity extends AbstractAndroidActivity {
+public class MagneticFieldActivity extends IDUMOAndroidVirtualMachine {
   @Override
   public void init() {
     setExecutionWithComponent(new MagneticFieldComponent());
   }
 
-  public class MagneticFieldComponent extends AbstractAndroidExecutionComponent {
+  public class MagneticFieldComponent extends IDUMOAndroidComponent {
     @Override
     public void onIdumoMakeFlowChart() throws IDUMOException {
       MagneticFieldProvider g1 = new MagneticFieldProvider(activity);

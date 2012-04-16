@@ -9,7 +9,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.location.LocationManager;
 
-import com.hixi_hyi.idumo.android.AndroidController;
+import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.android.sensor.GPSSensor;
 import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.SenderWithOption;

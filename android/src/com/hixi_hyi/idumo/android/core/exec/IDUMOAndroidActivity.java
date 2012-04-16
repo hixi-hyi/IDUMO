@@ -1,24 +1,23 @@
-package com.hixi_hyi.idumo.android.exec;
+package com.hixi_hyi.idumo.android.core.exec;
 
 import android.app.Activity;
 import android.os.Handler;
 
-import com.hixi_hyi.idumo.android.AndroidController;
-import com.hixi_hyi.idumo.android.front.AndroidContainer;
+import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.core.IDUMOController;
 import com.hixi_hyi.idumo.core.IDUMOActivity;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 
-public class AndroidExecution implements IDUMOActivity, Runnable {
+public class IDUMOAndroidActivity implements IDUMOActivity, Runnable {
 
-	private AbstractAndroidExecutionComponent	component;
+	private IDUMOAndroidComponent	component;
 	private Handler								handler	= new Handler();
 
-	public AndroidExecution(AbstractAndroidExecutionComponent component) {
+	public IDUMOAndroidActivity(IDUMOAndroidComponent component) {
 		this.component = component;
-		this.component.setContainer(new AndroidContainer());
+		this.component.setContainer(new IDUMOAndroidContainer());
 	}
 
 	@Override
@@ -96,7 +95,7 @@ public class AndroidExecution implements IDUMOActivity, Runnable {
 
 	/**
 	 * @param activity
-	 * @see com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent#setActivity(android.app.Activity)
+	 * @see com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidComponent#setActivity(android.app.Activity)
 	 */
 	public void setActivity(Activity activity) {
 		component.setActivity(activity);

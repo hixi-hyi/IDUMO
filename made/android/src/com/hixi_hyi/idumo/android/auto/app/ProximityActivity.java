@@ -1,17 +1,17 @@
 package com.hixi_hyi.idumo.android.auto.app;
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidActivity;
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
+import com.hixi_hyi.idumo.android.exec.IDUMOAndroidVirtualMachine;
+import com.hixi_hyi.idumo.android.exec.IDUMOAndroidComponent;
 import com.hixi_hyi.idumo.android.provider.ProximityProvider;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-public class ProximityActivity extends AbstractAndroidActivity {
+public class ProximityActivity extends IDUMOAndroidVirtualMachine {
   @Override
   public void init() {
     setExecutionWithComponent(new ProximityComponent());
   }
 
-  public class ProximityComponent extends AbstractAndroidExecutionComponent {
+  public class ProximityComponent extends IDUMOAndroidComponent {
     @Override
     public void onIdumoMakeFlowChart() throws IDUMOException {
       ProximityProvider l1 = new ProximityProvider(activity);

@@ -1,17 +1,17 @@
 package com.hixi_hyi.idumo.android.auto.app;
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidActivity;
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
+import com.hixi_hyi.idumo.android.exec.IDUMOAndroidVirtualMachine;
+import com.hixi_hyi.idumo.android.exec.IDUMOAndroidComponent;
 import com.hixi_hyi.idumo.common.provider.StringProvider;
 import com.hixi_hyi.idumo.common.receiptor.SendTCPReceiptor;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-public class RoombaSafeActivity extends AbstractAndroidActivity {
+public class RoombaSafeActivity extends IDUMOAndroidVirtualMachine {
   @Override
   public void init() {
     setExecutionWithComponent(new RoombaSafeComponent());
   }
 
 }
-class RoombaSafeComponent extends AbstractAndroidExecutionComponent {
+class RoombaSafeComponent extends IDUMOAndroidComponent {
   @Override
   public void onIdumoMakeFlowChart() throws IDUMOException {
     StringProvider s = new StringProvider("SAFE");

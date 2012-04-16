@@ -1,20 +1,20 @@
 package com.hixi_hyi.idumo.android.activity.app;
 
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidActivity;
-import com.hixi_hyi.idumo.android.exec.AbstractAndroidExecutionComponent;
+import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidComponent;
+import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidVirtualMachine;
 import com.hixi_hyi.idumo.android.receiptor.TextViewReceiptor;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler;
 import com.hixi_hyi.idumo.common.provider.LivedoorWeatherProvider;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
-public class TodaysWeatherActivity extends AbstractAndroidActivity {
+public class TodaysWeatherActivity extends IDUMOAndroidVirtualMachine {
 
 	@Override
 	public void init() {
 		setExecutionWithComponent(new TodaysWeatherComponent());
 	}
 
-	public class TodaysWeatherComponent extends AbstractAndroidExecutionComponent {
+	public class TodaysWeatherComponent extends IDUMOAndroidComponent {
 
 		@Override
 		public void onIdumoMakeFlowChart() throws IDUMOException {
