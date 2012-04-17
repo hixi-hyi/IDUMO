@@ -5,22 +5,21 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.hixi_hyi.idumo.core.IDUMOController;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOParts;
+import com.hixi_hyi.idumo.core.parts.IDUMOPart;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 
 public class IDUMOContainer {
 	
-	private ArrayList<IDUMOParts>			items		= new ArrayList<IDUMOParts>();
+	private ArrayList<IDUMOPart>			items		= new ArrayList<IDUMOPart>();
 	private ArrayList<IDUMORunnable>			runnables	= new ArrayList<IDUMORunnable>();
 	private ArrayList<IDUMOController>	controllers	= new ArrayList<IDUMOController>();
 	
 	private HashMap<IDUMOReceiver, Connect>			connector	= new HashMap<IDUMOReceiver, Connect>();
 	
-	public void add(IDUMOParts item) {
+	public void add(IDUMOPart item) {
 		items.add(item);
 		if (item instanceof IDUMOController) {
 			controllers.add((IDUMOController) item);

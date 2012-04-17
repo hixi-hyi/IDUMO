@@ -16,8 +16,6 @@ public abstract class IDUMOConsoleWrapper implements IDUMOWrapper{
 		this.execution = execution;
 	}
 
-	abstract public void init();
-
 	public void exec(){
 		init();
 		try {

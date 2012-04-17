@@ -18,8 +18,6 @@ public abstract class IDUMOAndroidWrapper extends Activity implements IDUMOWrapp
 		this.execution = execution;
 	}
 
-	abstract public void init();
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

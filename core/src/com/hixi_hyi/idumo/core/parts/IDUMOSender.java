@@ -28,7 +28,7 @@ import com.hixi_hyi.idumo.core.exception.IDUMOException;
  * @author Hiroyoshi HOUCHI
  *
  */
-public interface IDUMOSender extends IDUMOParts {
+public interface IDUMOSender extends IDUMOPart {
 	/**
 	 * getDataで取得できるPipeData(List)に保存されているデータタイプ(Class)を返す
 	 *

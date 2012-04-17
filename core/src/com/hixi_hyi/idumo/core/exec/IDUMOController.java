@@ -15,19 +15,10 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core.parts;
+package com.hixi_hyi.idumo.core.exec;
 
-/**
- * Idumoの構成要素(ブロック図の要素)になるインタフェースです．
- *
- * @author Hiroyoshi HOUCHI
- *
- */
-public interface IDUMOParts {
-	/**
-	 * 構成要素が呼び出される準備ができているかを返す
-	 *
-	 * @return
-	 */
-	public boolean isReady();
+public interface IDUMOController {
+	public void onIdumoStart();
+	
+	public void onIdumoStop();
 }

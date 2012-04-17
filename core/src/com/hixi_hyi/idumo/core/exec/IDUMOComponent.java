@@ -2,9 +2,8 @@ package com.hixi_hyi.idumo.core.exec;
 
 import java.util.Collection;
 
-import com.hixi_hyi.idumo.core.IDUMOController;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOParts;
+import com.hixi_hyi.idumo.core.parts.IDUMOPart;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
@@ -51,9 +50,9 @@ public abstract class IDUMOComponent {
 
 	/**
 	 * @param item
-	 * @see com.hixi_hyi.idumo.core.exec.IDUMOContainer#add(com.hixi_hyi.idumo.core.parts.IDUMOParts)
+	 * @see com.hixi_hyi.idumo.core.exec.IDUMOContainer#add(com.hixi_hyi.idumo.core.parts.IDUMOPart)
 	 */
-	public void add(IDUMOParts item) {
+	public void add(IDUMOPart item) {
 		container.add(item);
 	}
 

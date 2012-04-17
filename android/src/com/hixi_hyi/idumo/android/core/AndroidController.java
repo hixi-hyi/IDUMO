@@ -1,6 +1,6 @@
 package com.hixi_hyi.idumo.android.core;
 
-import com.hixi_hyi.idumo.core.IDUMOController;
+import com.hixi_hyi.idumo.core.exec.IDUMOController;
 
 /**
  * ApplicationのON/OFF時に必要な処理を書くためのインタフェース

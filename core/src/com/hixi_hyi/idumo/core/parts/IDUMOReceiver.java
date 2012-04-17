@@ -25,7 +25,7 @@ import com.hixi_hyi.idumo.core.exception.IDUMOException;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public interface IDUMOReceiver extends IDUMOParts {
+public interface IDUMOReceiver extends IDUMOPart {
 	/**
 	 * データを受け取るSender(Provider,Handlerに相当)をsetするメソッド
 	 * 

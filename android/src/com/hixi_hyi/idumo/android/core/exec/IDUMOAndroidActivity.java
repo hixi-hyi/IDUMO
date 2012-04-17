@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.os.Handler;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
-import com.hixi_hyi.idumo.core.IDUMOController;
-import com.hixi_hyi.idumo.core.IDUMOActivity;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
+import com.hixi_hyi.idumo.core.exec.IDUMOActivity;
+import com.hixi_hyi.idumo.core.exec.IDUMOController;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 
 public class IDUMOAndroidActivity implements IDUMOActivity, Runnable {

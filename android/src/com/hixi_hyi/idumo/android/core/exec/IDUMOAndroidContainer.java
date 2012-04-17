@@ -5,13 +5,13 @@ import java.util.Collection;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.core.exec.IDUMOContainer;
-import com.hixi_hyi.idumo.core.parts.IDUMOParts;
+import com.hixi_hyi.idumo.core.parts.IDUMOPart;
 
 public class IDUMOAndroidContainer extends IDUMOContainer {
 	private ArrayList<AndroidController>	androidControllers	= new ArrayList<AndroidController>();
 
 	@Override
-	public void add(IDUMOParts item) {
+	public void add(IDUMOPart item) {
 		super.add(item);
 		if (item instanceof AndroidController) {
 			androidControllers.add((AndroidController) item);
