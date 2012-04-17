@@ -33,7 +33,7 @@ public class LightProvider implements IDUMOSender, AndroidController {
 	}
 	
 	@Override
-	public IDUMOFlowingData getData() {
+	public IDUMOFlowingData get() {
 		IDUMOLogManager.log();
 		IDUMOFlowingData p = new IDUMOFlowingData();
 		p.add(light.getLight());

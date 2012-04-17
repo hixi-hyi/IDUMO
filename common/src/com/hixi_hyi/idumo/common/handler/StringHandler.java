@@ -23,8 +23,8 @@ public class StringHandler implements IDUMOSender, IDUMOReceiver {
 	}
 
 	@Override
-	public IDUMOFlowingData getData() {
-		if((Boolean)sender.getData().get(0)){
+	public IDUMOFlowingData get() {
+		if((Boolean)sender.get().get(0)){
 			return IDUMOFlowingData.generatePipeData(word);
 		}else{
 //			return IDUMOFlowingData.generatePipeData("");

@@ -43,12 +43,12 @@ public class SimpleRommbaCommandHandler implements IDUMOSender, IDUMOReceiver {
 	}
 
 	@Override
-	public IDUMOFlowingData getData() {
-		if(sender.getData()==null){
+	public IDUMOFlowingData get() {
+		if(sender.get()==null){
 			return null;
 		}
 		IDUMOLogManager.log();
-		String command = (String) sender.getData().get(0);
+		String command = (String) sender.get().get(0);
 		IDUMOFlowingData p = new IDUMOFlowingData();
 		if (false) {
 

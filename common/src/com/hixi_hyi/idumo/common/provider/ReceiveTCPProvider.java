@@ -109,7 +109,7 @@ public class ReceiveTCPProvider implements IDUMOSender, IDUMOController {
 	}
 
 	@Override
-	public IDUMOFlowingData getData() {
+	public IDUMOFlowingData get() {
 		IDUMOFlowingData p = new IDUMOFlowingData();
 		IDUMOLogManager.debug(p);
 		String s = strs.remove(0);

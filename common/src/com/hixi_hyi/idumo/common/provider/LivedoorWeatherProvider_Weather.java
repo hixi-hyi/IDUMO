@@ -30,7 +30,7 @@ public class LivedoorWeatherProvider_Weather implements IDUMOSender {
 	}
 	
 	@Override
-	public IDUMOFlowingData getData() {
+	public IDUMOFlowingData get() {
 		IDUMOLogManager.log();
 		System.out.println(weather.getWeather());
 		return IDUMOFlowingData.generatePipeData(weather.getWeather());

@@ -21,11 +21,11 @@ public class StringConcatHandler_Prefix implements IDUMOSender, IDUMOReceiver {
 	}
 	
 	@Override
-	public IDUMOFlowingData getData() {
+	public IDUMOFlowingData get() {
 		// LogUtil.d();
 		StringBuilder sb = new StringBuilder();
 		sb.append(fixWord);
-		for (Object o : provider.getData()) {
+		for (Object o : provider.get()) {
 			sb.append(o.toString());
 		}
 		IDUMOFlowingData p = new IDUMOFlowingData();

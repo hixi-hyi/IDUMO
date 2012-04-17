@@ -86,7 +86,7 @@ public class SendTCPReceiptor implements IDUMOReceiver, IDUMOController, IDUMORu
 		if (!sender.isReady()) {
 			return;
 		}
-		IDUMOFlowingData data = sender.getData();
+		IDUMOFlowingData data = sender.get();
 		if(data==null){
 			return ;
 		}

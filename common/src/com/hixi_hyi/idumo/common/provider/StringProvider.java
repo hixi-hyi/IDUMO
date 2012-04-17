@@ -30,7 +30,7 @@ public class StringProvider implements IDUMOSender {
 	}
 
 	@Override
-	public IDUMOFlowingData getData() {
+	public IDUMOFlowingData get() {
 		IDUMOLogManager.log();
 		IDUMOFlowingData pipes = new IDUMOFlowingData();
 		pipes.add(str);

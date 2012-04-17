@@ -42,7 +42,7 @@ public class CameraProvider implements SenderWithOption {
 	}
 	
 	@Override
-	public IDUMOFlowingData getData() {
+	public IDUMOFlowingData get() {
 		activity.setContentView(camera);
 		camera.takePicture();
 		return null;

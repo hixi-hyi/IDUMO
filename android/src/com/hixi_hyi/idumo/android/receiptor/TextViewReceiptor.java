@@ -40,10 +40,10 @@ public class TextViewReceiptor extends TextView implements IDUMOReceiver, IDUMOR
 		}
 		StringBuilder sb = new StringBuilder();
 		for (IDUMOSender sender : senders) {
-			if(sender.getData()==null){
+			if(sender.get()==null){
 				return;
 			}
-			for (Object o : sender.getData()) {
+			for (Object o : sender.get()) {
 				IDUMOLogManager.debug(o);
 				sb.append(o.toString());
 			}

@@ -29,7 +29,7 @@ public class SerialSendReceiptor implements IDUMORunnable, IDUMOReceiver, IDUMOC
 		if(!sender.isReady()){
 			return ;
 		}
-		IDUMOFlowingData data = sender.getData();
+		IDUMOFlowingData data = sender.get();
 		if(data==null){
 			return;
 		}

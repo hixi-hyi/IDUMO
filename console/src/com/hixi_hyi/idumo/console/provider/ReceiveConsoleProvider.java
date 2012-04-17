@@ -33,7 +33,7 @@ public class ReceiveConsoleProvider implements IDUMOSender {
 	}
 
 	@Override
-	public IDUMOFlowingData getData() {
+	public IDUMOFlowingData get() {
 		IDUMOFlowingData p = new IDUMOFlowingData();
 		try {
 			p.add(br.readLine());

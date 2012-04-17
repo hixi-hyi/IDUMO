@@ -33,7 +33,7 @@ public class AccelerometerProvider_Y implements IDUMOSender, AndroidController {
 	}
 	
 	@Override
-	public IDUMOFlowingData getData() {
+	public IDUMOFlowingData get() {
 		IDUMOLogManager.log();
 		IDUMOFlowingData p = new IDUMOFlowingData();
 		p.add(accel.getY());

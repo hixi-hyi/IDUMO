@@ -33,7 +33,7 @@ public class ImageViewReceiptor extends ImageView implements IDUMOReceiver, IDUM
 
 	@Override
 	public void run() {
-		IDUMOFlowingData p = sender.getData();
+		IDUMOFlowingData p = sender.get();
 		Bitmap image = (Bitmap) p.get(0);
 		setImageBitmap(image);
 	}

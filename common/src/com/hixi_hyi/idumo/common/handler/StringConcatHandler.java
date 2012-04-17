@@ -42,13 +42,13 @@ public class StringConcatHandler implements SenderWithOption, IDUMOReceiver {
 	}
 	
 	@Override
-	public IDUMOFlowingData getData() {
+	public IDUMOFlowingData get() {
 		// LogUtil.d();
 		StringBuilder sb = new StringBuilder();
 		if (type == Type.PREFIX) {
 			sb.append(fixWord);
 		}
-		for (Object o : provider.getData()) {
+		for (Object o : provider.get()) {
 			sb.append(o.toString());
 		}
 		if (type == Type.SUFFIX) {

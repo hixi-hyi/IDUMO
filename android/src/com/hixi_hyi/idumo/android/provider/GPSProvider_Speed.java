@@ -34,7 +34,7 @@ public class GPSProvider_Speed implements IDUMOSender, AndroidController {
 	}
 	
 	@Override
-	public IDUMOFlowingData getData() {
+	public IDUMOFlowingData get() {
 		IDUMOLogManager.log();
 		if (!isReady()) {
 			return null;

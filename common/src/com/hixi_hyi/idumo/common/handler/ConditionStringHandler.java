@@ -40,8 +40,8 @@ public class ConditionStringHandler implements IDUMOSender, IDUMOReceiver {
 	}
 
 	@Override
-	public IDUMOFlowingData getData() {
-		String str = (String)sender.getData().get(0);
+	public IDUMOFlowingData get() {
+		String str = (String)sender.get().get(0);
 		if(condition.equals(str)){
 			return IDUMOFlowingData.generatePipeData(new Boolean(true));
 		}

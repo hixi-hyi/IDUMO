@@ -25,9 +25,9 @@ public class ReversedGeocordingHandler implements IDUMOSender, IDUMOReceiver {
 	private ReceiveValidatorType v2Type = new ReceiveValidatorType(2,Double.class);
 
 	@Override
-	public IDUMOFlowingData getData() {
-		double lat = (Double) senders.get(0).getData().get(0);
-		double lon = (Double) senders.get(1).getData().get(0);
+	public IDUMOFlowingData get() {
+		double lat = (Double) senders.get(0).get().get(0);
+		double lon = (Double) senders.get(1).get().get(0);
 
 		ReversedGeocording rg = new ReversedGeocording(lat, lon);
 

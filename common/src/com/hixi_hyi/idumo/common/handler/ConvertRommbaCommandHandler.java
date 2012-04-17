@@ -40,8 +40,8 @@ public class ConvertRommbaCommandHandler implements IDUMOSender, IDUMOReceiver {
 	}
 
 	@Override
-	public IDUMOFlowingData getData() {
-		String command = (String) sender.getData().get(0);
+	public IDUMOFlowingData get() {
+		String command = (String) sender.get().get(0);
 		IDUMOFlowingData p = new IDUMOFlowingData();
 		if(ConvertRoombaCommand.containsKey(command)){
 			p.add(ConvertRoombaCommand.getCommand(command));

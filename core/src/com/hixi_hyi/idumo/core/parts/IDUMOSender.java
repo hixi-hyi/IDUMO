@@ -42,5 +42,5 @@ public interface IDUMOSender extends IDUMOPart {
 	 *
 	 * @return
 	 */
-	public IDUMOFlowingData getData();
+	public IDUMOFlowingData get();
 }

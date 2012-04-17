@@ -24,7 +24,7 @@ public class ConsoleViewReceiptor_Bool implements IDUMOReceiver, IDUMORunnable {
 		if(!sender.isReady()){
 			return;
 		}
-		if((Boolean)sender.getData().get(0)){
+		if((Boolean)sender.get().get(0)){
 			System.out.println("OK");
 		}else{
 			System.out.println("NG");

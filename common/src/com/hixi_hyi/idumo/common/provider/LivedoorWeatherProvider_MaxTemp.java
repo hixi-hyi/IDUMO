@@ -50,7 +50,7 @@ public class LivedoorWeatherProvider_MaxTemp implements SenderWithOption {
 	}
 	
 	@Override
-	public IDUMOFlowingData getData() {
+	public IDUMOFlowingData get() {
 		IDUMOLogManager.log();
 		IDUMOFlowingData p = new IDUMOFlowingData();
 		switch (type) {

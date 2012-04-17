@@ -44,7 +44,7 @@ public class OrientationProvider_Pitch implements IDUMOSender, AndroidController
 	}
 	
 	@Override
-	public IDUMOFlowingData getData() {
+	public IDUMOFlowingData get() {
 		IDUMOLogManager.log();
 		IDUMOFlowingData p = new IDUMOFlowingData();
 		p.add(sensor.getPitch());

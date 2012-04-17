@@ -36,10 +36,10 @@ public class StringConcatHandler_Suffix implements IDUMOSender,IDUMOReceiver{
 	}
 	
 	@Override
-	public IDUMOFlowingData getData() {
+	public IDUMOFlowingData get() {
 		// LogUtil.d();
 		StringBuilder sb = new StringBuilder();
-		for (Object o : provider.getData()) {
+		for (Object o : provider.get()) {
 			sb.append(o.toString());
 		}
 		sb.append(fixWord);

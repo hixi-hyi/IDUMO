@@ -64,7 +64,7 @@ public class OrientationProvider implements SenderWithOption, AndroidController 
 	}
 	
 	@Override
-	public IDUMOFlowingData getData() {
+	public IDUMOFlowingData get() {
 		IDUMOLogManager.log();
 		IDUMOFlowingData p = new IDUMOFlowingData();
 		switch (methodType) {

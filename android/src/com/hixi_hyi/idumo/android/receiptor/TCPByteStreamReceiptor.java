@@ -89,7 +89,7 @@ public class TCPByteStreamReceiptor implements IDUMOReceiver, AndroidController,
 	@Override
 	public void run() {
 		IDUMOLogManager.log();
-		IDUMOFlowingData data = sender.getData();
+		IDUMOFlowingData data = sender.get();
 		byte[] bytedata = new byte[data.size()];
 		int i = 0;
 		IDUMOLogManager.debug("size: " + data.size());

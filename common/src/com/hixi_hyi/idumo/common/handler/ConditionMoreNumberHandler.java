@@ -41,8 +41,8 @@ public class ConditionMoreNumberHandler implements IDUMOSender, IDUMOReceiver {
 	}
 
 	@Override
-	public IDUMOFlowingData getData() {
-		float d = (Float)sender.getData().get(0);
+	public IDUMOFlowingData get() {
+		float d = (Float)sender.get().get(0);
 		IDUMOLogManager.debug(d);
 		if(condition > d){
 			return IDUMOFlowingData.generatePipeData(new Boolean(true));

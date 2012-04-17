@@ -44,7 +44,7 @@ public class OrientationProvider_Azmuth implements IDUMOSender, AndroidControlle
 	}
 	
 	@Override
-	public IDUMOFlowingData getData() {
+	public IDUMOFlowingData get() {
 		IDUMOLogManager.log();
 		IDUMOFlowingData p = new IDUMOFlowingData();
 		p.add(sensor.getAzmuth());

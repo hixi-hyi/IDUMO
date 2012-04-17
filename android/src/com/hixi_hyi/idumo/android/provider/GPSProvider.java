@@ -52,7 +52,7 @@ public class GPSProvider implements SenderWithOption, AndroidController {
 	}
 	
 	@Override
-	public IDUMOFlowingData getData() {
+	public IDUMOFlowingData get() {
 		IDUMOLogManager.log();
 		if (!isReady()) {
 			return null;

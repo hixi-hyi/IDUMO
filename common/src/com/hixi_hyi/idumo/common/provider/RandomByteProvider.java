@@ -29,7 +29,7 @@ public class RandomByteProvider implements IDUMOSender {
 	}
 	
 	@Override
-	public IDUMOFlowingData getData() {
+	public IDUMOFlowingData get() {
 		// LogUtil.d();
 		IDUMOFlowingData pipes = new IDUMOFlowingData();
 		byte buf[] = new byte[1];

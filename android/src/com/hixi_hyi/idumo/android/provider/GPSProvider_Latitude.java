@@ -34,7 +34,7 @@ public class GPSProvider_Latitude implements IDUMOSender, AndroidController {
 	}
 	
 	@Override
-	public IDUMOFlowingData getData() {
+	public IDUMOFlowingData get() {
 		IDUMOLogManager.log();
 		if (!isReady()) {
 			return null;

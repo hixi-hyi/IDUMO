@@ -29,7 +29,7 @@ public class ConsoleViewReceiptor implements IDUMOReceiver, IDUMORunnable {
 		}
 		StringBuilder sb = new StringBuilder();
 		for (IDUMOSender sender : senders) {
-			for (Object o : sender.getData()) {
+			for (Object o : sender.get()) {
 				sb.append(o.toString());
 			}
 			sb.append("\n");
