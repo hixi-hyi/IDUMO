@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.IDUMOController;
@@ -13,11 +14,12 @@ import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
-public class SerialSendReceiptor implements IDUMORunnable, IDUMOReceiver, IDUMOController {
+public class SerialSendReceiptor implements IDUMORunnable, IDUMOReceiver,
+		IDUMOController {
 
-	private OutputStream	out;
-	private IDUMOSender			sender;
-	private String			serial;
+	private OutputStream out;
+	private IDUMOSender sender;
+	private String serial;
 
 	public SerialSendReceiptor(String serial) {
 		this.serial = serial;
@@ -26,11 +28,11 @@ public class SerialSendReceiptor implements IDUMORunnable, IDUMOReceiver, IDUMOC
 	@Override
 	public void run() {
 		IDUMOLogManager.log();
-		if(!sender.isReady()){
-			return ;
+		if (!sender.isReady()) {
+			return;
 		}
-		IDUMOFlowingData data = sender.get();
-		if(data==null){
+		IDUMOFlowingData data = sender.onCall();
+		if (data == null) {
 			return;
 		}
 		byte[] bytedata = new byte[data.size()];
@@ -61,11 +63,11 @@ public class SerialSendReceiptor implements IDUMORunnable, IDUMOReceiver, IDUMOC
 		if (senders.length != 1) {
 			return false;
 		}
-		for (Object o : senders[0].getDataType()) {
-			if (o != Byte.class) {
-				return false;
-			}
-		}
+		// for (Object o : senders[0].getDataType()) {
+		// if (o != Byte.class) {
+		// return false;
+		// }
+		// }
 		this.sender = senders[0];
 		return true;
 	}
@@ -86,6 +88,12 @@ public class SerialSendReceiptor implements IDUMORunnable, IDUMOReceiver, IDUMOC
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public Class<? extends IDUMOData> receivableType() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 
 }

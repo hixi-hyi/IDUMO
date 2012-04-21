@@ -17,31 +17,25 @@
  */
 package com.hixi_hyi.idumo.core.validator;
 
-import java.util.List;
-
+import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 
 public class ReceiveValidatorType implements ReceiveValidator {
 
-	private int num ;
-	private Class<?>[] classes;
+	private int num;
+	private Class<? extends IDUMOData> cls;
 
-	public ReceiveValidatorType(int num,Class<?>...classes) {
-		this.num = num-1;
-		this.classes = classes;
+	public ReceiveValidatorType(int num, Class<? extends IDUMOData> cls) {
+		this.num = num - 1;
+		this.cls = cls;
 	}
 
 	@Override
-	public void validate(IDUMOSender...senders) throws IDUMOException{
-		List<Class<?>> type = senders[num].getDataType();
-		if(type.size()!=classes.length){
+	public void validate(IDUMOSender... senders) throws IDUMOException {
+		Class<? extends IDUMOData> type = senders[num].sendableType();
+		if (cls != type) {
 			throw new IDUMOException();
-		}
-		for(int i=0;i<type.size();i++){
-			if(classes[i]!=type.get(i)){
-				throw new IDUMOException();
-			}
 		}
 		return;
 	}

@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.widget.TextView;
 
+import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
@@ -20,7 +21,7 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 public class TextViewReceiptor extends TextView implements IDUMOReceiver, IDUMORunnable {
 	
 	private ArrayList<IDUMOSender>	senders;
-	private Activity			activity;
+	private Activity				activity;
 	
 	public TextViewReceiptor(Context context) {
 		super(context);
@@ -40,10 +41,10 @@ public class TextViewReceiptor extends TextView implements IDUMOReceiver, IDUMOR
 		}
 		StringBuilder sb = new StringBuilder();
 		for (IDUMOSender sender : senders) {
-			if(sender.get()==null){
+			if (sender.onCall() == null) {
 				return;
 			}
-			for (Object o : sender.get()) {
+			for (Object o : sender.onCall()) {
 				IDUMOLogManager.debug(o);
 				sb.append(o.toString());
 			}
@@ -76,6 +77,12 @@ public class TextViewReceiptor extends TextView implements IDUMOReceiver, IDUMOR
 			}
 		}
 		return true;
+	}
+	
+	@Override
+	public Class<? extends IDUMOData> receivableType() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 	
 }

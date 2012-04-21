@@ -1,20 +1,15 @@
 package com.hixi_hyi.idumo.android.provider;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.SensorManager;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
+import com.hixi_hyi.idumo.android.data.IDUMOAndroidAccelerometerData;
 import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
-import com.hixi_hyi.idumo.core.OptionMethodType;
-import com.hixi_hyi.idumo.core.SenderWithOption;
+import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
-import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
@@ -23,23 +18,8 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class AccelerometerProvider implements SenderWithOption, AndroidController {
+public class AccelerometerProvider implements IDUMOSender, AndroidController {
 	
-	public enum Type implements OptionMethodType {
-		X("Get Accelerometer X"), Y("Get Accelerometer Y"), Z("Get Accelerometer Z");
-		private final String	description;
-		
-		Type(String description) {
-			this.description = description;
-		}
-		
-		@Override
-		public String getDescription() {
-			return description;
-		}
-	}
-	
-	private Type				methodType;
 	private AccelerometerSensor	accel;
 	
 	public AccelerometerProvider(Activity activity) {
@@ -52,39 +32,12 @@ public class AccelerometerProvider implements SenderWithOption, AndroidControlle
 	}
 	
 	@Override
-	public IDUMOFlowingData get() {
+	public IDUMOFlowingData onCall() {
 		IDUMOLogManager.log();
 		IDUMOFlowingData p = new IDUMOFlowingData();
-		switch (methodType) {
-			case X:
-				p.add(accel.getX());
-				break;
-			case Y:
-				p.add(accel.getY());
-				break;
-			case Z:
-				p.add(accel.getZ());
-				break;
-			default:
-				throw new IDUMORuntimeException();
-		}
+		IDUMOAndroidAccelerometerData data = new IDUMOAndroidAccelerometerData(accel.getX(), accel.getY(), accel.getZ());
+		p.add(data);
 		return p;
-	}
-	
-	@Override
-	public List<Class<?>> getDataType() {
-		ArrayList<Class<?>> type = new ArrayList<Class<?>>();
-		type.add(Float.class);
-		return type;
-	}
-	
-	@Override
-	public Map<String, String> getOptions() {
-		Map<String, String> map = new HashMap<String, String>();
-		for (OptionMethodType t : Type.values()) {
-			map.put(t.toString(), t.getDescription());
-		}
-		return map;
 	}
 	
 	@Override
@@ -115,12 +68,8 @@ public class AccelerometerProvider implements SenderWithOption, AndroidControlle
 	public void onIdumoStop() {}
 	
 	@Override
-	public void setOption(OptionMethodType type) {
-		if (type instanceof Type) {
-			methodType = (Type) type;
-		} else {
-			throw new IDUMORuntimeException();
-		}
+	public Class<? extends IDUMOData> sendableType() {
+		return IDUMOAndroidAccelerometerData.class;
 	}
 	
 }

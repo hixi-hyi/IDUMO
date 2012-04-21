@@ -26,14 +26,14 @@ class RommbaCommandComponent extends IDUMOComponent {
 		add(provider);
 		ConvertRommbaCommandHandler converter = new ConvertRommbaCommandHandler();
 		add(converter);
-//		ConsoleViewReceiptor console = new ConsoleViewReceiptor();
-//		add(console);
+		// ConsoleViewReceiptor console = new ConsoleViewReceiptor();
+		// add(console);
 		SerialSendReceiptor serial = new SerialSendReceiptor("/dev/stdout");
 		add(serial);
 
 		connect(provider, converter);
-		connect(converter,serial);
-//		connect(converter,console);
+		connect(converter, serial);
+		// connect(converter,console);
 
 	}
 

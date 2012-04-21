@@ -1,9 +1,9 @@
 package com.hixi_hyi.idumo.common.handler;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.hixi_hyi.idumo.common.component.ConvertRoombaCommand;
+import com.hixi_hyi.idumo.common.data.IDUMONumberData;
+import com.hixi_hyi.idumo.common.data.IDUMOStringData;
+import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
@@ -13,11 +13,13 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
 public class ConvertRommbaCommandHandler implements IDUMOSender, IDUMOReceiver {
 
-	private IDUMOSender	sender;
+	private IDUMOSender sender;
 	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
-	private ReceiveValidatorType vType = new ReceiveValidatorType(1,String.class); 
+	private ReceiveValidatorType vType = new ReceiveValidatorType(1,
+			IDUMOStringData.class);
 
-	public ConvertRommbaCommandHandler() {}
+	public ConvertRommbaCommandHandler() {
+	}
 
 	@Override
 	public boolean isReady() {
@@ -33,20 +35,24 @@ public class ConvertRommbaCommandHandler implements IDUMOSender, IDUMOReceiver {
 	}
 
 	@Override
-	public List<Class<?>> getDataType() throws IDUMOException {
-		List<Class<?>> type = new ArrayList<Class<?>>();
-		type.add(Byte.class);
-		return type;
+	public IDUMOFlowingData onCall() {
+		IDUMOStringData data = (IDUMOStringData) sender.onCall().next();
+		String command = data.getString();
+		IDUMOFlowingData p = new IDUMOFlowingData();
+		if (ConvertRoombaCommand.containsKey(command)) {
+			p.add(new IDUMONumberData(ConvertRoombaCommand.getCommand(command)));
+		}
+		return p;
 	}
 
 	@Override
-	public IDUMOFlowingData get() {
-		String command = (String) sender.get().get(0);
-		IDUMOFlowingData p = new IDUMOFlowingData();
-		if(ConvertRoombaCommand.containsKey(command)){
-			p.add(ConvertRoombaCommand.getCommand(command));
-		}
-		return p;
+	public Class<? extends IDUMOData> receivableType() {
+		return IDUMOStringData.class;
+	}
+
+	@Override
+	public Class<? extends IDUMOData> sendableType() {
+		return IDUMONumberData.class;
 	}
 
 }

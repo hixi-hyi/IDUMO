@@ -1,23 +1,17 @@
 package com.hixi_hyi.idumo.android.provider;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.SensorManager;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
+import com.hixi_hyi.idumo.android.data.IDUMOAndroidOrientationData;
 import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
 import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
 import com.hixi_hyi.idumo.android.sensor.OrientationSensor;
-import com.hixi_hyi.idumo.core.OptionMethodType;
-import com.hixi_hyi.idumo.core.SenderWithOption;
+import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
-import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
@@ -26,23 +20,8 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class OrientationProvider implements SenderWithOption, AndroidController {
+public class OrientationProvider implements IDUMOSender, AndroidController {
 	
-	public enum Type implements OptionMethodType {
-		PITCH("Get ORIENTATION"), AZMUTH("Get ORIENTATION"), ROLL("Get ORIENTATION");
-		private final String	description;
-		
-		Type(String description) {
-			this.description = description;
-		}
-		
-		@Override
-		public String getDescription() {
-			return description;
-		}
-	}
-	
-	private Type				methodType;
 	private OrientationSensor	sensor;
 	
 	public OrientationProvider(Activity activity) {
@@ -64,39 +43,11 @@ public class OrientationProvider implements SenderWithOption, AndroidController 
 	}
 	
 	@Override
-	public IDUMOFlowingData get() {
+	public IDUMOFlowingData onCall() {
 		IDUMOLogManager.log();
 		IDUMOFlowingData p = new IDUMOFlowingData();
-		switch (methodType) {
-			case PITCH:
-				p.add(sensor.getPitch());
-				break;
-			case ROLL:
-				p.add(sensor.getRoll());
-				break;
-			case AZMUTH:
-				p.add(sensor.getAzmuth());
-				break;
-			default:
-				throw new IDUMORuntimeException();
-		}
+		p.add(new IDUMOAndroidOrientationData(sensor.getPitch(), sensor.getRoll(), sensor.getAzmuth()));
 		return p;
-	}
-	
-	@Override
-	public List<Class<?>> getDataType() {
-		ArrayList<Class<?>> type = new ArrayList<Class<?>>();
-		type.add(Float.class);
-		return type;
-	}
-	
-	@Override
-	public Map<String, String> getOptions() {
-		Map<String, String> map = new HashMap<String, String>();
-		for (OptionMethodType t : Type.values()) {
-			map.put(t.toString(), t.getDescription());
-		}
-		return map;
 	}
 	
 	@Override
@@ -127,11 +78,8 @@ public class OrientationProvider implements SenderWithOption, AndroidController 
 	public void onIdumoStop() {}
 	
 	@Override
-	public void setOption(OptionMethodType type) throws IDUMOException {
-		if (type instanceof Type) {
-			methodType = (Type) type;
-		} else {
-			throw new IDUMOException();
-		}
+	public Class<? extends IDUMOData> sendableType() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 }

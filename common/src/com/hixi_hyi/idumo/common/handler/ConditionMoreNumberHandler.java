@@ -1,8 +1,8 @@
 package com.hixi_hyi.idumo.common.handler;
 
-import java.util.List;
-
-import com.hixi_hyi.idumo.core.data.DataType;
+import com.hixi_hyi.idumo.common.data.IDUMOBoolData;
+import com.hixi_hyi.idumo.common.data.IDUMONumberData;
+import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
@@ -16,7 +16,8 @@ public class ConditionMoreNumberHandler implements IDUMOSender, IDUMOReceiver {
 	private IDUMOSender sender;
 	private float condition;
 	private ReceiveValidatorSize validator = new ReceiveValidatorSize(1);
-	private ReceiveValidatorType vType = new ReceiveValidatorType(1,Float.class);
+	private ReceiveValidatorType vType = new ReceiveValidatorType(1,
+			IDUMONumberData.class);
 
 	public ConditionMoreNumberHandler(float condition) {
 		this.condition = condition;
@@ -36,17 +37,23 @@ public class ConditionMoreNumberHandler implements IDUMOSender, IDUMOReceiver {
 	}
 
 	@Override
-	public List<Class<?>> getDataType() throws IDUMOException {
-		return DataType.generateDataType(Boolean.class);
+	public IDUMOFlowingData onCall() {
+		IDUMONumberData number = (IDUMONumberData) sender.onCall().next();
+		double d = number.getNumber();
+		IDUMOLogManager.debug(d);
+		if (condition > d) {
+			return IDUMOFlowingData.generatePipeData(new IDUMOBoolData(true));
+		}
+		return IDUMOFlowingData.generatePipeData(new IDUMOBoolData(false));
 	}
 
 	@Override
-	public IDUMOFlowingData get() {
-		float d = (Float)sender.get().get(0);
-		IDUMOLogManager.debug(d);
-		if(condition > d){
-			return IDUMOFlowingData.generatePipeData(new Boolean(true));
-		}
-		return IDUMOFlowingData.generatePipeData(new Boolean(false));
+	public Class<? extends IDUMOData> receivableType() {
+		return IDUMONumberData.class;
+	}
+
+	@Override
+	public Class<? extends IDUMOData> sendableType() {
+		return IDUMOBoolData.class;
 	}
 }

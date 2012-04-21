@@ -21,8 +21,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.hixi_hyi.idumo.android.core.util.IDUMOAndroidLogger;
 import com.hixi_hyi.idumo.android.core.util.DeployUtil;
+import com.hixi_hyi.idumo.android.core.util.IDUMOAndroidLogger;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 //import com.hixi_hyi.idumo.android.core.util.IDUMOAndroidLogger;
@@ -31,13 +31,13 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * @author Hiroyoshi HOUCHI
- *
+ * 
  */
 public class Idumo extends ListActivity {
 
-	public static String		TAG				= "Idumo";
-	private final static String	MY_CATEGORY		= "android.intent.category.IDUMO_SAMPLES";
-	private final static String	CATEGORY_PATH	= "com.hixi_hyi.idumo.android.Path";
+	public static String TAG = "Idumo";
+	private final static String MY_CATEGORY = "android.intent.category.IDUMO_SAMPLES";
+	private final static String CATEGORY_PATH = "com.hixi_hyi.idumo.android.Path";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -55,9 +55,10 @@ public class Idumo extends ListActivity {
 		if (path == null) {
 			path = "";
 		}
-//		IDUMOLogManager.debug(path);
+		// IDUMOLogManager.debug(path);
 		List<Action> data = getData(path);
-		ListAdapter adapter = new ArrayAdapter<Action>(this, android.R.layout.simple_list_item_1, data);
+		ListAdapter adapter = new ArrayAdapter<Action>(this,
+				android.R.layout.simple_list_item_1, data);
 		setListAdapter(adapter);
 		getListView().setTextFilterEnabled(true);
 	}
@@ -87,21 +88,29 @@ public class Idumo extends ListActivity {
 
 		for (ResolveInfo info : list) {
 			CharSequence labelSeq = info.loadLabel(pm);
-			String label = labelSeq != null ? labelSeq.toString() : info.activityInfo.name;
+			String label = labelSeq != null ? labelSeq.toString()
+					: info.activityInfo.name;
 
 			if ((prefix.length() == 0) || label.startsWith(prefix)) {
 
 				String[] labelPath = label.split("/");
 
-				String nextLabel = prefixPath == null ? labelPath[0] : labelPath[prefixPath.length];
+				String nextLabel = prefixPath == null ? labelPath[0]
+						: labelPath[prefixPath.length];
 
 				if ((prefixPath != null ? prefixPath.length : 0) == (labelPath.length - 1)) {
 					// 終点の場合
-					addItem(ActionData, nextLabel, activityIntent(info.activityInfo.applicationInfo.packageName, info.activityInfo.name));
+					addItem(ActionData,
+							nextLabel,
+							activityIntent(
+									info.activityInfo.applicationInfo.packageName,
+									info.activityInfo.name));
 				} else {
 					// 下位層があるばあい
 					if (entries.get(nextLabel) == null) {
-						addItem(ActionData, "[" + nextLabel + "]/", browseIntent(prefix.equals("") ? nextLabel : prefix + "/" + nextLabel));
+						addItem(ActionData, "[" + nextLabel + "]/",
+								browseIntent(prefix.equals("") ? nextLabel
+										: prefix + "/" + nextLabel));
 						entries.put(nextLabel, true);
 					}
 				}
@@ -113,14 +122,14 @@ public class Idumo extends ListActivity {
 		return ActionData;
 	}
 
-	private final static Comparator<Action>	sDisplayNameComparator	= new Comparator<Action>() {
-																		private final Collator	collator	= Collator.getInstance();
+	private final static Comparator<Action> sDisplayNameComparator = new Comparator<Action>() {
+		private final Collator collator = Collator.getInstance();
 
-																		@Override
-																		public int compare(Action map1, Action map2) {
-																			return collator.compare(map1.getTitle(), map2.getTitle());
-																		}
-																	};
+		@Override
+		public int compare(Action map1, Action map2) {
+			return collator.compare(map1.getTitle(), map2.getTitle());
+		}
+	};
 
 	protected Intent activityIntent(String pkg, String componentName) {
 		Intent result = new Intent();
@@ -146,8 +155,8 @@ public class Idumo extends ListActivity {
 	}
 
 	private class Action {
-		private String	title;
-		private Intent	intent;
+		private String title;
+		private Intent intent;
 
 		Action(String title, Intent intent) {
 			this.title = title;

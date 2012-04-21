@@ -1,17 +1,15 @@
 package com.hixi_hyi.idumo.android.provider;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 
 import com.hixi_hyi.idumo.android.sensor.CameraSensor;
 import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.SenderWithOption;
+import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
@@ -42,17 +40,10 @@ public class CameraProvider implements SenderWithOption {
 	}
 	
 	@Override
-	public IDUMOFlowingData get() {
+	public IDUMOFlowingData onCall() {
 		activity.setContentView(camera);
 		camera.takePicture();
 		return null;
-	}
-	
-	@Override
-	public List<Class<?>> getDataType() {
-		ArrayList<Class<?>> type = new ArrayList<Class<?>>();
-		type.add(Bitmap.class);
-		return type;
 	}
 	
 	@Override
@@ -77,6 +68,12 @@ public class CameraProvider implements SenderWithOption {
 		} else {
 			throw new IDUMOException();
 		}
+	}
+	
+	@Override
+	public Class<? extends IDUMOData> sendableType() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 	
 }

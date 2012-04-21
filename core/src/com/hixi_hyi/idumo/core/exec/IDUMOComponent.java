@@ -10,12 +10,12 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 
 public abstract class IDUMOComponent {
 
-	private IDUMOContainer			container	= null;
-	private IDUMOSetting	setting		= new IDUMOSetting();
-	private boolean					isReady;
-
+	private IDUMOContainer container = null;
+	private IDUMOSetting setting = new IDUMOSetting();
+	private boolean isReady;
 
 	abstract public void onIdumoMakeFlowChart() throws IDUMOException;
+
 	abstract public void onIdumoPrepare();
 
 	/**

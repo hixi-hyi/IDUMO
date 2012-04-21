@@ -2,6 +2,7 @@ package com.hixi_hyi.idumo.console.receiptor;
 
 import java.util.ArrayList;
 
+import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
@@ -13,13 +14,13 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSender;
  * 
  */
 public class ConsoleViewReceiptor implements IDUMOReceiver, IDUMORunnable {
-	
-	private ArrayList<IDUMOSender>	senders;
-	
+
+	private ArrayList<IDUMOSender> senders;
+
 	public ConsoleViewReceiptor() {
 		senders = new ArrayList<IDUMOSender>();
 	}
-	
+
 	@Override
 	public void run() {
 		for (IDUMOSender sender : senders) {
@@ -29,16 +30,16 @@ public class ConsoleViewReceiptor implements IDUMOReceiver, IDUMORunnable {
 		}
 		StringBuilder sb = new StringBuilder();
 		for (IDUMOSender sender : senders) {
-			for (Object o : sender.get()) {
+			for (Object o : sender.onCall()) {
 				sb.append(o.toString());
 			}
 			sb.append("\n");
 		}
-		
+
 		System.out.println(sb.toString());
-		
+
 	}
-	
+
 	@Override
 	public boolean setSender(IDUMOSender... handler) {
 		senders.clear();
@@ -47,7 +48,7 @@ public class ConsoleViewReceiptor implements IDUMOReceiver, IDUMORunnable {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean isReady() {
 		if (senders.size() == 0) {
@@ -60,5 +61,10 @@ public class ConsoleViewReceiptor implements IDUMOReceiver, IDUMORunnable {
 		}
 		return true;
 	}
-	
+
+	@Override
+	public Class<? extends IDUMOData> receivableType() {
+		return IDUMOData.class;
+	}
+
 }

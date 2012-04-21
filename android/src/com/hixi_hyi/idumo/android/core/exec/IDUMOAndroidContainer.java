@@ -9,7 +9,7 @@ import com.hixi_hyi.idumo.core.parts.IDUMOPart;
 
 public class IDUMOAndroidContainer extends IDUMOContainer {
 	private ArrayList<AndroidController>	androidControllers	= new ArrayList<AndroidController>();
-
+	
 	@Override
 	public void add(IDUMOPart item) {
 		super.add(item);
@@ -17,9 +17,9 @@ public class IDUMOAndroidContainer extends IDUMOContainer {
 			androidControllers.add((AndroidController) item);
 		}
 	}
-
+	
 	public Collection<AndroidController> getAndroidControllers() {
 		return androidControllers;
 	}
-
+	
 }

@@ -1,7 +1,6 @@
 package com.hixi_hyi.idumo.android.handler;
 
-import java.util.List;
-
+import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
@@ -11,35 +10,41 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 public class ThroughHandler implements IDUMOSender, IDUMOReceiver {
-
-	private IDUMOSender	provider;
-	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
-
+	
+	private IDUMOSender			provider;
+	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
+	
 	@Override
-	public IDUMOFlowingData get() {
+	public IDUMOFlowingData onCall() {
 		IDUMOLogManager.log();
 		if (!provider.isReady()) {
 			return null;
 		}
-		return provider.get();
+		return provider.onCall();
 	}
-
-	@Override
-	public List<Class<?>> getDataType() throws IDUMOException {
-		return provider.getDataType();
-	}
-
+	
 	@Override
 	public boolean setSender(IDUMOSender... provider) throws IDUMOException {
 		vSize.validate(provider);
 		this.provider = provider[0];
 		return true;
 	}
-
-
+	
 	@Override
 	public boolean isReady() {
 		return (provider != null) && provider.isReady();
 	}
-
+	
+	@Override
+	public Class<? extends IDUMOData> receivableType() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+	
+	@Override
+	public Class<? extends IDUMOData> sendableType() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+	
 }

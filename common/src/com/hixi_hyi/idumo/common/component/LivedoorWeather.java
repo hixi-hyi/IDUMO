@@ -7,6 +7,9 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 
+import com.hixi_hyi.idumo.common.data.IDUMOLivedoorWeatherData;
+import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
+
 /**
  * 今日の天気予報を取得することが出来るクラス．
  * 
@@ -19,52 +22,57 @@ import org.jdom.input.SAXBuilder;
  * 
  */
 public class LivedoorWeather {
-	
-	private static final String	REQUEST_URL_SEED	= "http://weather.livedoor.com/forecast/webservice/rest/v1?day=today&city=%d";
-	
-	private String				requestURL;
-	
-	private String				location;
-	private String				date;
-	private String				maxTemp;
-	private String				minTemp;
-	private String				weather;
-	private String				description;
-	
-	private boolean				isReady;
-	
+
+	private static final String REQUEST_URL_SEED = "http://weather.livedoor.com/forecast/webservice/rest/v1?day=today&city=%d";
+
+	private String requestURL;
+
+	private String location;
+	private String date;
+	private double maxTemp;
+	private double minTemp;
+	private String weather;
+	private String description;
+
+	private IDUMOLivedoorWeatherData data;
+
+	private boolean isReady;
+
 	public LivedoorWeather(int citynum) {
 		requestURL = String.format(REQUEST_URL_SEED, citynum);
 		init();
 	}
-	
+
 	public void init() {
 		Document doc = null;
 		try {
 			URL accessURL = new URL(requestURL);
 			URLConnection con = accessURL.openConnection();
 			doc = new SAXBuilder().build(con.getInputStream());
-			Element root = doc.getRootElement();
-			date = root.getChildText("forecastdate");
-			location = root.getChild("location").getAttributeValue("city");
-			weather = root.getChildText("telop");
-			description = root.getChildText("description");
-			maxTemp = root.getChild("temperature").getChild("max").getChildText("celsius");
-			minTemp = root.getChild("temperature").getChild("min").getChildText("celsius");
-			
-			isReady = true;
 		} catch (Exception e) {
-			
+			throw new IDUMORuntimeException(e);
 		}
+
+		Element root = doc.getRootElement();
+		date = root.getChildText("forecastdate");
+		location = root.getChild("location").getAttributeValue("city");
+		weather = root.getChildText("telop");
+		description = root.getChildText("description");
+		try {
+			maxTemp = Double.parseDouble(root.getChild("temperature")
+					.getChild("max").getChildText("celsius"));
+		} catch (Exception e) {
+		}
+		try {
+			minTemp = Double.parseDouble(root.getChild("temperature")
+					.getChild("min").getChildText("celsius"));
+		} catch (Exception e) {
+		}
+		data = new IDUMOLivedoorWeatherData(location, date, maxTemp, minTemp,
+				weather, description);
+		isReady = true;
 	}
-	
-	/**
-	 * @return location
-	 */
-	public String getLocation() {
-		return location;
-	}
-	
+
 	public boolean isReady() {
 		if (isReady) {
 			return true;
@@ -72,40 +80,9 @@ public class LivedoorWeather {
 		init();
 		return isReady;
 	}
-	
-	/**
-	 * @return date
-	 */
-	public String getDate() {
-		return date;
+
+	public IDUMOLivedoorWeatherData getData() {
+		return data;
 	}
-	
-	/**
-	 * @return maxTemp
-	 */
-	public String getMaxTemp() {
-		return maxTemp;
-	}
-	
-	/**
-	 * @return minTemp
-	 */
-	public String getMinTemp() {
-		return minTemp;
-	}
-	
-	/**
-	 * @return weather
-	 */
-	public String getWeather() {
-		return weather;
-	}
-	
-	/**
-	 * @return description
-	 */
-	public String getDescription() {
-		return description;
-	}
-	
+
 }

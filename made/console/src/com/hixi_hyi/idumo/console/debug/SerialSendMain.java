@@ -11,7 +11,7 @@ public class SerialSendMain extends IDUMOConsoleWrapper {
 	public void init() {
 		setExecutionWithComponent(new SerialSendComponent());
 	}
-	
+
 	public static void main(String[] args) {
 		SerialSendMain main = new SerialSendMain();
 		main.exec();
@@ -25,10 +25,10 @@ class SerialSendComponent extends IDUMOComponent {
 		add(provider);
 		SerialSendReceiptor serial = new SerialSendReceiptor("/dev/stdout");
 		add(serial);
-		
+
 		connect(provider, serial);
 	}
-	
+
 	@Override
 	public void onIdumoPrepare() {
 		setLoopCount(-1);

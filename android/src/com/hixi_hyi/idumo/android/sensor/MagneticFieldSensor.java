@@ -9,76 +9,76 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * 地磁気センサ
- *
+ * 
  * @author Hiroyoshi HOUCHI
- *
+ * 
  */
 public enum MagneticFieldSensor implements SensorEventListener {
-
+	
 	INSTANCE;
-
+	
 	private SensorManager	sensorManager;
 	private Sensor			sensor;
 	private int				accurary;
 	private float[]			magnet	= new float[3];
 	private boolean			isReady;
 	private boolean			isInit;
-
+	
 	/**
 	 * @return accurary
 	 */
 	public int getAccurary() {
 		return accurary;
 	}
-
+	
 	public float[] getMagneticField() {
 		return magnet;
 	}
-
+	
 	/**
 	 * @return x
 	 */
 	public float getX() {
 		return magnet[0];
 	}
-
+	
 	/**
 	 * @return y
 	 */
 	public float getY() {
 		return magnet[1];
 	}
-
+	
 	/**
 	 * @return z
 	 */
 	public float getZ() {
 		return magnet[2];
 	}
-
+	
 	public void init(SensorManager sensorManager) {
 		isInit = true;
 		this.sensorManager = sensorManager;
 	}
-
+	
 	public boolean isInit() {
 		return isInit;
 	}
-
+	
 	/**
 	 * @return isReady
 	 */
 	public boolean isReady() {
 		return isReady;
 	}
-
+	
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		if (sensor.getType() == useSensorType()) {
 			this.accurary = accuracy;
 		}
 	}
-
+	
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		IDUMOLogManager.log();
@@ -87,7 +87,7 @@ public enum MagneticFieldSensor implements SensorEventListener {
 			isReady = true;
 		}
 	}
-
+	
 	public void register() {
 		if (sensor == null) {
 			IDUMOLogManager.log();
@@ -95,7 +95,7 @@ public enum MagneticFieldSensor implements SensorEventListener {
 			sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI);
 		}
 	}
-
+	
 	public void unregister() {
 		if (sensor != null) {
 			IDUMOLogManager.log();
@@ -103,9 +103,9 @@ public enum MagneticFieldSensor implements SensorEventListener {
 			sensorManager.unregisterListener(this);
 		}
 	}
-
+	
 	public int useSensorType() {
 		return Sensor.TYPE_MAGNETIC_FIELD;
 	}
-
+	
 }

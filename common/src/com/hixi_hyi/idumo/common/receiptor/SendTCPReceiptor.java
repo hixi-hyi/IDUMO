@@ -8,6 +8,8 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import com.hixi_hyi.idumo.common.data.IDUMOStringData;
+import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.IDUMOController;
@@ -21,19 +23,21 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
 /**
  * バイト情報をTCP通信を用いて送ることが出来るReceiptor
- *
+ * 
  * @author Hiroyoshi HOUCHI
- *
+ * 
  */
-public class SendTCPReceiptor implements IDUMOReceiver, IDUMOController, IDUMORunnable {
-	private String			ip;
-	private int				port;
-	private Socket			socket;
-	private PrintWriter		pw;
-	private OutputStream	outstream;
-	private IDUMOSender			sender;
+public class SendTCPReceiptor implements IDUMOReceiver, IDUMOController,
+		IDUMORunnable {
+	private String ip;
+	private int port;
+	private Socket socket;
+	private PrintWriter pw;
+	private OutputStream outstream;
+	private IDUMOSender sender;
 	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
-	private ReceiveValidator vType = new ReceiveValidatorType(1,String.class);
+	private ReceiveValidator vType = new ReceiveValidatorType(1,
+			IDUMOStringData.class);
 
 	public SendTCPReceiptor(String ip, int port) {
 		IDUMOLogManager.log();
@@ -86,15 +90,21 @@ public class SendTCPReceiptor implements IDUMOReceiver, IDUMOController, IDUMORu
 		if (!sender.isReady()) {
 			return;
 		}
-		IDUMOFlowingData data = sender.get();
-		if(data==null){
-			return ;
+		IDUMOFlowingData data = sender.onCall();
+		if (data == null) {
+			return;
 		}
 		for (Object o : data) {
 			IDUMOLogManager.debug(o.toString());
 			pw.println(o.toString());
 			pw.flush();
 		}
+	}
+
+	@Override
+	public Class<? extends IDUMOData> receivableType() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 
 }

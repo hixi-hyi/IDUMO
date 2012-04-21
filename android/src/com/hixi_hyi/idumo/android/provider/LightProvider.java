@@ -1,14 +1,13 @@
 package com.hixi_hyi.idumo.android.provider;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.SensorManager;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
+import com.hixi_hyi.idumo.android.data.IDUMOAndroidLIghtData;
 import com.hixi_hyi.idumo.android.sensor.LightSensor;
+import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
@@ -33,18 +32,11 @@ public class LightProvider implements IDUMOSender, AndroidController {
 	}
 	
 	@Override
-	public IDUMOFlowingData get() {
+	public IDUMOFlowingData onCall() {
 		IDUMOLogManager.log();
 		IDUMOFlowingData p = new IDUMOFlowingData();
-		p.add(light.getLight());
+		p.add(new IDUMOAndroidLIghtData(light.getLight()));
 		return p;
-	}
-	
-	@Override
-	public List<Class<?>> getDataType() {
-		ArrayList<Class<?>> type = new ArrayList<Class<?>>();
-		type.add(Float.class);
-		return type;
 	}
 	
 	@Override
@@ -73,4 +65,10 @@ public class LightProvider implements IDUMOSender, AndroidController {
 	
 	@Override
 	public void onIdumoStop() {}
+	
+	@Override
+	public Class<? extends IDUMOData> sendableType() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 }

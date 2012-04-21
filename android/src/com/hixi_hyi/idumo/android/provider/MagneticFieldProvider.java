@@ -1,21 +1,15 @@
 package com.hixi_hyi.idumo.android.provider;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.SensorManager;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
+import com.hixi_hyi.idumo.android.data.IDUMOAndroidMagneticFieldData;
 import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
-import com.hixi_hyi.idumo.core.OptionMethodType;
-import com.hixi_hyi.idumo.core.SenderWithOption;
+import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
-import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
+import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
@@ -24,23 +18,8 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class MagneticFieldProvider implements SenderWithOption, AndroidController {
+public class MagneticFieldProvider implements IDUMOSender, AndroidController {
 	
-	public enum Type implements OptionMethodType {
-		X("Get MagneticFiled X"), Y("Get MagneticFiled Y"), Z("Get MagneticFiled Z");
-		private final String	description;
-		
-		Type(String description) {
-			this.description = description;
-		}
-		
-		@Override
-		public String getDescription() {
-			return description;
-		}
-	}
-	
-	private Type				methodType;
 	private MagneticFieldSensor	magnet;
 	
 	public MagneticFieldProvider(Activity activity) {
@@ -53,39 +32,12 @@ public class MagneticFieldProvider implements SenderWithOption, AndroidControlle
 	}
 	
 	@Override
-	public IDUMOFlowingData get() {
+	public IDUMOFlowingData onCall() {
 		IDUMOLogManager.log();
 		IDUMOFlowingData p = new IDUMOFlowingData();
-		switch (methodType) {
-			case X:
-				p.add(magnet.getX());
-				break;
-			case Y:
-				p.add(magnet.getY());
-				break;
-			case Z:
-				p.add(magnet.getZ());
-				break;
-			default:
-				throw new IDUMORuntimeException();
-		}
+		IDUMOAndroidMagneticFieldData data = new IDUMOAndroidMagneticFieldData(magnet.getX(), magnet.getY(), magnet.getZ());
+		p.add(data);
 		return p;
-	}
-	
-	@Override
-	public List<Class<?>> getDataType() {
-		ArrayList<Class<?>> type = new ArrayList<Class<?>>();
-		type.add(Float.class);
-		return type;
-	}
-	
-	@Override
-	public Map<String, String> getOptions() {
-		Map<String, String> map = new HashMap<String, String>();
-		for (OptionMethodType t : Type.values()) {
-			map.put(t.toString(), t.getDescription());
-		}
-		return map;
 	}
 	
 	@Override
@@ -116,12 +68,8 @@ public class MagneticFieldProvider implements SenderWithOption, AndroidControlle
 	public void onIdumoStop() {}
 	
 	@Override
-	public void setOption(OptionMethodType type) throws IDUMOException {
-		if (type instanceof Type) {
-			methodType = (Type) type;
-		} else {
-			throw new IDUMOException();
-		}
+	public Class<? extends IDUMOData> sendableType() {
+		return IDUMOAndroidMagneticFieldData.class;
 	}
 	
 }

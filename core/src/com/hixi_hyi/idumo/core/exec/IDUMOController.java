@@ -19,6 +19,6 @@ package com.hixi_hyi.idumo.core.exec;
 
 public interface IDUMOController {
 	public void onIdumoStart();
-	
+
 	public void onIdumoStop();
 }

@@ -1,17 +1,16 @@
 package com.hixi_hyi.idumo.common.provider;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.hixi_hyi.idumo.common.data.IDUMOStringData;
+import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * ランダムなバイト情報を送るためのProvider(DebugClass)
- *
+ * 
  * @author Hiroyoshi HOUCHI
- *
+ * 
  */
 public class StringProvider implements IDUMOSender {
 
@@ -23,23 +22,21 @@ public class StringProvider implements IDUMOSender {
 	}
 
 	@Override
-	public List<Class<?>> getDataType() {
-		ArrayList<Class<?>> types = new ArrayList<Class<?>>();
-		types.add(String.class);
-		return types;
-	}
-
-	@Override
-	public IDUMOFlowingData get() {
+	public IDUMOFlowingData onCall() {
 		IDUMOLogManager.log();
 		IDUMOFlowingData pipes = new IDUMOFlowingData();
-		pipes.add(str);
+		pipes.add(new IDUMOStringData(str));
 		return pipes;
 	}
 
 	@Override
 	public boolean isReady() {
 		return true;
+	}
+
+	@Override
+	public Class<? extends IDUMOData> sendableType() {
+		return IDUMOStringData.class;
 	}
 
 }

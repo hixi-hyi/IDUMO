@@ -31,13 +31,14 @@ class TCP2RommbaComponent extends IDUMOComponent {
 		ConvertRommbaCommandHandler converter = new ConvertRommbaCommandHandler();
 		add(converter);
 		SerialSendReceiptor serial = new SerialSendReceiptor("/dev/stdout");
-//		SerialSendReceiptor serial = new SerialSendReceiptor("/dev/tty.ESD200v117-0CC2EC-Gener");
+		// SerialSendReceiptor serial = new
+		// SerialSendReceiptor("/dev/tty.ESD200v117-0CC2EC-Gener");
 		add(serial);
-//		ConsoleViewReceiptor receiptor = new ConsoleViewReceiptor();
-//		add(receiptor);
+		// ConsoleViewReceiptor receiptor = new ConsoleViewReceiptor();
+		// add(receiptor);
 		connect(provider, converter);
-		connect(converter,serial);
-//		connect(converter,receiptor);
+		connect(converter, serial);
+		// connect(converter,receiptor);
 
 	}
 

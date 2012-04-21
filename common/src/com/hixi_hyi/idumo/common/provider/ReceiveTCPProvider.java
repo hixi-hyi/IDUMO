@@ -7,27 +7,27 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.List;
 
+import com.hixi_hyi.idumo.common.data.IDUMOStringData;
+import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
-import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.IDUMOController;
 import com.hixi_hyi.idumo.core.parts.IDUMOSender;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * バイト情報を受け取ることが出来るProvider
- *
+ * 
  * @author Hiroyoshi HOUCHI
- *
+ * 
  */
 public class ReceiveTCPProvider implements IDUMOSender, IDUMOController {
-	private int					port;
-	private Socket				socket;
-	private BufferedReader		br;
-	private InputStream			in;
-	private ArrayList<String>	strs;
-	private AcceptServer		server;
+	private int port;
+	private Socket socket;
+	private BufferedReader br;
+	private InputStream in;
+	private ArrayList<String> strs;
+	private AcceptServer server;
 
 	public ReceiveTCPProvider(int port) {
 		this.port = port;
@@ -46,7 +46,7 @@ public class ReceiveTCPProvider implements IDUMOSender, IDUMOController {
 		if (server.getSocket() == null) {
 			IDUMOLogManager.debug("null");
 			socket = null;
-			if(!server.bool){
+			if (!server.bool) {
 				new Thread(server).start();
 			}
 			return false;
@@ -102,28 +102,22 @@ public class ReceiveTCPProvider implements IDUMOSender, IDUMOController {
 	}
 
 	@Override
-	public List<Class<?>> getDataType() throws IDUMOException {
-		List<Class<?>> type = new ArrayList<Class<?>>();
-		type.add(String.class);
-		return type;
-	}
-
-	@Override
-	public IDUMOFlowingData get() {
+	public IDUMOFlowingData onCall() {
 		IDUMOFlowingData p = new IDUMOFlowingData();
 		IDUMOLogManager.debug(p);
 		String s = strs.remove(0);
-		p.add(s);
+		p.add(new IDUMOStringData(s));
 		server.restart();
 		return p;
 	}
 
 	class AcceptServer implements Runnable {
 
-		int				port;
-		ServerSocket	server;
-		Socket			socket;
-		boolean         bool;
+		int port;
+		ServerSocket server;
+		Socket socket;
+		boolean bool;
+
 		public AcceptServer(int port) throws IOException {
 			this.port = port;
 			server = new ServerSocket(port);
@@ -163,5 +157,11 @@ public class ReceiveTCPProvider implements IDUMOSender, IDUMOController {
 			new Thread(this).start();
 		}
 
+	}
+
+	@Override
+	public Class<? extends IDUMOData> sendableType() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 }

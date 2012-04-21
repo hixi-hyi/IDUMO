@@ -20,28 +20,27 @@ package com.hixi_hyi.idumo.core.data;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
-public class IDUMOFlowingData implements Iterable<Object> {
-	private ArrayList<Object>	datalist;
+public class IDUMOFlowingData implements Iterable<IDUMOData> {
+	private ArrayList<IDUMOData> datalist;
 	{
-		datalist = new ArrayList<Object>();
+		datalist = new ArrayList<IDUMOData>();
 	}
 
-	public static IDUMOFlowingData generatePipeData(Object...objects){
+	public static IDUMOFlowingData generatePipeData(IDUMOData... objects) {
 		return new IDUMOFlowingData(objects);
 	}
 
-	public IDUMOFlowingData() {}
+	public IDUMOFlowingData() {
+	}
 
-	public IDUMOFlowingData(Object... objects) {
-		for (Object o : objects) {
+	public IDUMOFlowingData(IDUMOData... objects) {
+		for (IDUMOData o : objects) {
 			datalist.add(o);
 		}
 	}
 
-	public Collection<Object> getData() {
+	public Collection<IDUMOData> getData() {
 		return datalist;
 	}
 
@@ -53,98 +52,13 @@ public class IDUMOFlowingData implements Iterable<Object> {
 		return types;
 	}
 
-	// public Object poll() {
-	// return remove(0);
-	// }
-
-	/**
-	 * @param index
-	 * @param object
-	 * @see java.util.ArrayList#add(int, java.lang.Object)
-	 */
-	public void add(int index, Object object) {
-		datalist.add(index, object);
-	}
-
 	/**
 	 * @param object
 	 * @return
 	 * @see java.util.ArrayList#add(java.lang.Object)
 	 */
-	public boolean add(Object object) {
+	public boolean add(IDUMOData object) {
 		return datalist.add(object);
-	}
-
-	/**
-	 * @param collection
-	 * @return
-	 * @see java.util.ArrayList#addAll(java.util.Collection)
-	 */
-	public boolean addAll(Collection<? extends Object> collection) {
-		return datalist.addAll(collection);
-	}
-
-	/**
-	 * @param index
-	 * @param collection
-	 * @return
-	 * @see java.util.ArrayList#addAll(int, java.util.Collection)
-	 */
-	public boolean addAll(int index, Collection<? extends Object> collection) {
-		return datalist.addAll(index, collection);
-	}
-
-	/**
-	 *
-	 * @see java.util.ArrayList#clear()
-	 */
-	public void clear() {
-		datalist.clear();
-	}
-
-	/**
-	 * @return
-	 * @see java.util.ArrayList#clone()
-	 */
-	@Override
-	public Object clone() {
-		return datalist.clone();
-	}
-
-	/**
-	 * @param object
-	 * @return
-	 * @see java.util.ArrayList#contains(java.lang.Object)
-	 */
-	public boolean contains(Object object) {
-		return datalist.contains(object);
-	}
-
-	/**
-	 * @param collection
-	 * @return
-	 * @see java.util.AbstractCollection#containsAll(java.util.Collection)
-	 */
-	public boolean containsAll(Collection<?> collection) {
-		return datalist.containsAll(collection);
-	}
-
-	/**
-	 * @param minimumCapacity
-	 * @see java.util.ArrayList#ensureCapacity(int)
-	 */
-	public void ensureCapacity(int minimumCapacity) {
-		datalist.ensureCapacity(minimumCapacity);
-	}
-
-	/**
-	 * @param o
-	 * @return
-	 * @see java.util.ArrayList#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object o) {
-		return datalist.equals(o);
 	}
 
 	/**
@@ -152,115 +66,8 @@ public class IDUMOFlowingData implements Iterable<Object> {
 	 * @return
 	 * @see java.util.ArrayList#get(int)
 	 */
-	public Object get(int index) {
+	public IDUMOData get(int index) {
 		return datalist.get(index);
-	}
-
-	/**
-	 * @return
-	 * @see java.util.ArrayList#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		return datalist.hashCode();
-	}
-
-	/**
-	 * @param object
-	 * @return
-	 * @see java.util.ArrayList#indexOf(java.lang.Object)
-	 */
-	public int indexOf(Object object) {
-		return datalist.indexOf(object);
-	}
-
-	/**
-	 * @return
-	 * @see java.util.ArrayList#isEmpty()
-	 */
-	public boolean isEmpty() {
-		return datalist.isEmpty();
-	}
-
-	/**
-	 * @return
-	 * @see java.util.ArrayList#iterator()
-	 */
-	@Override
-	public Iterator<Object> iterator() {
-		return datalist.iterator();
-	}
-
-	/**
-	 * @param object
-	 * @return
-	 * @see java.util.ArrayList#lastIndexOf(java.lang.Object)
-	 */
-	public int lastIndexOf(Object object) {
-		return datalist.lastIndexOf(object);
-	}
-
-	/**
-	 * @return
-	 * @see java.util.AbstractList#listIterator()
-	 */
-	public ListIterator<Object> listIterator() {
-		return datalist.listIterator();
-	}
-
-	/**
-	 * @param location
-	 * @return
-	 * @see java.util.AbstractList#listIterator(int)
-	 */
-	public ListIterator<Object> listIterator(int location) {
-		return datalist.listIterator(location);
-	}
-
-	/**
-	 * @param index
-	 * @return
-	 * @see java.util.ArrayList#remove(int)
-	 */
-	public Object remove(int index) {
-		return datalist.remove(index);
-	}
-
-	/**
-	 * @param object
-	 * @return
-	 * @see java.util.ArrayList#remove(java.lang.Object)
-	 */
-	public boolean remove(Object object) {
-		return datalist.remove(object);
-	}
-
-	/**
-	 * @param collection
-	 * @return
-	 * @see java.util.AbstractCollection#removeAll(java.util.Collection)
-	 */
-	public boolean removeAll(Collection<?> collection) {
-		return datalist.removeAll(collection);
-	}
-
-	/**
-	 * @param collection
-	 * @return
-	 * @see java.util.AbstractCollection#retainAll(java.util.Collection)
-	 */
-	public boolean retainAll(Collection<?> collection) {
-		return datalist.retainAll(collection);
-	}
-
-	/**
-	 * @param index
-	 * @param object
-	 * @return
-	 * @see java.util.ArrayList#set(int, java.lang.Object)
-	 */
-	public Object set(int index, Object object) {
-		return datalist.set(index, object);
 	}
 
 	/**
@@ -272,34 +79,6 @@ public class IDUMOFlowingData implements Iterable<Object> {
 	}
 
 	/**
-	 * @param start
-	 * @param end
-	 * @return
-	 * @see java.util.AbstractList#subList(int, int)
-	 */
-	public List<Object> subList(int start, int end) {
-		return datalist.subList(start, end);
-	}
-
-	/**
-	 * @return
-	 * @see java.util.ArrayList#toArray()
-	 */
-	public Object[] toArray() {
-		return datalist.toArray();
-	}
-
-	/**
-	 * @param <T>
-	 * @param contents
-	 * @return
-	 * @see java.util.ArrayList#toArray(T[])
-	 */
-	public <T> T[] toArray(T[] contents) {
-		return datalist.toArray(contents);
-	}
-
-	/**
 	 * @return
 	 * @see java.util.AbstractCollection#toString()
 	 */
@@ -308,12 +87,13 @@ public class IDUMOFlowingData implements Iterable<Object> {
 		return datalist.toString();
 	}
 
-	/**
-	 *
-	 * @see java.util.ArrayList#trimToSize()
-	 */
-	public void trimToSize() {
-		datalist.trimToSize();
+	@Override
+	public Iterator<IDUMOData> iterator() {
+		return datalist.iterator();
+	}
+
+	public IDUMOData next() {
+		return datalist.remove(0);
 	}
 
 }

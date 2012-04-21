@@ -11,22 +11,22 @@ import com.hixi_hyi.idumo.core.exec.IDUMOController;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 
 public class IDUMOAndroidActivity implements IDUMOActivity, Runnable {
-
+	
 	private IDUMOAndroidComponent	component;
-	private Handler								handler	= new Handler();
-
+	private Handler					handler	= new Handler();
+	
 	public IDUMOAndroidActivity(IDUMOAndroidComponent component) {
 		this.component = component;
 		this.component.setContainer(new IDUMOAndroidContainer());
 	}
-
+	
 	@Override
 	public void onIdumoCreated() throws IDUMOException {
 		component.onIdumoMakeFlowChart();
 		component.setup();
 		component.onIdumoPrepare();
 	}
-
+	
 	@Override
 	public void onIdumoStart() {
 		for (AndroidController controller : component.getAndroidControllers()) {
@@ -38,7 +38,7 @@ public class IDUMOAndroidActivity implements IDUMOActivity, Runnable {
 		}
 		component.setReady(true);
 	}
-
+	
 	@Override
 	public void onIdumoStop() {
 		for (AndroidController controller : component.getAndroidControllers()) {
@@ -50,7 +50,7 @@ public class IDUMOAndroidActivity implements IDUMOActivity, Runnable {
 		}
 		component.setReady(false);
 	}
-
+	
 	@Override
 	public void onIdumoExec() throws IDUMORuntimeException {
 		while (!component.isReady()) {
@@ -75,7 +75,7 @@ public class IDUMOAndroidActivity implements IDUMOActivity, Runnable {
 				} catch (InterruptedException e) {}
 			}
 		} else {
-			for (int i = 0; i < count; ) {
+			for (int i = 0; i < count;) {
 				if (runnable.isReady()) {
 					handler.post(runnable);
 					i++;
@@ -83,16 +83,16 @@ public class IDUMOAndroidActivity implements IDUMOActivity, Runnable {
 				try {
 					Thread.sleep(component.getSleepTime());
 				} catch (InterruptedException e) {}
-
+				
 			}
 		}
 	}
-
+	
 	@Override
 	public void run() {
 		onIdumoExec();
 	}
-
+	
 	/**
 	 * @param activity
 	 * @see com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidComponent#setActivity(android.app.Activity)
@@ -100,5 +100,5 @@ public class IDUMOAndroidActivity implements IDUMOActivity, Runnable {
 	public void setActivity(Activity activity) {
 		component.setActivity(activity);
 	}
-
+	
 }
