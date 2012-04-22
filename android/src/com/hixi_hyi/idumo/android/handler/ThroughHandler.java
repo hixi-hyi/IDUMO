@@ -33,7 +33,7 @@ public class ThroughHandler implements IDUMOSendable, IDUMOReceivable {
 	
 	@Override
 	public boolean isReady() {
-		return (provider != null) && provider.isReady();
+		return provider.isReady();
 	}
 	
 	@Override

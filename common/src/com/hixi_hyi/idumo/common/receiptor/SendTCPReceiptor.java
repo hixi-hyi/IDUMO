@@ -50,7 +50,7 @@ public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController,
 	@Override
 	public boolean isReady() {
 		IDUMOLogManager.log();
-		return socket.isConnected();
+		return sender.isReady() && socket.isConnected();
 	}
 
 	@Override

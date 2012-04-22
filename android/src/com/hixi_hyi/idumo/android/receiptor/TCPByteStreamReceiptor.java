@@ -37,7 +37,7 @@ public class TCPByteStreamReceiptor implements IDUMOReceivable, AndroidControlle
 	
 	@Override
 	public boolean isReady() {
-		return socket.isConnected();
+		return sender.isReady() && socket.isConnected();
 	}
 	
 	@Override

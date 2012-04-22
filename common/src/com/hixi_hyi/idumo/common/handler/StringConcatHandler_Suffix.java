@@ -43,7 +43,7 @@ public class StringConcatHandler_Suffix implements IDUMOSendable, IDUMOReceivabl
 
 	@Override
 	public boolean isReady() {
-		return (provider != null) && provider.isReady();
+		return provider.isReady();
 	}
 
 	@Override
