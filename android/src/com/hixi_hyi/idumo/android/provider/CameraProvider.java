@@ -10,7 +10,8 @@ import com.hixi_hyi.idumo.android.sensor.CameraSensor;
 import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.SenderWithOption;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
+import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
 public class CameraProvider implements SenderWithOption {
@@ -40,7 +41,7 @@ public class CameraProvider implements SenderWithOption {
 	}
 	
 	@Override
-	public IDUMOFlowingData onCall() {
+	public IDUMODataFlowing onCall() {
 		activity.setContentView(camera);
 		camera.takePicture();
 		return null;
@@ -71,7 +72,7 @@ public class CameraProvider implements SenderWithOption {
 	}
 	
 	@Override
-	public Class<? extends IDUMOData> sendableType() {
+	public IDUMODataConnect sendableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

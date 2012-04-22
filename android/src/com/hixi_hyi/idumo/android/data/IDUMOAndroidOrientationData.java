@@ -18,13 +18,13 @@
 package com.hixi_hyi.idumo.android.data;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.datatype.IDUMONumberDataRaw;
+import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 
 public class IDUMOAndroidOrientationData extends IDUMOData {
 	public IDUMOAndroidOrientationData(float pitch, float roll, float azmuth) {
-		add(new IDUMONumberDataRaw("pitch", pitch, "Android Orientation Pitch"));
-		add(new IDUMONumberDataRaw("roll", roll, "Android Orientation Roll"));
-		add(new IDUMONumberDataRaw("azmuth", azmuth, "Android Orientation Azmuth"));
+		add(new IDUMODataTypeRawNumber("pitch", pitch, "Android Orientation Pitch"));
+		add(new IDUMODataTypeRawNumber("roll", roll, "Android Orientation Roll"));
+		add(new IDUMODataTypeRawNumber("azmuth", azmuth, "Android Orientation Azmuth"));
 	}
 	
 	public float getPitch() {

@@ -2,16 +2,18 @@ package com.hixi_hyi.idumo.common.handler;
 
 import com.hixi_hyi.idumo.common.data.IDUMOStringData;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
+import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnectSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
-import com.hixi_hyi.idumo.core.parts.IDUMOSender;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
-public class StringConcatHandler_Suffix implements IDUMOSender, IDUMOReceiver {
+public class StringConcatHandler_Suffix implements IDUMOSendable, IDUMOReceivable {
 
-	private IDUMOSender provider;
+	private IDUMOSendable provider;
 	private String fixWord;
 	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
 
@@ -20,20 +22,20 @@ public class StringConcatHandler_Suffix implements IDUMOSender, IDUMOReceiver {
 	}
 
 	@Override
-	public IDUMOFlowingData onCall() {
+	public IDUMODataFlowing onCall() {
 		// LogUtil.d();
 		StringBuilder sb = new StringBuilder();
 		for (Object o : provider.onCall()) {
 			sb.append(o.toString());
 		}
 		sb.append(fixWord);
-		IDUMOFlowingData p = new IDUMOFlowingData();
+		IDUMODataFlowing p = new IDUMODataFlowing();
 		p.add(new IDUMOStringData(sb.toString()));
 		return p;
 	}
 
 	@Override
-	public boolean setSender(IDUMOSender... senders) throws IDUMOException {
+	public boolean setSender(IDUMOSendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		this.provider = senders[0];
 		return true;
@@ -45,13 +47,13 @@ public class StringConcatHandler_Suffix implements IDUMOSender, IDUMOReceiver {
 	}
 
 	@Override
-	public Class<? extends IDUMOData> receivableType() {
-		return IDUMOData.class;
+	public IDUMODataConnect receivableType() {
+		return new IDUMODataConnectSingle(IDUMOData.class);
 	}
 
 	@Override
-	public Class<? extends IDUMOData> sendableType() {
-		return IDUMOStringData.class;
+	public IDUMODataConnect sendableType() {
+		return new IDUMODataConnectSingle(IDUMOStringData.class);
 	}
 
 }

@@ -6,20 +6,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOPart;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
+import com.hixi_hyi.idumo.core.parts.IDUMOConnectable;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSender;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
 public class IDUMOContainer {
 
-	private ArrayList<IDUMOPart> items = new ArrayList<IDUMOPart>();
+	private ArrayList<IDUMOConnectable> items = new ArrayList<IDUMOConnectable>();
 	private ArrayList<IDUMORunnable> runnables = new ArrayList<IDUMORunnable>();
 	private ArrayList<IDUMOController> controllers = new ArrayList<IDUMOController>();
 
-	private HashMap<IDUMOReceiver, Connect> connector = new HashMap<IDUMOReceiver, Connect>();
+	private HashMap<IDUMOReceivable, Connect> connector = new HashMap<IDUMOReceivable, Connect>();
 
-	public void add(IDUMOPart item) {
+	public void add(IDUMOConnectable item) {
 		items.add(item);
 		if (item instanceof IDUMOController) {
 			controllers.add((IDUMOController) item);
@@ -29,7 +29,7 @@ public class IDUMOContainer {
 		}
 	}
 
-	public void connect(IDUMOSender sender, IDUMOReceiver receiver) {
+	public void connect(IDUMOSendable sender, IDUMOReceivable receiver) {
 		if (!connector.containsKey(receiver)) {
 			Connect connect = new Connect();
 			connect.add(sender);
@@ -41,8 +41,8 @@ public class IDUMOContainer {
 	}
 
 	public void setup() throws IDUMOException {
-		for (Map.Entry<IDUMOReceiver, Connect> entry : connector.entrySet()) {
-			IDUMOReceiver receiver = entry.getKey();
+		for (Map.Entry<IDUMOReceivable, Connect> entry : connector.entrySet()) {
+			IDUMOReceivable receiver = entry.getKey();
 			Connect connect = entry.getValue();
 			receiver.setSender(connect.getSenders());
 		}
@@ -62,14 +62,14 @@ public class IDUMOContainer {
 	}
 
 	public class Connect {
-		private ArrayList<IDUMOSender> senders = new ArrayList<IDUMOSender>();
+		private ArrayList<IDUMOSendable> senders = new ArrayList<IDUMOSendable>();
 
-		public void add(IDUMOSender sender) {
+		public void add(IDUMOSendable sender) {
 			senders.add(sender);
 		}
 
-		public IDUMOSender[] getSenders() {
-			return senders.toArray(new IDUMOSender[0]);
+		public IDUMOSendable[] getSenders() {
+			return senders.toArray(new IDUMOSendable[0]);
 		}
 	}
 

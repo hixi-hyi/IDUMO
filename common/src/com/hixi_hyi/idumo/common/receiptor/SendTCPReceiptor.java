@@ -10,12 +10,13 @@ import java.net.UnknownHostException;
 
 import com.hixi_hyi.idumo.common.data.IDUMOStringData;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
+import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.IDUMOController;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSender;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
@@ -27,14 +28,14 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class SendTCPReceiptor implements IDUMOReceiver, IDUMOController,
+public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController,
 		IDUMORunnable {
 	private String ip;
 	private int port;
 	private Socket socket;
 	private PrintWriter pw;
 	private OutputStream outstream;
-	private IDUMOSender sender;
+	private IDUMOSendable sender;
 	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
 	private ReceiveValidator vType = new ReceiveValidatorType(1,
 			IDUMOStringData.class);
@@ -53,7 +54,7 @@ public class SendTCPReceiptor implements IDUMOReceiver, IDUMOController,
 	}
 
 	@Override
-	public boolean setSender(IDUMOSender... senders) throws IDUMOException {
+	public boolean setSender(IDUMOSendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		vType.validate(senders);
 		this.sender = senders[0];
@@ -90,7 +91,7 @@ public class SendTCPReceiptor implements IDUMOReceiver, IDUMOController,
 		if (!sender.isReady()) {
 			return;
 		}
-		IDUMOFlowingData data = sender.onCall();
+		IDUMODataFlowing data = sender.onCall();
 		if (data == null) {
 			return;
 		}
@@ -102,7 +103,7 @@ public class SendTCPReceiptor implements IDUMOReceiver, IDUMOController,
 	}
 
 	@Override
-	public Class<? extends IDUMOData> receivableType() {
+	public IDUMODataConnect receivableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

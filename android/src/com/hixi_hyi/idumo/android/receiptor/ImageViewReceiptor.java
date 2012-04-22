@@ -5,11 +5,12 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
+import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSender;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
 // TODO 非検証
 /**
@@ -18,9 +19,9 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSender;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class ImageViewReceiptor extends ImageView implements IDUMOReceiver, IDUMORunnable {
+public class ImageViewReceiptor extends ImageView implements IDUMOReceivable, IDUMORunnable {
 	
-	private IDUMOSender	sender;
+	private IDUMOSendable	sender;
 	private Activity	activity;
 	
 	public ImageViewReceiptor(Context context) {
@@ -31,14 +32,14 @@ public class ImageViewReceiptor extends ImageView implements IDUMOReceiver, IDUM
 	
 	@Override
 	public void run() {
-		IDUMOFlowingData p = sender.onCall();
+		IDUMODataFlowing p = sender.onCall();
 		// Bitmap image = (Bitmap) p.get(0);
 		// setImageBitmap(image);
 	}
 	
 	@Override
-	public boolean setSender(IDUMOSender... senders) throws IDUMOException {
-		IDUMOSender sender = senders[0];
+	public boolean setSender(IDUMOSendable... senders) throws IDUMOException {
+		IDUMOSendable sender = senders[0];
 		// ArrayList<Class<?>> list = new
 		// ArrayList<Class<?>>(sender.getDataType());
 		// if (list.get(0) == Bitmap.class) {
@@ -54,7 +55,7 @@ public class ImageViewReceiptor extends ImageView implements IDUMOReceiver, IDUM
 	}
 	
 	@Override
-	public Class<? extends IDUMOData> receivableType() {
+	public IDUMODataConnect receivableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

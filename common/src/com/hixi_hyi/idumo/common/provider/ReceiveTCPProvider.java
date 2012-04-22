@@ -10,9 +10,10 @@ import java.util.ArrayList;
 
 import com.hixi_hyi.idumo.common.data.IDUMOStringData;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
+import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
 import com.hixi_hyi.idumo.core.exec.IDUMOController;
-import com.hixi_hyi.idumo.core.parts.IDUMOSender;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
@@ -21,7 +22,7 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class ReceiveTCPProvider implements IDUMOSender, IDUMOController {
+public class ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
 	private int port;
 	private Socket socket;
 	private BufferedReader br;
@@ -102,8 +103,8 @@ public class ReceiveTCPProvider implements IDUMOSender, IDUMOController {
 	}
 
 	@Override
-	public IDUMOFlowingData onCall() {
-		IDUMOFlowingData p = new IDUMOFlowingData();
+	public IDUMODataFlowing onCall() {
+		IDUMODataFlowing p = new IDUMODataFlowing();
 		IDUMOLogManager.debug(p);
 		String s = strs.remove(0);
 		p.add(new IDUMOStringData(s));
@@ -160,7 +161,7 @@ public class ReceiveTCPProvider implements IDUMOSender, IDUMOController {
 	}
 
 	@Override
-	public Class<? extends IDUMOData> sendableType() {
+	public IDUMODataConnect sendableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

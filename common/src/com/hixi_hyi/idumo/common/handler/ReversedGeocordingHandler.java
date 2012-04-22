@@ -6,10 +6,12 @@ import com.hixi_hyi.idumo.common.component.ReversedGeocording;
 import com.hixi_hyi.idumo.common.data.IDUMONumberData;
 import com.hixi_hyi.idumo.common.data.IDUMOStringData;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
+import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnectSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
-import com.hixi_hyi.idumo.core.parts.IDUMOSender;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
@@ -19,15 +21,15 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
  * @author Hiroyoshi
  * 
  */
-public class ReversedGeocordingHandler implements IDUMOSender, IDUMOReceiver {
+public class ReversedGeocordingHandler implements IDUMOSendable, IDUMOReceivable {
 
-	private ArrayList<IDUMOSender> senders = new ArrayList<IDUMOSender>();
+	private ArrayList<IDUMOSendable> senders = new ArrayList<IDUMOSendable>();
 	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
 	private ReceiveValidatorType v1Type = new ReceiveValidatorType(1,
 			IDUMONumberData.class);
 
 	@Override
-	public IDUMOFlowingData onCall() {
+	public IDUMODataFlowing onCall() {
 		double lat = ((IDUMONumberData) senders.get(0).onCall().next())
 				.getNumber();
 		double lon = ((IDUMONumberData) senders.get(1).onCall().next())
@@ -35,18 +37,18 @@ public class ReversedGeocordingHandler implements IDUMOSender, IDUMOReceiver {
 
 		ReversedGeocording rg = new ReversedGeocording(lat, lon);
 
-		IDUMOFlowingData p = new IDUMOFlowingData();
+		IDUMODataFlowing p = new IDUMODataFlowing();
 		p.add(new IDUMOStringData(rg.getLocation()));
 
 		return p;
 	}
 
 	@Override
-	public boolean setSender(IDUMOSender... senders) throws IDUMOException {
+	public boolean setSender(IDUMOSendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		v1Type.validate(senders);
 		this.senders.clear();
-		for (IDUMOSender s : senders) {
+		for (IDUMOSendable s : senders) {
 			this.senders.add(s);
 		}
 		return true;
@@ -54,7 +56,7 @@ public class ReversedGeocordingHandler implements IDUMOSender, IDUMOReceiver {
 
 	@Override
 	public boolean isReady() {
-		for (IDUMOSender sender : senders) {
+		for (IDUMOSendable sender : senders) {
 			if (!sender.isReady()) {
 				return false;
 			}
@@ -63,13 +65,13 @@ public class ReversedGeocordingHandler implements IDUMOSender, IDUMOReceiver {
 	}
 
 	@Override
-	public Class<? extends IDUMOData> receivableType() {
-		return IDUMONumberData.class;
+	public IDUMODataConnect receivableType() {
+		return new IDUMODataConnectSingle(IDUMONumberData.class);
 	}
 
 	@Override
-	public Class<? extends IDUMOData> sendableType() {
-		return IDUMOStringData.class;
+	public IDUMODataConnect sendableType() {
+		return new IDUMODataConnectSingle(IDUMOStringData.class);
 	}
 
 }

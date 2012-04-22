@@ -15,43 +15,27 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core.datatype;
+package com.hixi_hyi.idumo.core.parts;
 
-import com.hixi_hyi.idumo.core.data.IDUMODataRaw;
+import com.hixi_hyi.idumo.core.data.IDUMOData;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
-public class IDUMOStringDataRaw implements IDUMODataRaw {
-	private String name;
-	private String value;
-	private String summary;
+/**
+ * IdumoComponentのHandler,Receiptorを作成する際に実装してください
+ * 
+ * @author Hiroyoshi HOUCHI
+ * 
+ */
+public interface IDUMOReceivable extends IDUMOConnectable {
+	/**
+	 * データを受け取るSender(Provider,Handlerに相当)をsetするメソッド
+	 * 
+	 * @param senders
+	 * @return
+	 * @throws IDUMOException
+	 */
+	public boolean setSender(IDUMOSendable... senders) throws IDUMOException;
 
-	public IDUMOStringDataRaw(String name, String value, String summary) {
-		this.name = name;
-		this.value = value;
-		this.summary = summary;
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public String getValue() {
-		return value;
-	}
-
-	@Override
-	public Class<?> getType() {
-		return String.class;
-	}
-
-	@Override
-	public String toString() {
-		return String.format("String[%s:%s]", name, value);
-	}
-
-	@Override
-	public String getSummary() {
-		return summary;
-	}
+	public IDUMODataConnect receivableType();
 }

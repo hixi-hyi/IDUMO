@@ -6,11 +6,13 @@ import java.io.InputStreamReader;
 
 import com.hixi_hyi.idumo.common.data.IDUMOStringData;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
+import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnectSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
-import com.hixi_hyi.idumo.core.parts.IDUMOSender;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
-public class ReceiveConsoleProvider implements IDUMOSender {
+public class ReceiveConsoleProvider implements IDUMOSendable {
 
 	private BufferedReader br;
 
@@ -25,8 +27,8 @@ public class ReceiveConsoleProvider implements IDUMOSender {
 	}
 
 	@Override
-	public IDUMOFlowingData onCall() {
-		IDUMOFlowingData p = new IDUMOFlowingData();
+	public IDUMODataFlowing onCall() {
+		IDUMODataFlowing p = new IDUMODataFlowing();
 		try {
 			p.add(new IDUMOStringData(br.readLine()));
 		} catch (IOException e) {
@@ -36,8 +38,8 @@ public class ReceiveConsoleProvider implements IDUMOSender {
 	}
 
 	@Override
-	public Class<? extends IDUMOData> sendableType() {
-		return IDUMOStringData.class;
+	public IDUMODataConnect sendableType() {
+		return new IDUMODataConnectSingle(IDUMOStringData.class);
 	}
 
 }

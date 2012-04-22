@@ -15,26 +15,42 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core.parts;
+package com.hixi_hyi.idumo.core.data.raw;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
-/**
- * IdumoComponentのHandler,Receiptorを作成する際に実装してください
- * 
- * @author Hiroyoshi HOUCHI
- * 
- */
-public interface IDUMOReceiver extends IDUMOPart {
-	/**
-	 * データを受け取るSender(Provider,Handlerに相当)をsetするメソッド
-	 * 
-	 * @param senders
-	 * @return
-	 * @throws IDUMOException
-	 */
-	public boolean setSender(IDUMOSender... senders) throws IDUMOException;
+public class IDUMODataTypeRawString implements IDUMODataTypeRaw {
+	private String name;
+	private String value;
+	private String summary;
 
-	public Class<? extends IDUMOData> receivableType();
+	public IDUMODataTypeRawString(String name, String value, String summary) {
+		this.name = name;
+		this.value = value;
+		this.summary = summary;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public String getValue() {
+		return value;
+	}
+
+	@Override
+	public Class<?> getType() {
+		return String.class;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("String[%s:%s]", name, value);
+	}
+
+	@Override
+	public String getSummary() {
+		return summary;
+	}
 }

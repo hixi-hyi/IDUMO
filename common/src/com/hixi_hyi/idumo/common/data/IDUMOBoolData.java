@@ -18,13 +18,13 @@
 package com.hixi_hyi.idumo.common.data;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.datatype.IDUMOBoolDataRaw;
+import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawBool;
 
 public class IDUMOBoolData extends IDUMOData {
 	private static final String name = "bool";
 
 	public IDUMOBoolData(boolean n) {
-		add(new IDUMOBoolDataRaw(name, n, "Primitive : Number"));
+		add(new IDUMODataTypeRawBool(name, n, "Primitive : Number"));
 	}
 
 	public boolean getBool() {

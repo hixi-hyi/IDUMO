@@ -3,10 +3,10 @@ package com.hixi_hyi.idumo.core.exec;
 import java.util.Collection;
 
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOPart;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
+import com.hixi_hyi.idumo.core.parts.IDUMOConnectable;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSender;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
 public abstract class IDUMOComponent {
 
@@ -50,19 +50,19 @@ public abstract class IDUMOComponent {
 
 	/**
 	 * @param item
-	 * @see com.hixi_hyi.idumo.core.exec.IDUMOContainer#add(com.hixi_hyi.idumo.core.parts.IDUMOPart)
+	 * @see com.hixi_hyi.idumo.core.exec.IDUMOContainer#add(com.hixi_hyi.idumo.core.parts.IDUMOConnectable)
 	 */
-	public void add(IDUMOPart item) {
+	public void add(IDUMOConnectable item) {
 		container.add(item);
 	}
 
 	/**
 	 * @param sender
 	 * @param receiver
-	 * @see com.hixi_hyi.idumo.core.exec.IDUMOContainer#connect(com.hixi_hyi.idumo.core.parts.IDUMOSender,
-	 *      com.hixi_hyi.idumo.core.parts.IDUMOReceiver)
+	 * @see com.hixi_hyi.idumo.core.exec.IDUMOContainer#connect(com.hixi_hyi.idumo.core.parts.IDUMOSendable,
+	 *      com.hixi_hyi.idumo.core.parts.IDUMOReceivable)
 	 */
-	public void connect(IDUMOSender sender, IDUMOReceiver receiver) {
+	public void connect(IDUMOSendable sender, IDUMOReceivable receiver) {
 		container.connect(sender, receiver);
 	}
 

@@ -18,8 +18,8 @@
 package com.hixi_hyi.idumo.core.validator;
 
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOSender;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
 public interface ReceiveValidator {
-	public void validate(IDUMOSender... senders) throws IDUMOException;
+	public void validate(IDUMOSendable... senders) throws IDUMOException;
 }

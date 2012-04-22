@@ -18,13 +18,13 @@
 package com.hixi_hyi.idumo.android.data;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.datatype.IDUMONumberDataRaw;
+import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 
 public class IDUMOAndroidTemperatureData extends IDUMOData {
 	public static final String	TEMPERATURE	= "temperature";
 	
 	public IDUMOAndroidTemperatureData(float temperature) {
-		add(new IDUMONumberDataRaw(TEMPERATURE, temperature, "Android Temperature"));
+		add(new IDUMODataTypeRawNumber(TEMPERATURE, temperature, "Android Temperature"));
 	}
 	
 	public float getProximity() {

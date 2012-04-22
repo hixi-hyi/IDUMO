@@ -2,8 +2,10 @@ package com.hixi_hyi.idumo.common.provider;
 
 import com.hixi_hyi.idumo.common.data.IDUMOStringData;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
-import com.hixi_hyi.idumo.core.parts.IDUMOSender;
+import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnectSingle;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
@@ -12,7 +14,7 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class StringProvider implements IDUMOSender {
+public class StringProvider implements IDUMOSendable {
 
 	private String str;
 
@@ -22,9 +24,9 @@ public class StringProvider implements IDUMOSender {
 	}
 
 	@Override
-	public IDUMOFlowingData onCall() {
+	public IDUMODataFlowing onCall() {
 		IDUMOLogManager.log();
-		IDUMOFlowingData pipes = new IDUMOFlowingData();
+		IDUMODataFlowing pipes = new IDUMODataFlowing();
 		pipes.add(new IDUMOStringData(str));
 		return pipes;
 	}
@@ -35,8 +37,8 @@ public class StringProvider implements IDUMOSender {
 	}
 
 	@Override
-	public Class<? extends IDUMOData> sendableType() {
-		return IDUMOStringData.class;
+	public IDUMODataConnect sendableType() {
+		return new IDUMODataConnectSingle(IDUMOStringData.class);
 	}
 
 }

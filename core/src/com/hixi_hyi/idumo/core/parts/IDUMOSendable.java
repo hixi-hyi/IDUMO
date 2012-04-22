@@ -15,43 +15,25 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core.datatype;
+package com.hixi_hyi.idumo.core.parts;
 
-import com.hixi_hyi.idumo.core.data.IDUMODataRaw;
+import com.hixi_hyi.idumo.core.data.IDUMOData;
+import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
 
-public class IDUMONumberDataRaw implements IDUMODataRaw {
-	private String name;
-	private Number value;
-	private String summary;
+/**
+ * IdumoのProvider,Handlerを作成するときに実装してください
+ * 
+ * @author Hiroyoshi HOUCHI
+ * 
+ */
+public interface IDUMOSendable extends IDUMOConnectable {
+	/**
+	 * データを取得する際に呼び出されるメソッド
+	 * 
+	 * @return
+	 */
+	public IDUMODataFlowing onCall();
 
-	public IDUMONumberDataRaw(String name, Number value, String summary) {
-		this.name = name;
-		this.value = value;
-		this.summary = summary;
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public Number getValue() {
-		return value;
-	}
-
-	@Override
-	public Class<?> getType() {
-		return Double.class;
-	}
-
-	@Override
-	public String toString() {
-		return String.format("Number[%s:%s]", name, value);
-	}
-
-	@Override
-	public String getSummary() {
-		return summary;
-	}
+	public IDUMODataConnect sendableType();
 }

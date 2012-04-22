@@ -7,9 +7,10 @@ import android.content.Context;
 import android.widget.TextView;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSender;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
@@ -18,14 +19,14 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class TextViewReceiptor extends TextView implements IDUMOReceiver, IDUMORunnable {
+public class TextViewReceiptor extends TextView implements IDUMOReceivable, IDUMORunnable {
 	
-	private ArrayList<IDUMOSender>	senders;
+	private ArrayList<IDUMOSendable>	senders;
 	private Activity				activity;
 	
 	public TextViewReceiptor(Context context) {
 		super(context);
-		senders = new ArrayList<IDUMOSender>();
+		senders = new ArrayList<IDUMOSendable>();
 		activity = (Activity) context;
 		activity.setContentView(this);
 		setTextSize(30.0f);
@@ -34,13 +35,13 @@ public class TextViewReceiptor extends TextView implements IDUMOReceiver, IDUMOR
 	@Override
 	public void run() {
 		IDUMOLogManager.log();
-		for (IDUMOSender sender : senders) {
+		for (IDUMOSendable sender : senders) {
 			if (!sender.isReady()) {
 				return;
 			}
 		}
 		StringBuilder sb = new StringBuilder();
-		for (IDUMOSender sender : senders) {
+		for (IDUMOSendable sender : senders) {
 			if (sender.onCall() == null) {
 				return;
 			}
@@ -58,9 +59,9 @@ public class TextViewReceiptor extends TextView implements IDUMOReceiver, IDUMOR
 	}
 	
 	@Override
-	public boolean setSender(IDUMOSender... handler) {
+	public boolean setSender(IDUMOSendable... handler) {
 		senders.clear();
-		for (IDUMOSender s : handler) {
+		for (IDUMOSendable s : handler) {
 			senders.add(s);
 		}
 		return true;
@@ -71,7 +72,7 @@ public class TextViewReceiptor extends TextView implements IDUMOReceiver, IDUMOR
 		if (senders.size() == 0) {
 			return false;
 		}
-		for (IDUMOSender sender : senders) {
+		for (IDUMOSendable sender : senders) {
 			if (!sender.isReady()) {
 				return false;
 			}
@@ -80,7 +81,7 @@ public class TextViewReceiptor extends TextView implements IDUMOReceiver, IDUMOR
 	}
 	
 	@Override
-	public Class<? extends IDUMOData> receivableType() {
+	public IDUMODataConnect receivableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

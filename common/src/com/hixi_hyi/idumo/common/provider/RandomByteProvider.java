@@ -4,8 +4,10 @@ import java.util.Random;
 
 import com.hixi_hyi.idumo.common.data.IDUMONumberData;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
-import com.hixi_hyi.idumo.core.parts.IDUMOSender;
+import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnectSingle;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
 /**
  * ランダムなバイト情報を送るためのProvider(DebugClass)
@@ -13,7 +15,7 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSender;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class RandomByteProvider implements IDUMOSender {
+public class RandomByteProvider implements IDUMOSendable {
 
 	private Random ramdom;
 
@@ -22,9 +24,9 @@ public class RandomByteProvider implements IDUMOSender {
 	}
 
 	@Override
-	public IDUMOFlowingData onCall() {
+	public IDUMODataFlowing onCall() {
 		// LogUtil.d();
-		IDUMOFlowingData pipes = new IDUMOFlowingData();
+		IDUMODataFlowing pipes = new IDUMODataFlowing();
 		byte buf[] = new byte[1];
 		ramdom.nextBytes(buf);
 		pipes.add(new IDUMONumberData(buf[0]));
@@ -37,8 +39,8 @@ public class RandomByteProvider implements IDUMOSender {
 	}
 
 	@Override
-	public Class<? extends IDUMOData> sendableType() {
-		return IDUMONumberData.class;
+	public IDUMODataConnect sendableType() {
+		return new IDUMODataConnectSingle(IDUMONumberData.class);
 	}
 
 }

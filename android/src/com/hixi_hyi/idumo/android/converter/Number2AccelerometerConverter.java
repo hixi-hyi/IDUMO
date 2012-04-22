@@ -5,17 +5,19 @@ import java.util.ArrayList;
 import com.hixi_hyi.idumo.android.data.IDUMOAndroidAccelerometerData;
 import com.hixi_hyi.idumo.common.data.IDUMONumberData;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
+import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnectSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
-import com.hixi_hyi.idumo.core.parts.IDUMOSender;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
-public class Number2AccelerometerConverter implements IDUMOSender, IDUMOReceiver {
+public class Number2AccelerometerConverter implements IDUMOSendable, IDUMOReceivable {
 	
-	private ArrayList<IDUMOSender>	sender	= new ArrayList<IDUMOSender>();
+	private ArrayList<IDUMOSendable>	sender	= new ArrayList<IDUMOSendable>();
 	private ReceiveValidator		vSize	= new ReceiveValidatorSize(3);
 	private ReceiveValidator		vType1	= new ReceiveValidatorType(1, IDUMONumberData.class);
 	private ReceiveValidator		vType2	= new ReceiveValidatorType(2, IDUMONumberData.class);
@@ -26,38 +28,38 @@ public class Number2AccelerometerConverter implements IDUMOSender, IDUMOReceiver
 	@Override
 	public boolean isReady() {
 		boolean flag = true;
-		for (IDUMOSender s : sender) {
+		for (IDUMOSendable s : sender) {
 			flag = flag && (s != null) && s.isReady();
 		}
 		return flag;
 	}
 	
 	@Override
-	public boolean setSender(IDUMOSender... senders) throws IDUMOException {
+	public boolean setSender(IDUMOSendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		vType1.validate(senders);
 		vType2.validate(senders);
 		vType3.validate(senders);
-		for (IDUMOSender s : senders) {
+		for (IDUMOSendable s : senders) {
 			sender.add(s);
 		}
 		return true;
 	}
 	
 	@Override
-	public Class<? extends IDUMOData> receivableType() {
+	public IDUMODataConnect receivableType() {
 		return null;
 	}
 	
 	@Override
-	public IDUMOFlowingData onCall() {
+	public IDUMODataFlowing onCall() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
 	
 	@Override
-	public Class<? extends IDUMOData> sendableType() {
-		return IDUMOAndroidAccelerometerData.class;
+	public IDUMODataConnect sendableType() {
+		return new IDUMODataConnectSingle(IDUMOAndroidAccelerometerData.class);
 	}
 	
 }

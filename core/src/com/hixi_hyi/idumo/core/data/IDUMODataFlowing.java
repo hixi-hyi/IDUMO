@@ -15,24 +15,75 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core.parts;
+package com.hixi_hyi.idumo.core.data;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
-/**
- * IdumoのProvider,Handlerを作成するときに実装してください
- * 
- * @author Hiroyoshi HOUCHI
- * 
- */
-public interface IDUMOSender extends IDUMOPart {
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+
+public class IDUMODataFlowing implements Iterable<IDUMOData> {
+	private ArrayList<IDUMOData> datalist;
+	{
+		datalist = new ArrayList<IDUMOData>();
+	}
+
+	public IDUMODataFlowing() {
+	}
+
+	public IDUMODataFlowing(IDUMOData... objects) {
+		for (IDUMOData o : objects) {
+			datalist.add(o);
+		}
+	}
+
+	public Collection<IDUMOData> getData() {
+		return datalist;
+	}
+
 	/**
-	 * データを取得する際に呼び出されるメソッド
-	 * 
+	 * @param object
 	 * @return
+	 * @see java.util.ArrayList#add(java.lang.Object)
 	 */
-	public IDUMOFlowingData onCall();
+	public boolean add(IDUMOData object) {
+		return datalist.add(object);
+	}
 
-	public Class<? extends IDUMOData> sendableType();
+	/**
+	 * @param index
+	 * @return
+	 * @see java.util.ArrayList#get(int)
+	 */
+	public IDUMOData get(int index) {
+		return datalist.get(index);
+	}
+
+	/**
+	 * @return
+	 * @see java.util.ArrayList#size()
+	 */
+	public int size() {
+		return datalist.size();
+	}
+
+	/**
+	 * @return
+	 * @see java.util.AbstractCollection#toString()
+	 */
+	@Override
+	public String toString() {
+		return datalist.toString();
+	}
+
+	@Override
+	public Iterator<IDUMOData> iterator() {
+		return datalist.iterator();
+	}
+
+	public IDUMOData next() {
+		return datalist.remove(0);
+	}
+
 }

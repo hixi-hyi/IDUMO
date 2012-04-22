@@ -10,8 +10,10 @@ import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
 import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
 import com.hixi_hyi.idumo.android.sensor.OrientationSensor;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
-import com.hixi_hyi.idumo.core.parts.IDUMOSender;
+import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnectSingle;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
@@ -20,7 +22,7 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class OrientationProvider implements IDUMOSender, AndroidController {
+public class OrientationProvider implements IDUMOSendable, AndroidController {
 	
 	private OrientationSensor	sensor;
 	
@@ -43,9 +45,9 @@ public class OrientationProvider implements IDUMOSender, AndroidController {
 	}
 	
 	@Override
-	public IDUMOFlowingData onCall() {
+	public IDUMODataFlowing onCall() {
 		IDUMOLogManager.log();
-		IDUMOFlowingData p = new IDUMOFlowingData();
+		IDUMODataFlowing p = new IDUMODataFlowing();
 		p.add(new IDUMOAndroidOrientationData(sensor.getPitch(), sensor.getRoll(), sensor.getAzmuth()));
 		return p;
 	}
@@ -78,8 +80,7 @@ public class OrientationProvider implements IDUMOSender, AndroidController {
 	public void onIdumoStop() {}
 	
 	@Override
-	public Class<? extends IDUMOData> sendableType() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+	public IDUMODataConnect sendableType() {
+		return new IDUMODataConnectSingle(IDUMOAndroidOrientationData.class);
 	}
 }

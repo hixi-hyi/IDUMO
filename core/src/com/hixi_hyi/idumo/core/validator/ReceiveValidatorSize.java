@@ -18,7 +18,7 @@
 package com.hixi_hyi.idumo.core.validator;
 
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOSender;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
 public class ReceiveValidatorSize implements ReceiveValidator {
 
@@ -29,7 +29,7 @@ public class ReceiveValidatorSize implements ReceiveValidator {
 	}
 
 	@Override
-	public void validate(IDUMOSender... senders) throws IDUMOException {
+	public void validate(IDUMOSendable... senders) throws IDUMOException {
 		if (senders.length == size) {
 			return;
 		}

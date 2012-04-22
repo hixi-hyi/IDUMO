@@ -8,8 +8,10 @@ import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.android.data.IDUMOAndroidGPSData;
 import com.hixi_hyi.idumo.android.sensor.GPSSensor;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
-import com.hixi_hyi.idumo.core.parts.IDUMOSender;
+import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnectSingle;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
@@ -18,7 +20,7 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class GPSProvider implements IDUMOSender, AndroidController {
+public class GPSProvider implements IDUMOSendable, AndroidController {
 	
 	private GPSSensor	gps;
 	
@@ -32,13 +34,13 @@ public class GPSProvider implements IDUMOSender, AndroidController {
 	}
 	
 	@Override
-	public IDUMOFlowingData onCall() {
+	public IDUMODataFlowing onCall() {
 		IDUMOLogManager.log();
 		if (!isReady()) {
 			return null;
 		}
 		
-		IDUMOFlowingData p = new IDUMOFlowingData();
+		IDUMODataFlowing p = new IDUMODataFlowing();
 		p.add(new IDUMOAndroidGPSData(gps.getLatitude(), gps.getLongitude(), gps.getAltitude(), gps.getTime(), gps.getBearing(), gps.getSpeed()));
 		return p;
 	}
@@ -71,8 +73,8 @@ public class GPSProvider implements IDUMOSender, AndroidController {
 	public void onIdumoStop() {}
 	
 	@Override
-	public Class<? extends IDUMOData> sendableType() {
-		return IDUMOAndroidGPSData.class;
+	public IDUMODataConnect sendableType() {
+		return new IDUMODataConnectSingle(IDUMOAndroidGPSData.class);
 	}
 	
 }

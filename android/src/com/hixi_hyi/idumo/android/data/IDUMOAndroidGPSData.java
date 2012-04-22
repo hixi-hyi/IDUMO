@@ -18,7 +18,7 @@
 package com.hixi_hyi.idumo.android.data;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.datatype.IDUMONumberDataRaw;
+import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 
 public class IDUMOAndroidGPSData extends IDUMOData {
 	public static final String	LATITUDE	= "latitude";
@@ -29,12 +29,12 @@ public class IDUMOAndroidGPSData extends IDUMOData {
 	public static final String	SPEED		= "speed";
 	
 	public IDUMOAndroidGPSData(double latitude, double longitude, double altitude, long time, float bearing, float speed) {
-		add(new IDUMONumberDataRaw(LATITUDE, latitude, "Android GPS latitude"));
-		add(new IDUMONumberDataRaw(LONGITUDE, longitude, "Android GPS"));
-		add(new IDUMONumberDataRaw(ALTITUDE, altitude, "Android GPS"));
-		add(new IDUMONumberDataRaw(TIME, time, "Android GPS"));
-		add(new IDUMONumberDataRaw(BEARING, bearing, "Android GPS"));
-		add(new IDUMONumberDataRaw(SPEED, speed, "Android GPS"));
+		add(new IDUMODataTypeRawNumber(LATITUDE, latitude, "Android GPS latitude"));
+		add(new IDUMODataTypeRawNumber(LONGITUDE, longitude, "Android GPS"));
+		add(new IDUMODataTypeRawNumber(ALTITUDE, altitude, "Android GPS"));
+		add(new IDUMODataTypeRawNumber(TIME, time, "Android GPS"));
+		add(new IDUMODataTypeRawNumber(BEARING, bearing, "Android GPS"));
+		add(new IDUMODataTypeRawNumber(SPEED, speed, "Android GPS"));
 	}
 	
 	public double getLatitude() {

@@ -18,13 +18,13 @@
 package com.hixi_hyi.idumo.common.data;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.datatype.IDUMOStringDataRaw;
+import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawString;
 
 public class IDUMOStringData extends IDUMOData {
 	private static final String string = "string";
 
 	public IDUMOStringData(String n) {
-		add(new IDUMOStringDataRaw(string, n, "Primitive : String"));
+		add(new IDUMODataTypeRawString(string, n, "Primitive : String"));
 	}
 
 	public String getString() {

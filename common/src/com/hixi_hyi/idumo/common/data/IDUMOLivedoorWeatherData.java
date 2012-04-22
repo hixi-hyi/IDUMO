@@ -18,8 +18,8 @@
 package com.hixi_hyi.idumo.common.data;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.datatype.IDUMONumberDataRaw;
-import com.hixi_hyi.idumo.core.datatype.IDUMOStringDataRaw;
+import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
+import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawString;
 
 public class IDUMOLivedoorWeatherData extends IDUMOData {
 	public static final String LOCATION = "location";
@@ -31,12 +31,12 @@ public class IDUMOLivedoorWeatherData extends IDUMOData {
 
 	public IDUMOLivedoorWeatherData(String location, String date,
 			Double maxTemp, Double minTemp, String weather, String description) {
-		add(new IDUMOStringDataRaw(LOCATION, location, ""));
-		add(new IDUMOStringDataRaw(DATE, date, ""));
-		add(new IDUMONumberDataRaw(MAX_TEMP, maxTemp, ""));
-		add(new IDUMONumberDataRaw(MIN_TEMP, minTemp, ""));
-		add(new IDUMOStringDataRaw(WEATHER, weather, ""));
-		add(new IDUMOStringDataRaw(DESCRIPTION, description, ""));
+		add(new IDUMODataTypeRawString(LOCATION, location, ""));
+		add(new IDUMODataTypeRawString(DATE, date, ""));
+		add(new IDUMODataTypeRawNumber(MAX_TEMP, maxTemp, ""));
+		add(new IDUMODataTypeRawNumber(MIN_TEMP, minTemp, ""));
+		add(new IDUMODataTypeRawString(WEATHER, weather, ""));
+		add(new IDUMODataTypeRawString(DESCRIPTION, description, ""));
 	}
 
 	public String getLocation() {

@@ -18,13 +18,13 @@
 package com.hixi_hyi.idumo.android.data;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.datatype.IDUMONumberDataRaw;
+import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 
 public class IDUMOAndroidProximityData extends IDUMOData {
 	public static final String	PROXMITY	= "proximity";
 	
 	public IDUMOAndroidProximityData(float proximity) {
-		add(new IDUMONumberDataRaw(PROXMITY, proximity, "Android Proximity"));
+		add(new IDUMODataTypeRawNumber(PROXMITY, proximity, "Android Proximity"));
 	}
 	
 	public float getProximity() {

@@ -8,11 +8,12 @@ import java.net.UnknownHostException;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMOFlowingData;
+import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSender;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
@@ -21,12 +22,12 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class TCPByteStreamReceiptor implements IDUMOReceiver, AndroidController, IDUMORunnable {
+public class TCPByteStreamReceiptor implements IDUMOReceivable, AndroidController, IDUMORunnable {
 	private String			ip;
 	private int				port;
 	private Socket			socket;
 	private OutputStream	outstream;
-	private IDUMOSender		sender;
+	private IDUMOSendable		sender;
 	
 	public TCPByteStreamReceiptor(String ip, int port) {
 		this.ip = ip;
@@ -40,7 +41,7 @@ public class TCPByteStreamReceiptor implements IDUMOReceiver, AndroidController,
 	}
 	
 	@Override
-	public boolean setSender(IDUMOSender... senders) throws IDUMOException {
+	public boolean setSender(IDUMOSendable... senders) throws IDUMOException {
 		if (senders.length != 1) {
 			return false;
 		}
@@ -90,7 +91,7 @@ public class TCPByteStreamReceiptor implements IDUMOReceiver, AndroidController,
 	@Override
 	public void run() {
 		IDUMOLogManager.log();
-		IDUMOFlowingData data = sender.onCall();
+		IDUMODataFlowing data = sender.onCall();
 		byte[] bytedata = new byte[data.size()];
 		int i = 0;
 		IDUMOLogManager.debug("size: " + data.size());
@@ -109,7 +110,7 @@ public class TCPByteStreamReceiptor implements IDUMOReceiver, AndroidController,
 	}
 	
 	@Override
-	public Class<? extends IDUMOData> receivableType() {
+	public IDUMODataConnect receivableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

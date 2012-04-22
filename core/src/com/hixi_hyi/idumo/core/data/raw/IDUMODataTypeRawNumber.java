@@ -15,85 +15,42 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core.data;
+package com.hixi_hyi.idumo.core.data.raw;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 
-public class IDUMOFlowingData implements Iterable<IDUMOData> {
-	private ArrayList<IDUMOData> datalist;
-	{
-		datalist = new ArrayList<IDUMOData>();
+public class IDUMODataTypeRawNumber implements IDUMODataTypeRaw {
+	private String name;
+	private Number value;
+	private String summary;
+
+	public IDUMODataTypeRawNumber(String name, Number value, String summary) {
+		this.name = name;
+		this.value = value;
+		this.summary = summary;
 	}
 
-	public static IDUMOFlowingData generatePipeData(IDUMOData... objects) {
-		return new IDUMOFlowingData(objects);
-	}
-
-	public IDUMOFlowingData() {
-	}
-
-	public IDUMOFlowingData(IDUMOData... objects) {
-		for (IDUMOData o : objects) {
-			datalist.add(o);
-		}
-	}
-
-	public Collection<IDUMOData> getData() {
-		return datalist;
-	}
-
-	public Collection<Class<?>> getDataType() {
-		ArrayList<Class<?>> types = new ArrayList<Class<?>>();
-		for (Object o : datalist) {
-			types.add(o.getClass());
-		}
-		return types;
-	}
-
-	/**
-	 * @param object
-	 * @return
-	 * @see java.util.ArrayList#add(java.lang.Object)
-	 */
-	public boolean add(IDUMOData object) {
-		return datalist.add(object);
-	}
-
-	/**
-	 * @param index
-	 * @return
-	 * @see java.util.ArrayList#get(int)
-	 */
-	public IDUMOData get(int index) {
-		return datalist.get(index);
-	}
-
-	/**
-	 * @return
-	 * @see java.util.ArrayList#size()
-	 */
-	public int size() {
-		return datalist.size();
-	}
-
-	/**
-	 * @return
-	 * @see java.util.AbstractCollection#toString()
-	 */
 	@Override
-	public String toString() {
-		return datalist.toString();
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public Number getValue() {
+		return value;
+	}
+
+	@Override
+	public Class<?> getType() {
+		return Double.class;
 	}
 
 	@Override
-	public Iterator<IDUMOData> iterator() {
-		return datalist.iterator();
+	public String toString() {
+		return String.format("Number[%s:%s]", name, value);
 	}
 
-	public IDUMOData next() {
-		return datalist.remove(0);
+	@Override
+	public String getSummary() {
+		return summary;
 	}
-
 }

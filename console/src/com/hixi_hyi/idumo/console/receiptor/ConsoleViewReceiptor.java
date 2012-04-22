@@ -3,9 +3,11 @@ package com.hixi_hyi.idumo.console.receiptor;
 import java.util.ArrayList;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceiver;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnectSingle;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSender;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
 /**
  * Systemoutに出力するReceiptor
@@ -13,23 +15,23 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSender;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class ConsoleViewReceiptor implements IDUMOReceiver, IDUMORunnable {
+public class ConsoleViewReceiptor implements IDUMOReceivable, IDUMORunnable {
 
-	private ArrayList<IDUMOSender> senders;
+	private ArrayList<IDUMOSendable> senders;
 
 	public ConsoleViewReceiptor() {
-		senders = new ArrayList<IDUMOSender>();
+		senders = new ArrayList<IDUMOSendable>();
 	}
 
 	@Override
 	public void run() {
-		for (IDUMOSender sender : senders) {
+		for (IDUMOSendable sender : senders) {
 			if (!sender.isReady()) {
 				return;
 			}
 		}
 		StringBuilder sb = new StringBuilder();
-		for (IDUMOSender sender : senders) {
+		for (IDUMOSendable sender : senders) {
 			for (Object o : sender.onCall()) {
 				sb.append(o.toString());
 			}
@@ -41,9 +43,9 @@ public class ConsoleViewReceiptor implements IDUMOReceiver, IDUMORunnable {
 	}
 
 	@Override
-	public boolean setSender(IDUMOSender... handler) {
+	public boolean setSender(IDUMOSendable... handler) {
 		senders.clear();
-		for (IDUMOSender s : handler) {
+		for (IDUMOSendable s : handler) {
 			senders.add(s);
 		}
 		return true;
@@ -54,7 +56,7 @@ public class ConsoleViewReceiptor implements IDUMOReceiver, IDUMORunnable {
 		if (senders.size() == 0) {
 			return false;
 		}
-		for (IDUMOSender sender : senders) {
+		for (IDUMOSendable sender : senders) {
 			if (!sender.isReady()) {
 				return false;
 			}
@@ -63,8 +65,8 @@ public class ConsoleViewReceiptor implements IDUMOReceiver, IDUMORunnable {
 	}
 
 	@Override
-	public Class<? extends IDUMOData> receivableType() {
-		return IDUMOData.class;
+	public IDUMODataConnect receivableType() {
+		return new IDUMODataConnectSingle(IDUMOData.class);
 	}
 
 }
