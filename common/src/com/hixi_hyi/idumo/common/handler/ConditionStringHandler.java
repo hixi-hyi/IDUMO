@@ -30,11 +30,10 @@ public class ConditionStringHandler implements IDUMOSendable, IDUMOReceivable {
 	}
 
 	@Override
-	public boolean setSender(IDUMOSendable... senders) throws IDUMOException {
+	public void setSender(IDUMOSendable... senders) throws IDUMOException {
 		validator.validate(senders);
 		vType.validate(senders);
 		this.sender = senders[0];
-		return true;
 	}
 
 	@Override

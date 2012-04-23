@@ -41,17 +41,16 @@ public class TCPByteStreamReceiptor implements IDUMOReceivable, AndroidControlle
 	}
 	
 	@Override
-	public boolean setSender(IDUMOSendable... senders) throws IDUMOException {
-		if (senders.length != 1) {
-			return false;
-		}
+	public void setSender(IDUMOSendable... senders) throws IDUMOException {
+//		if (senders.length != 1) {
+//			return false;
+//		}
 		// for (Object o : senders[0].getDataType()) {
 		// if (o != Byte.class) {
 		// return false;
 		// }
 		// }
 		this.sender = senders[0];
-		return true;
 	}
 	
 	@Override

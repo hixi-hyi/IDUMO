@@ -27,16 +27,16 @@ public class IDUMOLivedoorWeatherData extends IDUMOData {
 	public static final String MAX_TEMP = "max_temp";
 	public static final String MIN_TEMP = "min_temp";
 	public static final String WEATHER = "weather";
-	public static final String DESCRIPTION = "weather";
+	public static final String DESCRIPTION = "description";
 
 	public IDUMOLivedoorWeatherData(String location, String date,
 			Double maxTemp, Double minTemp, String weather, String description) {
-		add(new IDUMODataTypeRawString(LOCATION, location, ""));
-		add(new IDUMODataTypeRawString(DATE, date, ""));
-		add(new IDUMODataTypeRawNumber(MAX_TEMP, maxTemp, ""));
-		add(new IDUMODataTypeRawNumber(MIN_TEMP, minTemp, ""));
-		add(new IDUMODataTypeRawString(WEATHER, weather, ""));
-		add(new IDUMODataTypeRawString(DESCRIPTION, description, ""));
+		add(new IDUMODataTypeRawString(LOCATION, location, "livedoor location"));
+		add(new IDUMODataTypeRawString(DATE, date, "livedoor date"));
+		add(new IDUMODataTypeRawNumber(MAX_TEMP, maxTemp, "livedoor max temp"));
+		add(new IDUMODataTypeRawNumber(MIN_TEMP, minTemp, "livedoor min temp"));
+		add(new IDUMODataTypeRawString(WEATHER, weather, "livedoor weather"));
+		add(new IDUMODataTypeRawString(DESCRIPTION, description, "livedoor description"));
 	}
 
 	public String getLocation() {

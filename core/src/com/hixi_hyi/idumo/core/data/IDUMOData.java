@@ -21,15 +21,21 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRaw;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 public abstract class IDUMOData {
 	private Map<String, IDUMODataTypeRaw> raw = new TreeMap<String, IDUMODataTypeRaw>();
 
 	public IDUMODataTypeRaw add(IDUMODataTypeRaw value) {
+//		IDUMOLogManager.debug(value.getName());
+//		IDUMOLogManager.debug(value.getValue());
 		return raw.put(value.getName(), value);
 	}
 
 	public Object getValue(String name) {
+//		IDUMOLogManager.debug(name);
+//		IDUMOLogManager.debug(raw.get(name));
+//		IDUMOLogManager.debug(raw.get(name).getValue());
 		return raw.get(name).getValue();
 	}
 
@@ -44,7 +50,7 @@ public abstract class IDUMOData {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("{");
+		sb.append("IDUMOData{");
 		for (Map.Entry<String, IDUMODataTypeRaw> entry : raw.entrySet()) {
 			sb.append("[\"");
 			sb.append(entry.getKey());

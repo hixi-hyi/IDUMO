@@ -35,10 +35,9 @@ public class StringConcatHandler_Suffix implements IDUMOSendable, IDUMOReceivabl
 	}
 
 	@Override
-	public boolean setSender(IDUMOSendable... senders) throws IDUMOException {
+	public void setSender(IDUMOSendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		this.provider = senders[0];
-		return true;
 	}
 
 	@Override

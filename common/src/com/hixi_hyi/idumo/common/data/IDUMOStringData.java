@@ -26,8 +26,13 @@ public class IDUMOStringData extends IDUMOData {
 	public IDUMOStringData(String n) {
 		add(new IDUMODataTypeRawString(string, n, "Primitive : String"));
 	}
+	
+	public IDUMOStringData(IDUMODataTypeRawString raw){
+		add(new IDUMODataTypeRawString(string, raw.getValue(), raw.getSummary()));
+	}
 
 	public String getString() {
-		return (String) getValue(string);
+		String s = (String)getValue(string);
+		return s;
 	}
 }

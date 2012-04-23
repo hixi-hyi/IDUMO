@@ -25,7 +25,6 @@ public class LivedoorWeatherProvider implements IDUMOSendable {
 
 	@Override
 	public IDUMODataFlowing onCall() {
-		IDUMOLogManager.log();
 		IDUMODataFlowing p = new IDUMODataFlowing();
 		p.add(weather.getData());
 		return p;

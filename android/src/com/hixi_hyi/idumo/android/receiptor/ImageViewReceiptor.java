@@ -38,14 +38,13 @@ public class ImageViewReceiptor extends ImageView implements IDUMOReceivable, ID
 	}
 	
 	@Override
-	public boolean setSender(IDUMOSendable... senders) throws IDUMOException {
+	public void setSender(IDUMOSendable... senders) throws IDUMOException {
 		IDUMOSendable sender = senders[0];
 		// ArrayList<Class<?>> list = new
 		// ArrayList<Class<?>>(sender.getDataType());
 		// if (list.get(0) == Bitmap.class) {
 		// return true;
 		// }
-		return false;
 	}
 	
 	@Override

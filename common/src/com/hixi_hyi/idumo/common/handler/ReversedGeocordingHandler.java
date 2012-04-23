@@ -44,14 +44,13 @@ public class ReversedGeocordingHandler implements IDUMOSendable, IDUMOReceivable
 	}
 
 	@Override
-	public boolean setSender(IDUMOSendable... senders) throws IDUMOException {
+	public void setSender(IDUMOSendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		v1Type.validate(senders);
 		this.senders.clear();
 		for (IDUMOSendable s : senders) {
 			this.senders.add(s);
 		}
-		return true;
 	}
 
 	@Override

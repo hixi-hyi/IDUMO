@@ -44,10 +44,10 @@ public class IDUMODataTypeRawString implements IDUMODataTypeRaw {
 		return String.class;
 	}
 
-	@Override
-	public String toString() {
-		return String.format("String[%s:%s]", name, value);
-	}
+//	@Override
+//	public String toString() {
+//		return String.format("String[%s:%s:%s]", name, value,summary);
+//	}
 
 	@Override
 	public String getSummary() {

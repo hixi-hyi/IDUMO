@@ -59,12 +59,12 @@ public class TextViewReceiptor extends TextView implements IDUMOReceivable, IDUM
 	}
 	
 	@Override
-	public boolean setSender(IDUMOSendable... handler) {
+	public void setSender(IDUMOSendable... handler) {
 		senders.clear();
 		for (IDUMOSendable s : handler) {
 			senders.add(s);
 		}
-		return true;
+		
 	}
 	
 	@Override

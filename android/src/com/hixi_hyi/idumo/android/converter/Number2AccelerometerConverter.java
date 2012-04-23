@@ -35,7 +35,7 @@ public class Number2AccelerometerConverter implements IDUMOSendable, IDUMOReceiv
 	}
 	
 	@Override
-	public boolean setSender(IDUMOSendable... senders) throws IDUMOException {
+	public void setSender(IDUMOSendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		vType1.validate(senders);
 		vType2.validate(senders);
@@ -43,7 +43,6 @@ public class Number2AccelerometerConverter implements IDUMOSendable, IDUMOReceiv
 		for (IDUMOSendable s : senders) {
 			sender.add(s);
 		}
-		return true;
 	}
 	
 	@Override

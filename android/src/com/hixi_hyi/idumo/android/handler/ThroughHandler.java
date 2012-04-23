@@ -25,10 +25,9 @@ public class ThroughHandler implements IDUMOSendable, IDUMOReceivable {
 	}
 	
 	@Override
-	public boolean setSender(IDUMOSendable... provider) throws IDUMOException {
+	public void setSender(IDUMOSendable... provider) throws IDUMOException {
 		vSize.validate(provider);
 		this.provider = provider[0];
-		return true;
 	}
 	
 	@Override

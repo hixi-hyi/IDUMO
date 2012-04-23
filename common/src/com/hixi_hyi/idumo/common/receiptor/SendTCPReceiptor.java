@@ -54,11 +54,10 @@ public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController,
 	}
 
 	@Override
-	public boolean setSender(IDUMOSendable... senders) throws IDUMOException {
+	public void setSender(IDUMOSendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		vType.validate(senders);
 		this.sender = senders[0];
-		return true;
 	}
 
 	@Override

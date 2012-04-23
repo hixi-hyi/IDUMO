@@ -1,13 +1,22 @@
 package com.hixi_hyi.idumo.console.receiptor;
 
 import java.util.ArrayList;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
+import com.hixi_hyi.idumo.common.data.IDUMOStringData;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
+import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnectSingle;
+import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawString;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import com.hixi_hyi.idumo.core.util.IDUMOLogger;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 /**
  * Systemoutに出力するReceiptor
@@ -17,51 +26,25 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
  */
 public class ConsoleViewReceiptor implements IDUMOReceivable, IDUMORunnable {
 
-	private ArrayList<IDUMOSendable> senders;
-
-	public ConsoleViewReceiptor() {
-		senders = new ArrayList<IDUMOSendable>();
-	}
+	private IDUMOSendable sender;
+	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
 
 	@Override
 	public void run() {
-		for (IDUMOSendable sender : senders) {
-			if (!sender.isReady()) {
-				return;
-			}
-		}
-		StringBuilder sb = new StringBuilder();
-		for (IDUMOSendable sender : senders) {
-			for (Object o : sender.onCall()) {
-				sb.append(o.toString());
-			}
-			sb.append("\n");
-		}
-
-		System.out.println(sb.toString());
-
+		IDUMODataFlowing flowdata =  sender.onCall();
+		IDUMOStringData data = (IDUMOStringData) flowdata.next();
+		System.out.println(data.getString());
 	}
 
 	@Override
-	public boolean setSender(IDUMOSendable... handler) {
-		senders.clear();
-		for (IDUMOSendable s : handler) {
-			senders.add(s);
-		}
-		return true;
+	public void setSender(IDUMOSendable... handler) throws IDUMOException {
+		vSize.validate(handler);
+		sender = handler[0];
 	}
 
 	@Override
 	public boolean isReady() {
-		if (senders.size() == 0) {
-			return false;
-		}
-		for (IDUMOSendable sender : senders) {
-			if (!sender.isReady()) {
-				return false;
-			}
-		}
-		return true;
+		return sender.isReady();
 	}
 
 	@Override
