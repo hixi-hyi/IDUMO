@@ -4,6 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/IDUMOCommon"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/IDUMOCore"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/IDUMOForConsole"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/IDUMOForAndroid"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
