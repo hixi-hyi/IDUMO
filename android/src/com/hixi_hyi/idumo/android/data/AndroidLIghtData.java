@@ -20,44 +20,18 @@ package com.hixi_hyi.idumo.android.data;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 
-public class IDUMOAndroidGPSData extends IDUMOData {
-	public static final String	LATITUDE	= "latitude";
-	public static final String	LONGITUDE	= "longitude";
-	public static final String	ALTITUDE	= "altitude";
-	public static final String	TIME		= "time";
-	public static final String	BEARING		= "bearing";
-	public static final String	SPEED		= "speed";
+/**
+ * @author Hiroyoshi HOUCHI
+ * @version 2.0
+ */
+public class AndroidLIghtData extends IDUMOData {
+	public static final String	LIGHT	= "light";
 	
-	public IDUMOAndroidGPSData(double latitude, double longitude, double altitude, long time, float bearing, float speed) {
-		add(new IDUMODataTypeRawNumber(LATITUDE, latitude, "Android GPS latitude"));
-		add(new IDUMODataTypeRawNumber(LONGITUDE, longitude, "Android GPS"));
-		add(new IDUMODataTypeRawNumber(ALTITUDE, altitude, "Android GPS"));
-		add(new IDUMODataTypeRawNumber(TIME, time, "Android GPS"));
-		add(new IDUMODataTypeRawNumber(BEARING, bearing, "Android GPS"));
-		add(new IDUMODataTypeRawNumber(SPEED, speed, "Android GPS"));
+	public AndroidLIghtData(float light) {
+		add(new IDUMODataTypeRawNumber(LIGHT, light, "Android Light"));
 	}
 	
-	public double getLatitude() {
-		return (Double) getValue(LATITUDE);
-	}
-	
-	public double getLongitude() {
-		return (Double) getValue(LONGITUDE);
-	}
-	
-	public double getAltitude() {
-		return (Double) getValue(ALTITUDE);
-	}
-	
-	public long getTime() {
-		return (Long) getValue(TIME);
-	}
-	
-	public float getBearing() {
-		return (Float) getValue(BEARING);
-	}
-	
-	public float getSpeed() {
-		return (Float) getValue(SPEED);
+	public float getLight() {
+		return (Float) getValue(LIGHT);
 	}
 }

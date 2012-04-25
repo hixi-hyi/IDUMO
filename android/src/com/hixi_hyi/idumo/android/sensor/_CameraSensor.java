@@ -17,92 +17,73 @@
  */
 package com.hixi_hyi.idumo.android.sensor;
 
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
+import java.io.IOException;
 
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.hardware.Camera;
+import android.hardware.Camera.Parameters;
+import android.hardware.Camera.PictureCallback;
+import android.view.SurfaceHolder;
+import android.view.SurfaceHolder.Callback;
+import android.view.SurfaceView;
 
-/**
- * 温度センサ
- * 
- * @author Hiroyoshi HOUCHI
- * 
- */
-public enum TemperatureSensor implements SensorEventListener {
+public class _CameraSensor extends SurfaceView implements Callback, PictureCallback {
+	private Camera	camera;
+	private Bitmap	picture;
+	private boolean	isReady;
 	
-	INSTANCE;
-	
-	private SensorManager	sensorManager;
-	private Sensor			sensor;
-	private int				accurary;
-	private float			temp;
-	private boolean			isReady;
-	private boolean			isInit;
-	
-	/**
-	 * @return accurary
-	 */
-	public int getAccurary() {
-		return accurary;
+	public _CameraSensor(Context context) {
+		super(context);
+		SurfaceHolder holder = getHolder();
+		holder.addCallback(this);
+		holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 	}
 	
 	/**
-	 * @return temp
+	 * @return picture
 	 */
-	public float getTemperature() {
-		return temp;
+	public Bitmap getPicture() {
+		return picture;
 	}
 	
-	public void init(SensorManager manager) {
-		isInit = true;
-		this.sensorManager = manager;
-	}
-	
-	public boolean isInit() {
-		return isInit;
-	}
-	
-	/**
-	 * @return isReady
-	 */
 	public boolean isReady() {
 		return isReady;
 	}
 	
 	@Override
-	public void onAccuracyChanged(Sensor sensor, int accuracy) {
-		if (sensor.getType() == useSensorType()) {
-			this.accurary = accuracy;
+	public void onPictureTaken(byte[] data, Camera camera) {
+		picture = BitmapFactory.decodeByteArray(data, 0, data.length, null);
+		// camera.startPreview();
+	}
+	
+	@Override
+	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+		Parameters p = camera.getParameters();
+		p.setPreviewSize(width, height);
+		camera.startPreview();
+	}
+	
+	@Override
+	public void surfaceCreated(SurfaceHolder holder) {
+		camera = Camera.open();
+		try {
+			camera.setPreviewDisplay(holder);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 	
 	@Override
-	public void onSensorChanged(SensorEvent event) {
-		IDUMOLogManager.log();
-		if (event.sensor.getType() == useSensorType()) {
-			temp = event.values[0];
-			isReady = true;
-		}
+	public void surfaceDestroyed(SurfaceHolder holder) {
+		camera.stopPreview();
+		camera.release();
 	}
 	
-	public void register() {
-		if (sensor == null) {
-			sensor = sensorManager.getDefaultSensor(useSensorType());
-			sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI);
-		}
-	}
-	
-	public void unregister() {
-		if (sensor != null) {
-			sensor = null;
-			sensorManager.unregisterListener(this);
-		}
-	}
-	
-	public int useSensorType() {
-		return Sensor.TYPE_TEMPERATURE;
+	public void takePicture() {
+		camera.takePicture(null, null, this);
+		isReady = true;
 	}
 	
 }

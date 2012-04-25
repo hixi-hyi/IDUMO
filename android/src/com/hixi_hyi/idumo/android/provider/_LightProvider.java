@@ -2,11 +2,11 @@ package com.hixi_hyi.idumo.android.provider;
 
 import android.app.Activity;
 import android.content.Context;
-import android.location.LocationManager;
+import android.hardware.SensorManager;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
-import com.hixi_hyi.idumo.android.data.IDUMOAndroidGPSData;
-import com.hixi_hyi.idumo.android.sensor.GPSSensor;
+import com.hixi_hyi.idumo.android.data.AndroidLIghtData;
+import com.hixi_hyi.idumo.android.sensor.LightSensor;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
@@ -14,39 +14,35 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
- * GPS情報を取得できるProvider
+ * Android上の光センサの情報を取得できるProvider
  * 
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class GPSProvider implements IDUMOSendable, AndroidController {
+public class _LightProvider implements IDUMOSendable, AndroidController {
 	
-	private GPSSensor	gps;
+	private LightSensor	light;
 	
-	public GPSProvider(Activity activity) {
-		GPSSensor gpsSensor = GPSSensor.INSTANCE;
-		if (!gpsSensor.isInit()) {
-			LocationManager location = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-			gpsSensor.init(location);
+	public _LightProvider(Activity activity) {
+		LightSensor lightSensor = LightSensor.INSTANCE;
+		if (!lightSensor.isInit()) {
+			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+			lightSensor.init(sensor);
 		}
-		this.gps = gpsSensor;
+		this.light = lightSensor;
 	}
 	
 	@Override
 	public IDUMODataFlowing onCall() {
 		IDUMOLogManager.log();
-		if (!isReady()) {
-			return null;
-		}
-		
 		IDUMODataFlowing p = new IDUMODataFlowing();
-		p.add(new IDUMOAndroidGPSData(gps.getLatitude(), gps.getLongitude(), gps.getAltitude(), gps.getTime(), gps.getBearing(), gps.getSpeed()));
+		p.add(new AndroidLIghtData(light.getLight()));
 		return p;
 	}
 	
 	@Override
 	public boolean isReady() {
-		return gps.isReady();
+		return light.isReady();
 	}
 	
 	@Override
@@ -54,7 +50,7 @@ public class GPSProvider implements IDUMOSendable, AndroidController {
 	
 	@Override
 	public void onIdumoPause() {
-		gps.unregister();
+		light.unregister();
 	}
 	
 	@Override
@@ -62,7 +58,7 @@ public class GPSProvider implements IDUMOSendable, AndroidController {
 	
 	@Override
 	public void onIdumoResume() {
-		gps.register();
+		light.register();
 	}
 	
 	@Override
@@ -73,7 +69,6 @@ public class GPSProvider implements IDUMOSendable, AndroidController {
 	
 	@Override
 	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(IDUMOAndroidGPSData.class);
+		return new IDUMODataTypeConnectSingle(AndroidLIghtData.class);
 	}
-	
 }

@@ -9,7 +9,7 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
-public class ThroughHandler implements IDUMOSendable, IDUMOReceivable {
+public class _ThroughHandler implements IDUMOSendable, IDUMOReceivable {
 	
 	private IDUMOSendable		provider;
 	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);

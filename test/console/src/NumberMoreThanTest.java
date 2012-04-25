@@ -22,13 +22,13 @@ public class NumberMoreThanTest extends IDUMOConsoleWrapper {
 				add(idumo2);
 				ConsoleViewReceiptor idumoR = new ConsoleViewReceiptor();
 				add(idumoR);
-
+				
 				connect(idumo0, idumo1);
 				connect(idumo1, idumo2);
 				connect(idumo2, idumoR);
-
+				
 			}
-
+			
 			@Override
 			public void onIdumoPrepare() {
 				setLoopCount(1);
@@ -36,7 +36,7 @@ public class NumberMoreThanTest extends IDUMOConsoleWrapper {
 			}
 		});
 	}
-
+	
 	public static void main(String[] args) {
 		IDUMOLogManager.DEBUG = true;
 		IDUMOLogManager.LOGGER = new IDUMOConsoleLogger();

@@ -5,44 +5,43 @@ import android.content.Context;
 import android.hardware.SensorManager;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
-import com.hixi_hyi.idumo.android.data.IDUMOAndroidProximityData;
-import com.hixi_hyi.idumo.android.sensor.ProximitySensor;
+import com.hixi_hyi.idumo.android.data.AndroidTemperatureData;
+import com.hixi_hyi.idumo.android.sensor.TemperatureSensor;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
- * Android上の近接センサの情報を取得できるProvider
+ * Android上の温度センサの情報を取得できるProvider
  * 
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class ProximityProvider implements IDUMOSendable, AndroidController {
+public class _TemperatureProvider implements IDUMOSendable, AndroidController {
 	
-	private ProximitySensor	proximity;
+	private TemperatureSensor	sensor;
 	
-	public ProximityProvider(Activity activity) {
-		ProximitySensor proximitySensor = ProximitySensor.INSTANCE;
-		if (!proximitySensor.isInit()) {
+	public _TemperatureProvider(Activity activity) {
+		TemperatureSensor temperatureSensor = TemperatureSensor.INSTANCE;
+		if (!temperatureSensor.isInit()) {
 			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-			proximitySensor.init(sensor);
+			temperatureSensor.init(sensor);
 		}
-		this.proximity = proximitySensor;
+		this.sensor = temperatureSensor;
 	}
 	
 	@Override
 	public IDUMODataFlowing onCall() {
 		IDUMOLogManager.log();
 		IDUMODataFlowing p = new IDUMODataFlowing();
-		p.add(new IDUMOAndroidProximityData(proximity.getProximity()));
+		p.add(new AndroidTemperatureData(sensor.getTemperature()));
 		return p;
 	}
 	
 	@Override
 	public boolean isReady() {
-		return proximity.isReady();
+		return sensor.isReady();
 	}
 	
 	@Override
@@ -50,7 +49,7 @@ public class ProximityProvider implements IDUMOSendable, AndroidController {
 	
 	@Override
 	public void onIdumoPause() {
-		proximity.unregister();
+		sensor.unregister();
 	}
 	
 	@Override
@@ -58,7 +57,7 @@ public class ProximityProvider implements IDUMOSendable, AndroidController {
 	
 	@Override
 	public void onIdumoResume() {
-		proximity.register();
+		sensor.register();
 	}
 	
 	@Override
@@ -69,7 +68,8 @@ public class ProximityProvider implements IDUMOSendable, AndroidController {
 	
 	@Override
 	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(IDUMOAndroidProximityData.class);
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 	
 }

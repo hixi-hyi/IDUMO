@@ -20,22 +20,48 @@ package com.hixi_hyi.idumo.android.data;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 
-public class IDUMOAndroidAccelerometerData extends IDUMOData {
-	public IDUMOAndroidAccelerometerData(float x, float y, float z) {
-		add(new IDUMODataTypeRawNumber("x", x, "Android Accelerometer X"));
-		add(new IDUMODataTypeRawNumber("y", y, "Android Accelerometer Y"));
-		add(new IDUMODataTypeRawNumber("z", z, "Android Accelerometer Z"));
+/**
+ * @author Hiroyoshi HOUCHI
+ * @version 2.0
+ */
+public class AndroidGPSData extends IDUMOData {
+	public static final String	LATITUDE	= "latitude";
+	public static final String	LONGITUDE	= "longitude";
+	public static final String	ALTITUDE	= "altitude";
+	public static final String	TIME		= "time";
+	public static final String	BEARING		= "bearing";
+	public static final String	SPEED		= "speed";
+	
+	public AndroidGPSData(double latitude, double longitude, double altitude, long time, float bearing, float speed) {
+		add(new IDUMODataTypeRawNumber(LATITUDE, latitude, "Android GPS latitude"));
+		add(new IDUMODataTypeRawNumber(LONGITUDE, longitude, "Android GPS"));
+		add(new IDUMODataTypeRawNumber(ALTITUDE, altitude, "Android GPS"));
+		add(new IDUMODataTypeRawNumber(TIME, time, "Android GPS"));
+		add(new IDUMODataTypeRawNumber(BEARING, bearing, "Android GPS"));
+		add(new IDUMODataTypeRawNumber(SPEED, speed, "Android GPS"));
 	}
 	
-	public float getX() {
-		return (Float) getValue("x");
+	public double getLatitude() {
+		return (Double) getValue(LATITUDE);
 	}
 	
-	public float getY() {
-		return (Float) getValue("y");
+	public double getLongitude() {
+		return (Double) getValue(LONGITUDE);
 	}
 	
-	public float getZ() {
-		return (Float) getValue("z");
+	public double getAltitude() {
+		return (Double) getValue(ALTITUDE);
+	}
+	
+	public long getTime() {
+		return (Long) getValue(TIME);
+	}
+	
+	public float getBearing() {
+		return (Float) getValue(BEARING);
+	}
+	
+	public float getSpeed() {
+		return (Float) getValue(SPEED);
 	}
 }

@@ -20,14 +20,26 @@ package com.hixi_hyi.idumo.android.data;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 
-public class IDUMOAndroidProximityData extends IDUMOData {
-	public static final String	PROXMITY	= "proximity";
-	
-	public IDUMOAndroidProximityData(float proximity) {
-		add(new IDUMODataTypeRawNumber(PROXMITY, proximity, "Android Proximity"));
+/**
+ * @author Hiroyoshi HOUCHI
+ * @version 2.0
+ */
+public class AndroidMagneticFieldData extends IDUMOData {
+	public AndroidMagneticFieldData(float x, float y, float z) {
+		add(new IDUMODataTypeRawNumber("x", x, "Android MagneticField X"));
+		add(new IDUMODataTypeRawNumber("y", y, "Android MagneticField Y"));
+		add(new IDUMODataTypeRawNumber("z", z, "Android MagneticField Z"));
 	}
 	
-	public float getProximity() {
-		return (Float) getValue(PROXMITY);
+	public float getX() {
+		return (Float) getValue("x");
+	}
+	
+	public float getY() {
+		return (Float) getValue("y");
+	}
+	
+	public float getZ() {
+		return (Float) getValue("z");
 	}
 }

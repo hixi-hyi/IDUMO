@@ -20,14 +20,18 @@ package com.hixi_hyi.idumo.android.data;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 
-public class IDUMOAndroidLIghtData extends IDUMOData {
-	public static final String	LIGHT	= "light";
+/**
+ * @author Hiroyoshi HOUCHI
+ * @version 2.0
+ */
+public class AndroidProximityData extends IDUMOData {
+	public static final String	PROXMITY	= "proximity";
 	
-	public IDUMOAndroidLIghtData(float light) {
-		add(new IDUMODataTypeRawNumber(LIGHT, light, "Android Light"));
+	public AndroidProximityData(float proximity) {
+		add(new IDUMODataTypeRawNumber(PROXMITY, proximity, "Android Proximity"));
 	}
 	
-	public float getLight() {
-		return (Float) getValue(LIGHT);
+	public float getProximity() {
+		return (Float) getValue(PROXMITY);
 	}
 }

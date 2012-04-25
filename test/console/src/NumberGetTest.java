@@ -19,12 +19,12 @@ public class NumberGetTest extends IDUMOConsoleWrapper {
 				add(idumo1);
 				ConsoleViewReceiptor idumoR = new ConsoleViewReceiptor();
 				add(idumoR);
-
+				
 				connect(idumo0, idumo1);
 				connect(idumo1, idumoR);
-
+				
 			}
-
+			
 			@Override
 			public void onIdumoPrepare() {
 				setLoopCount(1);
@@ -32,7 +32,7 @@ public class NumberGetTest extends IDUMOConsoleWrapper {
 			}
 		});
 	}
-
+	
 	public static void main(String[] args) {
 		IDUMOLogManager.DEBUG = true;
 		IDUMOLogManager.LOGGER = new IDUMOConsoleLogger();

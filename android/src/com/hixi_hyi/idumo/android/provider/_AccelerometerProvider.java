@@ -5,8 +5,8 @@ import android.content.Context;
 import android.hardware.SensorManager;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
-import com.hixi_hyi.idumo.android.data.IDUMOAndroidMagneticFieldData;
-import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
+import com.hixi_hyi.idumo.android.data.AndroidAccelerometerData;
+import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
@@ -14,36 +14,36 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
- * Android上の地磁気センサの情報を取得できるProvider
+ * Android上の加速度センサの値を提供するProvider
  * 
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class MagneticFieldProvider implements IDUMOSendable, AndroidController {
+public class _AccelerometerProvider implements IDUMOSendable, AndroidController {
 	
-	private MagneticFieldSensor	magnet;
+	private AccelerometerSensor	accel;
 	
-	public MagneticFieldProvider(Activity activity) {
-		MagneticFieldSensor magneticFieldSensor = MagneticFieldSensor.INSTANCE;
-		if (!magneticFieldSensor.isInit()) {
+	public _AccelerometerProvider(Activity activity) {
+		AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
+		if (!accelerometerSensor.isInit()) {
 			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-			magneticFieldSensor.init(sensor);
+			accelerometerSensor.init(sensor);
 		}
-		this.magnet = magneticFieldSensor;
+		this.accel = accelerometerSensor;
 	}
 	
 	@Override
 	public IDUMODataFlowing onCall() {
 		IDUMOLogManager.log();
 		IDUMODataFlowing p = new IDUMODataFlowing();
-		IDUMOAndroidMagneticFieldData data = new IDUMOAndroidMagneticFieldData(magnet.getX(), magnet.getY(), magnet.getZ());
+		AndroidAccelerometerData data = new AndroidAccelerometerData(accel.getX(), accel.getY(), accel.getZ());
 		p.add(data);
 		return p;
 	}
 	
 	@Override
 	public boolean isReady() {
-		return magnet.isReady();
+		return accel.isReady();
 	}
 	
 	@Override
@@ -51,7 +51,7 @@ public class MagneticFieldProvider implements IDUMOSendable, AndroidController {
 	
 	@Override
 	public void onIdumoPause() {
-		magnet.unregister();
+		accel.unregister();
 	}
 	
 	@Override
@@ -59,7 +59,7 @@ public class MagneticFieldProvider implements IDUMOSendable, AndroidController {
 	
 	@Override
 	public void onIdumoResume() {
-		magnet.register();
+		accel.register();
 	}
 	
 	@Override
@@ -70,7 +70,7 @@ public class MagneticFieldProvider implements IDUMOSendable, AndroidController {
 	
 	@Override
 	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(IDUMOAndroidMagneticFieldData.class);
+		return new IDUMODataTypeConnectSingle(AndroidAccelerometerData.class);
 	}
 	
 }

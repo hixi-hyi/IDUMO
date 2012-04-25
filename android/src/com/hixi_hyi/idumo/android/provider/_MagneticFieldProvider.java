@@ -5,43 +5,45 @@ import android.content.Context;
 import android.hardware.SensorManager;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
-import com.hixi_hyi.idumo.android.data.IDUMOAndroidTemperatureData;
-import com.hixi_hyi.idumo.android.sensor.TemperatureSensor;
+import com.hixi_hyi.idumo.android.data.AndroidMagneticFieldData;
+import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
- * Android上の温度センサの情報を取得できるProvider
+ * Android上の地磁気センサの情報を取得できるProvider
  * 
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class TemperatureProvider implements IDUMOSendable, AndroidController {
+public class _MagneticFieldProvider implements IDUMOSendable, AndroidController {
 	
-	private TemperatureSensor	sensor;
+	private MagneticFieldSensor	magnet;
 	
-	public TemperatureProvider(Activity activity) {
-		TemperatureSensor temperatureSensor = TemperatureSensor.INSTANCE;
-		if (!temperatureSensor.isInit()) {
+	public _MagneticFieldProvider(Activity activity) {
+		MagneticFieldSensor magneticFieldSensor = MagneticFieldSensor.INSTANCE;
+		if (!magneticFieldSensor.isInit()) {
 			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-			temperatureSensor.init(sensor);
+			magneticFieldSensor.init(sensor);
 		}
-		this.sensor = temperatureSensor;
+		this.magnet = magneticFieldSensor;
 	}
 	
 	@Override
 	public IDUMODataFlowing onCall() {
 		IDUMOLogManager.log();
 		IDUMODataFlowing p = new IDUMODataFlowing();
-		p.add(new IDUMOAndroidTemperatureData(sensor.getTemperature()));
+		AndroidMagneticFieldData data = new AndroidMagneticFieldData(magnet.getX(), magnet.getY(), magnet.getZ());
+		p.add(data);
 		return p;
 	}
 	
 	@Override
 	public boolean isReady() {
-		return sensor.isReady();
+		return magnet.isReady();
 	}
 	
 	@Override
@@ -49,7 +51,7 @@ public class TemperatureProvider implements IDUMOSendable, AndroidController {
 	
 	@Override
 	public void onIdumoPause() {
-		sensor.unregister();
+		magnet.unregister();
 	}
 	
 	@Override
@@ -57,7 +59,7 @@ public class TemperatureProvider implements IDUMOSendable, AndroidController {
 	
 	@Override
 	public void onIdumoResume() {
-		sensor.register();
+		magnet.register();
 	}
 	
 	@Override
@@ -68,8 +70,7 @@ public class TemperatureProvider implements IDUMOSendable, AndroidController {
 	
 	@Override
 	public IDUMODataTypeConnect sendableType() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		return new IDUMODataTypeConnectSingle(AndroidMagneticFieldData.class);
 	}
 	
 }

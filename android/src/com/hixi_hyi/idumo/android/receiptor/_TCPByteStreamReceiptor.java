@@ -21,14 +21,14 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class TCPByteStreamReceiptor implements IDUMOReceivable, AndroidController, IDUMORunnable {
+public class _TCPByteStreamReceiptor implements IDUMOReceivable, AndroidController, IDUMORunnable {
 	private String			ip;
 	private int				port;
 	private Socket			socket;
 	private OutputStream	outstream;
 	private IDUMOSendable	sender;
 	
-	public TCPByteStreamReceiptor(String ip, int port) {
+	public _TCPByteStreamReceiptor(String ip, int port) {
 		this.ip = ip;
 		this.port = port;
 		socket = new Socket();

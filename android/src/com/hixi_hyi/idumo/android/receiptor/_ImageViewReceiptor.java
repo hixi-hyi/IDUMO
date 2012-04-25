@@ -18,12 +18,12 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class ImageViewReceiptor extends ImageView implements IDUMOReceivable, IDUMORunnable {
+public class _ImageViewReceiptor extends ImageView implements IDUMOReceivable, IDUMORunnable {
 	
 	private IDUMOSendable	sender;
 	private Activity		activity;
 	
-	public ImageViewReceiptor(Context context) {
+	public _ImageViewReceiptor(Context context) {
 		super(context);
 		activity = (Activity) context;
 		activity.setContentView(this);

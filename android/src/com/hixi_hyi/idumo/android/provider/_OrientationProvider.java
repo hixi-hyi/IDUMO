@@ -5,7 +5,7 @@ import android.content.Context;
 import android.hardware.SensorManager;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
-import com.hixi_hyi.idumo.android.data.IDUMOAndroidOrientationData;
+import com.hixi_hyi.idumo.android.data.AndroidOrientationData;
 import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
 import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
 import com.hixi_hyi.idumo.android.sensor.OrientationSensor;
@@ -21,11 +21,11 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class OrientationProvider implements IDUMOSendable, AndroidController {
+public class _OrientationProvider implements IDUMOSendable, AndroidController {
 	
 	private OrientationSensor	sensor;
 	
-	public OrientationProvider(Activity activity) {
+	public _OrientationProvider(Activity activity) {
 		OrientationSensor orientationSensor = OrientationSensor.INSTANCE;
 		if (!orientationSensor.isInit()) {
 			AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
@@ -47,7 +47,7 @@ public class OrientationProvider implements IDUMOSendable, AndroidController {
 	public IDUMODataFlowing onCall() {
 		IDUMOLogManager.log();
 		IDUMODataFlowing p = new IDUMODataFlowing();
-		p.add(new IDUMOAndroidOrientationData(sensor.getPitch(), sensor.getRoll(), sensor.getAzmuth()));
+		p.add(new AndroidOrientationData(sensor.getPitch(), sensor.getRoll(), sensor.getAzmuth()));
 		return p;
 	}
 	
@@ -80,6 +80,6 @@ public class OrientationProvider implements IDUMOSendable, AndroidController {
 	
 	@Override
 	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(IDUMOAndroidOrientationData.class);
+		return new IDUMODataTypeConnectSingle(AndroidOrientationData.class);
 	}
 }

@@ -20,14 +20,26 @@ package com.hixi_hyi.idumo.android.data;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 
-public class IDUMOAndroidTemperatureData extends IDUMOData {
-	public static final String	TEMPERATURE	= "temperature";
-	
-	public IDUMOAndroidTemperatureData(float temperature) {
-		add(new IDUMODataTypeRawNumber(TEMPERATURE, temperature, "Android Temperature"));
+/**
+ * @author Hiroyoshi HOUCHI
+ * @version 2.0
+ */
+public class AndroidAccelerometerData extends IDUMOData {
+	public AndroidAccelerometerData(float x, float y, float z) {
+		add(new IDUMODataTypeRawNumber("x", x, "Android Accelerometer X"));
+		add(new IDUMODataTypeRawNumber("y", y, "Android Accelerometer Y"));
+		add(new IDUMODataTypeRawNumber("z", z, "Android Accelerometer Z"));
 	}
 	
-	public float getProximity() {
-		return (Float) getValue(TEMPERATURE);
+	public float getX() {
+		return (Float) getValue("x");
+	}
+	
+	public float getY() {
+		return (Float) getValue("y");
+	}
+	
+	public float getZ() {
+		return (Float) getValue("z");
 	}
 }

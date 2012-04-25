@@ -18,12 +18,12 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class TextViewReceiptor extends TextView implements IDUMOReceivable, IDUMORunnable {
+public class _TextViewReceiptor extends TextView implements IDUMOReceivable, IDUMORunnable {
 	
 	private ArrayList<IDUMOSendable>	senders;
 	private Activity					activity;
 	
-	public TextViewReceiptor(Context context) {
+	public _TextViewReceiptor(Context context) {
 		super(context);
 		senders = new ArrayList<IDUMOSendable>();
 		activity = (Activity) context;

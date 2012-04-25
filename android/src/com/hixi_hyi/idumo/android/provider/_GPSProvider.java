@@ -2,11 +2,11 @@ package com.hixi_hyi.idumo.android.provider;
 
 import android.app.Activity;
 import android.content.Context;
-import android.hardware.SensorManager;
+import android.location.LocationManager;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
-import com.hixi_hyi.idumo.android.data.IDUMOAndroidAccelerometerData;
-import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
+import com.hixi_hyi.idumo.android.data.AndroidGPSData;
+import com.hixi_hyi.idumo.android.sensor.GPSSensor;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
@@ -14,36 +14,39 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
- * Android上の加速度センサの値を提供するProvider
+ * GPS情報を取得できるProvider
  * 
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class AccelerometerProvider implements IDUMOSendable, AndroidController {
+public class _GPSProvider implements IDUMOSendable, AndroidController {
 	
-	private AccelerometerSensor	accel;
+	private GPSSensor	gps;
 	
-	public AccelerometerProvider(Activity activity) {
-		AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
-		if (!accelerometerSensor.isInit()) {
-			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-			accelerometerSensor.init(sensor);
+	public _GPSProvider(Activity activity) {
+		GPSSensor gpsSensor = GPSSensor.INSTANCE;
+		if (!gpsSensor.isInit()) {
+			LocationManager location = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+			gpsSensor.init(location);
 		}
-		this.accel = accelerometerSensor;
+		this.gps = gpsSensor;
 	}
 	
 	@Override
 	public IDUMODataFlowing onCall() {
 		IDUMOLogManager.log();
+		if (!isReady()) {
+			return null;
+		}
+		
 		IDUMODataFlowing p = new IDUMODataFlowing();
-		IDUMOAndroidAccelerometerData data = new IDUMOAndroidAccelerometerData(accel.getX(), accel.getY(), accel.getZ());
-		p.add(data);
+		p.add(new AndroidGPSData(gps.getLatitude(), gps.getLongitude(), gps.getAltitude(), gps.getTime(), gps.getBearing(), gps.getSpeed()));
 		return p;
 	}
 	
 	@Override
 	public boolean isReady() {
-		return accel.isReady();
+		return gps.isReady();
 	}
 	
 	@Override
@@ -51,7 +54,7 @@ public class AccelerometerProvider implements IDUMOSendable, AndroidController {
 	
 	@Override
 	public void onIdumoPause() {
-		accel.unregister();
+		gps.unregister();
 	}
 	
 	@Override
@@ -59,7 +62,7 @@ public class AccelerometerProvider implements IDUMOSendable, AndroidController {
 	
 	@Override
 	public void onIdumoResume() {
-		accel.register();
+		gps.register();
 	}
 	
 	@Override
@@ -70,7 +73,7 @@ public class AccelerometerProvider implements IDUMOSendable, AndroidController {
 	
 	@Override
 	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(IDUMOAndroidAccelerometerData.class);
+		return new IDUMODataTypeConnectSingle(AndroidGPSData.class);
 	}
 	
 }

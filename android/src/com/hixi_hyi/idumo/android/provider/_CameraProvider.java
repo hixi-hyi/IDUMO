@@ -6,14 +6,14 @@ import java.util.Map;
 import android.app.Activity;
 import android.content.Context;
 
-import com.hixi_hyi.idumo.android.sensor.CameraSensor;
+import com.hixi_hyi.idumo.android.sensor._CameraSensor;
 import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.SenderWithOption;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
-public class CameraProvider implements SenderWithOption {
+public class _CameraProvider implements SenderWithOption {
 	
 	public enum Type implements OptionMethodType {
 		TOUCH("");
@@ -30,12 +30,12 @@ public class CameraProvider implements SenderWithOption {
 	}
 	
 	private Type			methodType;
-	private CameraSensor	camera;
+	private _CameraSensor	camera;
 	private Activity		activity;
 	
-	public CameraProvider(Context context) {
+	public _CameraProvider(Context context) {
 		activity = (Activity) context;
-		camera = new CameraSensor(context);
+		camera = new _CameraSensor(context);
 		methodType = Type.TOUCH;
 	}
 	

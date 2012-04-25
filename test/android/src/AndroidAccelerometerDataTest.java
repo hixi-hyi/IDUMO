@@ -15,13 +15,13 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-import com.hixi_hyi.idumo.android.data.IDUMOAndroidAccelerometerData;
+import com.hixi_hyi.idumo.android.data.AndroidAccelerometerData;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 
 public class AndroidAccelerometerDataTest {
 	public static void main(String args[]) {
-		IDUMOData d = new IDUMOAndroidAccelerometerData(10, 20, 30);
-		IDUMOAndroidAccelerometerData data = (IDUMOAndroidAccelerometerData) d;
+		IDUMOData d = new AndroidAccelerometerData(10, 20, 30);
+		AndroidAccelerometerData data = (AndroidAccelerometerData) d;
 		System.out.println("x(class):" + data.getX());
 		System.out.println("x(raw):" + data.getValue("x"));
 		System.out.println(data);

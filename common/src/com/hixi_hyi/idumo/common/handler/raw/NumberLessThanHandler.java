@@ -34,28 +34,28 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
  * @version 2.0
  */
 public class NumberLessThanHandler implements IDUMOSendable, IDUMOReceivable {
-
+	
 	private IDUMOSendable			sender;
 	private double					condition;
 	private ReceiveValidatorSize	validator	= new ReceiveValidatorSize(1);
 	private ReceiveValidatorType	vType		= new ReceiveValidatorType(1, IDUMODataPrimitiveNumber.class);
-
+	
 	public NumberLessThanHandler(double condition) {
 		this.condition = condition;
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		return sender.isReady();
 	}
-
+	
 	@Override
 	public void setSender(IDUMOSendable... senders) throws IDUMOException {
 		validator.validate(senders);
 		vType.validate(senders);
 		this.sender = senders[0];
 	}
-
+	
 	@Override
 	public IDUMODataFlowing onCall() {
 		IDUMODataPrimitiveNumber number = (IDUMODataPrimitiveNumber) sender.onCall().next();
@@ -67,12 +67,12 @@ public class NumberLessThanHandler implements IDUMOSendable, IDUMOReceivable {
 		}
 		return new IDUMODataFlowing(new IDUMODataPrimitiveBool(false));
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect receivableType() {
 		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveNumber.class);
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect sendableType() {
 		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveBool.class);
