@@ -19,19 +19,19 @@ import org.jdom.input.SAXBuilder;
  * 
  */
 public class _ReversedGeocording {
-
-	private static final String REQUEST_URL = "http://www.finds.jp/ws/rgeocode.php?lat=%f&lon=%f";
-
-	private String requestURL;
-	private boolean isReady;
-
-	private String location;
-
+	
+	private static final String	REQUEST_URL	= "http://www.finds.jp/ws/rgeocode.php?lat=%f&lon=%f";
+	
+	private String				requestURL;
+	private boolean				isReady;
+	
+	private String				location;
+	
 	public _ReversedGeocording(double lat, double lon) {
 		requestURL = String.format(REQUEST_URL, lat, lon);
 		init();
 	}
-
+	
 	public void init() {
 		try {
 			URL accessURL = new URL(requestURL);
@@ -39,12 +39,9 @@ public class _ReversedGeocording {
 			Document doc = new SAXBuilder().build(con.getInputStream());
 			Element root = doc.getRootElement();
 			Namespace ns = root.getNamespace();
-			String pref = root.getChild("result", ns)
-					.getChild("prefecture", ns).getChildText("pname", ns);
-			String mun = root.getChild("result", ns)
-					.getChild("municipality", ns).getChildText("mname", ns);
-			String sec = root.getChild("result", ns).getChild("local", ns)
-					.getChildText("section", ns);
+			String pref = root.getChild("result", ns).getChild("prefecture", ns).getChildText("pname", ns);
+			String mun = root.getChild("result", ns).getChild("municipality", ns).getChildText("mname", ns);
+			String sec = root.getChild("result", ns).getChild("local", ns).getChildText("section", ns);
 			location = pref + mun + sec;
 			isReady = true;
 		} catch (Exception e) {
@@ -52,7 +49,7 @@ public class _ReversedGeocording {
 			isReady = true;
 		}
 	}
-
+	
 	public boolean isReady() {
 		if (isReady) {
 			return true;
@@ -60,9 +57,9 @@ public class _ReversedGeocording {
 		init();
 		return isReady;
 	}
-
+	
 	public String getLocation() {
 		return location;
 	}
-
+	
 }

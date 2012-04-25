@@ -9,20 +9,20 @@ import com.hixi_hyi.idumo.core.exec.IDUMOController;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 
 public class IDUMOConsoleActivity implements IDUMOActivity {
-	private IDUMOComponent component;
-
+	private IDUMOComponent	component;
+	
 	public IDUMOConsoleActivity(IDUMOComponent component) {
 		this.component = component;
 		this.component.setContainer(new IDUMOContainer());
 	}
-
+	
 	@Override
 	public void onIdumoCreated() throws IDUMOException {
 		component.onIdumoMakeFlowChart();
 		component.setup();
 		component.onIdumoPrepare();
 	}
-
+	
 	@Override
 	public void onIdumoStart() {
 		component.onIdumoPrepare();
@@ -31,7 +31,7 @@ public class IDUMOConsoleActivity implements IDUMOActivity {
 		}
 		component.setReady(true);
 	}
-
+	
 	@Override
 	public void onIdumoStop() {
 		for (IDUMOController controller : component.getApplicationControllers()) {
@@ -39,21 +39,19 @@ public class IDUMOConsoleActivity implements IDUMOActivity {
 		}
 		component.setReady(false);
 	}
-
+	
 	@Override
 	public void onIdumoExec() throws IDUMORuntimeException {
 		while (!component.isReady()) {
 			try {
 				Thread.sleep(component.getSleepTime());
-			} catch (InterruptedException e) {
-			}
+			} catch (InterruptedException e) {}
 		}
 		IDUMORunnable runnable = component.getRunnable();
 		while (!runnable.isReady()) {
 			try {
 				Thread.sleep(component.getSleepTime());
-			} catch (InterruptedException e) {
-			}
+			} catch (InterruptedException e) {}
 		}
 		int count = component.getLoopCount();
 		if (count == -1) {
@@ -63,8 +61,7 @@ public class IDUMOConsoleActivity implements IDUMOActivity {
 				}
 				try {
 					Thread.sleep(component.getSleepTime());
-				} catch (InterruptedException e) {
-				}
+				} catch (InterruptedException e) {}
 			}
 		} else {
 			for (int i = 0; i < count;) {
@@ -74,10 +71,9 @@ public class IDUMOConsoleActivity implements IDUMOActivity {
 				}
 				try {
 					Thread.sleep(component.getSleepTime());
-				} catch (InterruptedException e) {
-				}
+				} catch (InterruptedException e) {}
 			}
 		}
-
+		
 	}
 }

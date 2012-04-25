@@ -1,4 +1,3 @@
-
 import com.hixi_hyi.idumo.common.provider.StringProvider;
 import com.hixi_hyi.idumo.console.core.exec.IDUMOConsoleWrapper;
 import com.hixi_hyi.idumo.console.core.util.IDUMOConsoleLogger;
@@ -17,11 +16,11 @@ public class StringProviderTest extends IDUMOConsoleWrapper {
 				add(idumo0);
 				ConsoleViewReceiptor idumo1 = new ConsoleViewReceiptor();
 				add(idumo1);
-
+				
 				connect(idumo0, idumo1);
-
+				
 			}
-
+			
 			@Override
 			public void onIdumoPrepare() {
 				setLoopCount(1);
@@ -29,7 +28,7 @@ public class StringProviderTest extends IDUMOConsoleWrapper {
 			}
 		});
 	}
-
+	
 	public static void main(String[] args) {
 		IDUMOLogManager.DEBUG = true;
 		IDUMOLogManager.LOGGER = new IDUMOConsoleLogger();

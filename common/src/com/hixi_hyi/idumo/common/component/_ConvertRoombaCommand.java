@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class _ConvertRoombaCommand {
-	private static Map<String, Byte> command;
+	private static Map<String, Byte>	command;
 	static {
 		command = new HashMap<String, Byte>();
 		// Geting Started Commands
@@ -40,13 +40,13 @@ public class _ConvertRoombaCommand {
 		command.put("STREAM", (byte) 148);
 		command.put("PAUSE_RESUME_STREAM", (byte) 150);
 	}
-
+	
 	public static boolean containsKey(Object key) {
 		return command.containsKey(key);
 	}
-
+	
 	public static Byte getCommand(String key) {
 		return command.get(key);
 	}
-
+	
 }

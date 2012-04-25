@@ -27,38 +27,36 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController,
-		IDUMORunnable {
-	private String ip;
-	private int port;
-	private Socket socket;
-	private PrintWriter pw;
-	private OutputStream outstream;
-	private IDUMOSendable sender;
-	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
-	private ReceiveValidator vType = new ReceiveValidatorType(1,
-			IDUMODataPrimitiveString.class);
-
+public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController, IDUMORunnable {
+	private String				ip;
+	private int					port;
+	private Socket				socket;
+	private PrintWriter			pw;
+	private OutputStream		outstream;
+	private IDUMOSendable		sender;
+	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
+	private ReceiveValidator	vType	= new ReceiveValidatorType(1, IDUMODataPrimitiveString.class);
+	
 	public SendTCPReceiptor(String ip, int port) {
 		IDUMOLogManager.log();
 		this.ip = ip;
 		this.port = port;
 		socket = new Socket();
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		IDUMOLogManager.log();
 		return sender.isReady() && socket.isConnected();
 	}
-
+	
 	@Override
 	public void setSender(IDUMOSendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		vType.validate(senders);
 		this.sender = senders[0];
 	}
-
+	
 	@Override
 	public void onIdumoStart() {
 		IDUMOLogManager.log();
@@ -72,7 +70,7 @@ public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController,
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	public void onIdumoStop() {
 		try {
@@ -82,7 +80,7 @@ public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController,
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	public void run() {
 		IDUMOLogManager.log();
@@ -99,11 +97,11 @@ public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController,
 			pw.flush();
 		}
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect receivableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
-
+	
 }

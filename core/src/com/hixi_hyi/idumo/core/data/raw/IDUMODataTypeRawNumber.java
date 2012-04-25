@@ -18,36 +18,36 @@
 package com.hixi_hyi.idumo.core.data.raw;
 
 public class IDUMODataTypeRawNumber implements IDUMODataTypeRaw {
-	private String name;
-	private Number value;
-	private String summary;
-
+	private String	name;
+	private Number	value;
+	private String	summary;
+	
 	public IDUMODataTypeRawNumber(String name, Number value, String summary) {
 		this.name = name;
 		this.value = value;
 		this.summary = summary;
 	}
-
+	
 	@Override
 	public String getName() {
 		return name;
 	}
-
+	
 	@Override
 	public Number getValue() {
 		return value;
 	}
-
+	
 	@Override
 	public Class<?> getType() {
 		return Double.class;
 	}
-
+	
 	@Override
 	public String toString() {
 		return String.format("Number[%s:%s]", name, value);
 	}
-
+	
 	@Override
 	public String getSummary() {
 		return summary;

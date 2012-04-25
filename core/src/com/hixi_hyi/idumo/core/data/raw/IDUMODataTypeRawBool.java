@@ -18,36 +18,36 @@
 package com.hixi_hyi.idumo.core.data.raw;
 
 public class IDUMODataTypeRawBool implements IDUMODataTypeRaw {
-	private String name;
-	private Boolean value;
-	private String summary;
-
+	private String	name;
+	private Boolean	value;
+	private String	summary;
+	
 	public IDUMODataTypeRawBool(String name, Boolean value, String summary) {
 		this.name = name;
 		this.value = value;
 		this.summary = summary;
 	}
-
+	
 	@Override
 	public String getName() {
 		return name;
 	}
-
+	
 	@Override
 	public Boolean getValue() {
 		return value;
 	}
-
+	
 	@Override
 	public Class<?> getType() {
 		return Boolean.class;
 	}
-
+	
 	@Override
 	public String toString() {
 		return String.format("Bool[%s:%s]", name, value);
 	}
-
+	
 	@Override
 	public String getSummary() {
 		return summary;

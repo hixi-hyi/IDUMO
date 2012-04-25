@@ -20,11 +20,11 @@ package com.hixi_hyi.idumo.core.data;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 
 public class IDUMODataPrimitiveNumber extends IDUMODataPrimitive {
-
+	
 	public IDUMODataPrimitiveNumber(double n) {
 		add(new IDUMODataTypeRawNumber(name, n, "Primitive : Number"));
 	}
-
+	
 	public float getNumber() {
 		return (Float) getValue(name);
 	}

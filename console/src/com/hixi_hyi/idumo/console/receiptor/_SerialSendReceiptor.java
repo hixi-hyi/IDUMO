@@ -14,17 +14,16 @@ import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
-public class _SerialSendReceiptor implements IDUMORunnable, IDUMOReceivable,
-		IDUMOController {
-
-	private OutputStream out;
-	private IDUMOSendable sender;
-	private String serial;
-
+public class _SerialSendReceiptor implements IDUMORunnable, IDUMOReceivable, IDUMOController {
+	
+	private OutputStream	out;
+	private IDUMOSendable	sender;
+	private String			serial;
+	
 	public _SerialSendReceiptor(String serial) {
 		this.serial = serial;
 	}
-
+	
 	@Override
 	public void run() {
 		IDUMOLogManager.log();
@@ -43,21 +42,21 @@ public class _SerialSendReceiptor implements IDUMORunnable, IDUMOReceivable,
 			bytedata[i] = (Byte) o;
 			i++;
 		}
-
+		
 		try {
 			out.write(bytedata);
 			out.flush();
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-
+		
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		return sender.isReady();
 	}
-
+	
 	@Override
 	public void setSender(IDUMOSendable... senders) throws IDUMOException {
 		// if (senders.length != 1) {
@@ -70,7 +69,7 @@ public class _SerialSendReceiptor implements IDUMORunnable, IDUMOReceivable,
 		// }
 		this.sender = senders[0];
 	}
-
+	
 	@Override
 	public void onIdumoStart() {
 		try {
@@ -79,7 +78,7 @@ public class _SerialSendReceiptor implements IDUMORunnable, IDUMOReceivable,
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	public void onIdumoStop() {
 		try {
@@ -88,11 +87,11 @@ public class _SerialSendReceiptor implements IDUMORunnable, IDUMOReceivable,
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect receivableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
-
+	
 }

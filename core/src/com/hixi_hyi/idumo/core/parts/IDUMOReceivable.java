@@ -35,6 +35,6 @@ public interface IDUMOReceivable extends IDUMOConnectable {
 	 * @throws IDUMOException
 	 */
 	public void setSender(IDUMOSendable... senders) throws IDUMOException;
-
+	
 	public IDUMODataTypeConnect receivableType();
 }

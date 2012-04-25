@@ -12,7 +12,7 @@ public class ReceiveConsoleMain extends IDUMOConsoleWrapper {
 	public void init() {
 		setExecutionWithComponent(new ReceiveConsoleComponent());
 	}
-
+	
 	public static void main(String[] args) {
 		ReceiveConsoleMain main = new ReceiveConsoleMain();
 		main.exec();
@@ -30,13 +30,13 @@ class ReceiveConsoleComponent extends IDUMOComponent {
 		// add(console);
 		_SerialSendReceiptor serial = new _SerialSendReceiptor("/dev/stdout");
 		add(serial);
-
+		
 		connect(provider, converter);
 		connect(converter, serial);
 		// connect(converter,console);
-
+		
 	}
-
+	
 	@Override
 	public void onIdumoPrepare() {
 		setLoopCount(-1);

@@ -9,15 +9,15 @@ import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
 public abstract class IDUMOComponent {
-
-	private IDUMOContainer container = null;
-	private IDUMOSetting setting = new IDUMOSetting();
-	private boolean isReady;
-
+	
+	private IDUMOContainer	container	= null;
+	private IDUMOSetting	setting		= new IDUMOSetting();
+	private boolean			isReady;
+	
 	abstract public void onIdumoMakeFlowChart() throws IDUMOException;
-
+	
 	abstract public void onIdumoPrepare();
-
+	
 	/**
 	 * @param container
 	 *            セットする container
@@ -25,14 +25,14 @@ public abstract class IDUMOComponent {
 	public void setContainer(IDUMOContainer container) {
 		this.container = container;
 	}
-
+	
 	/**
 	 * @return container
 	 */
 	public IDUMOContainer getContainer() {
 		return container;
 	}
-
+	
 	/**
 	 * @param isReady
 	 *            セットする isReady
@@ -40,14 +40,14 @@ public abstract class IDUMOComponent {
 	public void setReady(boolean isReady) {
 		this.isReady = isReady;
 	}
-
+	
 	/**
 	 * @return isReady
 	 */
 	public boolean isReady() {
 		return isReady;
 	}
-
+	
 	/**
 	 * @param item
 	 * @see com.hixi_hyi.idumo.core.exec.IDUMOContainer#add(com.hixi_hyi.idumo.core.parts.IDUMOConnectable)
@@ -55,7 +55,7 @@ public abstract class IDUMOComponent {
 	public void add(IDUMOConnectable item) {
 		container.add(item);
 	}
-
+	
 	/**
 	 * @param sender
 	 * @param receiver
@@ -65,7 +65,7 @@ public abstract class IDUMOComponent {
 	public void connect(IDUMOSendable sender, IDUMOReceivable receiver) {
 		container.connect(sender, receiver);
 	}
-
+	
 	/**
 	 * @throws IDUMOException
 	 * @see com.hixi_hyi.idumo.core.exec.IDUMOContainer#setup()
@@ -73,7 +73,7 @@ public abstract class IDUMOComponent {
 	public void setup() throws IDUMOException {
 		container.setup();
 	}
-
+	
 	/**
 	 * @return
 	 * @see com.hixi_hyi.idumo.core.exec.IDUMOContainer#getRunnable()
@@ -81,7 +81,7 @@ public abstract class IDUMOComponent {
 	public IDUMORunnable getRunnable() {
 		return container.getRunnable();
 	}
-
+	
 	/**
 	 * @return
 	 * @see com.hixi_hyi.idumo.core.exec.IDUMOSetting#getLoopCount()
@@ -89,7 +89,7 @@ public abstract class IDUMOComponent {
 	public int getLoopCount() {
 		return setting.getLoopCount();
 	}
-
+	
 	/**
 	 * @param loopCount
 	 * @see com.hixi_hyi.idumo.core.exec.IDUMOSetting#setLoopCount(int)
@@ -97,7 +97,7 @@ public abstract class IDUMOComponent {
 	public void setLoopCount(int loopCount) {
 		setting.setLoopCount(loopCount);
 	}
-
+	
 	/**
 	 * @return
 	 * @see com.hixi_hyi.idumo.core.exec.IDUMOSetting#getSleepTime()
@@ -105,7 +105,7 @@ public abstract class IDUMOComponent {
 	public int getSleepTime() {
 		return setting.getSleepTime();
 	}
-
+	
 	/**
 	 * @param sleepTime
 	 * @see com.hixi_hyi.idumo.core.exec.IDUMOSetting#setSleepTime(int)
@@ -113,7 +113,7 @@ public abstract class IDUMOComponent {
 	public void setSleepTime(int sleepTime) {
 		setting.setSleepTime(sleepTime);
 	}
-
+	
 	/**
 	 * @return
 	 * @see com.hixi_hyi.idumo.core.exec.IDUMOContainer#getApplicationControllers()
@@ -121,5 +121,5 @@ public abstract class IDUMOComponent {
 	public Collection<IDUMOController> getApplicationControllers() {
 		return container.getApplicationControllers();
 	}
-
+	
 }

@@ -12,45 +12,43 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
 public class _ConditionStringHandler implements IDUMOSendable, IDUMOReceivable {
-
-	private IDUMOSendable sender;
-	private String condition;
-	private ReceiveValidatorSize validator = new ReceiveValidatorSize(1);
-	private ReceiveValidatorType vType = new ReceiveValidatorType(1,
-			IDUMODataPrimitiveString.class);
-
+	
+	private IDUMOSendable			sender;
+	private String					condition;
+	private ReceiveValidatorSize	validator	= new ReceiveValidatorSize(1);
+	private ReceiveValidatorType	vType		= new ReceiveValidatorType(1, IDUMODataPrimitiveString.class);
+	
 	public _ConditionStringHandler(String condition) {
 		this.condition = condition;
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		return sender.isReady();
 	}
-
+	
 	@Override
 	public void setSender(IDUMOSendable... senders) throws IDUMOException {
 		validator.validate(senders);
 		vType.validate(senders);
 		this.sender = senders[0];
 	}
-
+	
 	@Override
 	public IDUMODataFlowing onCall() {
-		IDUMODataPrimitiveString data = (IDUMODataPrimitiveString) sender
-				.onCall().next();
+		IDUMODataPrimitiveString data = (IDUMODataPrimitiveString) sender.onCall().next();
 		String str = data.getString();
 		if (condition.equals(str)) {
 			return new IDUMODataFlowing(new IDUMODataPrimitiveBool(true));
 		}
 		return new IDUMODataFlowing(new IDUMODataPrimitiveBool(false));
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect receivableType() {
 		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveString.class);
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect sendableType() {
 		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveBool.class);

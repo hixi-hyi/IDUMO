@@ -36,31 +36,31 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
  * 
  */
 public class ConsoleViewReceiptor implements IDUMOReceivable, IDUMORunnable {
-
-	private IDUMOSendable sender;
-	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
-
+	
+	private IDUMOSendable			sender;
+	private ReceiveValidatorSize	vSize	= new ReceiveValidatorSize(1);
+	
 	@Override
 	public void run() {
 		IDUMODataFlowing flowdata = sender.onCall();
 		IDUMODataPrimitive data = (IDUMODataPrimitive) flowdata.next();
 		System.out.println(data.getValue());
 	}
-
+	
 	@Override
 	public void setSender(IDUMOSendable... handler) throws IDUMOException {
 		vSize.validate(handler);
 		sender = handler[0];
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		return sender.isReady();
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect receivableType() {
 		return new IDUMODataTypeConnectSingle(IDUMOData.class);
 	}
-
+	
 }

@@ -31,28 +31,28 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
  * @version 2.0
  */
 public class LivedoorWeatherProvider implements IDUMOSendable {
-
-	private LivedoorWeather weather;
-
+	
+	private LivedoorWeather	weather;
+	
 	public LivedoorWeatherProvider(int citynum) {
 		weather = new LivedoorWeather(citynum);
 	}
-
+	
 	@Override
 	public IDUMODataFlowing onCall() {
 		IDUMODataFlowing p = new IDUMODataFlowing();
 		p.add(weather.getData());
 		return p;
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		return weather.isReady();
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect sendableType() {
 		return new IDUMODataTypeConnectSingle(LivedoorWeatherData.class);
 	}
-
+	
 }

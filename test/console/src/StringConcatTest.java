@@ -1,4 +1,3 @@
-
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler_Prefix;
 import com.hixi_hyi.idumo.common.handler.StringConcatHandler_Suffix;
 import com.hixi_hyi.idumo.common.provider.StringProvider;
@@ -17,21 +16,19 @@ public class StringConcatTest extends IDUMOConsoleWrapper {
 			public void onIdumoMakeFlowChart() throws IDUMOException {
 				StringProvider idumo0 = new StringProvider("'str_test'");
 				add(idumo0);
-				StringConcatHandler_Prefix idumo1 = new StringConcatHandler_Prefix(
-						"pre-");
+				StringConcatHandler_Prefix idumo1 = new StringConcatHandler_Prefix("pre-");
 				add(idumo1);
-				StringConcatHandler_Suffix idumo2 = new StringConcatHandler_Suffix(
-						"-suf");
+				StringConcatHandler_Suffix idumo2 = new StringConcatHandler_Suffix("-suf");
 				add(idumo2);
 				ConsoleViewReceiptor idumop = new ConsoleViewReceiptor();
 				add(idumop);
-
+				
 				connect(idumo0, idumo1);
 				connect(idumo1, idumo2);
 				connect(idumo2, idumop);
-
+				
 			}
-
+			
 			@Override
 			public void onIdumoPrepare() {
 				setLoopCount(1);
@@ -39,7 +36,7 @@ public class StringConcatTest extends IDUMOConsoleWrapper {
 			}
 		});
 	}
-
+	
 	public static void main(String[] args) {
 		IDUMOLogManager.DEBUG = true;
 		IDUMOLogManager.LOGGER = new IDUMOConsoleLogger();

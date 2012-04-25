@@ -15,13 +15,13 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
  * 
  */
 public class _RandomByteProvider implements IDUMOSendable {
-
-	private Random ramdom;
-
+	
+	private Random	ramdom;
+	
 	public _RandomByteProvider() {
 		ramdom = new Random();
 	}
-
+	
 	@Override
 	public IDUMODataFlowing onCall() {
 		// LogUtil.d();
@@ -31,15 +31,15 @@ public class _RandomByteProvider implements IDUMOSendable {
 		pipes.add(new IDUMODataPrimitiveNumber(buf[0]));
 		return pipes;
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		return true;
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect sendableType() {
 		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveNumber.class);
 	}
-
+	
 }

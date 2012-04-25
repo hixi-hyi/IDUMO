@@ -11,7 +11,7 @@ public class RoombaRightMain extends IDUMOConsoleWrapper {
 	public void init() {
 		setExecutionWithComponent(new RoombaRightComponent());
 	}
-
+	
 	public static void main(String[] args) {
 		RoombaRightMain main = new RoombaRightMain();
 		main.exec();
@@ -25,10 +25,10 @@ class RoombaRightComponent extends IDUMOComponent {
 		add(s);
 		SendTCPReceiptor r = new SendTCPReceiptor("192.168.11.4", 10000);
 		add(r);
-
+		
 		connect(s, r);
 	}
-
+	
 	@Override
 	public void onIdumoPrepare() {
 		setLoopCount(1);

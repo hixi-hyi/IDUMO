@@ -16,11 +16,11 @@ public class NumberProviderTest extends IDUMOConsoleWrapper {
 				add(idumo0);
 				ConsoleViewReceiptor idumo1 = new ConsoleViewReceiptor();
 				add(idumo1);
-
+				
 				connect(idumo0, idumo1);
-
+				
 			}
-
+			
 			@Override
 			public void onIdumoPrepare() {
 				setLoopCount(1);
@@ -28,7 +28,7 @@ public class NumberProviderTest extends IDUMOConsoleWrapper {
 			}
 		});
 	}
-
+	
 	public static void main(String[] args) {
 		IDUMOLogManager.DEBUG = true;
 		IDUMOLogManager.LOGGER = new IDUMOConsoleLogger();

@@ -12,7 +12,7 @@ public class RommbaCommandMain extends IDUMOConsoleWrapper {
 	public void init() {
 		setExecutionWithComponent(new RommbaCommandComponent());
 	}
-
+	
 	public static void main(String[] args) {
 		RommbaCommandMain main = new RommbaCommandMain();
 		main.exec();
@@ -30,13 +30,13 @@ class RommbaCommandComponent extends IDUMOComponent {
 		// add(console);
 		_SerialSendReceiptor serial = new _SerialSendReceiptor("/dev/stdout");
 		add(serial);
-
+		
 		connect(provider, converter);
 		connect(converter, serial);
 		// connect(converter,console);
-
+		
 	}
-
+	
 	@Override
 	public void onIdumoPrepare() {
 		setLoopCount(-1);

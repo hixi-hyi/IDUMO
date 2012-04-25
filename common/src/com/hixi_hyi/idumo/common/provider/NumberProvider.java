@@ -31,13 +31,13 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
  * 
  */
 public class NumberProvider implements IDUMOSendable {
-
-	private Double num;
-
+	
+	private Double	num;
+	
 	public NumberProvider(Double num) {
 		this.num = num;
 	}
-
+	
 	@Override
 	public IDUMODataFlowing onCall() {
 		// IDUMOLogManager.log();
@@ -45,15 +45,15 @@ public class NumberProvider implements IDUMOSendable {
 		pipes.add(new IDUMODataPrimitiveNumber(num));
 		return pipes;
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		return true;
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect sendableType() {
 		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveNumber.class);
 	}
-
+	
 }

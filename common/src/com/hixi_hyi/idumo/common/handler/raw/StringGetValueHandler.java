@@ -33,30 +33,30 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
  * @version 2.0
  */
 public class StringGetValueHandler implements IDUMOSendable, IDUMOReceivable {
-	private String name;
-	private IDUMOSendable sender;
-	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
-
+	private String				name;
+	private IDUMOSendable		sender;
+	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
+	
 	public StringGetValueHandler(String name) {
 		this.name = name;
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		return sender.isReady();
 	}
-
+	
 	@Override
 	public void setSender(IDUMOSendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		sender = senders[0];
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect receivableType() {
 		return new IDUMODataTypeConnectSingle(IDUMOData.class);
 	}
-
+	
 	@Override
 	public IDUMODataFlowing onCall() {
 		// IDUMODataTypeRawString s = (IDUMODataTypeRawString)
@@ -65,10 +65,10 @@ public class StringGetValueHandler implements IDUMOSendable, IDUMOReceivable {
 		Object o = sender.onCall().next().get(name).getValue();
 		return new IDUMODataFlowing(new IDUMODataPrimitiveString(o.toString()));
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect sendableType() {
 		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveString.class);
 	}
-
+	
 }

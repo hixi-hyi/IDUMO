@@ -20,29 +20,25 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
  * @author Hiroyoshi
  * 
  */
-public class _ReversedGeocordingHandler implements IDUMOSendable,
-		IDUMOReceivable {
-
-	private ArrayList<IDUMOSendable> senders = new ArrayList<IDUMOSendable>();
-	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
-	private ReceiveValidatorType v1Type = new ReceiveValidatorType(1,
-			IDUMODataPrimitiveNumber.class);
-
+public class _ReversedGeocordingHandler implements IDUMOSendable, IDUMOReceivable {
+	
+	private ArrayList<IDUMOSendable>	senders	= new ArrayList<IDUMOSendable>();
+	private ReceiveValidatorSize		vSize	= new ReceiveValidatorSize(1);
+	private ReceiveValidatorType		v1Type	= new ReceiveValidatorType(1, IDUMODataPrimitiveNumber.class);
+	
 	@Override
 	public IDUMODataFlowing onCall() {
-		double lat = ((IDUMODataPrimitiveNumber) senders.get(0).onCall().next())
-				.getNumber();
-		double lon = ((IDUMODataPrimitiveNumber) senders.get(1).onCall().next())
-				.getNumber();
-
+		double lat = ((IDUMODataPrimitiveNumber) senders.get(0).onCall().next()).getNumber();
+		double lon = ((IDUMODataPrimitiveNumber) senders.get(1).onCall().next()).getNumber();
+		
 		_ReversedGeocording rg = new _ReversedGeocording(lat, lon);
-
+		
 		IDUMODataFlowing p = new IDUMODataFlowing();
 		p.add(new IDUMODataPrimitiveString(rg.getLocation()));
-
+		
 		return p;
 	}
-
+	
 	@Override
 	public void setSender(IDUMOSendable... senders) throws IDUMOException {
 		vSize.validate(senders);
@@ -52,7 +48,7 @@ public class _ReversedGeocordingHandler implements IDUMOSendable,
 			this.senders.add(s);
 		}
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		for (IDUMOSendable sender : senders) {
@@ -62,15 +58,15 @@ public class _ReversedGeocordingHandler implements IDUMOSendable,
 		}
 		return true;
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect receivableType() {
 		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveNumber.class);
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect sendableType() {
 		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveString.class);
 	}
-
+	
 }

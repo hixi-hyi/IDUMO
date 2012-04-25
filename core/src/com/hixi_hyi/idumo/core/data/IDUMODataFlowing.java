@@ -22,24 +22,23 @@ import java.util.Collection;
 import java.util.Iterator;
 
 public class IDUMODataFlowing implements Iterable<IDUMOData> {
-	private ArrayList<IDUMOData> datalist;
+	private ArrayList<IDUMOData>	datalist;
 	{
 		datalist = new ArrayList<IDUMOData>();
 	}
-
-	public IDUMODataFlowing() {
-	}
-
+	
+	public IDUMODataFlowing() {}
+	
 	public IDUMODataFlowing(IDUMOData... objects) {
 		for (IDUMOData o : objects) {
 			datalist.add(o);
 		}
 	}
-
+	
 	public Collection<IDUMOData> getData() {
 		return datalist;
 	}
-
+	
 	/**
 	 * @param object
 	 * @return
@@ -48,7 +47,7 @@ public class IDUMODataFlowing implements Iterable<IDUMOData> {
 	public boolean add(IDUMOData object) {
 		return datalist.add(object);
 	}
-
+	
 	/**
 	 * @param index
 	 * @return
@@ -57,7 +56,7 @@ public class IDUMODataFlowing implements Iterable<IDUMOData> {
 	public IDUMOData get(int index) {
 		return datalist.get(index);
 	}
-
+	
 	/**
 	 * @return
 	 * @see java.util.ArrayList#size()
@@ -65,7 +64,7 @@ public class IDUMODataFlowing implements Iterable<IDUMOData> {
 	public int size() {
 		return datalist.size();
 	}
-
+	
 	/**
 	 * @return
 	 * @see java.util.AbstractCollection#toString()
@@ -74,14 +73,14 @@ public class IDUMODataFlowing implements Iterable<IDUMOData> {
 	public String toString() {
 		return datalist.toString();
 	}
-
+	
 	@Override
 	public Iterator<IDUMOData> iterator() {
 		return datalist.iterator();
 	}
-
+	
 	public IDUMOData next() {
 		return datalist.remove(0);
 	}
-
+	
 }

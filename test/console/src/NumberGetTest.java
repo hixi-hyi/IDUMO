@@ -15,16 +15,15 @@ public class NumberGetTest extends IDUMOConsoleWrapper {
 			public void onIdumoMakeFlowChart() throws IDUMOException {
 				LivedoorWeatherProvider idumo0 = new LivedoorWeatherProvider(63);
 				add(idumo0);
-				NumberGetValueHandler idumo1 = new NumberGetValueHandler(
-						"max_temp");
+				NumberGetValueHandler idumo1 = new NumberGetValueHandler("max_temp");
 				ConsoleViewReceiptor idumoR = new ConsoleViewReceiptor();
 				add(idumoR);
-
+				
 				connect(idumo0, idumo1);
 				connect(idumo1, idumoR);
-
+				
 			}
-
+			
 			@Override
 			public void onIdumoPrepare() {
 				setLoopCount(1);
@@ -32,7 +31,7 @@ public class NumberGetTest extends IDUMOConsoleWrapper {
 			}
 		});
 	}
-
+	
 	public static void main(String[] args) {
 		IDUMOLogManager.DEBUG = true;
 		IDUMOLogManager.LOGGER = new IDUMOConsoleLogger();

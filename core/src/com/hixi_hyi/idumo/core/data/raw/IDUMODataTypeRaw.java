@@ -19,10 +19,10 @@ package com.hixi_hyi.idumo.core.data.raw;
 
 public interface IDUMODataTypeRaw {
 	public String getName();
-
+	
 	public Object getValue();
-
+	
 	public Class<?> getType();
-
+	
 	public String getSummary();
 }

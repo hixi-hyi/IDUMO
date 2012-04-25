@@ -12,7 +12,7 @@ public class UPSendActivity extends IDUMOAndroidWrapper {
 	public void init() {
 		setExecutionWithComponent(new UPSendComponent());
 	}
-
+	
 }
 
 class UPSendComponent extends IDUMOAndroidComponent {
@@ -28,7 +28,7 @@ class UPSendComponent extends IDUMOAndroidComponent {
 		connect(s, r);
 		IDUMOLogManager.debug("connection ok");
 	}
-
+	
 	@Override
 	public void onIdumoPrepare() {
 		setLoopCount(1);

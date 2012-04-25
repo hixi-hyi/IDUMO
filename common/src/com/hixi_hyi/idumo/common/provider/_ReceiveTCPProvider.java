@@ -22,13 +22,13 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * 
  */
 public class _ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
-	private int port;
-	private Socket socket;
-	private BufferedReader br;
-	private InputStream in;
-	private ArrayList<String> strs;
-	private AcceptServer server;
-
+	private int					port;
+	private Socket				socket;
+	private BufferedReader		br;
+	private InputStream			in;
+	private ArrayList<String>	strs;
+	private AcceptServer		server;
+	
 	public _ReceiveTCPProvider(int port) {
 		this.port = port;
 		this.strs = new ArrayList<String>();
@@ -38,11 +38,11 @@ public class _ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		IDUMOLogManager.log();
-
+		
 		if (server.getSocket() == null) {
 			IDUMOLogManager.debug("null");
 			socket = null;
@@ -60,7 +60,7 @@ public class _ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
 			}
 			br = new BufferedReader(new InputStreamReader(in));
 		}
-
+		
 		if (strs.size() != 0) {
 			return true;
 		} else {
@@ -75,7 +75,7 @@ public class _ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
 			}
 		}
 		return false;
-
+		
 		/*
 		 * if (server.getSocket() == null) { return false; } socket =
 		 * server.getSocket(); try { in = socket.getInputStream(); } catch
@@ -85,12 +85,12 @@ public class _ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
 		 * (IOException e) { e.printStackTrace(); } return false;
 		 */
 	}
-
+	
 	@Override
 	public void onIdumoStart() {
 		new Thread(server).run();
 	}
-
+	
 	@Override
 	public void onIdumoStop() {
 		try {
@@ -100,7 +100,7 @@ public class _ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	public IDUMODataFlowing onCall() {
 		IDUMODataFlowing p = new IDUMODataFlowing();
@@ -110,19 +110,19 @@ public class _ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
 		server.restart();
 		return p;
 	}
-
+	
 	class AcceptServer implements Runnable {
-
-		int port;
-		ServerSocket server;
-		Socket socket;
-		boolean bool;
-
+		
+		int				port;
+		ServerSocket	server;
+		Socket			socket;
+		boolean			bool;
+		
 		public AcceptServer(int port) throws IOException {
 			this.port = port;
 			server = new ServerSocket(port);
 		}
-
+		
 		@Override
 		public void run() {
 			try {
@@ -134,7 +134,7 @@ public class _ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
 				e.printStackTrace();
 			}
 		}
-
+		
 		/**
 		 * @return socket
 		 */
@@ -146,7 +146,7 @@ public class _ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
 			// }
 			return socket;
 		}
-
+		
 		public void restart() {
 			try {
 				socket.close();
@@ -156,9 +156,9 @@ public class _ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
 			socket = null;
 			new Thread(this).start();
 		}
-
+		
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect sendableType() {
 		// TODO 自動生成されたメソッド・スタブ

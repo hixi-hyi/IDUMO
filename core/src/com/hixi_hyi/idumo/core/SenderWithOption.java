@@ -24,7 +24,7 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
 public interface SenderWithOption extends IDUMOSendable {
 	public Map<String, String> getOptions();
-
+	
 	public void setOption(OptionMethodType type) throws IDUMOException;
-
+	
 }

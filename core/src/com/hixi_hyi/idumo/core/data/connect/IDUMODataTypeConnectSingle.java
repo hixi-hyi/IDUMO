@@ -7,22 +7,22 @@ import java.util.List;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 
 public class IDUMODataTypeConnectSingle implements IDUMODataTypeConnect {
-
-	List<Class<? extends IDUMOData>> data = new ArrayList<Class<? extends IDUMOData>>();
-
+	
+	List<Class<? extends IDUMOData>>	data	= new ArrayList<Class<? extends IDUMOData>>();
+	
 	public IDUMODataTypeConnectSingle(Class<? extends IDUMOData> d) {
 		data.add(d);
 	}
-
+	
 	@Override
 	public Iterator<Class<? extends IDUMOData>> iterator() {
 		return data.iterator();
 	}
-
+	
 	@Override
 	public boolean equals(IDUMODataTypeConnect connect) {
 		// TODO 自動生成されたメソッド・スタブ
 		return false;
 	}
-
+	
 }

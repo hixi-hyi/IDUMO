@@ -12,19 +12,19 @@ import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
 public class _ReceiveConsoleProvider implements IDUMOSendable {
-
-	private BufferedReader br;
-
+	
+	private BufferedReader	br;
+	
 	public _ReceiveConsoleProvider() {
 		br = new BufferedReader(new InputStreamReader(System.in));
-
+		
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		return true;
 	}
-
+	
 	@Override
 	public IDUMODataFlowing onCall() {
 		IDUMODataFlowing p = new IDUMODataFlowing();
@@ -35,10 +35,10 @@ public class _ReceiveConsoleProvider implements IDUMOSendable {
 		}
 		return p;
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect sendableType() {
 		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveString.class);
 	}
-
+	
 }

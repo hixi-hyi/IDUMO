@@ -11,7 +11,7 @@ public class TCPSendMain extends IDUMOConsoleWrapper {
 	public void init() {
 		setExecutionWithComponent(new TCPSendComponent());
 	}
-
+	
 	public static void main(String[] args) {
 		TCPSendMain main = new TCPSendMain();
 		main.exec();
@@ -25,10 +25,10 @@ class TCPSendComponent extends IDUMOComponent {
 		add(s);
 		SendTCPReceiptor r = new SendTCPReceiptor("192.168.12.4", 10000);
 		add(r);
-
+		
 		connect(s, r);
 	}
-
+	
 	@Override
 	public void onIdumoPrepare() {
 		setLoopCount(-1);

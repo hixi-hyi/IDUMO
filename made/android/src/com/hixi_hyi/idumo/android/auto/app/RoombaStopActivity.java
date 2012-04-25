@@ -11,7 +11,7 @@ public class RoombaStopActivity extends IDUMOAndroidWrapper {
 	public void init() {
 		setExecutionWithComponent(new RoombaStopComponent());
 	}
-
+	
 }
 
 class RoombaStopComponent extends IDUMOAndroidComponent {
@@ -21,10 +21,10 @@ class RoombaStopComponent extends IDUMOAndroidComponent {
 		add(s);
 		SendTCPReceiptor r = new SendTCPReceiptor("192.168.11.4", 10000);
 		add(r);
-
+		
 		connect(s, r);
 	}
-
+	
 	@Override
 	public void onIdumoPrepare() {
 		setLoopCount(1);

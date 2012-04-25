@@ -33,6 +33,6 @@ public interface IDUMOSendable extends IDUMOConnectable {
 	 * @return
 	 */
 	public IDUMODataFlowing onCall();
-
+	
 	public IDUMODataTypeConnect sendableType();
 }

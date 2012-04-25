@@ -31,14 +31,14 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
  * 
  */
 public class StringProvider implements IDUMOSendable {
-
-	private String str;
-
+	
+	private String	str;
+	
 	public StringProvider(String str) {
 		// IDUMOLogManager.debug(str);
 		this.str = str;
 	}
-
+	
 	@Override
 	public IDUMODataFlowing onCall() {
 		// IDUMOLogManager.log();
@@ -46,15 +46,15 @@ public class StringProvider implements IDUMOSendable {
 		pipes.add(new IDUMODataPrimitiveString(str));
 		return pipes;
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		return true;
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect sendableType() {
 		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveString.class);
 	}
-
+	
 }

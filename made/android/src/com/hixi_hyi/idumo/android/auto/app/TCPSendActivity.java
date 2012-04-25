@@ -14,7 +14,7 @@ public class TCPSendActivity extends IDUMOAndroidWrapper {
 	public void init() {
 		IDUMOLogManager.DEBUG = DeployUtil.isDebuggable(this);
 		IDUMOLogManager.LOGGER = new IDUMOAndroidLogger("IDUMO");
-
+		
 		setExecutionWithComponent(new TCPSendComponent());
 	}
 }
@@ -28,7 +28,7 @@ class TCPSendComponent extends IDUMOAndroidComponent {
 		add(r);
 		connect(s, r);
 	}
-
+	
 	@Override
 	public void onIdumoPrepare() {
 		setLoopCount(-1);

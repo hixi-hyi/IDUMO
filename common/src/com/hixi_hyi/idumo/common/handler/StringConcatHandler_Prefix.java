@@ -33,43 +33,41 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
  * @version 2.0
  * 
  */
-public class StringConcatHandler_Prefix implements IDUMOSendable,
-		IDUMOReceivable {
-
-	private IDUMOSendable provider;
-	private String fixWord;
-	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
-
+public class StringConcatHandler_Prefix implements IDUMOSendable, IDUMOReceivable {
+	
+	private IDUMOSendable		provider;
+	private String				fixWord;
+	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
+	
 	public StringConcatHandler_Prefix(String fixWord) {
 		this.fixWord = fixWord;
 	}
-
+	
 	@Override
 	public IDUMODataFlowing onCall() {
-		String s = ((IDUMODataPrimitiveString) provider.onCall().next())
-				.getString();
+		String s = ((IDUMODataPrimitiveString) provider.onCall().next()).getString();
 		return new IDUMODataFlowing(new IDUMODataPrimitiveString(fixWord + s));
 	}
-
+	
 	@Override
 	public void setSender(IDUMOSendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		this.provider = senders[0];
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		return provider.isReady();
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect receivableType() {
 		return new IDUMODataTypeConnectSingle(IDUMOData.class);
 	}
-
+	
 	@Override
 	public IDUMODataTypeConnect sendableType() {
 		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveString.class);
 	}
-
+	
 }

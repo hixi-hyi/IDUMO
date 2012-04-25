@@ -1,4 +1,3 @@
-
 import com.hixi_hyi.idumo.common.handler.raw.StringGetValueHandler;
 import com.hixi_hyi.idumo.common.provider.LivedoorWeatherProvider;
 import com.hixi_hyi.idumo.console.core.exec.IDUMOConsoleWrapper;
@@ -13,7 +12,7 @@ public class LivedoorGetStringConsoleTest extends IDUMOConsoleWrapper {
 	public void init() {
 		setExecutionWithComponent(new LivedoorWeatherConsoleComponent());
 	}
-
+	
 	public static void main(String[] args) {
 		IDUMOLogManager.DEBUG = true;
 		IDUMOLogManager.LOGGER = new IDUMOConsoleLogger();
@@ -31,12 +30,12 @@ class LivedoorWeatherConsoleComponent extends IDUMOComponent {
 		add(idumo1);
 		ConsoleViewReceiptor idumo2 = new ConsoleViewReceiptor();
 		add(idumo2);
-
+		
 		connect(idumo0, idumo1);
 		connect(idumo1, idumo2);
-
+		
 	}
-
+	
 	@Override
 	public void onIdumoPrepare() {
 		setLoopCount(1);

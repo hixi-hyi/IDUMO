@@ -11,7 +11,7 @@ public class RoombaCleanActivity extends IDUMOAndroidWrapper {
 	public void init() {
 		setExecutionWithComponent(new RoombaCleanComponent());
 	}
-
+	
 }
 
 class RoombaCleanComponent extends IDUMOAndroidComponent {
@@ -21,10 +21,10 @@ class RoombaCleanComponent extends IDUMOAndroidComponent {
 		add(s);
 		SendTCPReceiptor r = new SendTCPReceiptor("192.168.11.4", 10000);
 		add(r);
-
+		
 		connect(s, r);
 	}
-
+	
 	@Override
 	public void onIdumoPrepare() {
 		setLoopCount(1);

@@ -22,23 +22,22 @@ import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
 public class ReceiveValidatorType implements ReceiveValidator {
-
-	private int num;
-	private Class<? extends IDUMOData> cls;
-
+	
+	private int							num;
+	private Class<? extends IDUMOData>	cls;
+	
 	public ReceiveValidatorType(int num, Class<? extends IDUMOData> cls) {
 		this.num = num - 1;
 		this.cls = cls;
 	}
-
+	
 	@Override
 	public void validate(IDUMOSendable... senders) throws IDUMOException {
-		Class<? extends IDUMOData> type = senders[num].sendableType()
-				.iterator().next();
+		Class<? extends IDUMOData> type = senders[num].sendableType().iterator().next();
 		if (cls != type) {
 			throw new IDUMOException();
 		}
 		return;
 	}
-
+	
 }

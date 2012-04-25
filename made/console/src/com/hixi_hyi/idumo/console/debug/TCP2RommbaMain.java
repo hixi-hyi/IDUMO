@@ -14,7 +14,7 @@ public class TCP2RommbaMain extends IDUMOConsoleWrapper {
 	public void init() {
 		setExecutionWithComponent(new TCP2RommbaComponent());
 	}
-
+	
 	public static void main(String[] args) {
 		IDUMOLogManager.DEBUG = true;
 		IDUMOLogManager.LOGGER = new IDUMOConsoleLogger();
@@ -39,9 +39,9 @@ class TCP2RommbaComponent extends IDUMOComponent {
 		connect(provider, converter);
 		connect(converter, serial);
 		// connect(converter,receiptor);
-
+		
 	}
-
+	
 	@Override
 	public void onIdumoPrepare() {
 		setLoopCount(-1);
