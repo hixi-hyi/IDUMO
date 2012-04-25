@@ -7,7 +7,7 @@ import java.io.OutputStream;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.IDUMOController;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
@@ -15,14 +15,14 @@ import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
-public class SerialSendReceiptor implements IDUMORunnable, IDUMOReceivable,
+public class _SerialSendReceiptor implements IDUMORunnable, IDUMOReceivable,
 		IDUMOController {
 
 	private OutputStream out;
 	private IDUMOSendable sender;
 	private String serial;
 
-	public SerialSendReceiptor(String serial) {
+	public _SerialSendReceiptor(String serial) {
 		this.serial = serial;
 	}
 
@@ -91,7 +91,7 @@ public class SerialSendReceiptor implements IDUMORunnable, IDUMOReceivable,
 	}
 
 	@Override
-	public IDUMODataConnect receivableType() {
+	public IDUMODataTypeConnect receivableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

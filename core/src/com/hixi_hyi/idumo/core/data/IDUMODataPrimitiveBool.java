@@ -15,19 +15,17 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.common.data;
+package com.hixi_hyi.idumo.core.data;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
+import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawBool;
 
-public class IDUMONumberData extends IDUMOData {
-	private static final String number = "number";
+public class IDUMODataPrimitiveBool extends IDUMODataPrimitive {
 
-	public IDUMONumberData(double n) {
-		add(new IDUMODataTypeRawNumber(number, n, "Primitive : Number"));
+	public IDUMODataPrimitiveBool(boolean n) {
+		add(new IDUMODataTypeRawBool(name, n, "Primitive : Number"));
 	}
 
-	public float getNumber() {
-		return (Float) getValue(number);
+	public boolean getBool() {
+		return (Boolean) getValue(name);
 	}
 }

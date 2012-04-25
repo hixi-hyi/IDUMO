@@ -3,7 +3,7 @@ package com.hixi_hyi.idumo.common.component;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ConvertRoombaCommand {
+public class _ConvertRoombaCommand {
 	private static Map<String, Byte> command;
 	static {
 		command = new HashMap<String, Byte>();

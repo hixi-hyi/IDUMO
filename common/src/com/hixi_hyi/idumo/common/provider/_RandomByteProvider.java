@@ -2,11 +2,11 @@ package com.hixi_hyi.idumo.common.provider;
 
 import java.util.Random;
 
-import com.hixi_hyi.idumo.common.data.IDUMONumberData;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnectSingle;
+import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveNumber;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
 /**
@@ -15,11 +15,11 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class RandomByteProvider implements IDUMOSendable {
+public class _RandomByteProvider implements IDUMOSendable {
 
 	private Random ramdom;
 
-	public RandomByteProvider() {
+	public _RandomByteProvider() {
 		ramdom = new Random();
 	}
 
@@ -29,7 +29,7 @@ public class RandomByteProvider implements IDUMOSendable {
 		IDUMODataFlowing pipes = new IDUMODataFlowing();
 		byte buf[] = new byte[1];
 		ramdom.nextBytes(buf);
-		pipes.add(new IDUMONumberData(buf[0]));
+		pipes.add(new IDUMODataPrimitiveNumber(buf[0]));
 		return pipes;
 	}
 
@@ -39,8 +39,8 @@ public class RandomByteProvider implements IDUMOSendable {
 	}
 
 	@Override
-	public IDUMODataConnect sendableType() {
-		return new IDUMODataConnectSingle(IDUMONumberData.class);
+	public IDUMODataTypeConnect sendableType() {
+		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveNumber.class);
 	}
 
 }

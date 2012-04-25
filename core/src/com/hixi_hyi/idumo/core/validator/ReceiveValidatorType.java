@@ -18,8 +18,8 @@
 package com.hixi_hyi.idumo.core.validator;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnectSingle;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 

@@ -2,13 +2,13 @@ package com.hixi_hyi.idumo.common.handler;
 
 import java.util.ArrayList;
 
-import com.hixi_hyi.idumo.common.component.ReversedGeocording;
-import com.hixi_hyi.idumo.common.data.IDUMONumberData;
-import com.hixi_hyi.idumo.common.data.IDUMOStringData;
+import com.hixi_hyi.idumo.common.component._ReversedGeocording;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnectSingle;
+import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveNumber;
+import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
@@ -21,24 +21,24 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
  * @author Hiroyoshi
  * 
  */
-public class ReversedGeocordingHandler implements IDUMOSendable, IDUMOReceivable {
+public class _ReversedGeocordingHandler implements IDUMOSendable, IDUMOReceivable {
 
 	private ArrayList<IDUMOSendable> senders = new ArrayList<IDUMOSendable>();
 	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
 	private ReceiveValidatorType v1Type = new ReceiveValidatorType(1,
-			IDUMONumberData.class);
+			IDUMODataPrimitiveNumber.class);
 
 	@Override
 	public IDUMODataFlowing onCall() {
-		double lat = ((IDUMONumberData) senders.get(0).onCall().next())
+		double lat = ((IDUMODataPrimitiveNumber) senders.get(0).onCall().next())
 				.getNumber();
-		double lon = ((IDUMONumberData) senders.get(1).onCall().next())
+		double lon = ((IDUMODataPrimitiveNumber) senders.get(1).onCall().next())
 				.getNumber();
 
-		ReversedGeocording rg = new ReversedGeocording(lat, lon);
+		_ReversedGeocording rg = new _ReversedGeocording(lat, lon);
 
 		IDUMODataFlowing p = new IDUMODataFlowing();
-		p.add(new IDUMOStringData(rg.getLocation()));
+		p.add(new IDUMODataPrimitiveString(rg.getLocation()));
 
 		return p;
 	}
@@ -64,13 +64,13 @@ public class ReversedGeocordingHandler implements IDUMOSendable, IDUMOReceivable
 	}
 
 	@Override
-	public IDUMODataConnect receivableType() {
-		return new IDUMODataConnectSingle(IDUMONumberData.class);
+	public IDUMODataTypeConnect receivableType() {
+		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveNumber.class);
 	}
 
 	@Override
-	public IDUMODataConnect sendableType() {
-		return new IDUMODataConnectSingle(IDUMOStringData.class);
+	public IDUMODataTypeConnect sendableType() {
+		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveString.class);
 	}
 
 }

@@ -8,10 +8,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import com.hixi_hyi.idumo.common.data.IDUMOStringData;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.exec.IDUMOController;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
@@ -22,7 +22,7 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
+public class _ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
 	private int port;
 	private Socket socket;
 	private BufferedReader br;
@@ -30,7 +30,7 @@ public class ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
 	private ArrayList<String> strs;
 	private AcceptServer server;
 
-	public ReceiveTCPProvider(int port) {
+	public _ReceiveTCPProvider(int port) {
 		this.port = port;
 		this.strs = new ArrayList<String>();
 		try {
@@ -107,7 +107,7 @@ public class ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
 		IDUMODataFlowing p = new IDUMODataFlowing();
 		IDUMOLogManager.debug(p);
 		String s = strs.remove(0);
-		p.add(new IDUMOStringData(s));
+		p.add(new IDUMODataPrimitiveString(s));
 		server.restart();
 		return p;
 	}
@@ -161,7 +161,7 @@ public class ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
 	}
 
 	@Override
-	public IDUMODataConnect sendableType() {
+	public IDUMODataTypeConnect sendableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

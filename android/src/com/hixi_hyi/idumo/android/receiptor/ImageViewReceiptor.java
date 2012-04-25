@@ -6,7 +6,7 @@ import android.widget.ImageView;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
@@ -54,7 +54,7 @@ public class ImageViewReceiptor extends ImageView implements IDUMOReceivable, ID
 	}
 	
 	@Override
-	public IDUMODataConnect receivableType() {
+	public IDUMODataTypeConnect receivableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

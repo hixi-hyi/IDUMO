@@ -8,10 +8,10 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import com.hixi_hyi.idumo.common.data.IDUMOStringData;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.IDUMOController;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
@@ -38,7 +38,7 @@ public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController,
 	private IDUMOSendable sender;
 	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
 	private ReceiveValidator vType = new ReceiveValidatorType(1,
-			IDUMOStringData.class);
+			IDUMODataPrimitiveString.class);
 
 	public SendTCPReceiptor(String ip, int port) {
 		IDUMOLogManager.log();
@@ -102,7 +102,7 @@ public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController,
 	}
 
 	@Override
-	public IDUMODataConnect receivableType() {
+	public IDUMODataTypeConnect receivableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

@@ -11,7 +11,7 @@ import com.hixi_hyi.idumo.core.OptionMethodType;
 import com.hixi_hyi.idumo.core.SenderWithOption;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
 public class CameraProvider implements SenderWithOption {
@@ -72,7 +72,7 @@ public class CameraProvider implements SenderWithOption {
 	}
 	
 	@Override
-	public IDUMODataConnect sendableType() {
+	public IDUMODataTypeConnect sendableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

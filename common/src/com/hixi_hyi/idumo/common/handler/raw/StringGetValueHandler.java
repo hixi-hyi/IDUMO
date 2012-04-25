@@ -15,43 +15,54 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.common.provider;
+package com.hixi_hyi.idumo.common.handler.raw;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 /**
- * ランダムなバイト情報を送るためのProvider(DebugClass)
- *
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- *
  */
-public class StringProvider implements IDUMOSendable {
+public class StringGetValueHandler implements IDUMOSendable, IDUMOReceivable {
+	private String name;
+	private IDUMOSendable sender;
+	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
 
-	private String str;
-
-	public StringProvider(String str) {
-//		IDUMOLogManager.debug(str);
-		this.str = str;
-	}
-
-	@Override
-	public IDUMODataFlowing onCall() {
-//		IDUMOLogManager.log();
-		IDUMODataFlowing pipes = new IDUMODataFlowing();
-		pipes.add(new IDUMODataPrimitiveString(str));
-		return pipes;
+	public StringGetValueHandler(String name){
+		this.name = name;
 	}
 
 	@Override
 	public boolean isReady() {
-		return true;
+		return sender.isReady();
+	}
+
+	@Override
+	public void setSender(IDUMOSendable... senders) throws IDUMOException {
+		vSize.validate(senders);
+		sender = senders[0];
+	}
+
+	@Override
+	public IDUMODataTypeConnect receivableType() {
+		return new IDUMODataTypeConnectSingle(IDUMOData.class);
+	}
+
+	@Override
+	public IDUMODataFlowing onCall() {
+//		IDUMODataTypeRawString s = (IDUMODataTypeRawString) sender.onCall().next().get(name);
+//		IDUMOLogManager.debug(s);
+		Object o = sender.onCall().next().get(name).getValue();
+		return new IDUMODataFlowing(new IDUMODataPrimitiveString(o.toString()));
 	}
 
 	@Override

@@ -18,7 +18,7 @@
 package com.hixi_hyi.idumo.core.parts;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
 /**
@@ -37,5 +37,5 @@ public interface IDUMOReceivable extends IDUMOConnectable {
 	 */
 	public void setSender(IDUMOSendable... senders) throws IDUMOException;
 
-	public IDUMODataConnect receivableType();
+	public IDUMODataTypeConnect receivableType();
 }

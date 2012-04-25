@@ -7,7 +7,7 @@ import android.content.Context;
 import android.widget.TextView;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
@@ -81,7 +81,7 @@ public class TextViewReceiptor extends TextView implements IDUMOReceivable, IDUM
 	}
 	
 	@Override
-	public IDUMODataConnect receivableType() {
+	public IDUMODataTypeConnect receivableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

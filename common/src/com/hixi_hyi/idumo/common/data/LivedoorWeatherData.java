@@ -18,21 +18,53 @@
 package com.hixi_hyi.idumo.common.data;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
+import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawString;
 
-public class IDUMOStringData extends IDUMOData {
-	private static final String string = "string";
+/**
+ * @author Hiroyoshi HOUCHI
+ * @version 2.0
+ *
+ */
+public class LivedoorWeatherData extends IDUMOData {
+	public static final String LOCATION = "location";
+	public static final String DATE = "date";
+	public static final String MAX_TEMP = "max_temp";
+	public static final String MIN_TEMP = "min_temp";
+	public static final String WEATHER = "weather";
+	public static final String DESCRIPTION = "description";
 
-	public IDUMOStringData(String n) {
-		add(new IDUMODataTypeRawString(string, n, "Primitive : String"));
-	}
-	
-	public IDUMOStringData(IDUMODataTypeRawString raw){
-		add(new IDUMODataTypeRawString(string, raw.getValue(), raw.getSummary()));
+	public LivedoorWeatherData(String location, String date,
+			Double maxTemp, Double minTemp, String weather, String description) {
+		add(new IDUMODataTypeRawString(LOCATION, location, "livedoor location"));
+		add(new IDUMODataTypeRawString(DATE, date, "livedoor date"));
+		add(new IDUMODataTypeRawNumber(MAX_TEMP, maxTemp, "livedoor max temp"));
+		add(new IDUMODataTypeRawNumber(MIN_TEMP, minTemp, "livedoor min temp"));
+		add(new IDUMODataTypeRawString(WEATHER, weather, "livedoor weather"));
+		add(new IDUMODataTypeRawString(DESCRIPTION, description, "livedoor description"));
 	}
 
-	public String getString() {
-		String s = (String)getValue(string);
-		return s;
+	public String getLocation() {
+		return (String) getValue(LOCATION);
+	}
+
+	public String getDate() {
+		return (String) getValue(DATE);
+	}
+
+	public String getMaxTemp() {
+		return (String) getValue(MAX_TEMP);
+	}
+
+	public String getMinTemp() {
+		return (String) getValue(MIN_TEMP);
+	}
+
+	public String getWeather() {
+		return (String) getValue(WEATHER);
+	}
+
+	public String getDescription() {
+		return (String) getValue(DESCRIPTION);
 	}
 }

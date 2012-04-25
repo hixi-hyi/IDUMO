@@ -15,51 +15,23 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.common.data;
+package com.hixi_hyi.idumo.core.data;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
+import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRaw;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawString;
 
-public class IDUMOLivedoorWeatherData extends IDUMOData {
-	public static final String LOCATION = "location";
-	public static final String DATE = "date";
-	public static final String MAX_TEMP = "max_temp";
-	public static final String MIN_TEMP = "min_temp";
-	public static final String WEATHER = "weather";
-	public static final String DESCRIPTION = "description";
+public class IDUMODataPrimitiveString extends IDUMODataPrimitive {
 
-	public IDUMOLivedoorWeatherData(String location, String date,
-			Double maxTemp, Double minTemp, String weather, String description) {
-		add(new IDUMODataTypeRawString(LOCATION, location, "livedoor location"));
-		add(new IDUMODataTypeRawString(DATE, date, "livedoor date"));
-		add(new IDUMODataTypeRawNumber(MAX_TEMP, maxTemp, "livedoor max temp"));
-		add(new IDUMODataTypeRawNumber(MIN_TEMP, minTemp, "livedoor min temp"));
-		add(new IDUMODataTypeRawString(WEATHER, weather, "livedoor weather"));
-		add(new IDUMODataTypeRawString(DESCRIPTION, description, "livedoor description"));
+	public IDUMODataPrimitiveString(String n) {
+		add(new IDUMODataTypeRawString(name, n, "Primitive : String"));
 	}
 
-	public String getLocation() {
-		return (String) getValue(LOCATION);
+	public IDUMODataPrimitiveString(IDUMODataTypeRaw raw){
+		add(new IDUMODataTypeRawString(name, (String) raw.getValue(), raw.getSummary()));
 	}
 
-	public String getDate() {
-		return (String) getValue(DATE);
-	}
-
-	public String getMaxTemp() {
-		return (String) getValue(MAX_TEMP);
-	}
-
-	public String getMinTemp() {
-		return (String) getValue(MIN_TEMP);
-	}
-
-	public String getWeather() {
-		return (String) getValue(WEATHER);
-	}
-
-	public String getDescription() {
-		return (String) getValue(DESCRIPTION);
+	public String getString() {
+		String s = (String)getValue(name);
+		return s;
 	}
 }
