@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.common.handler;
+package com.hixi_hyi.idumo.common.handler.raw;
 
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveBool;
@@ -12,14 +12,14 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
-public class _ConditionMoreNumberHandler implements IDUMOSendable, IDUMOReceivable {
+public class NumberMoreThanHandler implements IDUMOSendable, IDUMOReceivable {
 	
 	private IDUMOSendable			sender;
-	private float					condition;
+	private double					condition;
 	private ReceiveValidatorSize	validator	= new ReceiveValidatorSize(1);
 	private ReceiveValidatorType	vType		= new ReceiveValidatorType(1, IDUMODataPrimitiveNumber.class);
 	
-	public _ConditionMoreNumberHandler(float condition) {
+	public NumberMoreThanHandler(double condition) {
 		this.condition = condition;
 	}
 	
@@ -39,8 +39,9 @@ public class _ConditionMoreNumberHandler implements IDUMOSendable, IDUMOReceivab
 	public IDUMODataFlowing onCall() {
 		IDUMODataPrimitiveNumber number = (IDUMODataPrimitiveNumber) sender.onCall().next();
 		double d = number.getNumber();
-		IDUMOLogManager.debug(d);
-		if (condition > d) {
+		// IDUMOLogManager.debug(d);
+		// IDUMOLogManager.debug(String.format("raw:%.0f,con:%.0f",d,condition));
+		if (condition < d) {
 			return new IDUMODataFlowing(new IDUMODataPrimitiveBool(true));
 		}
 		return new IDUMODataFlowing(new IDUMODataPrimitiveBool(false));
