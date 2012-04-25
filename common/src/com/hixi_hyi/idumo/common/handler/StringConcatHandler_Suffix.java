@@ -31,9 +31,10 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- *
+ * 
  */
-public class StringConcatHandler_Suffix implements IDUMOSendable, IDUMOReceivable {
+public class StringConcatHandler_Suffix implements IDUMOSendable,
+		IDUMOReceivable {
 
 	private IDUMOSendable provider;
 	private String fixWord;
@@ -45,8 +46,9 @@ public class StringConcatHandler_Suffix implements IDUMOSendable, IDUMOReceivabl
 
 	@Override
 	public IDUMODataFlowing onCall() {
-		String s = ((IDUMODataPrimitiveString)provider.onCall().next()).getString();
-		return new IDUMODataFlowing(new IDUMODataPrimitiveString(s+fixWord));
+		String s = ((IDUMODataPrimitiveString) provider.onCall().next())
+				.getString();
+		return new IDUMODataFlowing(new IDUMODataPrimitiveString(s + fixWord));
 	}
 
 	@Override

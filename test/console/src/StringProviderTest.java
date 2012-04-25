@@ -1,8 +1,4 @@
 
-
-
-import com.hixi_hyi.idumo.common.handler.raw.StringGetValueHandler;
-import com.hixi_hyi.idumo.common.provider.LivedoorWeatherProvider;
 import com.hixi_hyi.idumo.common.provider.StringProvider;
 import com.hixi_hyi.idumo.console.core.exec.IDUMOConsoleWrapper;
 import com.hixi_hyi.idumo.console.core.util.IDUMOConsoleLogger;
@@ -22,7 +18,7 @@ public class StringProviderTest extends IDUMOConsoleWrapper {
 				ConsoleViewReceiptor idumo1 = new ConsoleViewReceiptor();
 				add(idumo1);
 
-				connect(idumo0,idumo1);
+				connect(idumo0, idumo1);
 
 			}
 
@@ -41,4 +37,3 @@ public class StringProviderTest extends IDUMOConsoleWrapper {
 		main.exec();
 	}
 }
-

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
@@ -22,7 +21,7 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 public class ImageViewReceiptor extends ImageView implements IDUMOReceivable, IDUMORunnable {
 	
 	private IDUMOSendable	sender;
-	private Activity	activity;
+	private Activity		activity;
 	
 	public ImageViewReceiptor(Context context) {
 		super(context);

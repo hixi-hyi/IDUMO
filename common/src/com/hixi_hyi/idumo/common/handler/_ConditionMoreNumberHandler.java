@@ -1,8 +1,7 @@
 package com.hixi_hyi.idumo.common.handler;
 
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveBool;
-import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
+import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveBool;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveNumber;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
@@ -13,7 +12,8 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
-public class _ConditionMoreNumberHandler implements IDUMOSendable, IDUMOReceivable {
+public class _ConditionMoreNumberHandler implements IDUMOSendable,
+		IDUMOReceivable {
 
 	private IDUMOSendable sender;
 	private float condition;
@@ -39,7 +39,8 @@ public class _ConditionMoreNumberHandler implements IDUMOSendable, IDUMOReceivab
 
 	@Override
 	public IDUMODataFlowing onCall() {
-		IDUMODataPrimitiveNumber number = (IDUMODataPrimitiveNumber) sender.onCall().next();
+		IDUMODataPrimitiveNumber number = (IDUMODataPrimitiveNumber) sender
+				.onCall().next();
 		double d = number.getNumber();
 		IDUMOLogManager.debug(d);
 		if (condition > d) {

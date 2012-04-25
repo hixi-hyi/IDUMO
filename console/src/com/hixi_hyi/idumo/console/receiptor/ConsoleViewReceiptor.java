@@ -17,31 +17,23 @@
  */
 package com.hixi_hyi.idumo.console.receiptor;
 
-import java.util.ArrayList;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitive;
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
-import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawString;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
-import com.hixi_hyi.idumo.core.util.IDUMOLogger;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 /**
  * Systemoutに出力するReceiptor
- *
+ * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- *
+ * 
  */
 public class ConsoleViewReceiptor implements IDUMOReceivable, IDUMORunnable {
 
@@ -50,7 +42,7 @@ public class ConsoleViewReceiptor implements IDUMOReceivable, IDUMORunnable {
 
 	@Override
 	public void run() {
-		IDUMODataFlowing flowdata =  sender.onCall();
+		IDUMODataFlowing flowdata = sender.onCall();
 		IDUMODataPrimitive data = (IDUMODataPrimitive) flowdata.next();
 		System.out.println(data.getValue());
 	}

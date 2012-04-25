@@ -17,7 +17,6 @@
  */
 package com.hixi_hyi.idumo.core.data.raw;
 
-
 public class IDUMODataTypeRawNumber implements IDUMODataTypeRaw {
 	private String name;
 	private Number value;

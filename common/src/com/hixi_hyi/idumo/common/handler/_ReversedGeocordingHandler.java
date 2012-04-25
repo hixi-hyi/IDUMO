@@ -3,7 +3,6 @@ package com.hixi_hyi.idumo.common.handler;
 import java.util.ArrayList;
 
 import com.hixi_hyi.idumo.common.component._ReversedGeocording;
-import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveNumber;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
@@ -21,7 +20,8 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
  * @author Hiroyoshi
  * 
  */
-public class _ReversedGeocordingHandler implements IDUMOSendable, IDUMOReceivable {
+public class _ReversedGeocordingHandler implements IDUMOSendable,
+		IDUMOReceivable {
 
 	private ArrayList<IDUMOSendable> senders = new ArrayList<IDUMOSendable>();
 	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);

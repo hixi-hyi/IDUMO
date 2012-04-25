@@ -17,7 +17,6 @@
  */
 package com.hixi_hyi.idumo.core.data.raw;
 
-
 public class IDUMODataTypeRawBool implements IDUMODataTypeRaw {
 	private String name;
 	private Boolean value;

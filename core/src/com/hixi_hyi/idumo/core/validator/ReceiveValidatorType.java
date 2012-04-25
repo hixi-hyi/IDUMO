@@ -18,8 +18,6 @@
 package com.hixi_hyi.idumo.core.validator;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
@@ -35,7 +33,8 @@ public class ReceiveValidatorType implements ReceiveValidator {
 
 	@Override
 	public void validate(IDUMOSendable... senders) throws IDUMOException {
-		Class<? extends IDUMOData> type = senders[num].sendableType().iterator().next();
+		Class<? extends IDUMOData> type = senders[num].sendableType()
+				.iterator().next();
 		if (cls != type) {
 			throw new IDUMOException();
 		}

@@ -1,8 +1,7 @@
 package com.hixi_hyi.idumo.common.handler;
 
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveBool;
-import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
+import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveBool;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
@@ -38,7 +37,8 @@ public class _ConditionStringHandler implements IDUMOSendable, IDUMOReceivable {
 
 	@Override
 	public IDUMODataFlowing onCall() {
-		IDUMODataPrimitiveString data = (IDUMODataPrimitiveString) sender.onCall().next();
+		IDUMODataPrimitiveString data = (IDUMODataPrimitiveString) sender
+				.onCall().next();
 		String str = data.getString();
 		if (condition.equals(str)) {
 			return new IDUMODataFlowing(new IDUMODataPrimitiveBool(true));

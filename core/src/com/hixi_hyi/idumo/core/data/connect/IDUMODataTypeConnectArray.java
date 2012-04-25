@@ -10,8 +10,8 @@ public class IDUMODataTypeConnectArray implements IDUMODataTypeConnect {
 
 	List<Class<? extends IDUMOData>> data = new ArrayList<Class<? extends IDUMOData>>();
 
-	public IDUMODataTypeConnectArray(Class<? extends IDUMOData>... ds){
-		for(Class<? extends IDUMOData> d:ds){
+	public IDUMODataTypeConnectArray(Class<? extends IDUMOData>... ds) {
+		for (Class<? extends IDUMOData> d : ds) {
 			data.add(d);
 		}
 	}

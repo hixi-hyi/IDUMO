@@ -29,15 +29,15 @@ import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 
 /**
  * 今日の天気予報を取得することが出来るクラス．
- *
+ * 
  * お天気Webサービス仕様 - Weather Hacks - livedoor 天気情報
  * http://weather.livedoor.com/weather_hacks/webservice.html API
  * http://weather.livedoor.com/forecast/webservice/rest/v1?city=63&day=today
  * Reference Site http://d.hatena.ne.jp/tomute/20080506/1210110326
- *
+ * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- *
+ * 
  */
 public class LivedoorWeather {
 

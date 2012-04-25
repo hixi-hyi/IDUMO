@@ -37,7 +37,7 @@ public class StringGetValueHandler implements IDUMOSendable, IDUMOReceivable {
 	private IDUMOSendable sender;
 	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
 
-	public StringGetValueHandler(String name){
+	public StringGetValueHandler(String name) {
 		this.name = name;
 	}
 
@@ -59,8 +59,9 @@ public class StringGetValueHandler implements IDUMOSendable, IDUMOReceivable {
 
 	@Override
 	public IDUMODataFlowing onCall() {
-//		IDUMODataTypeRawString s = (IDUMODataTypeRawString) sender.onCall().next().get(name);
-//		IDUMOLogManager.debug(s);
+		// IDUMODataTypeRawString s = (IDUMODataTypeRawString)
+		// sender.onCall().next().get(name);
+		// IDUMOLogManager.debug(s);
 		Object o = sender.onCall().next().get(name).getValue();
 		return new IDUMODataFlowing(new IDUMODataPrimitiveString(o.toString()));
 	}

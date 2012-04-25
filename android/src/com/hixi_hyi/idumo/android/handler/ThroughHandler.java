@@ -1,6 +1,5 @@
 package com.hixi_hyi.idumo.android.handler;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
@@ -12,7 +11,7 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 public class ThroughHandler implements IDUMOSendable, IDUMOReceivable {
 	
-	private IDUMOSendable			provider;
+	private IDUMOSendable		provider;
 	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
 	
 	@Override

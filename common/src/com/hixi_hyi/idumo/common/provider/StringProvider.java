@@ -17,33 +17,31 @@
  */
 package com.hixi_hyi.idumo.common.provider;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * ランダムなバイト情報を送るためのProvider(DebugClass)
- *
+ * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- *
+ * 
  */
 public class StringProvider implements IDUMOSendable {
 
 	private String str;
 
 	public StringProvider(String str) {
-//		IDUMOLogManager.debug(str);
+		// IDUMOLogManager.debug(str);
 		this.str = str;
 	}
 
 	@Override
 	public IDUMODataFlowing onCall() {
-//		IDUMOLogManager.log();
+		// IDUMOLogManager.log();
 		IDUMODataFlowing pipes = new IDUMODataFlowing();
 		pipes.add(new IDUMODataPrimitiveString(str));
 		return pipes;

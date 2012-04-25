@@ -9,9 +9,9 @@ import com.hixi_hyi.idumo.core.data.IDUMOData;
 public class IDUMODataTypeConnectMulti implements IDUMODataTypeConnect {
 
 	List<Class<? extends IDUMOData>> data = new ArrayList<Class<? extends IDUMOData>>();
-	
-	public IDUMODataTypeConnectMulti(Class<? extends IDUMOData>... ds){
-		for(Class<? extends IDUMOData> d:ds){
+
+	public IDUMODataTypeConnectMulti(Class<? extends IDUMOData>... ds) {
+		for (Class<? extends IDUMOData> d : ds) {
 			data.add(d);
 		}
 	}
@@ -26,5 +26,5 @@ public class IDUMODataTypeConnectMulti implements IDUMODataTypeConnect {
 		// TODO 自動生成されたメソッド・スタブ
 		return false;
 	}
-	
+
 }

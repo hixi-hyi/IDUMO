@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-
 public class IDUMODataFlowing implements Iterable<IDUMOData> {
 	private ArrayList<IDUMOData> datalist;
 	{

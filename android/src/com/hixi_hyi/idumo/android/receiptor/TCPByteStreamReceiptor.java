@@ -7,7 +7,6 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
-import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
@@ -27,7 +26,7 @@ public class TCPByteStreamReceiptor implements IDUMOReceivable, AndroidControlle
 	private int				port;
 	private Socket			socket;
 	private OutputStream	outstream;
-	private IDUMOSendable		sender;
+	private IDUMOSendable	sender;
 	
 	public TCPByteStreamReceiptor(String ip, int port) {
 		this.ip = ip;
@@ -42,9 +41,9 @@ public class TCPByteStreamReceiptor implements IDUMOReceivable, AndroidControlle
 	
 	@Override
 	public void setSender(IDUMOSendable... senders) throws IDUMOException {
-//		if (senders.length != 1) {
-//			return false;
-//		}
+		// if (senders.length != 1) {
+		// return false;
+		// }
 		// for (Object o : senders[0].getDataType()) {
 		// if (o != Byte.class) {
 		// return false;

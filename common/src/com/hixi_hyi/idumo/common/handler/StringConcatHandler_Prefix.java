@@ -19,7 +19,6 @@ package com.hixi_hyi.idumo.common.handler;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitive;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
@@ -32,9 +31,10 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- *
+ * 
  */
-public class StringConcatHandler_Prefix implements IDUMOSendable, IDUMOReceivable {
+public class StringConcatHandler_Prefix implements IDUMOSendable,
+		IDUMOReceivable {
 
 	private IDUMOSendable provider;
 	private String fixWord;
@@ -46,8 +46,9 @@ public class StringConcatHandler_Prefix implements IDUMOSendable, IDUMOReceivabl
 
 	@Override
 	public IDUMODataFlowing onCall() {
-		String s = ((IDUMODataPrimitiveString)provider.onCall().next()).getString();
-		return new IDUMODataFlowing(new IDUMODataPrimitiveString(fixWord+s));
+		String s = ((IDUMODataPrimitiveString) provider.onCall().next())
+				.getString();
+		return new IDUMODataFlowing(new IDUMODataPrimitiveString(fixWord + s));
 	}
 
 	@Override

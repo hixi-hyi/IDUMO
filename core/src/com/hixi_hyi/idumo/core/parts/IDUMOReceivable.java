@@ -17,7 +17,6 @@
  */
 package com.hixi_hyi.idumo.core.parts;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 

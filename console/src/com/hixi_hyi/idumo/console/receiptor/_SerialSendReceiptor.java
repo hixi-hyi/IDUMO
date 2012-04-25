@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
@@ -61,9 +60,9 @@ public class _SerialSendReceiptor implements IDUMORunnable, IDUMOReceivable,
 
 	@Override
 	public void setSender(IDUMOSendable... senders) throws IDUMOException {
-//		if (senders.length != 1) {
-//			return false;
-//		}
+		// if (senders.length != 1) {
+		// return false;
+		// }
 		// for (Object o : senders[0].getDataType()) {
 		// if (o != Byte.class) {
 		// return false;

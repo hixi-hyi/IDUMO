@@ -17,7 +17,6 @@
  */
 package com.hixi_hyi.idumo.core.data.raw;
 
-
 public class IDUMODataTypeRawString implements IDUMODataTypeRaw {
 	private String name;
 	private String value;
@@ -44,10 +43,10 @@ public class IDUMODataTypeRawString implements IDUMODataTypeRaw {
 		return String.class;
 	}
 
-//	@Override
-//	public String toString() {
-//		return String.format("String[%s:%s:%s]", name, value,summary);
-//	}
+	// @Override
+	// public String toString() {
+	// return String.format("String[%s:%s:%s]", name, value,summary);
+	// }
 
 	@Override
 	public String getSummary() {

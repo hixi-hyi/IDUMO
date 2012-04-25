@@ -17,10 +17,9 @@
  */
 package com.hixi_hyi.idumo.core.data.connect;
 
-import java.util.List;
-
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 
-public interface IDUMODataTypeConnect extends Iterable<Class<? extends IDUMOData>>{
+public interface IDUMODataTypeConnect extends
+		Iterable<Class<? extends IDUMOData>> {
 	public boolean equals(IDUMODataTypeConnect connect);
 }

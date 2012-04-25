@@ -2,7 +2,6 @@ package com.hixi_hyi.idumo.common.provider;
 
 import java.util.Random;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveNumber;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;

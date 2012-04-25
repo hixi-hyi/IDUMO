@@ -1,6 +1,4 @@
 
-
-
 import com.hixi_hyi.idumo.common.handler.raw.StringGetValueHandler;
 import com.hixi_hyi.idumo.common.provider.LivedoorWeatherProvider;
 import com.hixi_hyi.idumo.console.core.exec.IDUMOConsoleWrapper;
@@ -34,7 +32,7 @@ class LivedoorWeatherConsoleComponent extends IDUMOComponent {
 		ConsoleViewReceiptor idumo2 = new ConsoleViewReceiptor();
 		add(idumo2);
 
-		connect(idumo0,idumo1);
+		connect(idumo0, idumo1);
 		connect(idumo1, idumo2);
 
 	}

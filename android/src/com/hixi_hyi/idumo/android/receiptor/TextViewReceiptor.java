@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.widget.TextView;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
@@ -22,7 +21,7 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 public class TextViewReceiptor extends TextView implements IDUMOReceivable, IDUMORunnable {
 	
 	private ArrayList<IDUMOSendable>	senders;
-	private Activity				activity;
+	private Activity					activity;
 	
 	public TextViewReceiptor(Context context) {
 		super(context);

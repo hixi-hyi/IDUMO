@@ -24,7 +24,7 @@ import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawString;
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- *
+ * 
  */
 public class LivedoorWeatherData extends IDUMOData {
 	public static final String LOCATION = "location";
@@ -34,14 +34,15 @@ public class LivedoorWeatherData extends IDUMOData {
 	public static final String WEATHER = "weather";
 	public static final String DESCRIPTION = "description";
 
-	public LivedoorWeatherData(String location, String date,
-			Double maxTemp, Double minTemp, String weather, String description) {
+	public LivedoorWeatherData(String location, String date, Double maxTemp,
+			Double minTemp, String weather, String description) {
 		add(new IDUMODataTypeRawString(LOCATION, location, "livedoor location"));
 		add(new IDUMODataTypeRawString(DATE, date, "livedoor date"));
 		add(new IDUMODataTypeRawNumber(MAX_TEMP, maxTemp, "livedoor max temp"));
 		add(new IDUMODataTypeRawNumber(MIN_TEMP, minTemp, "livedoor min temp"));
 		add(new IDUMODataTypeRawString(WEATHER, weather, "livedoor weather"));
-		add(new IDUMODataTypeRawString(DESCRIPTION, description, "livedoor description"));
+		add(new IDUMODataTypeRawString(DESCRIPTION, description,
+				"livedoor description"));
 	}
 
 	public String getLocation() {
