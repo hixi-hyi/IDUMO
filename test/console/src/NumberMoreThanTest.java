@@ -8,7 +8,7 @@ import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
-public class NumberConditionTest extends IDUMOConsoleWrapper {
+public class NumberMoreThanTest extends IDUMOConsoleWrapper {
 	@Override
 	public void init() {
 		setExecutionWithComponent(new IDUMOComponent() {
@@ -40,7 +40,7 @@ public class NumberConditionTest extends IDUMOConsoleWrapper {
 	public static void main(String[] args) {
 		IDUMOLogManager.DEBUG = true;
 		IDUMOLogManager.LOGGER = new IDUMOConsoleLogger();
-		NumberConditionTest main = new NumberConditionTest();
+		NumberMoreThanTest main = new NumberMoreThanTest();
 		main.exec();
 	}
 }
