@@ -79,7 +79,7 @@ public class Hotpepper {
 		}
 		for (Element element : shops) {
 			System.out.println(element);
-			System.out.println(element.getChildren("name"));
+			System.out.println(element.getChild("shop"));
 			String name;
 			name = element.getChildText("shop");
 			System.out.println(name);
