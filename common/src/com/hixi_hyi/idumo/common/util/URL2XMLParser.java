@@ -13,10 +13,10 @@ import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 public class URL2XMLParser {
-	
+
 	private URL url;
 	private Document doc;
-	
+
 	public URL2XMLParser(String url) throws IOException, JDOMException{
 		this.url = new URL(url);
 		init();
@@ -25,23 +25,23 @@ public class URL2XMLParser {
 		this.url = url;
 		init();
 	}
-	
+
 	public void init() throws IOException, JDOMException{
 		URLConnection con = url.openConnection();
 		doc = new SAXBuilder().build(con.getInputStream());
 	}
-	
+
 	public Element getRoot(){
 		return doc.getRootElement();
 	}
-	
+
 	public void output() throws IOException{
 	    XMLOutputter outputter = new XMLOutputter();
 	    Format format = outputter.getFormat();
 	    format.setLineSeparator("\n");
 	    format.setIndent("    ");
 	    outputter.setFormat(format);
-	    outputter.output(doc, System.out);	    
+	    outputter.output(doc, System.out);
 	}
-	
+
 }

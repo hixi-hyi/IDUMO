@@ -22,7 +22,28 @@ import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawString;
 
 public class HotpepperData extends IDUMOData {
-	public HotpepperData() {
+	/*
+	 * name - String
+	 * address - String
+	 * catch - String
+	 * open - String
+	 * budget - String
+	 * average - String
+	 */
+	private static final String NAME = "name";
+	private static final String ADDRESS = "address";
+	private static final String CATCHCOPY = "catchcopy";
+	private static final String OPEN = "budget";
+	private static final String BUDGET = "budget";
+	private static final String AVERAGE = "average";
+
+	public HotpepperData(String name,String address,String catchcopy, String open,String budget,String average) {
+		add(new IDUMODataTypeRawString(NAME, name, "shop name"));
+		add(new IDUMODataTypeRawString(ADDRESS, address, "shop address"));
+		add(new IDUMODataTypeRawString(CATCHCOPY, catchcopy, "shop catchcopy"));
+		add(new IDUMODataTypeRawString(OPEN, open, "shop open"));
+		add(new IDUMODataTypeRawString(BUDGET, budget, "shop budget"));
+		add(new IDUMODataTypeRawString(AVERAGE, average, "shop average"));
 	}
 
 }

@@ -27,47 +27,41 @@ import com.hixi_hyi.idumo.common.util.URL2XMLParser;
 
 /**
  * 今日の天気予報を取得することが出来るクラス．
- * 
+ *
  * お天気Webサービス仕様 - Weather Hacks - livedoor 天気情報
  * http://weather.livedoor.com/weather_hacks/webservice.html API
  * http://weather.livedoor.com/forecast/webservice/rest/v1?city=63&day=today
  * Reference Site http://d.hatena.ne.jp/tomute/20080506/1210110326
- * 
+ *
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- * 
+ *
  */
 public class LivedoorWeather {
-	
+
 	private static final String	REQUEST_URL_SEED	= "http://weather.livedoor.com/forecast/webservice/rest/v1?day=today&city=%d";
-	
+
 	private String				requestURL;
-	
-	private String				location;
-	private String				date;
-	private double				maxTemp;
-	private double				minTemp;
-	private String				weather;
-	private String				description;
-	
+
 	private LivedoorWeatherData	data;
-	
+
 	private boolean				isReady;
 	private URL2XMLParser parser;
-	
+
 	public LivedoorWeather(int citynum) throws IOException, JDOMException {
 		requestURL = String.format(REQUEST_URL_SEED, citynum);
 		init();
 	}
-	
+
 	public void init() throws IOException, JDOMException {
 		parser = new URL2XMLParser(requestURL);
 		Element root = parser.getRoot();
-		parser.output();
-		date = root.getChildText("forecastdate");
-		location = root.getChild("location").getAttributeValue("city");
-		weather = root.getChildText("telop");
-		description = root.getChildText("description");
+//		parser.output();
+		String date = root.getChildText("forecastdate");
+		String location = root.getChild("location").getAttributeValue("city");
+		String weather = root.getChildText("telop");
+		String description = root.getChildText("description");
+		double maxTemp=0.0,minTemp=0.0;
 		try {
 			maxTemp = Double.parseDouble(root.getChild("temperature").getChild("max").getChildText("celsius"));
 		} catch (Exception e) {}
@@ -77,7 +71,7 @@ public class LivedoorWeather {
 		data = new LivedoorWeatherData(location, date, maxTemp, minTemp, weather, description);
 		isReady = true;
 	}
-	
+
 	public boolean isReady() throws IOException, JDOMException {
 		if (isReady) {
 			return true;
@@ -85,9 +79,9 @@ public class LivedoorWeather {
 		init();
 		return isReady;
 	}
-	
+
 	public LivedoorWeatherData getData() {
 		return data;
 	}
-	
+
 }

@@ -27,6 +27,7 @@ import java.util.logging.LogManager;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
+import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
@@ -43,28 +44,22 @@ public class Hotpepper {
 
 	private String				requestURL;
 
-	private String				location;
-	private String				date;
-	private double				maxTemp;
-	private double				minTemp;
-	private String				weather;
-	private String				description;
-
-	private HotpepperData	data;
+	private ArrayList<HotpepperData>	list;
 	private boolean				isReady;
-	
+
 	private URL2XMLParser parser;
-	
+
 
 	public Hotpepper(double lat,double lon) {
 		requestURL = String.format(REQUEST_URL_SEED, lat,lon);
+		list = new ArrayList<HotpepperData>();
 		init();
 	}
 
 	public void init() {
 		try {
 			parser = new URL2XMLParser(requestURL);
-			parser.output();
+//			parser.output();
 		} catch (Exception e) {
 			throw new IDUMORuntimeException(e);
 		}
@@ -77,30 +72,16 @@ public class Hotpepper {
 				shops.add(element);
 			}
 		}
+		Namespace ns = root.getNamespace();
 		for (Element element : shops) {
-			System.out.println(element);
-			System.out.println(element.getChild("shop"));
-			String name;
-			name = element.getChildText("shop");
-			System.out.println(name);
+			String name = element.getChildText("name",ns);
+			String address = element.getChildText("address",ns);
+			String catchcopy = element.getChildText("catch",ns);
+			String open = element.getChildText("open",ns);
+			String budget = element.getChild("budget",ns).getChildText("name", ns);
+			String average = element.getChild("budget",ns).getChildText("average", ns);
+			list.add(new HotpepperData(name, address, catchcopy, open, budget, average));
 		}
-//		System.out.println( root.getChildren() );
-		
-		
-		/*
-		date = root.getChildText("forecastdate");
-		location = root.getChild("location").getAttributeValue("city");
-		weather = root.getChildText("telop");
-		description = root.getChildText("description");
-		try {
-			maxTemp = Double.parseDouble(root.getChild("temperature").getChild("max").getChildText("celsius"));
-		} catch (Exception e) {}
-		try {
-			minTemp = Double.parseDouble(root.getChild("temperature").getChild("min").getChildText("celsius"));
-		} catch (Exception e) {}
-		data = new LivedoorWeatherData(location, date, maxTemp, minTemp, weather, description);
-		isReady = true;
-		*/
 	}
 
 	public boolean isReady() {
@@ -111,8 +92,8 @@ public class Hotpepper {
 		return isReady;
 	}
 
-	public HotpepperData getData() {
-		return data;
+	public ArrayList<HotpepperData> getData() {
+		return list;
 	}
 
 }
