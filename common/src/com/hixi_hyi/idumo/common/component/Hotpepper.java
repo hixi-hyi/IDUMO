@@ -17,18 +17,23 @@
  */
 package com.hixi_hyi.idumo.common.component;
 
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.LogManager;
 
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 import com.hixi_hyi.idumo.common.data.HotpepperData;
 import com.hixi_hyi.idumo.common.data.LivedoorWeatherData;
+import com.hixi_hyi.idumo.common.util.URL2XMLParser;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
@@ -47,6 +52,9 @@ public class Hotpepper {
 
 	private HotpepperData	data;
 	private boolean				isReady;
+	
+	private URL2XMLParser parser;
+	
 
 	public Hotpepper(double lat,double lon) {
 		requestURL = String.format(REQUEST_URL_SEED, lat,lon);
@@ -54,29 +62,31 @@ public class Hotpepper {
 	}
 
 	public void init() {
-		Document doc = null;
 		try {
-			URL accessURL = new URL(requestURL);
-			URLConnection con = accessURL.openConnection();
-			doc = new SAXBuilder().build(con.getInputStream());
+			parser = new URL2XMLParser(requestURL);
+			parser.output();
 		} catch (Exception e) {
 			throw new IDUMORuntimeException(e);
 		}
-		System.out.println(requestURL);
-		Element root = doc.getRootElement();
-		System.out.println(doc);
-		System.out.println(root);
-		try {
-		    XMLOutputter outputter = new XMLOutputter();
-		    Format format = outputter.getFormat();
-//		    format.setEncoding("UTF-8");
-		    format.setLineSeparator("\n");
-		    format.setIndent("    ");
-		    outputter.setFormat(format);
-		    outputter.output(doc, System.out);
-		} catch (java.io.IOException e) {
-		    e.printStackTrace();
+		Element root = parser.getRoot();
+		List<Element> shops = new ArrayList<Element>();
+		List<Element> children = (List<Element>)root.getChildren();
+		for (Element element : children) {
+			String name = element.getName();
+			if(name.equals("shop")){
+				shops.add(element);
+			}
 		}
+		for (Element element : shops) {
+			System.out.println(element);
+			System.out.println(element.getChildren("name"));
+			String name;
+			name = element.getChildText("shop");
+			System.out.println(name);
+		}
+//		System.out.println( root.getChildren() );
+		
+		
 		/*
 		date = root.getChildText("forecastdate");
 		location = root.getChild("location").getAttributeValue("city");

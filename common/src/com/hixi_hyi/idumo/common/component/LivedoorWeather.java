@@ -17,15 +17,13 @@
  */
 package com.hixi_hyi.idumo.common.component;
 
-import java.net.URL;
-import java.net.URLConnection;
+import java.io.IOException;
 
-import org.jdom.Document;
 import org.jdom.Element;
-import org.jdom.input.SAXBuilder;
+import org.jdom.JDOMException;
 
 import com.hixi_hyi.idumo.common.data.LivedoorWeatherData;
-import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
+import com.hixi_hyi.idumo.common.util.URL2XMLParser;
 
 /**
  * 今日の天気予報を取得することが出来るクラス．
@@ -55,23 +53,17 @@ public class LivedoorWeather {
 	private LivedoorWeatherData	data;
 	
 	private boolean				isReady;
+	private URL2XMLParser parser;
 	
-	public LivedoorWeather(int citynum) {
+	public LivedoorWeather(int citynum) throws IOException, JDOMException {
 		requestURL = String.format(REQUEST_URL_SEED, citynum);
 		init();
 	}
 	
-	public void init() {
-		Document doc = null;
-		try {
-			URL accessURL = new URL(requestURL);
-			URLConnection con = accessURL.openConnection();
-			doc = new SAXBuilder().build(con.getInputStream());
-		} catch (Exception e) {
-			throw new IDUMORuntimeException(e);
-		}
-		
-		Element root = doc.getRootElement();
+	public void init() throws IOException, JDOMException {
+		parser = new URL2XMLParser(requestURL);
+		Element root = parser.getRoot();
+		parser.output();
 		date = root.getChildText("forecastdate");
 		location = root.getChild("location").getAttributeValue("city");
 		weather = root.getChildText("telop");
@@ -86,7 +78,7 @@ public class LivedoorWeather {
 		isReady = true;
 	}
 	
-	public boolean isReady() {
+	public boolean isReady() throws IOException, JDOMException {
 		if (isReady) {
 			return true;
 		}

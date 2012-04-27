@@ -17,11 +17,16 @@
  */
 package com.hixi_hyi.idumo.common.provider;
 
+import java.io.IOException;
+
+import org.jdom.JDOMException;
+
 import com.hixi_hyi.idumo.common.component.LivedoorWeather;
 import com.hixi_hyi.idumo.common.data.LivedoorWeatherData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
 /**
@@ -35,7 +40,10 @@ public class LivedoorWeatherProvider implements IDUMOSendable {
 	private LivedoorWeather	weather;
 	
 	public LivedoorWeatherProvider(int citynum) {
-		weather = new LivedoorWeather(citynum);
+		try {
+			weather = new LivedoorWeather(citynum);
+		} catch (Exception e) {
+		}
 	}
 	
 	@Override
@@ -47,7 +55,11 @@ public class LivedoorWeatherProvider implements IDUMOSendable {
 	
 	@Override
 	public boolean isReady() {
-		return weather.isReady();
+		try {
+			return weather.isReady();
+		} catch (Exception e) {
+			throw new IDUMORuntimeException(e);
+		}
 	}
 	
 	@Override
