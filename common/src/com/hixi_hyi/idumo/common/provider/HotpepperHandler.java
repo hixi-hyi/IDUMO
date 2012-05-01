@@ -35,6 +35,7 @@ import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 /**
@@ -50,6 +51,7 @@ public class HotpepperHandler implements IDUMOSendable,IDUMOReceivable {
 
 	@Override
 	public IDUMODataFlowing onCall() {
+		IDUMOLogManager.log();
 		GPSData gd = (GPSData) sender.onCall().next();
 		hotpepper.setLatLon(gd.getLatitude(), gd.getLongitude());
 		IDUMODataFlowing p = new IDUMODataFlowing();
@@ -62,7 +64,7 @@ public class HotpepperHandler implements IDUMOSendable,IDUMOReceivable {
 
 	@Override
 	public boolean isReady() {
-		return hotpepper.isReady();
+		return true;
 	}
 
 	@Override

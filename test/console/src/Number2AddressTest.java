@@ -1,4 +1,6 @@
 import com.hixi_hyi.idumo.android.converter.Number2GPSConverter;
+import com.hixi_hyi.idumo.common.component.ReversedGeocording;
+import com.hixi_hyi.idumo.common.handler.ReversedGeocordingHandler;
 import com.hixi_hyi.idumo.common.provider.NumberProvider;
 import com.hixi_hyi.idumo.console.core.exec.IDUMOConsoleWrapper;
 import com.hixi_hyi.idumo.console.core.util.IDUMOConsoleLogger;
@@ -13,20 +15,22 @@ public class Number2AddressTest extends IDUMOConsoleWrapper {
 		setExecutionWithComponent(new IDUMOComponent() {
 			@Override
 			public void onIdumoMakeFlowChart() throws IDUMOException {
-				NumberProvider idumo0 = new NumberProvider(40.0);
+				NumberProvider idumo0 = new NumberProvider(35.4138);
 				add(idumo0);
-				NumberProvider idumo1 = new NumberProvider(132.0);
+				NumberProvider idumo1 = new NumberProvider(139.4505);
 				add(idumo1);
 				Number2GPSConverter idumo2 = new Number2GPSConverter();
 				add(idumo2);
-				
+				ReversedGeocordingHandler idumo3 = new ReversedGeocordingHandler();
+				add(idumo3);
 				
 				ConsoleViewReceiptor idumor = new ConsoleViewReceiptor();
 				add(idumor);
 				
 				connect(idumo0, idumo2);
 				connect(idumo1, idumo2);
-				connect(idumo2, idumor);
+				connect(idumo2, idumo3);
+				connect(idumo3, idumor);
 				
 			}
 			

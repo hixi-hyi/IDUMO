@@ -10,7 +10,7 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 public class ArrayGetTopHandler implements IDUMOSendable,IDUMOReceivable{
-	
+
 	private IDUMOSendable sender;
 	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
 
@@ -32,14 +32,14 @@ public class ArrayGetTopHandler implements IDUMOSendable,IDUMOReceivable{
 
 	@Override
 	public IDUMODataFlowing onCall() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		IDUMOData d = sender.onCall().next();
+		return new IDUMODataFlowing(d);
 	}
 
 	@Override
 	public IDUMODataTypeConnect sendableType() {
 		return sender.sendableType();
 	}
-	
+
 
 }

@@ -17,6 +17,8 @@
  */
 package com.hixi_hyi.idumo.console.receiptor;
 
+import java.util.Iterator;
+
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitive;
@@ -30,39 +32,43 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 /**
  * Systemoutに出力するReceiptor
- * 
+ *
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- * 
+ *
  */
 public class ConsoleViewReceiptor implements IDUMOReceivable, IDUMORunnable {
-	
+
 	private IDUMOSendable			sender;
 	private ReceiveValidatorSize	vSize	= new ReceiveValidatorSize(1);
-	
+
 	@Override
 	public void run() {
 		IDUMODataFlowing flowdata = sender.onCall();
-		IDUMODataPrimitive data = (IDUMODataPrimitive) flowdata.next();
-		System.out.println(data.getValue());
+//		IDUMODataPrimitive data = (IDUMODataPrimitive) flowdata.next();
+//		System.out.println(data.getValue());
+		Iterator<IDUMOData> it = flowdata.iterator();
+		for (IDUMOData idumoData : flowdata) {
+			System.out.println(idumoData);
+		}
 //		IDUMOData data = (IDUMOData) flowdata.next();
 //		System.out.println(data);
 	}
-	
+
 	@Override
 	public void setSender(IDUMOSendable... handler) throws IDUMOException {
 		vSize.validate(handler);
 		sender = handler[0];
 	}
-	
+
 	@Override
 	public boolean isReady() {
 		return sender.isReady();
 	}
-	
+
 	@Override
 	public IDUMODataTypeConnect receivableType() {
 		return new IDUMODataTypeConnectSingle(IDUMOData.class);
 	}
-	
+
 }

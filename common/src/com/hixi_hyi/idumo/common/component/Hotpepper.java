@@ -53,10 +53,10 @@ public class Hotpepper {
 	public Hotpepper(double lat,double lon) {
 		init(lat,lon);
 	}
-	
+
 	public Hotpepper(){
 	}
-	
+
 	public void setLatLon(double lat,double lon){
 		init(lat,lon);
 	}

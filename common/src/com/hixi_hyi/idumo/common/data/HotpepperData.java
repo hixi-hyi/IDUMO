@@ -46,4 +46,46 @@ public class HotpepperData extends IDUMOData {
 		add(new IDUMODataTypeRawString(AVERAGE, average, "shop average"));
 	}
 
+	public String getName(){
+		return (String)getValue(NAME);
+	}
+
+	public String getAddress(){
+		return (String)getValue(ADDRESS);
+	}
+
+	public String getCatchcopy(){
+		return (String)getValue(CATCHCOPY);
+	}
+
+	public String getOpen(){
+		return (String)getValue(OPEN);
+	}
+
+	public String getBudget(){
+		return (String)getValue(BUDGET);
+	}
+
+	public String getAverage(){
+		return (String)getValue(AVERAGE);
+	}
+
+	@Override
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		sb.append(getName());
+		sb.append(":");
+		sb.append(getAddress());
+		sb.append(":");
+		sb.append(getCatchcopy());
+		sb.append(":");
+		sb.append(getOpen());
+		sb.append(":");
+		sb.append(getBudget());
+		sb.append(":");
+		sb.append(getAverage());
+		return sb.toString();
+	}
+
+
 }
