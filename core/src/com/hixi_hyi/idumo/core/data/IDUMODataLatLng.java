@@ -15,41 +15,31 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core.data.raw;
+package com.hixi_hyi.idumo.core.data;
 
-public class IDUMODataTypeRawString implements IDUMODataTypeRaw {
-	private String	name;
-	private String	value;
-	private String	summary;
-	
-	public IDUMODataTypeRawString(String name, String value, String summary) {
-		this.name = name;
-		this.value = value;
-		this.summary = summary;
+import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
+
+public class IDUMODataLatLng extends IDUMOData {
+
+
+	private static final String LAT = "latitude";
+	private static final String LNG = "longitude";
+
+	public IDUMODataLatLng(double lat,double lng) {
+		add(new IDUMODataTypeRawNumber(LAT, lat, "Primitive : GPS Latitude"));
+		add(new IDUMODataTypeRawNumber(LNG, lng, "Primitive : GPS Longtude"));
 	}
-	
-	@Override
-	public String getName() {
-		return name;
+
+	public double getLatitude() {
+		return (Double) getValue(LAT);
 	}
-	
-	@Override
-	public String getValue() {
-		return value;
+
+	public double getLongitude() {
+		return (Double) getValue(LNG);
 	}
-	
+
 	@Override
-	public Class<?> getType() {
-		return String.class;
-	}
-	
-	// @Override
-	// public String toString() {
-	// return String.format("String[%s:%s:%s]", NAME, value,summary);
-	// }
-	
-	@Override
-	public String getSummary() {
-		return summary;
+	public String toString(){
+		return String.format("[%f,%f]",getLatitude(),getLongitude());
 	}
 }

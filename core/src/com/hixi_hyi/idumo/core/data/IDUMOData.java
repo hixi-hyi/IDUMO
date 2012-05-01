@@ -32,9 +32,9 @@ public abstract class IDUMOData {
 	}
 	
 	public Object getValue(String name) {
-		// IDUMOLogManager.debug(name);
-		// IDUMOLogManager.debug(raw.get(name));
-		// IDUMOLogManager.debug(raw.get(name).getValue());
+		// IDUMOLogManager.debug(NAME);
+		// IDUMOLogManager.debug(raw.get(NAME));
+		// IDUMOLogManager.debug(raw.get(NAME).getValue());
 		return raw.get(name).getValue();
 	}
 	

@@ -33,10 +33,10 @@ class RoombaSingComponent extends IDUMOAndroidComponent {
 }
 
 /*
- * <activity android:name=".auto.app.RoombaSingActivity"
+ * <activity android:NAME=".auto.app.RoombaSingActivity"
  * android:label="RoombaSing"> <intent-filter> <action
- * android:name="android.intent.action.MAIN" /> <category
- * android:name="android.intent.category.IDUMO_SAMPLES" /> <category
- * android:name="android.intent.category.LAUNCHER" /> </intent-filter>
+ * android:NAME="android.intent.action.MAIN" /> <category
+ * android:NAME="android.intent.category.IDUMO_SAMPLES" /> <category
+ * android:NAME="android.intent.category.LAUNCHER" /> </intent-filter>
  * </activity>
  */

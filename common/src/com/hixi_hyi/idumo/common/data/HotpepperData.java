@@ -31,14 +31,20 @@ public class HotpepperData extends IDUMOData {
 	 * average - String
 	 */
 	private static final String NAME = "name";
+	private static final String KANA = "kana";
+	private static final String LAT ="lat";
+	private static final String LNG = "lng";
 	private static final String ADDRESS = "address";
 	private static final String CATCHCOPY = "catchcopy";
 	private static final String OPEN = "budget";
 	private static final String BUDGET = "budget";
 	private static final String AVERAGE = "average";
 
-	public HotpepperData(String name,String address,String catchcopy, String open,String budget,String average) {
+	public HotpepperData(String name,String kana, double lat, double lng ,String address,String catchcopy, String open,String budget,String average) {
 		add(new IDUMODataTypeRawString(NAME, name, "shop name"));
+		add(new IDUMODataTypeRawString(KANA, kana, "shop kana name"));
+		add(new IDUMODataTypeRawNumber(LAT, lat, "shop lat"));
+		add(new IDUMODataTypeRawNumber(LNG, lng, "shop lng"));
 		add(new IDUMODataTypeRawString(ADDRESS, address, "shop address"));
 		add(new IDUMODataTypeRawString(CATCHCOPY, catchcopy, "shop catchcopy"));
 		add(new IDUMODataTypeRawString(OPEN, open, "shop open"));
@@ -48,6 +54,18 @@ public class HotpepperData extends IDUMOData {
 
 	public String getName(){
 		return (String)getValue(NAME);
+	}
+
+	public String getKana(){
+		return (String)getValue(KANA);
+	}
+
+	public double getLat(){
+		return (Double)getValue(LAT);
+	}
+
+	public double getLng(){
+		return (Double)getValue(LNG);
 	}
 
 	public String getAddress(){
@@ -74,15 +92,23 @@ public class HotpepperData extends IDUMOData {
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append(getName());
-		sb.append(":");
+		sb.append(" : ");
+		sb.append(getKana());
+		sb.append(" : ");
+		sb.append("[");
+		sb.append(getLat());
+		sb.append(",");
+		sb.append(getLng());
+		sb.append("]");
+		sb.append(" : ");
 		sb.append(getAddress());
-		sb.append(":");
+		sb.append(" : ");
 		sb.append(getCatchcopy());
-		sb.append(":");
+		sb.append(" : ");
 		sb.append(getOpen());
-		sb.append(":");
+		sb.append(" : ");
 		sb.append(getBudget());
-		sb.append(":");
+		sb.append(" : ");
 		sb.append(getAverage());
 		return sb.toString();
 	}

@@ -60,7 +60,7 @@ public class NumberGetValueHandler implements IDUMOSendable, IDUMOReceivable {
 	@Override
 	public IDUMODataFlowing onCall() {
 		// IDUMODataTypeRawString s = (IDUMODataTypeRawString)
-		// sender.onCall().next().get(name);
+		// sender.onCall().next().get(NAME);
 		// IDUMOLogManager.debug(s);
 		String s = sender.onCall().next().get(name).getValue().toString();
 		return new IDUMODataFlowing(new IDUMODataPrimitiveNumber(Double.parseDouble(s)));

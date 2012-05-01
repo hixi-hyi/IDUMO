@@ -22,11 +22,11 @@ import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawBool;
 public class IDUMODataPrimitiveBool extends IDUMODataPrimitive {
 
 	public IDUMODataPrimitiveBool(boolean n) {
-		add(new IDUMODataTypeRawBool(name, n, "Primitive : Number"));
+		add(new IDUMODataTypeRawBool(NAME, n, "Primitive : Number"));
 	}
 
 	public boolean getBool() {
-		return (Boolean) getValue(name);
+		return (Boolean) getValue(NAME);
 	}
 
 	@Override

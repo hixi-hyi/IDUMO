@@ -22,11 +22,11 @@ import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 public class IDUMODataPrimitiveNumber extends IDUMODataPrimitive {
 
 	public IDUMODataPrimitiveNumber(double n) {
-		add(new IDUMODataTypeRawNumber(name, n, "Primitive : Number"));
+		add(new IDUMODataTypeRawNumber(NAME, n, "Primitive : Number"));
 	}
 
 	public double getNumber() {
-		return (Double) getValue(name);
+		return (Double) getValue(NAME);
 	}
 
 	@Override

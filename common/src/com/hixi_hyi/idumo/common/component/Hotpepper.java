@@ -38,6 +38,12 @@ import com.hixi_hyi.idumo.common.util.URL2XMLParser;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
+/**
+ * http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=bdcd74ea41fe6b8d&lat=34.670000&lng=135.520000
+ *
+ * @author Hiroyoshi HOUCHI
+ * @version 2.0
+ */
 public class Hotpepper {
 	private static final String API_KEY = "bdcd74ea41fe6b8d";
 	private static final String	REQUEST_URL_SEED	= "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key="+API_KEY+"&lat=%f&lng=%f";
@@ -63,6 +69,7 @@ public class Hotpepper {
 
 	public void init(double lat,double lon) {
 		requestURL = String.format(REQUEST_URL_SEED, lat,lon);
+		IDUMOLogManager.debug(requestURL);
 		list = new ArrayList<HotpepperData>();
 		try {
 			parser = new URL2XMLParser(requestURL);
@@ -82,12 +89,15 @@ public class Hotpepper {
 		Namespace ns = root.getNamespace();
 		for (Element element : shops) {
 			String name = element.getChildText("name",ns);
+			String kana = element.getChildText("name_kana",ns);
+			Double glat = Double.parseDouble(element.getChildText("lat",ns));
+			Double glng = Double.parseDouble(element.getChildText("lng",ns));
 			String address = element.getChildText("address",ns);
 			String catchcopy = element.getChildText("catch",ns);
 			String open = element.getChildText("open",ns);
-			String budget = element.getChild("budget",ns).getChildText("name", ns);
+			String budget = element.getChild("budget",ns).getChildText("NAME", ns);
 			String average = element.getChild("budget",ns).getChildText("average", ns);
-			list.add(new HotpepperData(name, address, catchcopy, open, budget, average));
+			list.add(new HotpepperData(name, kana, glat, glng, address, catchcopy, open, budget, average));
 		}
 	}
 

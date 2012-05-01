@@ -23,15 +23,15 @@ import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawString;
 public class IDUMODataPrimitiveString extends IDUMODataPrimitive {
 
 	public IDUMODataPrimitiveString(String n) {
-		add(new IDUMODataTypeRawString(name, n, "Primitive : String"));
+		add(new IDUMODataTypeRawString(NAME, n, "Primitive : String"));
 	}
 
 	public IDUMODataPrimitiveString(IDUMODataTypeRaw raw) {
-		add(new IDUMODataTypeRawString(name, (String) raw.getValue(), raw.getSummary()));
+		add(new IDUMODataTypeRawString(NAME, (String) raw.getValue(), raw.getSummary()));
 	}
 
 	public String getString() {
-		String s = (String) getValue(name);
+		String s = (String) getValue(NAME);
 		return s;
 	}
 

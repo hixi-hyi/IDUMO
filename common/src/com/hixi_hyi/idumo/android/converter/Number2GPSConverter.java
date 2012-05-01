@@ -54,7 +54,7 @@ public class Number2GPSConverter implements IDUMOSendable, IDUMOReceivable {
 		IDUMODataPrimitiveNumber num1 = (IDUMODataPrimitiveNumber) sender1.onCall().next();
 		IDUMODataPrimitiveNumber num2 = (IDUMODataPrimitiveNumber) sender2.onCall().next();
 		GPSData gd = new GPSData(num1.getNumber(), num2.getNumber());
-		IDUMOLogManager.debug(gd);
+//		IDUMOLogManager.debug(gd);
 		return new IDUMODataFlowing(gd);
 	}
 

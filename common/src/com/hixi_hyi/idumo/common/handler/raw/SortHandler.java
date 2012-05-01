@@ -17,14 +17,20 @@
  */
 package com.hixi_hyi.idumo.common.handler.raw;
 
+import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeMap;
+
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectArray;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
+import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
@@ -32,43 +38,48 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class StringGetValueHandler implements IDUMOSendable, IDUMOReceivable {
+public class SortHandler implements IDUMOSendable, IDUMOReceivable {
 	private String				name;
 	private IDUMOSendable		sender;
 	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
-	
-	public StringGetValueHandler(String name) {
+
+	public SortHandler(String name) {
 		this.name = name;
 	}
-	
+
 	@Override
 	public boolean isReady() {
 		return sender.isReady();
 	}
-	
+
 	@Override
 	public void setSender(IDUMOSendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		sender = senders[0];
 	}
-	
+
 	@Override
 	public IDUMODataTypeConnect receivableType() {
-		return new IDUMODataTypeConnectSingle(IDUMOData.class);
+		return new IDUMODataTypeConnectArray(IDUMOData.class);
 	}
-	
+
 	@Override
 	public IDUMODataFlowing onCall() {
-		// IDUMODataTypeRawString s = (IDUMODataTypeRawString)
-		// sender.onCall().next().get(NAME);
-		// IDUMOLogManager.debug(s);
-		Object o = sender.onCall().next().get(name).getValue();
-		return new IDUMODataFlowing(new IDUMODataPrimitiveString(o.toString()));
+		TreeMap<Object, IDUMOData> map = new TreeMap<Object, IDUMOData>();
+		for (IDUMOData d : sender.onCall()) {
+			map.put(d.get(name).getValue(), d);
+			IDUMOLogManager.debug(d.get(name).getValue());
+		}
+		IDUMODataFlowing idf =  new IDUMODataFlowing();
+		for(Map.Entry<Object, IDUMOData> e: map.entrySet()){
+			idf.add(e.getValue());
+		}
+		return idf;
 	}
-	
+
 	@Override
 	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveString.class);
+		return new IDUMODataTypeConnectArray(IDUMOData.class);
 	}
-	
+
 }
