@@ -31,28 +31,29 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
 /**
  * LivedoorWeatherからデータを取得し，提供するプロバイダ
- * 
+ *
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
 public class LivedoorWeatherProvider implements IDUMOSendable {
-	
+
 	private LivedoorWeather	weather;
-	
+
 	public LivedoorWeatherProvider(int citynum) {
 		try {
 			weather = new LivedoorWeather(citynum);
 		} catch (Exception e) {
+			throw new IDUMORuntimeException(e);
 		}
 	}
-	
+
 	@Override
 	public IDUMODataFlowing onCall() {
 		IDUMODataFlowing p = new IDUMODataFlowing();
 		p.add(weather.getData());
 		return p;
 	}
-	
+
 	@Override
 	public boolean isReady() {
 		try {
@@ -61,10 +62,10 @@ public class LivedoorWeatherProvider implements IDUMOSendable {
 			throw new IDUMORuntimeException(e);
 		}
 	}
-	
+
 	@Override
 	public IDUMODataTypeConnect sendableType() {
 		return new IDUMODataTypeConnectSingle(LivedoorWeatherData.class);
 	}
-	
+
 }

@@ -15,54 +15,69 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.console.receiptor;
+package com.hixi_hyi.idumo.common.provider;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
+import java.io.IOException;
+import java.util.List;
+
+import org.jdom.JDOMException;
+
+import com.hixi_hyi.idumo.common.component.Hotpepper;
+import com.hixi_hyi.idumo.common.component.LivedoorWeather;
+import com.hixi_hyi.idumo.common.data.GPSData;
+import com.hixi_hyi.idumo.common.data.HotpepperData;
+import com.hixi_hyi.idumo.common.data.LivedoorWeatherData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitive;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectArray;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
-import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 /**
- * Systemoutに出力するReceiptor
- * 
+ *
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- * 
  */
-public class ConsoleViewReceiptor implements IDUMOReceivable, IDUMORunnable {
-	
-	private IDUMOSendable			sender;
-	private ReceiveValidatorSize	vSize	= new ReceiveValidatorSize(1);
-	
+public class HotpepperHandler implements IDUMOSendable,IDUMOReceivable {
+
+	private Hotpepper hotpepper = new Hotpepper();
+	private IDUMOSendable sender;
+	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
+
 	@Override
-	public void run() {
-		IDUMODataFlowing flowdata = sender.onCall();
-		IDUMODataPrimitive data = (IDUMODataPrimitive) flowdata.next();
-		System.out.println(data.getValue());
-//		IDUMOData data = (IDUMOData) flowdata.next();
-//		System.out.println(data);
+	public IDUMODataFlowing onCall() {
+		GPSData gd = (GPSData) sender.onCall().next();
+		hotpepper.setLatLon(gd.getLatitude(), gd.getLongitude());
+		IDUMODataFlowing p = new IDUMODataFlowing();
+		List<HotpepperData> data = hotpepper.getData();
+		for (HotpepperData d : data) {
+			p.add(d);
+		}
+		return p;
 	}
-	
-	@Override
-	public void setSender(IDUMOSendable... handler) throws IDUMOException {
-		vSize.validate(handler);
-		sender = handler[0];
-	}
-	
+
 	@Override
 	public boolean isReady() {
-		return sender.isReady();
+		return hotpepper.isReady();
 	}
-	
+
+	@Override
+	public IDUMODataTypeConnect sendableType() {
+		return new IDUMODataTypeConnectArray(HotpepperData.class);
+	}
+
+	@Override
+	public void setSender(IDUMOSendable... senders) throws IDUMOException {
+		vSize.validate(senders);
+		sender = senders[0];
+	}
+
 	@Override
 	public IDUMODataTypeConnect receivableType() {
-		return new IDUMODataTypeConnectSingle(IDUMOData.class);
+		return new IDUMODataTypeConnectSingle(GPSData.class);
 	}
-	
 }

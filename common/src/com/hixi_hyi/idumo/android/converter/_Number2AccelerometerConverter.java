@@ -2,7 +2,6 @@ package com.hixi_hyi.idumo.android.converter;
 
 import java.util.ArrayList;
 
-import com.hixi_hyi.idumo.android.data.AndroidAccelerometerData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveNumber;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
@@ -57,7 +56,8 @@ public class _Number2AccelerometerConverter implements IDUMOSendable, IDUMORecei
 	
 	@Override
 	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(AndroidAccelerometerData.class);
+//		return new IDUMODataTypeConnectSingle(AndroidAccelerometerData.class);
+		return null;
 	}
 	
 }

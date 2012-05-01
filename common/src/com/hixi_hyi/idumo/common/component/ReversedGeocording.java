@@ -18,7 +18,7 @@ import org.jdom.input.SAXBuilder;
  * @author Hiroyoshi
  * 
  */
-public class _ReversedGeocording {
+public class ReversedGeocording {
 	
 	private static final String	REQUEST_URL	= "http://www.finds.jp/ws/rgeocode.php?lat=%f&lon=%f";
 	
@@ -27,7 +27,7 @@ public class _ReversedGeocording {
 	
 	private String				location;
 	
-	public _ReversedGeocording(double lat, double lon) {
+	public ReversedGeocording(double lat, double lon) {
 		requestURL = String.format(REQUEST_URL, lat, lon);
 		init();
 	}

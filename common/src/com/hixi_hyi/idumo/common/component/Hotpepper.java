@@ -51,12 +51,19 @@ public class Hotpepper {
 
 
 	public Hotpepper(double lat,double lon) {
-		requestURL = String.format(REQUEST_URL_SEED, lat,lon);
-		list = new ArrayList<HotpepperData>();
-		init();
+		init(lat,lon);
+	}
+	
+	public Hotpepper(){
+	}
+	
+	public void setLatLon(double lat,double lon){
+		init(lat,lon);
 	}
 
-	public void init() {
+	public void init(double lat,double lon) {
+		requestURL = String.format(REQUEST_URL_SEED, lat,lon);
+		list = new ArrayList<HotpepperData>();
 		try {
 			parser = new URL2XMLParser(requestURL);
 //			parser.output();
@@ -85,10 +92,10 @@ public class Hotpepper {
 	}
 
 	public boolean isReady() {
-		if (isReady) {
-			return true;
-		}
-		init();
+//		if (isReady) {
+//			return true;
+//		}
+//		init();
 		return isReady;
 	}
 

@@ -2,11 +2,13 @@ package com.hixi_hyi.idumo.common.handler;
 
 import java.util.ArrayList;
 
-import com.hixi_hyi.idumo.common.component._ReversedGeocording;
+import com.hixi_hyi.idumo.common.component.ReversedGeocording;
+import com.hixi_hyi.idumo.common.data.GPSData;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveNumber;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectMulti;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
@@ -20,18 +22,17 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
  * @author Hiroyoshi
  * 
  */
-public class _ReversedGeocordingHandler implements IDUMOSendable, IDUMOReceivable {
+public class ReversedGeocordingHandler implements IDUMOSendable, IDUMOReceivable {
 	
-	private ArrayList<IDUMOSendable>	senders	= new ArrayList<IDUMOSendable>();
+	private IDUMOSendable sender;
 	private ReceiveValidatorSize		vSize	= new ReceiveValidatorSize(1);
-	private ReceiveValidatorType		v1Type	= new ReceiveValidatorType(1, IDUMODataPrimitiveNumber.class);
+	private ReceiveValidatorType		v1Type	= new ReceiveValidatorType(1, GPSData.class);
 	
 	@Override
 	public IDUMODataFlowing onCall() {
-		double lat = ((IDUMODataPrimitiveNumber) senders.get(0).onCall().next()).getNumber();
-		double lon = ((IDUMODataPrimitiveNumber) senders.get(1).onCall().next()).getNumber();
+		GPSData gd = (GPSData) sender.onCall().next();
 		
-		_ReversedGeocording rg = new _ReversedGeocording(lat, lon);
+		ReversedGeocording rg = new ReversedGeocording(gd.getLatitude(), gd.getLongitude());
 		
 		IDUMODataFlowing p = new IDUMODataFlowing();
 		p.add(new IDUMODataPrimitiveString(rg.getLocation()));
@@ -43,25 +44,17 @@ public class _ReversedGeocordingHandler implements IDUMOSendable, IDUMOReceivabl
 	public void setSender(IDUMOSendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		v1Type.validate(senders);
-		this.senders.clear();
-		for (IDUMOSendable s : senders) {
-			this.senders.add(s);
-		}
+		sender = senders[0];
 	}
 	
 	@Override
 	public boolean isReady() {
-		for (IDUMOSendable sender : senders) {
-			if (!sender.isReady()) {
-				return false;
-			}
-		}
-		return true;
+		return sender.isReady();
 	}
 	
 	@Override
 	public IDUMODataTypeConnect receivableType() {
-		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveNumber.class);
+		return new IDUMODataTypeConnectSingle(GPSData.class);
 	}
 	
 	@Override
