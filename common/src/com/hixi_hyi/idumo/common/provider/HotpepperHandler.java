@@ -27,7 +27,7 @@ import com.hixi_hyi.idumo.common.component.LivedoorWeather;
 import com.hixi_hyi.idumo.common.data.GPSData;
 import com.hixi_hyi.idumo.common.data.HotpepperData;
 import com.hixi_hyi.idumo.common.data.LivedoorWeatherData;
-import com.hixi_hyi.idumo.common.data.element.GPSDataElement;
+import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectArray;
@@ -53,7 +53,7 @@ public class HotpepperHandler implements IDUMOSendable,IDUMOReceivable {
 	@Override
 	public IDUMODataFlowing onCall() {
 		IDUMOLogManager.log();
-		GPSDataElement gd = (GPSDataElement) sender.onCall().next();
+		LatLngDataElement gd = (LatLngDataElement) sender.onCall().next();
 		hotpepper.setLatLon(gd.getLatitude(), gd.getLongitude());
 		IDUMODataFlowing p = new IDUMODataFlowing();
 		List<HotpepperData> data = hotpepper.getData();

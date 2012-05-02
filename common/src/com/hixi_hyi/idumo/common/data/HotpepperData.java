@@ -17,12 +17,12 @@
  */
 package com.hixi_hyi.idumo.common.data;
 
-import com.hixi_hyi.idumo.common.data.element.GPSDataElement;
+import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawString;
 
-public class HotpepperData extends IDUMOData implements GPSDataElement{
+public class HotpepperData extends IDUMOData implements LatLngDataElement{
 	/*
 	 * name - String
 	 * address - String

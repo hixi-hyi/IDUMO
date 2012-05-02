@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.hixi_hyi.idumo.common.component.ReversedGeocording;
 import com.hixi_hyi.idumo.common.data.GPSData;
-import com.hixi_hyi.idumo.common.data.element.GPSDataElement;
+import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveNumber;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
@@ -31,7 +31,7 @@ public class ReversedGeocordingHandler implements IDUMOSendable, IDUMOReceivable
 
 	@Override
 	public IDUMODataFlowing onCall() {
-		GPSDataElement gd = (GPSDataElement) sender.onCall().next();
+		LatLngDataElement gd = (LatLngDataElement) sender.onCall().next();
 
 		ReversedGeocording rg = new ReversedGeocording(gd.getLatitude(), gd.getLongitude());
 
