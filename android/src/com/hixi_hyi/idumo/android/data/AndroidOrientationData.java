@@ -25,21 +25,29 @@ import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
  * @version 2.0
  */
 public class AndroidOrientationData extends IDUMOData {
+	private static final String PITCH="pitch";
+	private static final String ROLL="roll";
+	private static final String AZMUTH="azmuth";
+
 	public AndroidOrientationData(float pitch, float roll, float azmuth) {
-		add(new IDUMODataTypeRawNumber("pitch", pitch, "Android Orientation Pitch"));
-		add(new IDUMODataTypeRawNumber("roll", roll, "Android Orientation Roll"));
-		add(new IDUMODataTypeRawNumber("azmuth", azmuth, "Android Orientation Azmuth"));
+		add(new IDUMODataTypeRawNumber(PITCH, pitch, "Android Orientation Pitch"));
+		add(new IDUMODataTypeRawNumber(ROLL, roll, "Android Orientation Roll"));
+		add(new IDUMODataTypeRawNumber(AZMUTH, azmuth, "Android Orientation Azmuth"));
 	}
-	
+
 	public float getPitch() {
-		return (Float) getValue("pitch");
+		return (Float) getValue(PITCH);
 	}
-	
+
 	public float getRoll() {
-		return (Float) getValue("roll");
+		return (Float) getValue(ROLL);
 	}
-	
+
 	public float getAzmuth() {
-		return (Float) getValue("azmuth");
+		return (Float) getValue(AZMUTH);
+	}
+	@Override
+	public String toString(){
+		return String.format("%s:%f\n%s:%f\n%s:%f",PITCH,getPitch(),ROLL,getRoll(),AZMUTH,getAzmuth());
 	}
 }

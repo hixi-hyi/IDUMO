@@ -25,13 +25,18 @@ import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
  * @version 2.0
  */
 public class AndroidProximityData extends IDUMOData {
-	public static final String	PROXMITY	= "proximity";
-	
+	public static final String	PROXIMITY	= "proximity";
+
 	public AndroidProximityData(float proximity) {
-		add(new IDUMODataTypeRawNumber(PROXMITY, proximity, "Android Proximity"));
+		add(new IDUMODataTypeRawNumber(PROXIMITY, proximity, "Android Proximity"));
 	}
-	
+
 	public float getProximity() {
-		return (Float) getValue(PROXMITY);
+		return (Float) getValue(PROXIMITY);
+	}
+
+	@Override
+	public String toString(){
+		return String.format("%s:%d",PROXIMITY, getProximity());
 	}
 }

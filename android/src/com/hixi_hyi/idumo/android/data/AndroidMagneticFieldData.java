@@ -25,21 +25,30 @@ import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
  * @version 2.0
  */
 public class AndroidMagneticFieldData extends IDUMOData {
+	private static final String X="x";
+	private static final String Y="y";
+	private static final String Z="z";
+
 	public AndroidMagneticFieldData(float x, float y, float z) {
-		add(new IDUMODataTypeRawNumber("x", x, "Android MagneticField X"));
-		add(new IDUMODataTypeRawNumber("y", y, "Android MagneticField Y"));
-		add(new IDUMODataTypeRawNumber("z", z, "Android MagneticField Z"));
+		add(new IDUMODataTypeRawNumber(X, x, "Android MagneticField X"));
+		add(new IDUMODataTypeRawNumber(Y, y, "Android MagneticField Y"));
+		add(new IDUMODataTypeRawNumber(Z, z, "Android MagneticField Z"));
 	}
-	
+
 	public float getX() {
-		return (Float) getValue("x");
+		return (Float) getValue(X);
 	}
-	
+
 	public float getY() {
-		return (Float) getValue("y");
+		return (Float) getValue(Y);
 	}
-	
+
 	public float getZ() {
-		return (Float) getValue("z");
+		return (Float) getValue(Z);
+	}
+
+	@Override
+	public String toString(){
+		return String.format("%s:%f\n%s:%f\n%s:%f",X,getX(),Y,getY(),Z,getZ());
 	}
 }

@@ -25,21 +25,32 @@ import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
  * @version 2.0
  */
 public class AndroidAccelerometerData extends IDUMOData {
+
+	private static final String X="x";
+	private static final String Y="y";
+	private static final String Z="z";
+
 	public AndroidAccelerometerData(float x, float y, float z) {
-		add(new IDUMODataTypeRawNumber("x", x, "Android Accelerometer X"));
-		add(new IDUMODataTypeRawNumber("y", y, "Android Accelerometer Y"));
-		add(new IDUMODataTypeRawNumber("z", z, "Android Accelerometer Z"));
+		add(new IDUMODataTypeRawNumber(X, x, "Android Accelerometer X"));
+		add(new IDUMODataTypeRawNumber(Y, y, "Android Accelerometer Y"));
+		add(new IDUMODataTypeRawNumber(Z, z, "Android Accelerometer Z"));
 	}
-	
+
 	public float getX() {
-		return (Float) getValue("x");
+		return (Float) getValue(X);
 	}
-	
+
 	public float getY() {
-		return (Float) getValue("y");
+		return (Float) getValue(Y);
 	}
-	
+
 	public float getZ() {
-		return (Float) getValue("z");
+		return (Float) getValue(Z);
+	}
+
+
+	@Override
+	public String toString(){
+		return String.format("%s:%f\n%s:%f\n%s:%f",X,getX(),Y,getY(),Z,getZ());
 	}
 }

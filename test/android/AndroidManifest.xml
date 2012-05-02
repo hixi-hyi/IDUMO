@@ -39,17 +39,60 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
             </intent-filter>
         </activity>
         <activity
-            android:name="AndroidGPS"
-            android:label="GPS" >
+            android:name=".sensor.AndroidGPS"
+            android:label="Sensor/GPS" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".sensor.AndroidAccelerometer"
+            android:label="Sensor/Accelerometer" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".sensor.AndroidLight"
+            android:label="Sensor/Light" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".sensor.AndroidMagnetic"
+            android:label="Sensor/Magnetic" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".sensor.AndroidOrientation"
+            android:label="Sensor/Orientation" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".sensor.AndroidProximity"
+            android:label="Sensor/Proximity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
             </intent-filter>
         </activity>

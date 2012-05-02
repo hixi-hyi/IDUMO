@@ -35,17 +35,19 @@ public class AndroidGPSData extends IDUMOData implements LatLngDataElement{
 
 	public AndroidGPSData(double latitude, double longitude, double altitude, long time, float bearing, float speed) {
 		add(new IDUMODataTypeRawNumber(LATITUDE, latitude, "Android GPS latitude"));
-		add(new IDUMODataTypeRawNumber(LONGITUDE, longitude, "Android GPS"));
-		add(new IDUMODataTypeRawNumber(ALTITUDE, altitude, "Android GPS"));
-		add(new IDUMODataTypeRawNumber(TIME, time, "Android GPS"));
-		add(new IDUMODataTypeRawNumber(BEARING, bearing, "Android GPS"));
-		add(new IDUMODataTypeRawNumber(SPEED, speed, "Android GPS"));
+		add(new IDUMODataTypeRawNumber(LONGITUDE, longitude, "Android GPS Longitude"));
+		add(new IDUMODataTypeRawNumber(ALTITUDE, altitude, "Android GPS Altitude"));
+		add(new IDUMODataTypeRawNumber(TIME, time, "Android GPS Time"));
+		add(new IDUMODataTypeRawNumber(BEARING, bearing, "Android GPS Bearing"));
+		add(new IDUMODataTypeRawNumber(SPEED, speed, "Android GPS Speed"));
 	}
 
+	@Override
 	public double getLatitude() {
 		return (Double) getValue(LATITUDE);
 	}
 
+	@Override
 	public double getLongitude() {
 		return (Double) getValue(LONGITUDE);
 	}
@@ -64,5 +66,10 @@ public class AndroidGPSData extends IDUMOData implements LatLngDataElement{
 
 	public float getSpeed() {
 		return (Float) getValue(SPEED);
+	}
+
+	@Override
+	public String toString(){
+		return String.format("%s:%f\n%s:%f\n%s:%f\n%s:%l\n%s:%f\n%s:%f",LATITUDE,getLatitude(),LONGITUDE,getLongitude(),ALTITUDE,getAltitude(),TIME,getTime(),BEARING,getBearing(),SPEED,getSpeed());
 	}
 }

@@ -24,14 +24,19 @@ import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class AndroidLIghtData extends IDUMOData {
+public class AndroidLightData extends IDUMOData {
 	public static final String	LIGHT	= "light";
-	
-	public AndroidLIghtData(float light) {
+
+	public AndroidLightData(float light) {
 		add(new IDUMODataTypeRawNumber(LIGHT, light, "Android Light"));
 	}
-	
+
 	public float getLight() {
 		return (Float) getValue(LIGHT);
+	}
+
+	@Override
+	public String toString(){
+		return String.format("%s:%d",LIGHT,getLight());
 	}
 }

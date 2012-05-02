@@ -5,5 +5,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="lib" path="/Users/houchi/Documents/Programming/IDUMO/android/bin/idumoforandroid.jar"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/IDUMOForAndroid"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
