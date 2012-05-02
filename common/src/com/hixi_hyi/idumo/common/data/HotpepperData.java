@@ -17,11 +17,12 @@
  */
 package com.hixi_hyi.idumo.common.data;
 
+import com.hixi_hyi.idumo.common.data.element.GPSDataElement;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawString;
 
-public class HotpepperData extends IDUMOData {
+public class HotpepperData extends IDUMOData implements GPSDataElement{
 	/*
 	 * name - String
 	 * address - String
@@ -60,11 +61,11 @@ public class HotpepperData extends IDUMOData {
 		return (String)getValue(KANA);
 	}
 
-	public double getLat(){
+	public double getLatitude(){
 		return (Double)getValue(LAT);
 	}
 
-	public double getLng(){
+	public double getLongitude(){
 		return (Double)getValue(LNG);
 	}
 
@@ -96,9 +97,9 @@ public class HotpepperData extends IDUMOData {
 		sb.append(getKana());
 		sb.append(" : ");
 		sb.append("[");
-		sb.append(getLat());
+		sb.append(getLatitude());
 		sb.append(",");
-		sb.append(getLng());
+		sb.append(getLongitude());
 		sb.append("]");
 		sb.append(" : ");
 		sb.append(getAddress());

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<idumo ver='0.1' type='android' name='TCPReceive'
+ package='com.hixi_hyi.idumo.android.auto.app'>
+<items>
+<item class='ReceiveTCPProvider' name='idumo1' init='12345'/>
+<item class='TextViewReceiptor' name='idumo2' init='activity'/>
+</items>
+<connections>
+<connect src='idumo1' sink='idumo2'/>
+</connections>
+<executions>
+<loop count='-1'/>
+<sleep time='1000'/>
+</executions>
+</idumo>
+ß

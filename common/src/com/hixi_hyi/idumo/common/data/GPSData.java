@@ -17,12 +17,13 @@
  */
 package com.hixi_hyi.idumo.common.data;
 
+import com.hixi_hyi.idumo.common.data.element.GPSDataElement;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawString;
 
-public class GPSData extends IDUMOData {
-	
+public class GPSData extends IDUMOData implements GPSDataElement {
+
 	private static final String LATITUDE = "latitude";
 	private static final String LONGITUDE = "longitude";
 
@@ -30,13 +31,13 @@ public class GPSData extends IDUMOData {
 		add(new IDUMODataTypeRawNumber(LATITUDE, lat , "GPS Latitude"));
 		add(new IDUMODataTypeRawNumber(LONGITUDE, lon , "GPS Longitude"));
 	}
-	
+
 	public double getLatitude(){
-		return (Double) getValue(LATITUDE); 
+		return (Double) getValue(LATITUDE);
 	}
-	
+
 	public double getLongitude(){
-		return (Double) getValue(LONGITUDE); 
+		return (Double) getValue(LONGITUDE);
 	}
 
 }
