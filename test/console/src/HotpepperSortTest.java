@@ -1,5 +1,5 @@
-import com.hixi_hyi.idumo.android.converter.Number2GPSConverter;
 import com.hixi_hyi.idumo.common.component.Hotpepper;
+import com.hixi_hyi.idumo.common.converter.Number2GPSConverter;
 import com.hixi_hyi.idumo.common.handler.raw.NumberGetValueHandler;
 import com.hixi_hyi.idumo.common.handler.raw.NumberMoreThanHandler;
 import com.hixi_hyi.idumo.common.handler.raw.SortHandler;

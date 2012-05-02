@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.android.converter;
+package com.hixi_hyi.idumo.common.converter;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-import com.hixi_hyi.idumo.android.converter.Number2GPSConverter;
+import com.hixi_hyi.idumo.common.converter.Number2GPSConverter;
 import com.hixi_hyi.idumo.common.provider.NumberProvider;
 import com.hixi_hyi.idumo.console.core.exec.IDUMOConsoleWrapper;
 import com.hixi_hyi.idumo.console.core.util.IDUMOConsoleLogger;
