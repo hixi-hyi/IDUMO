@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.hixi_hyi.idumo.android;
+package com.hixi_hyi.idumo.android.test;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -25,19 +25,19 @@ import com.hixi_hyi.idumo.android.core.util.DeployUtil;
 import com.hixi_hyi.idumo.android.core.util.IDUMOAndroidLogger;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
-//import com.hixi_hyi.idumo.android.core.util.IDUMOAndroidLogger;
-//import com.hixi_hyi.idumo.android.core.util.DeployUtil;
+//import com.hixi_hyi.idumo.android.test.core.util.IDUMOAndroidLogger;
+//import com.hixi_hyi.idumo.android.test.core.util.DeployUtil;
 //import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
 /**
  * @author Hiroyoshi HOUCHI
  *
  */
-public class Idumo extends ListActivity {
+public class IDUMO extends ListActivity {
 
 	public static String		TAG				= "Idumo";
 	private final static String	MY_CATEGORY		= "android.intent.category.IDUMO_SAMPLES";
-	private final static String	CATEGORY_PATH	= "com.hixi_hyi.idumo.android.Path";
+	private final static String	CATEGORY_PATH	= "com.hixi_hyi.idumo.android.test.Path";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -101,7 +101,7 @@ public class Idumo extends ListActivity {
 				} else {
 					// 下位層があるばあい
 					if (entries.get(nextLabel) == null) {
-						addItem(ActionData,  nextLabel + "->", browseIntent(prefix.equals("") ? nextLabel : prefix + "/" + nextLabel));
+						addItem(ActionData, "[" + nextLabel + "]/", browseIntent(prefix.equals("") ? nextLabel : prefix + "/" + nextLabel));
 						entries.put(nextLabel, true);
 					}
 				}
@@ -114,13 +114,13 @@ public class Idumo extends ListActivity {
 	}
 
 	private final static Comparator<Action>	sDisplayNameComparator	= new Comparator<Action>() {
-																		private final Collator	collator	= Collator.getInstance();
+		private final Collator	collator	= Collator.getInstance();
 
-																		@Override
-																		public int compare(Action map1, Action map2) {
-																			return collator.compare(map1.getTitle(), map2.getTitle());
-																		}
-																	};
+		@Override
+		public int compare(Action map1, Action map2) {
+			return collator.compare(map1.getTitle(), map2.getTitle());
+		}
+	};
 
 	protected Intent activityIntent(String pkg, String componentName) {
 		Intent result = new Intent();
@@ -130,7 +130,7 @@ public class Idumo extends ListActivity {
 
 	protected Intent browseIntent(String path) {
 		Intent result = new Intent();
-		result.setClass(this, Idumo.class);
+		result.setClass(this, IDUMO.class);
 		result.putExtra(CATEGORY_PATH, path);
 		return result;
 	}

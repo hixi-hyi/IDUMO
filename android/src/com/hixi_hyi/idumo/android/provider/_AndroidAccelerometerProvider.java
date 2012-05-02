@@ -19,11 +19,11 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class _AccelerometerProvider implements IDUMOSendable, AndroidController {
+public class _AndroidAccelerometerProvider implements IDUMOSendable, AndroidController {
 	
 	private AccelerometerSensor	accel;
 	
-	public _AccelerometerProvider(Activity activity) {
+	public _AndroidAccelerometerProvider(Activity activity) {
 		AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
 		if (!accelerometerSensor.isInit()) {
 			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);

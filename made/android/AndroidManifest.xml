@@ -8,204 +8,203 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:label="IDUMO"
-            android:name=".Idumo" >
-            <intent-filter >
+            android:name=".Idumo"
+            android:label="IDUMO" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".auto.app.TodaysWeatherActivity"
-        		  android:label="Auto/Todaysweather">
+        <activity
+            android:name=".auto.app.TodaysWeatherActivity"
+            android:label="Auto/Todaysweather" >
             <intent-filter>
- 	            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".auto.app.ReverseGeoLocationActivity"
-        		  android:label="ReverseGeoLocation">
+        <activity
+            android:name=".auto.app.ReverseGeoLocationActivity"
+            android:label="ReverseGeoLocation" >
             <intent-filter>
- 	            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".auto.app.AccelerometerActivity"
-        		  android:label="Auto/Sensor/Accelerometer">
+        <activity
+            android:name=".auto.app.AccelerometerActivity"
+            android:label="Auto/Sensor/Accelerometer" >
             <intent-filter>
- 	            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".auto.app.GPSActivity"
-        		  android:label="Auto/Sensor/GPS">
+        <activity
+            android:name=".auto.app.GPSActivity"
+            android:label="Auto/Sensor/GPS" >
             <intent-filter>
- 	            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".auto.app.LightActivity"
-        		  android:label="Auto/Sensor/Light">
+        <activity
+            android:name=".auto.app.UPSendActivity"
+            android:label="UPSend" >
             <intent-filter>
- 	            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".auto.app.MagneticFieldActivity"
-        		  android:label="Auto/Sensor/MagneticField">
+        <activity
+            android:name=".auto.app.RoombaBackActivity"
+            android:label="Back" >
             <intent-filter>
- 	            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".auto.app.OrientationActivity"
-        		  android:label="Auto/Sensor/Orientation">
+        <activity
+            android:name=".auto.app.RoombaCleanActivity"
+            android:label="Clean" >
             <intent-filter>
- 	            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".auto.app.ProximityActivity"
-        		  android:label="Auto/Sensor/Proximity">
+        <activity
+            android:name=".auto.app.RoombaForwardActivity"
+            android:label="Forward" >
             <intent-filter>
- 	            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".auto.app.TCPSendActivity"
-        		  android:label="TCPSendActivityaa">
+        <activity
+            android:name=".auto.app.RoombaStopActivity"
+            android:label="Stop" >
             <intent-filter>
- 	            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".auto.app.UPSendActivity"
-       		  android:label="UPSend">
-           <intent-filter>
-	            <action android:name="android.intent.action.MAIN" />
-               <category android:name="android.intent.category.IDUMO_SAMPLES" />
-               <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
-       </activity>
-               <activity android:name=".auto.app.RoombaBackActivity"
-       		  android:label="Back">
-           <intent-filter>
-	            <action android:name="android.intent.action.MAIN" />
-               <category android:name="android.intent.category.IDUMO_SAMPLES" />
-               <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
-       </activity>
-               <activity android:name=".auto.app.RoombaCleanActivity"
-       		  android:label="Clean">
-           <intent-filter>
-	            <action android:name="android.intent.action.MAIN" />
-               <category android:name="android.intent.category.IDUMO_SAMPLES" />
-               <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
-       </activity>
-               <activity android:name=".auto.app.RoombaForwardActivity"
-       		  android:label="Forward">
-           <intent-filter>
-	            <action android:name="android.intent.action.MAIN" />
-               <category android:name="android.intent.category.IDUMO_SAMPLES" />
-               <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
-       </activity>
-       <activity android:name=".auto.app.RoombaStopActivity"
-       		  android:label="Stop">
-           <intent-filter>
-	            <action android:name="android.intent.action.MAIN" />
-               <category android:name="android.intent.category.IDUMO_SAMPLES" />
-               <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
-       </activity>
-		        <activity android:name=".auto.app.RoombaSafeActivity"
-       		  android:label="Safe">
-           <intent-filter>
-	            <action android:name="android.intent.action.MAIN" />
-               <category android:name="android.intent.category.IDUMO_SAMPLES" />
-               <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
-       </activity>
-        <activity android:name=".auto.app.RoombaLeftActivity"
-       		  android:label="Left">
-           <intent-filter>
-	            <action android:name="android.intent.action.MAIN" />
-               <category android:name="android.intent.category.IDUMO_SAMPLES" />
-               <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
-       </activity>
-        <activity android:name=".auto.app.RoombaRecordActivity"
-       		  android:label="Record">
-           <intent-filter>
-	            <action android:name="android.intent.action.MAIN" />
-               <category android:name="android.intent.category.IDUMO_SAMPLES" />
-               <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
-       </activity>
-        <activity android:name=".auto.app.RoombaSingActivity"
-       		  android:label="Sing">
-           <intent-filter>
-	            <action android:name="android.intent.action.MAIN" />
-               <category android:name="android.intent.category.IDUMO_SAMPLES" />
-               <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
-       </activity>
-        <activity android:name=".auto.app.RoombaRightActivity"
-       		  android:label="Right">
-           <intent-filter>
-	            <action android:name="android.intent.action.MAIN" />
-               <category android:name="android.intent.category.IDUMO_SAMPLES" />
-               <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
-       </activity>
-        <activity android:name=".auto.app.AccelerometerCleanActivity"
-       		  android:label="AClean">
-           <intent-filter>
-	            <action android:name="android.intent.action.MAIN" />
-               <category android:name="android.intent.category.IDUMO_SAMPLES" />
-               <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
-       </activity>
-        <activity android:name=".hc.TVOnActivity"
-       		  android:label="TVOn">
-           <intent-filter>
-	            <action android:name="android.intent.action.MAIN" />
-               <category android:name="android.intent.category.IDUMO_SAMPLES" />
-               <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
-       </activity>
-        <activity android:name=".hc.ThermoViewActivity"
-       		  android:label="ThermoView">
-           <intent-filter>
-	            <action android:name="android.intent.action.MAIN" />
-               <category android:name="android.intent.category.IDUMO_SAMPLES" />
-               <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
-       </activity>
-	<activity android:name=".auto.app.TCPReceiveActivity"
-       		  android:label="TCPReceive">
-           <intent-filter>
-	            <action android:name="android.intent.action.MAIN" />
-               <category android:name="android.intent.category.IDUMO_SAMPLES" />
-               <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
-       </activity>
+        <activity
+            android:name=".auto.app.RoombaSafeActivity"
+            android:label="Safe" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".auto.app.RoombaLeftActivity"
+            android:label="Left" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".auto.app.RoombaRecordActivity"
+            android:label="Record" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".auto.app.RoombaSingActivity"
+            android:label="Sing" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".auto.app.RoombaRightActivity"
+            android:label="Right" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".auto.app.AccelerometerCleanActivity"
+            android:label="AClean" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".hc.TVOnActivity"
+            android:label="TVOn" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".hc.ThermoViewActivity"
+            android:label="ThermoView" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".auto.app.TCPReceiveActivity"
+            android:label="TCPReceive" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-	<uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
