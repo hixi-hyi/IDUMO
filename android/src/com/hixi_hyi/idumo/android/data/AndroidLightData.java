@@ -37,6 +37,6 @@ public class AndroidLightData extends IDUMOData {
 
 	@Override
 	public String toString(){
-		return String.format("%s:%d",LIGHT,getLight());
+		return String.format("%s:%f",LIGHT,getLight());
 	}
 }

@@ -37,6 +37,6 @@ public class AndroidProximityData extends IDUMOData {
 
 	@Override
 	public String toString(){
-		return String.format("%s:%d",PROXIMITY, getProximity());
+		return String.format("%s:%f",PROXIMITY, getProximity());
 	}
 }
