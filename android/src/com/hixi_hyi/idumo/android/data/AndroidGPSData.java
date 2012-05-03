@@ -70,6 +70,31 @@ public class AndroidGPSData extends IDUMOData implements LatLngDataElement{
 
 	@Override
 	public String toString(){
-		return String.format("%s:%f\n%s:%f\n%s:%f\n%s:%l\n%s:%f\n%s:%f",LATITUDE,getLatitude(),LONGITUDE,getLongitude(),ALTITUDE,getAltitude(),TIME,getTime(),BEARING,getBearing(),SPEED,getSpeed());
+		StringBuilder sb = new StringBuilder();
+		sb.append(LATITUDE);
+		sb.append(":");
+		sb.append(getLatitude());
+		sb.append("\n");
+		sb.append(LONGITUDE);
+		sb.append(":");
+		sb.append(getLongitude());
+		sb.append("\n");
+		sb.append(ALTITUDE);
+		sb.append(":");
+		sb.append(getAltitude());
+		sb.append("\n");
+		sb.append(TIME);
+		sb.append(":");
+		sb.append(getTime());
+		sb.append("\n");
+		sb.append(BEARING);
+		sb.append(":");
+		sb.append(getBearing());
+		sb.append("\n");
+		sb.append(SPEED);
+		sb.append(":");
+		sb.append(getSpeed());
+		sb.append("\n");
+		return sb.toString();
 	}
 }

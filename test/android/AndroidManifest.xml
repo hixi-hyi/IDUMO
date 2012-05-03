@@ -9,6 +9,7 @@
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
+        <uses-library android:name="com.google.android.maps" />
 
         <!--
         <activity
@@ -33,15 +34,7 @@
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="TextView"
-            android:label="TextView" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.IDUMO_SAMPLES" />
-            </intent-filter>
-        </activity>
+        <!-- Sensor -->
         <activity
             android:name=".sensor.AndroidGPS"
             android:label="Sensor/GPS" >
@@ -90,6 +83,25 @@
         <activity
             android:name=".sensor.AndroidProximity"
             android:label="Sensor/Proximity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <!-- /Sensor -->
+        <activity
+            android:name="TextView"
+            android:label="View/TextView" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.MapView"
+            android:label="View/MapView" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

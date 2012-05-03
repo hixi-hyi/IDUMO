@@ -3,7 +3,7 @@ package com.hixi_hyi.idumo.android.test.sensor;
 import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidComponent;
 import com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidWrapper;
 import com.hixi_hyi.idumo.android.provider.AndroidOrientationProvider;
-import com.hixi_hyi.idumo.android.receiptor._TextViewReceiptor;
+import com.hixi_hyi.idumo.android.receiptor.AndroidTextViewReceiptor;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
 public class AndroidOrientation extends IDUMOAndroidWrapper {
@@ -16,7 +16,7 @@ public class AndroidOrientation extends IDUMOAndroidWrapper {
 				AndroidOrientationProvider idumo1 = new AndroidOrientationProvider(activity);
 				add(idumo1);
 
-				_TextViewReceiptor idumor = new _TextViewReceiptor(activity);
+				AndroidTextViewReceiptor idumor = new AndroidTextViewReceiptor(activity);
 				add(idumor);
 
 				connect(idumo1,idumor);

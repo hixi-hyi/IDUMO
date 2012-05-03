@@ -3,10 +3,16 @@ package com.hixi_hyi.idumo.android.core.exec;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.google.android.maps.MapActivity;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.IDUMOWrapper;
 
-public abstract class IDUMOAndroidWrapper extends Activity implements IDUMOWrapper {
+public abstract class IDUMOAndroidWrapper extends MapActivity implements IDUMOWrapper {
+
+	@Override
+	protected boolean isRouteDisplayed() {
+		return false;
+	}
 
 	private IDUMOAndroidActivity	execution;
 
