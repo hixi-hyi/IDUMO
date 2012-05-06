@@ -17,14 +17,14 @@
  */
 package com.hixi_hyi.idumo.android.data;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
+import com.hixi_hyi.idumo.core.data.IDUMODataBase;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class AndroidMagneticFieldData extends IDUMOData {
+public class AndroidMagneticFieldData extends IDUMODataBase {
 	private static final String X="x";
 	private static final String Y="y";
 	private static final String Z="z";

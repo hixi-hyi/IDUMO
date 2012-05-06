@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
+import com.hixi_hyi.idumo.core.data.IDUMODataBase;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
@@ -31,8 +32,8 @@ import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidator;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
 
 /**
  * @author Hiroyoshi HOUCHI
@@ -41,7 +42,7 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 public class SortHandler implements IDUMOSendable, IDUMOReceivable {
 	private String				name;
 	private IDUMOSendable		sender;
-	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
+	private IDUMOReceiveValidator	vSize	= new IDUMOReceiveValidatorSize(1);
 
 	public SortHandler(String name) {
 		this.name = name;

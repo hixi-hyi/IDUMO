@@ -6,13 +6,13 @@ import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidator;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
 
 public class _ThroughHandler implements IDUMOSendable, IDUMOReceivable {
 	
 	private IDUMOSendable		provider;
-	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
+	private IDUMOReceiveValidator	vSize	= new IDUMOReceiveValidatorSize(1);
 	
 	@Override
 	public IDUMODataFlowing onCall() {

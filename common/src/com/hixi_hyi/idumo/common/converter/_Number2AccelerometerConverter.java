@@ -9,17 +9,17 @@ import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidator;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorType;
 
 public class _Number2AccelerometerConverter implements IDUMOSendable, IDUMOReceivable {
 	
 	private ArrayList<IDUMOSendable>	sender	= new ArrayList<IDUMOSendable>();
-	private ReceiveValidator			vSize	= new ReceiveValidatorSize(3);
-	private ReceiveValidator			vType1	= new ReceiveValidatorType(1, IDUMODataPrimitiveNumber.class);
-	private ReceiveValidator			vType2	= new ReceiveValidatorType(2, IDUMODataPrimitiveNumber.class);
-	private ReceiveValidator			vType3	= new ReceiveValidatorType(3, IDUMODataPrimitiveNumber.class);
+	private IDUMOReceiveValidator			vSize	= new IDUMOReceiveValidatorSize(3);
+	private IDUMOReceiveValidator			vType1	= new IDUMOReceiveValidatorType(1, IDUMODataPrimitiveNumber.class);
+	private IDUMOReceiveValidator			vType2	= new IDUMOReceiveValidatorType(2, IDUMODataPrimitiveNumber.class);
+	private IDUMOReceiveValidator			vType3	= new IDUMOReceiveValidatorType(3, IDUMODataPrimitiveNumber.class);
 	
 	public _Number2AccelerometerConverter() {}
 	

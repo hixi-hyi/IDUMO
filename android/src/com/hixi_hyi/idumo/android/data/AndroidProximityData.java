@@ -17,14 +17,14 @@
  */
 package com.hixi_hyi.idumo.android.data;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
+import com.hixi_hyi.idumo.core.data.IDUMODataBase;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class AndroidProximityData extends IDUMOData {
+public class AndroidProximityData extends IDUMODataBase {
 	public static final String	PROXIMITY	= "proximity";
 
 	public AndroidProximityData(float proximity) {

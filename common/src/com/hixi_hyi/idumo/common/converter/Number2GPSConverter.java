@@ -12,18 +12,18 @@ import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidator;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorType;
 
 public class Number2GPSConverter implements IDUMOSendable, IDUMOReceivable {
 
 	private IDUMOSendable sender1;
 	private IDUMOSendable sender2;
 
-	private ReceiveValidator			vSize	= new ReceiveValidatorSize(2);
-	private ReceiveValidator			vType1	= new ReceiveValidatorType(1, IDUMODataPrimitiveNumber.class);
-	private ReceiveValidator			vType2	= new ReceiveValidatorType(2, IDUMODataPrimitiveNumber.class);
+	private IDUMOReceiveValidator			vSize	= new IDUMOReceiveValidatorSize(2);
+	private IDUMOReceiveValidator			vType1	= new IDUMOReceiveValidatorType(1, IDUMODataPrimitiveNumber.class);
+	private IDUMOReceiveValidator			vType2	= new IDUMOReceiveValidatorType(2, IDUMODataPrimitiveNumber.class);
 
 	public Number2GPSConverter() {}
 

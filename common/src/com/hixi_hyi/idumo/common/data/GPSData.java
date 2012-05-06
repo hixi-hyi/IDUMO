@@ -18,11 +18,11 @@
 package com.hixi_hyi.idumo.common.data;
 
 import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
-import com.hixi_hyi.idumo.core.data.IDUMOData;
+import com.hixi_hyi.idumo.core.data.IDUMODataBase;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawString;
 
-public class GPSData extends IDUMOData implements LatLngDataElement {
+public class GPSData extends IDUMODataBase implements LatLngDataElement {
 
 	private static final String LATITUDE = "latitude";
 	private static final String LONGITUDE = "longitude";

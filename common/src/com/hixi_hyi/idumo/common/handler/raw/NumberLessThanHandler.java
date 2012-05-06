@@ -26,8 +26,8 @@ import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorType;
 
 /**
  * @author Hiroyoshi HOUCHI
@@ -37,8 +37,8 @@ public class NumberLessThanHandler implements IDUMOSendable, IDUMOReceivable {
 	
 	private IDUMOSendable			sender;
 	private double					condition;
-	private ReceiveValidatorSize	validator	= new ReceiveValidatorSize(1);
-	private ReceiveValidatorType	vType		= new ReceiveValidatorType(1, IDUMODataPrimitiveNumber.class);
+	private IDUMOReceiveValidatorSize	validator	= new IDUMOReceiveValidatorSize(1);
+	private IDUMOReceiveValidatorType	vType		= new IDUMOReceiveValidatorType(1, IDUMODataPrimitiveNumber.class);
 	
 	public NumberLessThanHandler(double condition) {
 		this.condition = condition;

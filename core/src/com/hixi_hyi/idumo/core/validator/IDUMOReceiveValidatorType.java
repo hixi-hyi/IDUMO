@@ -15,39 +15,30 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.android.data;
+package com.hixi_hyi.idumo.core.validator;
 
+import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
-/**
- * @author Hiroyoshi HOUCHI
- * @version 2.0
- */
-public class AndroidOrientationData extends IDUMODataBase {
-	private static final String PITCH="pitch";
-	private static final String ROLL="roll";
-	private static final String AZMUTH="azmuth";
-
-	public AndroidOrientationData(float pitch, float roll, float azmuth) {
-		add(new IDUMODataTypeRawNumber(PITCH, pitch, "Android Orientation Pitch"));
-		add(new IDUMODataTypeRawNumber(ROLL, roll, "Android Orientation Roll"));
-		add(new IDUMODataTypeRawNumber(AZMUTH, azmuth, "Android Orientation Azmuth"));
+public class IDUMOReceiveValidatorType implements IDUMOReceiveValidator {
+	
+	private int							num;
+	private Class<? extends IDUMOData>	cls;
+	
+	public IDUMOReceiveValidatorType(int num, Class<? extends IDUMOData> cls) {
+		this.num = num - 1;
+		this.cls = cls;
 	}
-
-	public float getPitch() {
-		return (Float) getValue(PITCH);
-	}
-
-	public float getRoll() {
-		return (Float) getValue(ROLL);
-	}
-
-	public float getAzmuth() {
-		return (Float) getValue(AZMUTH);
-	}
+	
 	@Override
-	public String toString(){
-		return String.format("%s:%f\n%s:%f\n%s:%f",PITCH,getPitch(),ROLL,getRoll(),AZMUTH,getAzmuth());
+	public void validate(IDUMOSendable... senders) throws IDUMOException {
+		Class<? extends IDUMOData> type = senders[num].sendableType().iterator().next();
+		if (cls != type) {
+			throw new IDUMOException();
+		}
+		return;
 	}
+	
 }

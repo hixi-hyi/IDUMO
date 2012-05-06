@@ -37,7 +37,7 @@ import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
 
 /**
  *
@@ -48,7 +48,7 @@ public class HotpepperHandler implements IDUMOSendable,IDUMOReceivable {
 
 	private Hotpepper hotpepper = new Hotpepper();
 	private IDUMOSendable sender;
-	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
+	private IDUMOReceiveValidatorSize vSize = new IDUMOReceiveValidatorSize(1);
 
 	@Override
 	public IDUMODataFlowing onCall() {

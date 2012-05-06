@@ -17,9 +17,9 @@ import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidator;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorType;
 
 /**
  * バイト情報をTCP通信を用いて送ることが出来るReceiptor
@@ -34,8 +34,8 @@ public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController, IDUMO
 	private PrintWriter			pw;
 	private OutputStream		outstream;
 	private IDUMOSendable		sender;
-	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
-	private ReceiveValidator	vType	= new ReceiveValidatorType(1, IDUMODataPrimitiveString.class);
+	private IDUMOReceiveValidator	vSize	= new IDUMOReceiveValidatorSize(1);
+	private IDUMOReceiveValidator	vType	= new IDUMOReceiveValidatorType(1, IDUMODataPrimitiveString.class);
 	
 	public SendTCPReceiptor(String ip, int port) {
 		IDUMOLogManager.log();

@@ -18,14 +18,14 @@
 package com.hixi_hyi.idumo.android.data;
 
 import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
-import com.hixi_hyi.idumo.core.data.IDUMOData;
+import com.hixi_hyi.idumo.core.data.IDUMODataBase;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class AndroidGPSData extends IDUMOData implements LatLngDataElement{
+public class AndroidGPSData extends IDUMODataBase implements LatLngDataElement{
 	public static final String	LATITUDE	= "latitude";
 	public static final String	LONGITUDE	= "longitude";
 	public static final String	ALTITUDE	= "altitude";

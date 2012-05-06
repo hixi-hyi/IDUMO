@@ -15,39 +15,49 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.android.data;
+package com.hixi_hyi.idumo.core.data;
 
-import com.hixi_hyi.idumo.core.data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
+import java.util.Map;
+import java.util.TreeMap;
 
-/**
- * @author Hiroyoshi HOUCHI
- * @version 2.0
- */
-public class AndroidOrientationData extends IDUMODataBase {
-	private static final String PITCH="pitch";
-	private static final String ROLL="roll";
-	private static final String AZMUTH="azmuth";
+import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRaw;
 
-	public AndroidOrientationData(float pitch, float roll, float azmuth) {
-		add(new IDUMODataTypeRawNumber(PITCH, pitch, "Android Orientation Pitch"));
-		add(new IDUMODataTypeRawNumber(ROLL, roll, "Android Orientation Roll"));
-		add(new IDUMODataTypeRawNumber(AZMUTH, azmuth, "Android Orientation Azmuth"));
+public abstract class IDUMODataBase implements IDUMOData{
+	private Map<String, IDUMODataTypeRaw>	raw	= new TreeMap<String, IDUMODataTypeRaw>();
+	
+	public IDUMODataTypeRaw add(IDUMODataTypeRaw value) {
+		// IDUMOLogManager.debug(value.getName());
+		// IDUMOLogManager.debug(value.getValue());
+		return raw.put(value.getName(), value);
 	}
-
-	public float getPitch() {
-		return (Float) getValue(PITCH);
+	
+	public Object getValue(String name) {
+		// IDUMOLogManager.debug(NAME);
+		// IDUMOLogManager.debug(raw.get(NAME));
+		// IDUMOLogManager.debug(raw.get(NAME).getValue());
+		return raw.get(name).getValue();
 	}
-
-	public float getRoll() {
-		return (Float) getValue(ROLL);
+	
+	public String getSummary(String name) {
+		return raw.get(name).getSummary();
 	}
-
-	public float getAzmuth() {
-		return (Float) getValue(AZMUTH);
+	
+	public IDUMODataTypeRaw get(String name) {
+		return raw.get(name);
 	}
+	
 	@Override
-	public String toString(){
-		return String.format("%s:%f\n%s:%f\n%s:%f",PITCH,getPitch(),ROLL,getRoll(),AZMUTH,getAzmuth());
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("IDUMOData{");
+		for (Map.Entry<String, IDUMODataTypeRaw> entry : raw.entrySet()) {
+			sb.append("[\"");
+			sb.append(entry.getKey());
+			sb.append("\":");
+			sb.append(entry.getValue().getValue());
+			sb.append("]");
+		}
+		sb.append("}");
+		return sb.toString();
 	}
 }

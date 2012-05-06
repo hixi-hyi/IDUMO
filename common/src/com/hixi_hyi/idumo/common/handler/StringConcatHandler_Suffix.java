@@ -18,6 +18,7 @@
 package com.hixi_hyi.idumo.common.handler;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
+import com.hixi_hyi.idumo.core.data.IDUMODataBase;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
@@ -25,8 +26,8 @@ import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidator;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
 
 /**
  * @author Hiroyoshi HOUCHI
@@ -37,7 +38,7 @@ public class StringConcatHandler_Suffix implements IDUMOSendable, IDUMOReceivabl
 	
 	private IDUMOSendable		provider;
 	private String				fixWord;
-	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
+	private IDUMOReceiveValidator	vSize	= new IDUMOReceiveValidatorSize(1);
 	
 	public StringConcatHandler_Suffix(String fixWord) {
 		this.fixWord = fixWord;

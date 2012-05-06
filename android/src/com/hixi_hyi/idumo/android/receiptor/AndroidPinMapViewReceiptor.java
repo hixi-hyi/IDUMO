@@ -17,17 +17,28 @@
  */
 package com.hixi_hyi.idumo.android.receiptor;
 
-import java.util.ArrayList;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import android.R;
 import android.app.Activity;
 import android.content.Context;
-import android.widget.TextView;
+import android.graphics.drawable.Drawable;
 
+import com.google.android.maps.GeoPoint;
+import com.google.android.maps.ItemizedOverlay;
+import com.google.android.maps.MapController;
+import com.google.android.maps.MapView;
+import com.google.android.maps.Overlay;
+import com.google.android.maps.OverlayItem;
+import com.hixi_hyi.idumo.common.data.GPSData;
+import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
 import com.hixi_hyi.idumo.core.data.IDUMOData;
 import com.hixi_hyi.idumo.core.data.IDUMODataBase;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectArray;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
@@ -42,32 +53,47 @@ import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
  * @version 2.0
  * 
  */
-public class AndroidTextViewReceiptor extends TextView implements IDUMOReceivable, IDUMORunnable {
+public class AndroidPinMapViewReceiptor extends MapView implements IDUMOReceivable, IDUMORunnable {
 	
 	private IDUMOSendable	sender;
-	private IDUMOReceiveValidatorSize vSize = new IDUMOReceiveValidatorSize(1);
 	private Activity					activity;
+	private IDUMOReceiveValidatorSize vSize = new IDUMOReceiveValidatorSize(1);
 	
-	public AndroidTextViewReceiptor(Context context) {
-		super(context);
+	private static final int ZOOM_LEVEL = 10;
+	private MapController controller;
+	private DefaultItemizedOverlay overlay;
+	
+	private static final String API_KEY = "0RPjiLm_GLRAHM0HCn22WyqMNKfeWGuSvvXnqoA";
+	
+	public AndroidPinMapViewReceiptor(Context context) {
+		super(context, API_KEY);
 		activity = (Activity) context;
 		activity.setContentView(this);
-		setTextSize(30.0f);
+		
+		controller = getController();
+		controller.setZoom(ZOOM_LEVEL);
+		
+		Drawable marker = activity.getResources().getDrawable(com.hixi_hyi.idumo.android.R.drawable.androidmarker);
+		overlay = new DefaultItemizedOverlay(marker);
+		getOverlays().add(overlay);
+		
+		setClickable(true);
+		setBuiltInZoomControls(true);
+		setSatellite(false);
+		
 	}
 	
 	@Override
 	public void run() {
 		IDUMOLogManager.log();
 		IDUMODataFlowing idf = sender.onCall();
-		StringBuilder sb = new StringBuilder();
-		for (IDUMOData d : idf) {
-			sb.append(d.toString());
+		for(IDUMOData id:idf){
+			LatLngDataElement llde = (LatLngDataElement)id;
+			GeoPoint point = new GeoPoint((int)(llde.getLatitude()*1E6), (int)(llde.getLongitude()*1E6));	
+			overlay.addPoint(point);
+			IDUMOLogManager.debug(point);
 		}
-		
-		IDUMOLogManager.debug(sb.toString());
-		
-		setText(sb.toString());
-		
+		invalidate();
 	}
 	
 	@Override
@@ -83,7 +109,28 @@ public class AndroidTextViewReceiptor extends TextView implements IDUMOReceivabl
 	
 	@Override
 	public IDUMODataTypeConnect receivableType() {
-		return new IDUMODataTypeConnectArray(IDUMOData.class);
+		return new IDUMODataTypeConnectSingle(LatLngDataElement.class);
 	}
 	
+}
+class DefaultItemizedOverlay extends ItemizedOverlay<OverlayItem> {
+	private List<OverlayItem> items = new ArrayList<OverlayItem>();
+	public DefaultItemizedOverlay(Drawable defaultMarker) {
+		super(boundCenterBottom(defaultMarker));
+	}
+	@Override
+	protected OverlayItem createItem(int i) {
+		return items.get(i);
+	}
+	@Override
+	public int size() {
+		return items.size();
+	}
+	public void addPoint(GeoPoint point){
+		addPoint(point, "", "");
+	}
+	public void addPoint(GeoPoint point, String title, String snippet) {
+		items.add(new OverlayItem(point, title, snippet));
+		populate();
+	}
 }

@@ -100,8 +100,26 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.MapView"
+            android:name=".view.Number2MapView"
+            android:label="View/Number2MapView" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.GPS2MapView"
             android:label="View/MapView" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.Shop2MapView"
+            android:label="View/ShopMapView" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

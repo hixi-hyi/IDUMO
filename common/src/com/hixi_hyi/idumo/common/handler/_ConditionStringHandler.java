@@ -8,15 +8,15 @@ import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorType;
 
 public class _ConditionStringHandler implements IDUMOSendable, IDUMOReceivable {
 	
 	private IDUMOSendable			sender;
 	private String					condition;
-	private ReceiveValidatorSize	validator	= new ReceiveValidatorSize(1);
-	private ReceiveValidatorType	vType		= new ReceiveValidatorType(1, IDUMODataPrimitiveString.class);
+	private IDUMOReceiveValidatorSize	validator	= new IDUMOReceiveValidatorSize(1);
+	private IDUMOReceiveValidatorType	vType		= new IDUMOReceiveValidatorType(1, IDUMODataPrimitiveString.class);
 	
 	public _ConditionStringHandler(String condition) {
 		this.condition = condition;

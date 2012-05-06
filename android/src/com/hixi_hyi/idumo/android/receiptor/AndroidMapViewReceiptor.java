@@ -32,16 +32,18 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
+import com.hixi_hyi.idumo.common.data.GPSData;
 import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
-import com.hixi_hyi.idumo.core.data.IDUMOData;
+import com.hixi_hyi.idumo.core.data.IDUMODataBase;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
+import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
 
 /**
  * Android上にテキスト情報を出力するReceiptorです
@@ -54,7 +56,7 @@ public class AndroidMapViewReceiptor extends MapView implements IDUMOReceivable,
 	
 	private IDUMOSendable	sender;
 	private Activity					activity;
-	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
+	private IDUMOReceiveValidatorSize vSize = new IDUMOReceiveValidatorSize(1);
 	
 	private static final int ZOOM_LEVEL = 10;
 	private MapController controller;
@@ -99,26 +101,7 @@ public class AndroidMapViewReceiptor extends MapView implements IDUMOReceivable,
 	
 	@Override
 	public IDUMODataTypeConnect receivableType() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		return new IDUMODataTypeConnectSingle(LatLngDataElement.class);
 	}
 	
-}
-class PinItemizedOverlay extends ItemizedOverlay<OverlayItem> {
-	private List<OverlayItem> items = new ArrayList<OverlayItem>();
-	public PinItemizedOverlay(Drawable defaultMarker) {
-		super(boundCenterBottom(defaultMarker));
-	}
-	@Override
-	protected OverlayItem createItem(int i) {
-		return items.get(i);
-	}
-	@Override
-	public int size() {
-		return items.size();
-	}
-	public void addPin(GeoPoint point, String title, String snippet) {
-		items.add(new OverlayItem(point, title, snippet));
-		populate();
-	}
 }

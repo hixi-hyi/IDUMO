@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
+import com.hixi_hyi.idumo.core.data.IDUMODataBase;
 
 public class IDUMODataTypeConnectSingle implements IDUMODataTypeConnect {
 	

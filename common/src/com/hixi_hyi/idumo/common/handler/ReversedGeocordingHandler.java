@@ -14,8 +14,8 @@ import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorType;
 
 /**
  * 逆ジオコーディング(lat,lon->住所)のハンドラです． senderにはlat,lonの順番で設定してください．
@@ -26,8 +26,8 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 public class ReversedGeocordingHandler implements IDUMOSendable, IDUMOReceivable {
 
 	private IDUMOSendable sender;
-	private ReceiveValidatorSize		vSize	= new ReceiveValidatorSize(1);
-	private ReceiveValidatorType		v1Type	= new ReceiveValidatorType(1, GPSData.class);
+	private IDUMOReceiveValidatorSize		vSize	= new IDUMOReceiveValidatorSize(1);
+	private IDUMOReceiveValidatorType		v1Type	= new IDUMOReceiveValidatorType(1, GPSData.class);
 
 	@Override
 	public IDUMODataFlowing onCall() {

@@ -20,6 +20,7 @@ package com.hixi_hyi.idumo.console.receiptor;
 import java.util.Iterator;
 
 import com.hixi_hyi.idumo.core.data.IDUMOData;
+import com.hixi_hyi.idumo.core.data.IDUMODataBase;
 import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
 import com.hixi_hyi.idumo.core.data.IDUMODataPrimitive;
 import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
@@ -28,7 +29,7 @@ import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
 
 /**
  * Systemoutに出力するReceiptor
@@ -40,7 +41,7 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 public class ConsoleViewReceiptor implements IDUMOReceivable, IDUMORunnable {
 
 	private IDUMOSendable			sender;
-	private ReceiveValidatorSize	vSize	= new ReceiveValidatorSize(1);
+	private IDUMOReceiveValidatorSize	vSize	= new IDUMOReceiveValidatorSize(1);
 
 	@Override
 	public void run() {

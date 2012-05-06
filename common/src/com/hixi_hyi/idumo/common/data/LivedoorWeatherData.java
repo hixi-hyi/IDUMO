@@ -17,7 +17,7 @@
  */
 package com.hixi_hyi.idumo.common.data;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
+import com.hixi_hyi.idumo.core.data.IDUMODataBase;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawString;
 
@@ -26,7 +26,7 @@ import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawString;
  * @version 2.0
  * 
  */
-public class LivedoorWeatherData extends IDUMOData {
+public class LivedoorWeatherData extends IDUMODataBase {
 	public static final String	LOCATION	= "location";
 	public static final String	DATE		= "date";
 	public static final String	MAX_TEMP	= "max_temp";
