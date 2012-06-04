@@ -19,7 +19,7 @@ package com.hixi_hyi.idumo.core.data;
 
 import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
 
-public class IDUMODataLatLng extends IDUMOData {
+public class IDUMODataLatLng extends IDUMODataBase {
 
 
 	private static final String LAT = "latitude";
