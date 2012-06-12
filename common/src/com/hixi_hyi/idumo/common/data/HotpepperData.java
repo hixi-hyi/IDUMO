@@ -18,19 +18,12 @@
 package com.hixi_hyi.idumo.common.data;
 
 import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
-import com.hixi_hyi.idumo.core.data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
-import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawString;
+import com.hixi_hyi.idumo.core.data.Data.IDUMODataBase;
+import com.hixi_hyi.idumo.core.data.element.TextElement;
+import com.hixi_hyi.idumo.core.data.raw.RawDataTypeNumber;
+import com.hixi_hyi.idumo.core.data.raw.RawDataTypeString;
 
-public class HotpepperData extends IDUMODataBase implements LatLngDataElement{
-	/*
-	 * name - String
-	 * address - String
-	 * catch - String
-	 * open - String
-	 * budget - String
-	 * average - String
-	 */
+public class HotpepperData extends IDUMODataBase implements LatLngDataElement,TextElement{
 	private static final String NAME = "name";
 	private static final String KANA = "kana";
 	private static final String LAT ="lat";
@@ -42,15 +35,15 @@ public class HotpepperData extends IDUMODataBase implements LatLngDataElement{
 	private static final String AVERAGE = "average";
 
 	public HotpepperData(String name,String kana, double lat, double lng ,String address,String catchcopy, String open,String budget,String average) {
-		add(new IDUMODataTypeRawString(NAME, name, "shop name"));
-		add(new IDUMODataTypeRawString(KANA, kana, "shop kana name"));
-		add(new IDUMODataTypeRawNumber(LAT, lat, "shop lat"));
-		add(new IDUMODataTypeRawNumber(LNG, lng, "shop lng"));
-		add(new IDUMODataTypeRawString(ADDRESS, address, "shop address"));
-		add(new IDUMODataTypeRawString(CATCHCOPY, catchcopy, "shop catchcopy"));
-		add(new IDUMODataTypeRawString(OPEN, open, "shop open"));
-		add(new IDUMODataTypeRawString(BUDGET, budget, "shop budget"));
-		add(new IDUMODataTypeRawString(AVERAGE, average, "shop average"));
+		add(new RawDataTypeString(NAME, name, "shop name"));
+		add(new RawDataTypeString(KANA, kana, "shop kana name"));
+		add(new RawDataTypeNumber(LAT, lat, "shop lat"));
+		add(new RawDataTypeNumber(LNG, lng, "shop lng"));
+		add(new RawDataTypeString(ADDRESS, address, "shop address"));
+		add(new RawDataTypeString(CATCHCOPY, catchcopy, "shop catchcopy"));
+		add(new RawDataTypeString(OPEN, open, "shop open"));
+		add(new RawDataTypeString(BUDGET, budget, "shop budget"));
+		add(new RawDataTypeString(AVERAGE, average, "shop average"));
 	}
 
 	public String getName(){
@@ -90,27 +83,30 @@ public class HotpepperData extends IDUMODataBase implements LatLngDataElement{
 	}
 
 	@Override
-	public String toString(){
+	public String getText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getName());
-		sb.append(" : ");
-		sb.append(getKana());
-		sb.append(" : ");
-		sb.append("[");
-		sb.append(getLatitude());
-		sb.append(",");
-		sb.append(getLongitude());
-		sb.append("]");
-		sb.append(" : ");
-		sb.append(getAddress());
-		sb.append(" : ");
-		sb.append(getCatchcopy());
-		sb.append(" : ");
-		sb.append(getOpen());
-		sb.append(" : ");
-		sb.append(getBudget());
-		sb.append(" : ");
+		sb.append(":");
 		sb.append(getAverage());
+//		sb.append(getName());
+//		sb.append(" : ");
+//		sb.append(getKana());
+//		sb.append(" : ");
+//		sb.append("[");
+//		sb.append(getLatitude());
+//		sb.append(",");
+//		sb.append(getLongitude());
+//		sb.append("]");
+//		sb.append(" : ");
+//		sb.append(getAddress());
+//		sb.append(" : ");
+//		sb.append(getCatchcopy());
+//		sb.append(" : ");
+//		sb.append(getOpen());
+//		sb.append(" : ");
+//		sb.append(getBudget());
+//		sb.append(" : ");
+//		sb.append(getAverage());
 		return sb.toString();
 	}
 

@@ -5,8 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.IDUMOController;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
@@ -30,7 +30,7 @@ public class _SerialSendReceiptor implements IDUMORunnable, IDUMOReceivable, IDU
 		if (!sender.isReady()) {
 			return;
 		}
-		IDUMODataFlowing data = sender.onCall();
+		FlowingData data = sender.onCall();
 		if (data == null) {
 			return;
 		}
@@ -89,7 +89,7 @@ public class _SerialSendReceiptor implements IDUMORunnable, IDUMOReceivable, IDU
 	}
 	
 	@Override
-	public IDUMODataTypeConnect receivableType() {
+	public ConnectDataType receivableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

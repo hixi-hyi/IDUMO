@@ -15,72 +15,14 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core.data;
+package com.hixi_hyi.idumo.core.data.raw;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-
-public class IDUMODataFlowing implements Iterable<IDUMOData> {
-	private ArrayList<IDUMOData>	datalist;
-	{
-		datalist = new ArrayList<IDUMOData>();
-	}
+public interface RawDataType {
+	public String getName();
 	
-	public IDUMODataFlowing() {}
+	public Object getValue();
 	
-	public IDUMODataFlowing(IDUMOData... objects) {
-		for (IDUMOData o : objects) {
-			datalist.add(o);
-		}
-	}
+	public Class<?> getType();
 	
-	public Collection<IDUMOData> getData() {
-		return datalist;
-	}
-	
-	/**
-	 * @param object
-	 * @return
-	 * @see java.util.ArrayList#add(java.lang.Object)
-	 */
-	public boolean add(IDUMOData object) {
-		return datalist.add(object);
-	}
-	
-	/**
-	 * @param index
-	 * @return
-	 * @see java.util.ArrayList#get(int)
-	 */
-	public IDUMOData get(int index) {
-		return datalist.get(index);
-	}
-	
-	/**
-	 * @return
-	 * @see java.util.ArrayList#size()
-	 */
-	public int size() {
-		return datalist.size();
-	}
-	
-	/**
-	 * @return
-	 * @see java.util.AbstractCollection#toString()
-	 */
-	@Override
-	public String toString() {
-		return datalist.toString();
-	}
-	
-	@Override
-	public Iterator<IDUMOData> iterator() {
-		return datalist.iterator();
-	}
-	
-	public IDUMOData next() {
-		return datalist.remove(0);
-	}
-	
+	public String getSummary();
 }

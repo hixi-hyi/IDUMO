@@ -17,8 +17,8 @@
  */
 package com.hixi_hyi.idumo.android.data;
 
-import com.hixi_hyi.idumo.core.data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
+import com.hixi_hyi.idumo.core.data.Data.IDUMODataBase;
+import com.hixi_hyi.idumo.core.data.raw.RawDataTypeNumber;
 
 /**
  * @author Hiroyoshi HOUCHI
@@ -30,9 +30,9 @@ public class AndroidMagneticFieldData extends IDUMODataBase {
 	private static final String Z="z";
 
 	public AndroidMagneticFieldData(float x, float y, float z) {
-		add(new IDUMODataTypeRawNumber(X, x, "Android MagneticField X"));
-		add(new IDUMODataTypeRawNumber(Y, y, "Android MagneticField Y"));
-		add(new IDUMODataTypeRawNumber(Z, z, "Android MagneticField Z"));
+		add(new RawDataTypeNumber(X, x, "Android MagneticField X"));
+		add(new RawDataTypeNumber(Y, y, "Android MagneticField Y"));
+		add(new RawDataTypeNumber(Z, z, "Android MagneticField Z"));
 	}
 
 	public float getX() {

@@ -50,7 +50,7 @@ public class HotpepperSortTest extends IDUMOConsoleWrapper {
 	}
 
 	public static void main(String[] args) {
-		IDUMOLogManager.DEBUG = true;
+//		IDUMOLogManager.DEBUG = true;
 		IDUMOLogManager.LOGGER = new IDUMOConsoleLogger();
 		HotpepperSortTest main = new HotpepperSortTest();
 		main.exec();

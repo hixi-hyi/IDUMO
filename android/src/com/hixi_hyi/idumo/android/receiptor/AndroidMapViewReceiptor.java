@@ -34,10 +34,9 @@ import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 import com.hixi_hyi.idumo.common.data.GPSData;
 import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
-import com.hixi_hyi.idumo.core.data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
@@ -80,7 +79,7 @@ public class AndroidMapViewReceiptor extends MapView implements IDUMOReceivable,
 	@Override
 	public void run() {
 		IDUMOLogManager.log();
-		IDUMODataFlowing idf = sender.onCall();
+		FlowingData idf = sender.onCall();
 		LatLngDataElement llde = (LatLngDataElement)idf.next();
 		GeoPoint point = new GeoPoint((int)(llde.getLatitude()*1E6), (int)(llde.getLongitude()*1E6));	
 		IDUMOLogManager.debug(point);
@@ -100,8 +99,8 @@ public class AndroidMapViewReceiptor extends MapView implements IDUMOReceivable,
 	}
 	
 	@Override
-	public IDUMODataTypeConnect receivableType() {
-		return new IDUMODataTypeConnectSingle(LatLngDataElement.class);
+	public ConnectDataType receivableType() {
+		return new ConnectDataTypeSingle(LatLngDataElement.class);
 	}
 	
 }

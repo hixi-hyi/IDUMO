@@ -19,12 +19,12 @@ package com.hixi_hyi.idumo.console.receiptor;
 
 import java.util.Iterator;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitive;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.data.Data;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.PrimitiveData;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
+import com.hixi_hyi.idumo.core.data.element.TextElement;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
@@ -45,12 +45,12 @@ public class ConsoleViewReceiptor implements IDUMOReceivable, IDUMORunnable {
 
 	@Override
 	public void run() {
-		IDUMODataFlowing flowdata = sender.onCall();
+		FlowingData flowdata = sender.onCall();
 //		IDUMODataPrimitive data = (IDUMODataPrimitive) flowdata.next();
 //		System.out.println(data.getValue());
-		Iterator<IDUMOData> it = flowdata.iterator();
-		for (IDUMOData idumoData : flowdata) {
-			System.out.println(idumoData);
+		Iterator<Data> it = flowdata.iterator();
+		for (Data idumoData : flowdata) {
+			System.out.println(((TextElement)idumoData).getText());
 		}
 //		IDUMOData data = (IDUMOData) flowdata.next();
 //		System.out.println(data);
@@ -68,8 +68,8 @@ public class ConsoleViewReceiptor implements IDUMOReceivable, IDUMORunnable {
 	}
 
 	@Override
-	public IDUMODataTypeConnect receivableType() {
-		return new IDUMODataTypeConnectSingle(IDUMOData.class);
+	public ConnectDataType receivableType() {
+		return new ConnectDataTypeSingle(Data.class);
 	}
 
 }

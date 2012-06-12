@@ -1,10 +1,9 @@
 package com.hixi_hyi.idumo.common.handler.manifact;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectArray;
+import com.hixi_hyi.idumo.core.data.Data;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeArray;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
@@ -27,18 +26,18 @@ public class ArrayGetTopHandler implements IDUMOSendable,IDUMOReceivable{
 	}
 
 	@Override
-	public IDUMODataTypeConnect receivableType() {
-		return new IDUMODataTypeConnectArray(IDUMOData.class);
+	public ConnectDataType receivableType() {
+		return new ConnectDataTypeArray(Data.class);
 	}
 
 	@Override
-	public IDUMODataFlowing onCall() {
-		IDUMOData d = sender.onCall().next();
-		return new IDUMODataFlowing(d);
+	public FlowingData onCall() {
+		Data d = sender.onCall().next();
+		return new FlowingData(d);
 	}
 
 	@Override
-	public IDUMODataTypeConnect sendableType() {
+	public ConnectDataType sendableType() {
 		return sender.sendableType();
 	}
 

@@ -24,9 +24,9 @@ import android.hardware.SensorManager;
 import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.android.data.AndroidAccelerometerData;
 import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
@@ -51,9 +51,9 @@ public class AndroidAccelerometerProvider implements IDUMOSendable, AndroidContr
 	}
 
 	@Override
-	public IDUMODataFlowing onCall() {
+	public FlowingData onCall() {
 		IDUMOLogManager.log();
-		IDUMODataFlowing p = new IDUMODataFlowing();
+		FlowingData p = new FlowingData();
 		AndroidAccelerometerData data = new AndroidAccelerometerData(accel.getX(), accel.getY(), accel.getZ());
 		p.add(data);
 		return p;
@@ -87,8 +87,8 @@ public class AndroidAccelerometerProvider implements IDUMOSendable, AndroidContr
 	public void onIdumoStop() {}
 
 	@Override
-	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(AndroidAccelerometerData.class);
+	public ConnectDataType sendableType() {
+		return new ConnectDataTypeSingle(AndroidAccelerometerData.class);
 	}
 
 }

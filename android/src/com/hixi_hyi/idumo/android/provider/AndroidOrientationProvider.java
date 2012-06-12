@@ -26,9 +26,9 @@ import com.hixi_hyi.idumo.android.data.AndroidOrientationData;
 import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
 import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
 import com.hixi_hyi.idumo.android.sensor.OrientationSensor;
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
@@ -62,9 +62,9 @@ public class AndroidOrientationProvider implements IDUMOSendable, AndroidControl
 	}
 
 	@Override
-	public IDUMODataFlowing onCall() {
+	public FlowingData onCall() {
 		IDUMOLogManager.log();
-		IDUMODataFlowing p = new IDUMODataFlowing();
+		FlowingData p = new FlowingData();
 		p.add(new AndroidOrientationData(sensor.getPitch(), sensor.getRoll(), sensor.getAzmuth()));
 		return p;
 	}
@@ -97,7 +97,7 @@ public class AndroidOrientationProvider implements IDUMOSendable, AndroidControl
 	public void onIdumoStop() {}
 
 	@Override
-	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(AndroidOrientationData.class);
+	public ConnectDataType sendableType() {
+		return new ConnectDataTypeSingle(AndroidOrientationData.class);
 	}
 }

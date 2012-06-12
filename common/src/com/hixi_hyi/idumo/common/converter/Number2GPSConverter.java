@@ -3,11 +3,11 @@ package com.hixi_hyi.idumo.common.converter;
 import java.util.ArrayList;
 
 import com.hixi_hyi.idumo.common.data.GPSData;
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveNumber;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectMulti;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.PrimitiveDataNumber;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeMulti;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
@@ -22,8 +22,8 @@ public class Number2GPSConverter implements IDUMOSendable, IDUMOReceivable {
 	private IDUMOSendable sender2;
 
 	private IDUMOReceiveValidator			vSize	= new IDUMOReceiveValidatorSize(2);
-	private IDUMOReceiveValidator			vType1	= new IDUMOReceiveValidatorType(1, IDUMODataPrimitiveNumber.class);
-	private IDUMOReceiveValidator			vType2	= new IDUMOReceiveValidatorType(2, IDUMODataPrimitiveNumber.class);
+	private IDUMOReceiveValidator			vType1	= new IDUMOReceiveValidatorType(1, PrimitiveDataNumber.class);
+	private IDUMOReceiveValidator			vType2	= new IDUMOReceiveValidatorType(2, PrimitiveDataNumber.class);
 
 	public Number2GPSConverter() {}
 
@@ -45,22 +45,22 @@ public class Number2GPSConverter implements IDUMOSendable, IDUMOReceivable {
 	}
 
 	@Override
-	public IDUMODataTypeConnect receivableType() {
-		return new IDUMODataTypeConnectMulti(IDUMODataPrimitiveNumber.class,IDUMODataPrimitiveNumber.class);
+	public ConnectDataType receivableType() {
+		return new ConnectDataTypeMulti(PrimitiveDataNumber.class,PrimitiveDataNumber.class);
 	}
 
 	@Override
-	public IDUMODataFlowing onCall() {
-		IDUMODataPrimitiveNumber num1 = (IDUMODataPrimitiveNumber) sender1.onCall().next();
-		IDUMODataPrimitiveNumber num2 = (IDUMODataPrimitiveNumber) sender2.onCall().next();
+	public FlowingData onCall() {
+		PrimitiveDataNumber num1 = (PrimitiveDataNumber) sender1.onCall().next();
+		PrimitiveDataNumber num2 = (PrimitiveDataNumber) sender2.onCall().next();
 		GPSData gd = new GPSData(num1.getNumber(), num2.getNumber());
 //		IDUMOLogManager.debug(gd);
-		return new IDUMODataFlowing(gd);
+		return new FlowingData(gd);
 	}
 
 	@Override
-	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(GPSData.class);
+	public ConnectDataType sendableType() {
+		return new ConnectDataTypeSingle(GPSData.class);
 	}
 
 }

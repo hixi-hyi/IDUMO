@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
@@ -31,7 +31,7 @@ public class _ImageViewReceiptor extends ImageView implements IDUMOReceivable, I
 	
 	@Override
 	public void run() {
-		IDUMODataFlowing p = sender.onCall();
+		FlowingData p = sender.onCall();
 		// Bitmap image = (Bitmap) p.get(0);
 		// setImageBitmap(image);
 	}
@@ -53,7 +53,7 @@ public class _ImageViewReceiptor extends ImageView implements IDUMOReceivable, I
 	}
 	
 	@Override
-	public IDUMODataTypeConnect receivableType() {
+	public ConnectDataType receivableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

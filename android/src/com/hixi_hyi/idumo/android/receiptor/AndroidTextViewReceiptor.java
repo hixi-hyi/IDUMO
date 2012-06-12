@@ -23,11 +23,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.widget.TextView;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectArray;
+import com.hixi_hyi.idumo.core.data.Data;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeArray;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
@@ -58,9 +57,9 @@ public class AndroidTextViewReceiptor extends TextView implements IDUMOReceivabl
 	@Override
 	public void run() {
 		IDUMOLogManager.log();
-		IDUMODataFlowing idf = sender.onCall();
+		FlowingData idf = sender.onCall();
 		StringBuilder sb = new StringBuilder();
-		for (IDUMOData d : idf) {
+		for (Data d : idf) {
 			sb.append(d.toString());
 		}
 		
@@ -82,8 +81,8 @@ public class AndroidTextViewReceiptor extends TextView implements IDUMOReceivabl
 	}
 	
 	@Override
-	public IDUMODataTypeConnect receivableType() {
-		return new IDUMODataTypeConnectArray(IDUMOData.class);
+	public ConnectDataType receivableType() {
+		return new ConnectDataTypeArray(Data.class);
 	}
 	
 }

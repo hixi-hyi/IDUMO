@@ -7,8 +7,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
@@ -89,7 +89,7 @@ public class _TCPByteStreamReceiptor implements IDUMOReceivable, AndroidControll
 	@Override
 	public void run() {
 		IDUMOLogManager.log();
-		IDUMODataFlowing data = sender.onCall();
+		FlowingData data = sender.onCall();
 		byte[] bytedata = new byte[data.size()];
 		int i = 0;
 		IDUMOLogManager.debug("size: " + data.size());
@@ -108,7 +108,7 @@ public class _TCPByteStreamReceiptor implements IDUMOReceivable, AndroidControll
 	}
 	
 	@Override
-	public IDUMODataTypeConnect receivableType() {
+	public ConnectDataType receivableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

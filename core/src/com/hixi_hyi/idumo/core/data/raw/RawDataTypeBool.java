@@ -15,49 +15,41 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core.data;
+package com.hixi_hyi.idumo.core.data.raw;
 
-import java.util.Map;
-import java.util.TreeMap;
-
-import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRaw;
-
-public abstract class IDUMODataBase implements IDUMOData{
-	private Map<String, IDUMODataTypeRaw>	raw	= new TreeMap<String, IDUMODataTypeRaw>();
+public class RawDataTypeBool implements RawDataType {
+	private String	name;
+	private Boolean	value;
+	private String	summary;
 	
-	public IDUMODataTypeRaw add(IDUMODataTypeRaw value) {
-		// IDUMOLogManager.debug(value.getName());
-		// IDUMOLogManager.debug(value.getValue());
-		return raw.put(value.getName(), value);
+	public RawDataTypeBool(String name, Boolean value, String summary) {
+		this.name = name;
+		this.value = value;
+		this.summary = summary;
 	}
 	
-	public Object getValue(String name) {
-		// IDUMOLogManager.debug(NAME);
-		// IDUMOLogManager.debug(raw.get(NAME));
-		// IDUMOLogManager.debug(raw.get(NAME).getValue());
-		return raw.get(name).getValue();
+	@Override
+	public String getName() {
+		return name;
 	}
 	
-	public String getSummary(String name) {
-		return raw.get(name).getSummary();
+	@Override
+	public Boolean getValue() {
+		return value;
 	}
 	
-	public IDUMODataTypeRaw get(String name) {
-		return raw.get(name);
+	@Override
+	public Class<?> getType() {
+		return Boolean.class;
 	}
 	
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("IDUMOData{");
-		for (Map.Entry<String, IDUMODataTypeRaw> entry : raw.entrySet()) {
-			sb.append("[\"");
-			sb.append(entry.getKey());
-			sb.append("\":");
-			sb.append(entry.getValue().getValue());
-			sb.append("]");
-		}
-		sb.append("}");
-		return sb.toString();
+		return String.format("Bool[%s:%s]", name, value);
+	}
+	
+	@Override
+	public String getSummary() {
+		return summary;
 	}
 }

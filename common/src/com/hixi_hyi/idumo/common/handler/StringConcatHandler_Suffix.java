@@ -17,12 +17,11 @@
  */
 package com.hixi_hyi.idumo.common.handler;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.data.Data;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.PrimitiveDataString;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
@@ -45,9 +44,9 @@ public class StringConcatHandler_Suffix implements IDUMOSendable, IDUMOReceivabl
 	}
 	
 	@Override
-	public IDUMODataFlowing onCall() {
-		String s = ((IDUMODataPrimitiveString) provider.onCall().next()).getString();
-		return new IDUMODataFlowing(new IDUMODataPrimitiveString(s + fixWord));
+	public FlowingData onCall() {
+		String s = ((PrimitiveDataString) provider.onCall().next()).getString();
+		return new FlowingData(new PrimitiveDataString(s + fixWord));
 	}
 	
 	@Override
@@ -62,13 +61,13 @@ public class StringConcatHandler_Suffix implements IDUMOSendable, IDUMOReceivabl
 	}
 	
 	@Override
-	public IDUMODataTypeConnect receivableType() {
-		return new IDUMODataTypeConnectSingle(IDUMOData.class);
+	public ConnectDataType receivableType() {
+		return new ConnectDataTypeSingle(Data.class);
 	}
 	
 	@Override
-	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveString.class);
+	public ConnectDataType sendableType() {
+		return new ConnectDataTypeSingle(PrimitiveDataString.class);
 	}
 	
 }

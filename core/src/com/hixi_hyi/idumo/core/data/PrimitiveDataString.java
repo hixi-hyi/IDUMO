@@ -17,20 +17,26 @@
  */
 package com.hixi_hyi.idumo.core.data;
 
-import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
+import com.hixi_hyi.idumo.core.data.raw.RawDataType;
+import com.hixi_hyi.idumo.core.data.raw.RawDataTypeString;
 
-public class IDUMODataPrimitiveNumber extends IDUMODataPrimitive {
+public class PrimitiveDataString extends PrimitiveData {
 
-	public IDUMODataPrimitiveNumber(double n) {
-		add(new IDUMODataTypeRawNumber(NAME, n, "Primitive : Number"));
+	public PrimitiveDataString(String n) {
+		add(new RawDataTypeString(NAME, n, "Primitive : String"));
 	}
 
-	public double getNumber() {
-		return (Double) getValue(NAME);
+	public PrimitiveDataString(RawDataType raw) {
+		add(new RawDataTypeString(NAME, (String) raw.getValue(), raw.getSummary()));
+	}
+
+	public String getString() {
+		String s = (String) getValue(NAME);
+		return s;
 	}
 
 	@Override
 	public String toString(){
-		return String.valueOf(getNumber());
+		return getString();
 	}
 }

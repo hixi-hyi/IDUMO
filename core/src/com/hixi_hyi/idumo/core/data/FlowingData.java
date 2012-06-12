@@ -17,29 +17,70 @@
  */
 package com.hixi_hyi.idumo.core.data;
 
-import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
-public class IDUMODataLatLng extends IDUMODataBase {
-
-
-	private static final String LAT = "latitude";
-	private static final String LNG = "longitude";
-
-	public IDUMODataLatLng(double lat,double lng) {
-		add(new IDUMODataTypeRawNumber(LAT, lat, "Primitive : GPS Latitude"));
-		add(new IDUMODataTypeRawNumber(LNG, lng, "Primitive : GPS Longtude"));
+public class FlowingData implements Iterable<Data> {
+	private ArrayList<Data>	datalist;
+	{
+		datalist = new ArrayList<Data>();
 	}
-
-	public double getLatitude() {
-		return (Double) getValue(LAT);
+	
+	public FlowingData() {}
+	
+	public FlowingData(Data... objects) {
+		for (Data o : objects) {
+			datalist.add(o);
+		}
 	}
-
-	public double getLongitude() {
-		return (Double) getValue(LNG);
+	
+	public Collection<Data> getData() {
+		return datalist;
 	}
-
+	
+	/**
+	 * @param object
+	 * @return
+	 * @see java.util.ArrayList#add(java.lang.Object)
+	 */
+	public boolean add(Data object) {
+		return datalist.add(object);
+	}
+	
+	/**
+	 * @param index
+	 * @return
+	 * @see java.util.ArrayList#get(int)
+	 */
+	public Data get(int index) {
+		return datalist.get(index);
+	}
+	
+	/**
+	 * @return
+	 * @see java.util.ArrayList#size()
+	 */
+	public int size() {
+		return datalist.size();
+	}
+	
+	/**
+	 * @return
+	 * @see java.util.AbstractCollection#toString()
+	 */
 	@Override
-	public String toString(){
-		return String.format("[%f,%f]",getLatitude(),getLongitude());
+	public String toString() {
+		return datalist.toString();
 	}
+	
+	@Override
+	public Iterator<Data> iterator() {
+		return datalist.iterator();
+	}
+	
+	public Data next() {
+		return datalist.remove(0);
+	}
+	
 }

@@ -18,8 +18,8 @@
 package com.hixi_hyi.idumo.android.data;
 
 import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
-import com.hixi_hyi.idumo.core.data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
+import com.hixi_hyi.idumo.core.data.raw.RawDataTypeNumber;
+import com.hixi_hyi.idumo.core.data.Data.IDUMODataBase;
 
 /**
  * @author Hiroyoshi HOUCHI
@@ -34,12 +34,12 @@ public class AndroidGPSData extends IDUMODataBase implements LatLngDataElement{
 	public static final String	SPEED		= "speed";
 
 	public AndroidGPSData(double latitude, double longitude, double altitude, long time, float bearing, float speed) {
-		add(new IDUMODataTypeRawNumber(LATITUDE, latitude, "Android GPS latitude"));
-		add(new IDUMODataTypeRawNumber(LONGITUDE, longitude, "Android GPS Longitude"));
-		add(new IDUMODataTypeRawNumber(ALTITUDE, altitude, "Android GPS Altitude"));
-		add(new IDUMODataTypeRawNumber(TIME, time, "Android GPS Time"));
-		add(new IDUMODataTypeRawNumber(BEARING, bearing, "Android GPS Bearing"));
-		add(new IDUMODataTypeRawNumber(SPEED, speed, "Android GPS Speed"));
+		add(new RawDataTypeNumber(LATITUDE, latitude, "Android GPS latitude"));
+		add(new RawDataTypeNumber(LONGITUDE, longitude, "Android GPS Longitude"));
+		add(new RawDataTypeNumber(ALTITUDE, altitude, "Android GPS Altitude"));
+		add(new RawDataTypeNumber(TIME, time, "Android GPS Time"));
+		add(new RawDataTypeNumber(BEARING, bearing, "Android GPS Bearing"));
+		add(new RawDataTypeNumber(SPEED, speed, "Android GPS Speed"));
 	}
 
 	@Override

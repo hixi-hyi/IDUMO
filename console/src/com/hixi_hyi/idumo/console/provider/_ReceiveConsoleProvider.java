@@ -4,10 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.PrimitiveDataString;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
@@ -26,10 +26,10 @@ public class _ReceiveConsoleProvider implements IDUMOSendable {
 	}
 	
 	@Override
-	public IDUMODataFlowing onCall() {
-		IDUMODataFlowing p = new IDUMODataFlowing();
+	public FlowingData onCall() {
+		FlowingData p = new FlowingData();
 		try {
-			p.add(new IDUMODataPrimitiveString(br.readLine()));
+			p.add(new PrimitiveDataString(br.readLine()));
 		} catch (IOException e) {
 			throw new IDUMORuntimeException(e);
 		}
@@ -37,8 +37,8 @@ public class _ReceiveConsoleProvider implements IDUMOSendable {
 	}
 	
 	@Override
-	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveString.class);
+	public ConnectDataType sendableType() {
+		return new ConnectDataTypeSingle(PrimitiveDataString.class);
 	}
 	
 }

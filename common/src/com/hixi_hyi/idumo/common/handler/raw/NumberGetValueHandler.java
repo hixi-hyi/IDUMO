@@ -17,12 +17,11 @@
  */
 package com.hixi_hyi.idumo.common.handler.raw;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveNumber;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.data.Data;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.PrimitiveDataNumber;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
@@ -54,22 +53,22 @@ public class NumberGetValueHandler implements IDUMOSendable, IDUMOReceivable {
 	}
 	
 	@Override
-	public IDUMODataTypeConnect receivableType() {
-		return new IDUMODataTypeConnectSingle(IDUMOData.class);
+	public ConnectDataType receivableType() {
+		return new ConnectDataTypeSingle(Data.class);
 	}
 	
 	@Override
-	public IDUMODataFlowing onCall() {
+	public FlowingData onCall() {
 		// IDUMODataTypeRawString s = (IDUMODataTypeRawString)
 		// sender.onCall().next().get(NAME);
 		// IDUMOLogManager.debug(s);
 		String s = sender.onCall().next().get(name).getValue().toString();
-		return new IDUMODataFlowing(new IDUMODataPrimitiveNumber(Double.parseDouble(s)));
+		return new FlowingData(new PrimitiveDataNumber(Double.parseDouble(s)));
 	}
 	
 	@Override
-	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveNumber.class);
+	public ConnectDataType sendableType() {
+		return new ConnectDataTypeSingle(PrimitiveDataNumber.class);
 	}
 	
 }

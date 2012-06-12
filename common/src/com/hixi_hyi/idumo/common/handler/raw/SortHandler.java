@@ -21,13 +21,12 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectArray;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.data.Data;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.PrimitiveDataString;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeArray;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
@@ -60,27 +59,27 @@ public class SortHandler implements IDUMOSendable, IDUMOReceivable {
 	}
 
 	@Override
-	public IDUMODataTypeConnect receivableType() {
-		return new IDUMODataTypeConnectArray(IDUMOData.class);
+	public ConnectDataType receivableType() {
+		return new ConnectDataTypeArray(Data.class);
 	}
 
 	@Override
-	public IDUMODataFlowing onCall() {
-		TreeMap<Object, IDUMOData> map = new TreeMap<Object, IDUMOData>();
-		for (IDUMOData d : sender.onCall()) {
+	public FlowingData onCall() {
+		TreeMap<Object, Data> map = new TreeMap<Object, Data>();
+		for (Data d : sender.onCall()) {
 			map.put(d.get(name).getValue(), d);
 			IDUMOLogManager.debug(d.get(name).getValue());
 		}
-		IDUMODataFlowing idf =  new IDUMODataFlowing();
-		for(Map.Entry<Object, IDUMOData> e: map.entrySet()){
+		FlowingData idf =  new FlowingData();
+		for(Map.Entry<Object, Data> e: map.entrySet()){
 			idf.add(e.getValue());
 		}
 		return idf;
 	}
 
 	@Override
-	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectArray(IDUMOData.class);
+	public ConnectDataType sendableType() {
+		return new ConnectDataTypeArray(Data.class);
 	}
 
 }

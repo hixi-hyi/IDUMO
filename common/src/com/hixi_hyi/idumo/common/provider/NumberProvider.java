@@ -17,10 +17,10 @@
  */
 package com.hixi_hyi.idumo.common.provider;
 
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveNumber;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.PrimitiveDataNumber;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
 /**
@@ -39,10 +39,10 @@ public class NumberProvider implements IDUMOSendable {
 	}
 	
 	@Override
-	public IDUMODataFlowing onCall() {
+	public FlowingData onCall() {
 		// IDUMOLogManager.log();
-		IDUMODataFlowing pipes = new IDUMODataFlowing();
-		pipes.add(new IDUMODataPrimitiveNumber(num));
+		FlowingData pipes = new FlowingData();
+		pipes.add(new PrimitiveDataNumber(num));
 		return pipes;
 	}
 	
@@ -52,8 +52,8 @@ public class NumberProvider implements IDUMOSendable {
 	}
 	
 	@Override
-	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveNumber.class);
+	public ConnectDataType sendableType() {
+		return new ConnectDataTypeSingle(PrimitiveDataNumber.class);
 	}
 	
 }

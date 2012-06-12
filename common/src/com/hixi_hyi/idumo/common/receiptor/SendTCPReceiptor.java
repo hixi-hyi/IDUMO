@@ -8,9 +8,9 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.PrimitiveDataString;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.IDUMOController;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
@@ -35,7 +35,7 @@ public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController, IDUMO
 	private OutputStream		outstream;
 	private IDUMOSendable		sender;
 	private IDUMOReceiveValidator	vSize	= new IDUMOReceiveValidatorSize(1);
-	private IDUMOReceiveValidator	vType	= new IDUMOReceiveValidatorType(1, IDUMODataPrimitiveString.class);
+	private IDUMOReceiveValidator	vType	= new IDUMOReceiveValidatorType(1, PrimitiveDataString.class);
 	
 	public SendTCPReceiptor(String ip, int port) {
 		IDUMOLogManager.log();
@@ -87,7 +87,7 @@ public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController, IDUMO
 		if (!sender.isReady()) {
 			return;
 		}
-		IDUMODataFlowing data = sender.onCall();
+		FlowingData data = sender.onCall();
 		if (data == null) {
 			return;
 		}
@@ -99,7 +99,7 @@ public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController, IDUMO
 	}
 	
 	@Override
-	public IDUMODataTypeConnect receivableType() {
+	public ConnectDataType receivableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

@@ -2,10 +2,10 @@ package com.hixi_hyi.idumo.common.provider;
 
 import java.util.Random;
 
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveNumber;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.PrimitiveDataNumber;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
 /**
@@ -23,12 +23,12 @@ public class _RandomByteProvider implements IDUMOSendable {
 	}
 	
 	@Override
-	public IDUMODataFlowing onCall() {
+	public FlowingData onCall() {
 		// LogUtil.d();
-		IDUMODataFlowing pipes = new IDUMODataFlowing();
+		FlowingData pipes = new FlowingData();
 		byte buf[] = new byte[1];
 		ramdom.nextBytes(buf);
-		pipes.add(new IDUMODataPrimitiveNumber(buf[0]));
+		pipes.add(new PrimitiveDataNumber(buf[0]));
 		return pipes;
 	}
 	
@@ -38,8 +38,8 @@ public class _RandomByteProvider implements IDUMOSendable {
 	}
 	
 	@Override
-	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveNumber.class);
+	public ConnectDataType sendableType() {
+		return new ConnectDataTypeSingle(PrimitiveDataNumber.class);
 	}
 	
 }

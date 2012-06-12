@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import com.hixi_hyi.idumo.common.component.ReversedGeocording;
 import com.hixi_hyi.idumo.common.data.GPSData;
 import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveNumber;
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectMulti;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.PrimitiveDataNumber;
+import com.hixi_hyi.idumo.core.data.PrimitiveDataString;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeMulti;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
@@ -30,13 +30,13 @@ public class ReversedGeocordingHandler implements IDUMOSendable, IDUMOReceivable
 	private IDUMOReceiveValidatorType		v1Type	= new IDUMOReceiveValidatorType(1, GPSData.class);
 
 	@Override
-	public IDUMODataFlowing onCall() {
+	public FlowingData onCall() {
 		LatLngDataElement gd = (LatLngDataElement) sender.onCall().next();
 
 		ReversedGeocording rg = new ReversedGeocording(gd.getLatitude(), gd.getLongitude());
 
-		IDUMODataFlowing p = new IDUMODataFlowing();
-		p.add(new IDUMODataPrimitiveString(rg.getLocation()));
+		FlowingData p = new FlowingData();
+		p.add(new PrimitiveDataString(rg.getLocation()));
 
 		return p;
 	}
@@ -54,13 +54,13 @@ public class ReversedGeocordingHandler implements IDUMOSendable, IDUMOReceivable
 	}
 
 	@Override
-	public IDUMODataTypeConnect receivableType() {
-		return new IDUMODataTypeConnectSingle(GPSData.class);
+	public ConnectDataType receivableType() {
+		return new ConnectDataTypeSingle(GPSData.class);
 	}
 
 	@Override
-	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveString.class);
+	public ConnectDataType sendableType() {
+		return new ConnectDataTypeSingle(PrimitiveDataString.class);
 	}
 
 }

@@ -18,18 +18,19 @@
 package com.hixi_hyi.idumo.common.data;
 
 import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
-import com.hixi_hyi.idumo.core.data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
-import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawString;
+import com.hixi_hyi.idumo.core.data.Data.IDUMODataBase;
+import com.hixi_hyi.idumo.core.data.element.TextElement;
+import com.hixi_hyi.idumo.core.data.raw.RawDataTypeNumber;
+import com.hixi_hyi.idumo.core.data.raw.RawDataTypeString;
 
-public class GPSData extends IDUMODataBase implements LatLngDataElement {
+public class GPSData extends IDUMODataBase implements LatLngDataElement,TextElement {
 
 	private static final String LATITUDE = "latitude";
 	private static final String LONGITUDE = "longitude";
 
 	public GPSData(double lat,double lon) {
-		add(new IDUMODataTypeRawNumber(LATITUDE, lat , "GPS Latitude"));
-		add(new IDUMODataTypeRawNumber(LONGITUDE, lon , "GPS Longitude"));
+		add(new RawDataTypeNumber(LATITUDE, lat , "GPS Latitude"));
+		add(new RawDataTypeNumber(LONGITUDE, lon , "GPS Longitude"));
 	}
 
 	public double getLatitude(){
@@ -38,6 +39,10 @@ public class GPSData extends IDUMODataBase implements LatLngDataElement {
 
 	public double getLongitude(){
 		return (Double) getValue(LONGITUDE);
+	}
+	
+	public String getText(){
+		return String.format("Lat:%f , Lng:%f", getLatitude(),getLongitude());
 	}
 
 }

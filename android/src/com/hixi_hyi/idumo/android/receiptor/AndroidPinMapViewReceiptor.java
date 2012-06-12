@@ -34,11 +34,10 @@ import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 import com.hixi_hyi.idumo.common.data.GPSData;
 import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
-import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.data.Data;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
@@ -86,8 +85,8 @@ public class AndroidPinMapViewReceiptor extends MapView implements IDUMOReceivab
 	@Override
 	public void run() {
 		IDUMOLogManager.log();
-		IDUMODataFlowing idf = sender.onCall();
-		for(IDUMOData id:idf){
+		FlowingData idf = sender.onCall();
+		for(Data id:idf){
 			LatLngDataElement llde = (LatLngDataElement)id;
 			GeoPoint point = new GeoPoint((int)(llde.getLatitude()*1E6), (int)(llde.getLongitude()*1E6));	
 			overlay.addPoint(point);
@@ -108,8 +107,8 @@ public class AndroidPinMapViewReceiptor extends MapView implements IDUMOReceivab
 	}
 	
 	@Override
-	public IDUMODataTypeConnect receivableType() {
-		return new IDUMODataTypeConnectSingle(LatLngDataElement.class);
+	public ConnectDataType receivableType() {
+		return new ConnectDataTypeSingle(LatLngDataElement.class);
 	}
 	
 }

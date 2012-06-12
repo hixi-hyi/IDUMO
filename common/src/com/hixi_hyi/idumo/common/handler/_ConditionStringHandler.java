@@ -1,10 +1,10 @@
 package com.hixi_hyi.idumo.common.handler;
 
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveBool;
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveString;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.PrimitiveDataBool;
+import com.hixi_hyi.idumo.core.data.PrimitiveDataString;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
@@ -16,7 +16,7 @@ public class _ConditionStringHandler implements IDUMOSendable, IDUMOReceivable {
 	private IDUMOSendable			sender;
 	private String					condition;
 	private IDUMOReceiveValidatorSize	validator	= new IDUMOReceiveValidatorSize(1);
-	private IDUMOReceiveValidatorType	vType		= new IDUMOReceiveValidatorType(1, IDUMODataPrimitiveString.class);
+	private IDUMOReceiveValidatorType	vType		= new IDUMOReceiveValidatorType(1, PrimitiveDataString.class);
 	
 	public _ConditionStringHandler(String condition) {
 		this.condition = condition;
@@ -35,22 +35,22 @@ public class _ConditionStringHandler implements IDUMOSendable, IDUMOReceivable {
 	}
 	
 	@Override
-	public IDUMODataFlowing onCall() {
-		IDUMODataPrimitiveString data = (IDUMODataPrimitiveString) sender.onCall().next();
+	public FlowingData onCall() {
+		PrimitiveDataString data = (PrimitiveDataString) sender.onCall().next();
 		String str = data.getString();
 		if (condition.equals(str)) {
-			return new IDUMODataFlowing(new IDUMODataPrimitiveBool(true));
+			return new FlowingData(new PrimitiveDataBool(true));
 		}
-		return new IDUMODataFlowing(new IDUMODataPrimitiveBool(false));
+		return new FlowingData(new PrimitiveDataBool(false));
 	}
 	
 	@Override
-	public IDUMODataTypeConnect receivableType() {
-		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveString.class);
+	public ConnectDataType receivableType() {
+		return new ConnectDataTypeSingle(PrimitiveDataString.class);
 	}
 	
 	@Override
-	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(IDUMODataPrimitiveBool.class);
+	public ConnectDataType sendableType() {
+		return new ConnectDataTypeSingle(PrimitiveDataBool.class);
 	}
 }

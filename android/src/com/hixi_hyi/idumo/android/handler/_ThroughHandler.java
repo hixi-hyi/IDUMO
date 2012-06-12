@@ -1,7 +1,7 @@
 package com.hixi_hyi.idumo.android.handler;
 
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
@@ -15,7 +15,7 @@ public class _ThroughHandler implements IDUMOSendable, IDUMOReceivable {
 	private IDUMOReceiveValidator	vSize	= new IDUMOReceiveValidatorSize(1);
 	
 	@Override
-	public IDUMODataFlowing onCall() {
+	public FlowingData onCall() {
 		IDUMOLogManager.log();
 		if (!provider.isReady()) {
 			return null;
@@ -35,13 +35,13 @@ public class _ThroughHandler implements IDUMOSendable, IDUMOReceivable {
 	}
 	
 	@Override
-	public IDUMODataTypeConnect receivableType() {
+	public ConnectDataType receivableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
 	
 	@Override
-	public IDUMODataTypeConnect sendableType() {
+	public ConnectDataType sendableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

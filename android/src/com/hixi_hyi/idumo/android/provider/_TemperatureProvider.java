@@ -7,8 +7,8 @@ import android.hardware.SensorManager;
 import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.android.data.AndroidTemperatureData;
 import com.hixi_hyi.idumo.android.sensor.TemperatureSensor;
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
@@ -32,9 +32,9 @@ public class _TemperatureProvider implements IDUMOSendable, AndroidController {
 	}
 	
 	@Override
-	public IDUMODataFlowing onCall() {
+	public FlowingData onCall() {
 		IDUMOLogManager.log();
-		IDUMODataFlowing p = new IDUMODataFlowing();
+		FlowingData p = new FlowingData();
 		p.add(new AndroidTemperatureData(sensor.getTemperature()));
 		return p;
 	}
@@ -67,7 +67,7 @@ public class _TemperatureProvider implements IDUMOSendable, AndroidController {
 	public void onIdumoStop() {}
 	
 	@Override
-	public IDUMODataTypeConnect sendableType() {
+	public ConnectDataType sendableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

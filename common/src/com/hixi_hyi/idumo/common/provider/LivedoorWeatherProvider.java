@@ -23,9 +23,9 @@ import org.jdom.JDOMException;
 
 import com.hixi_hyi.idumo.common.component.LivedoorWeather;
 import com.hixi_hyi.idumo.common.data.LivedoorWeatherData;
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
@@ -48,8 +48,8 @@ public class LivedoorWeatherProvider implements IDUMOSendable {
 	}
 
 	@Override
-	public IDUMODataFlowing onCall() {
-		IDUMODataFlowing p = new IDUMODataFlowing();
+	public FlowingData onCall() {
+		FlowingData p = new FlowingData();
 		p.add(weather.getData());
 		return p;
 	}
@@ -64,8 +64,8 @@ public class LivedoorWeatherProvider implements IDUMOSendable {
 	}
 
 	@Override
-	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(LivedoorWeatherData.class);
+	public ConnectDataType sendableType() {
+		return new ConnectDataTypeSingle(LivedoorWeatherData.class);
 	}
 
 }

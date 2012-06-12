@@ -17,8 +17,8 @@
  */
 package com.hixi_hyi.idumo.core.parts;
 
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 
 /**
  * IdumoのProvider,Handlerを作成するときに実装してください
@@ -32,7 +32,7 @@ public interface IDUMOSendable extends IDUMOConnectable {
 	 * 
 	 * @return
 	 */
-	public IDUMODataFlowing onCall();
+	public FlowingData onCall();
 	
-	public IDUMODataTypeConnect sendableType();
+	public ConnectDataType sendableType();
 }

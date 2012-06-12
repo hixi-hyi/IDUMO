@@ -28,10 +28,10 @@ import com.hixi_hyi.idumo.common.data.GPSData;
 import com.hixi_hyi.idumo.common.data.HotpepperData;
 import com.hixi_hyi.idumo.common.data.LivedoorWeatherData;
 import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectArray;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeArray;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
@@ -51,11 +51,11 @@ public class HotpepperHandler implements IDUMOSendable,IDUMOReceivable {
 	private IDUMOReceiveValidatorSize vSize = new IDUMOReceiveValidatorSize(1);
 
 	@Override
-	public IDUMODataFlowing onCall() {
+	public FlowingData onCall() {
 		IDUMOLogManager.log();
 		LatLngDataElement gd = (LatLngDataElement) sender.onCall().next();
 		hotpepper.setLatLon(gd.getLatitude(), gd.getLongitude());
-		IDUMODataFlowing p = new IDUMODataFlowing();
+		FlowingData p = new FlowingData();
 		List<HotpepperData> data = hotpepper.getData();
 		for (HotpepperData d : data) {
 			p.add(d);
@@ -69,8 +69,8 @@ public class HotpepperHandler implements IDUMOSendable,IDUMOReceivable {
 	}
 
 	@Override
-	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectArray(HotpepperData.class);
+	public ConnectDataType sendableType() {
+		return new ConnectDataTypeArray(HotpepperData.class);
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class HotpepperHandler implements IDUMOSendable,IDUMOReceivable {
 	}
 
 	@Override
-	public IDUMODataTypeConnect receivableType() {
-		return new IDUMODataTypeConnectSingle(GPSData.class);
+	public ConnectDataType receivableType() {
+		return new ConnectDataTypeSingle(GPSData.class);
 	}
 }

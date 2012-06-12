@@ -17,12 +17,12 @@
  */
 package com.hixi_hyi.idumo.core.data.raw;
 
-public class IDUMODataTypeRawNumber implements IDUMODataTypeRaw {
+public class RawDataTypeNumber implements RawDataType {
 	private String	name;
 	private Number	value;
 	private String	summary;
 	
-	public IDUMODataTypeRawNumber(String name, Number value, String summary) {
+	public RawDataTypeNumber(String name, Number value, String summary) {
 		this.name = name;
 		this.value = value;
 		this.summary = summary;

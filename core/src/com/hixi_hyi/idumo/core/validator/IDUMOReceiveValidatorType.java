@@ -17,24 +17,23 @@
  */
 package com.hixi_hyi.idumo.core.validator;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.data.IDUMODataBase;
+import com.hixi_hyi.idumo.core.data.Data;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 
 public class IDUMOReceiveValidatorType implements IDUMOReceiveValidator {
 	
 	private int							num;
-	private Class<? extends IDUMOData>	cls;
+	private Class<? extends Data>	cls;
 	
-	public IDUMOReceiveValidatorType(int num, Class<? extends IDUMOData> cls) {
+	public IDUMOReceiveValidatorType(int num, Class<? extends Data> cls) {
 		this.num = num - 1;
 		this.cls = cls;
 	}
 	
 	@Override
 	public void validate(IDUMOSendable... senders) throws IDUMOException {
-		Class<? extends IDUMOData> type = senders[num].sendableType().iterator().next();
+		Class<? extends Data> type = senders[num].sendableType().iterator().next();
 		if (cls != type) {
 			throw new IDUMOException();
 		}

@@ -24,9 +24,9 @@ import android.hardware.SensorManager;
 import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.android.data.AndroidMagneticFieldData;
 import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
 import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
 
@@ -51,9 +51,9 @@ public class AndroidMagneticFieldProvider implements IDUMOSendable, AndroidContr
 	}
 
 	@Override
-	public IDUMODataFlowing onCall() {
+	public FlowingData onCall() {
 		IDUMOLogManager.log();
-		IDUMODataFlowing p = new IDUMODataFlowing();
+		FlowingData p = new FlowingData();
 		AndroidMagneticFieldData data = new AndroidMagneticFieldData(magnet.getX(), magnet.getY(), magnet.getZ());
 		p.add(data);
 		return p;
@@ -87,8 +87,8 @@ public class AndroidMagneticFieldProvider implements IDUMOSendable, AndroidContr
 	public void onIdumoStop() {}
 
 	@Override
-	public IDUMODataTypeConnect sendableType() {
-		return new IDUMODataTypeConnectSingle(AndroidMagneticFieldData.class);
+	public ConnectDataType sendableType() {
+		return new ConnectDataTypeSingle(AndroidMagneticFieldData.class);
 	}
 
 }

@@ -15,29 +15,22 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core.validator;
+package com.hixi_hyi.idumo.core.data;
 
-import com.hixi_hyi.idumo.core.data.IDUMOData;
-import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
+import com.hixi_hyi.idumo.core.data.raw.RawDataTypeBool;
 
-public class ReceiveValidatorType implements ReceiveValidator {
-	
-	private int							num;
-	private Class<? extends IDUMOData>	cls;
-	
-	public ReceiveValidatorType(int num, Class<? extends IDUMOData> cls) {
-		this.num = num - 1;
-		this.cls = cls;
+public class PrimitiveDataBool extends PrimitiveData {
+
+	public PrimitiveDataBool(boolean n) {
+		add(new RawDataTypeBool(NAME, n, "Primitive : Number"));
 	}
-	
+
+	public boolean getBool() {
+		return (Boolean) getValue(NAME);
+	}
+
 	@Override
-	public void validate(IDUMOSendable... senders) throws IDUMOException {
-		Class<? extends IDUMOData> type = senders[num].sendableType().iterator().next();
-		if (cls != type) {
-			throw new IDUMOException();
-		}
-		return;
+	public String toString(){
+		return String.valueOf(getBool());
 	}
-	
 }

@@ -2,10 +2,10 @@ package com.hixi_hyi.idumo.common.converter;
 
 import java.util.ArrayList;
 
-import com.hixi_hyi.idumo.core.data.IDUMODataFlowing;
-import com.hixi_hyi.idumo.core.data.IDUMODataPrimitiveNumber;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnect;
-import com.hixi_hyi.idumo.core.data.connect.IDUMODataTypeConnectSingle;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.PrimitiveDataNumber;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
 import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
@@ -17,9 +17,9 @@ public class _Number2AccelerometerConverter implements IDUMOSendable, IDUMORecei
 	
 	private ArrayList<IDUMOSendable>	sender	= new ArrayList<IDUMOSendable>();
 	private IDUMOReceiveValidator			vSize	= new IDUMOReceiveValidatorSize(3);
-	private IDUMOReceiveValidator			vType1	= new IDUMOReceiveValidatorType(1, IDUMODataPrimitiveNumber.class);
-	private IDUMOReceiveValidator			vType2	= new IDUMOReceiveValidatorType(2, IDUMODataPrimitiveNumber.class);
-	private IDUMOReceiveValidator			vType3	= new IDUMOReceiveValidatorType(3, IDUMODataPrimitiveNumber.class);
+	private IDUMOReceiveValidator			vType1	= new IDUMOReceiveValidatorType(1, PrimitiveDataNumber.class);
+	private IDUMOReceiveValidator			vType2	= new IDUMOReceiveValidatorType(2, PrimitiveDataNumber.class);
+	private IDUMOReceiveValidator			vType3	= new IDUMOReceiveValidatorType(3, PrimitiveDataNumber.class);
 	
 	public _Number2AccelerometerConverter() {}
 	
@@ -44,18 +44,18 @@ public class _Number2AccelerometerConverter implements IDUMOSendable, IDUMORecei
 	}
 	
 	@Override
-	public IDUMODataTypeConnect receivableType() {
+	public ConnectDataType receivableType() {
 		return null;
 	}
 	
 	@Override
-	public IDUMODataFlowing onCall() {
+	public FlowingData onCall() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
 	
 	@Override
-	public IDUMODataTypeConnect sendableType() {
+	public ConnectDataType sendableType() {
 //		return new IDUMODataTypeConnectSingle(AndroidAccelerometerData.class);
 		return null;
 	}

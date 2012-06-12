@@ -17,8 +17,8 @@
  */
 package com.hixi_hyi.idumo.android.data;
 
-import com.hixi_hyi.idumo.core.data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.raw.IDUMODataTypeRawNumber;
+import com.hixi_hyi.idumo.core.data.Data.IDUMODataBase;
+import com.hixi_hyi.idumo.core.data.raw.RawDataTypeNumber;
 
 /**
  * @author Hiroyoshi HOUCHI
@@ -31,9 +31,9 @@ public class AndroidAccelerometerData extends IDUMODataBase {
 	private static final String Z="z";
 
 	public AndroidAccelerometerData(float x, float y, float z) {
-		add(new IDUMODataTypeRawNumber(X, x, "Android Accelerometer X"));
-		add(new IDUMODataTypeRawNumber(Y, y, "Android Accelerometer Y"));
-		add(new IDUMODataTypeRawNumber(Z, z, "Android Accelerometer Z"));
+		add(new RawDataTypeNumber(X, x, "Android Accelerometer X"));
+		add(new RawDataTypeNumber(Y, y, "Android Accelerometer Y"));
+		add(new RawDataTypeNumber(Z, z, "Android Accelerometer Z"));
 	}
 
 	public float getX() {
