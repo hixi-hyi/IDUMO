@@ -17,59 +17,56 @@
  */
 package com.hixi_hyi.idumo.console.receiptor;
 
-import java.util.Iterator;
 
 import com.hixi_hyi.idumo.core.data.Data;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
 import com.hixi_hyi.idumo.core.data.element.TextElement;
-import com.hixi_hyi.idumo.core.data.primitive.PrimitiveData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Executable;
+import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 /**
  * Systemoutに出力するReceiptor
- *
+ * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- *
+ * 
  */
 public class ConsoleViewReceiptor implements Receivable, Executable {
-
-	private Sendable			sender;
-	private ReceiveValidatorSize	vSize	= new ReceiveValidatorSize(1);
-
+	
+	private Sendable sender;
+	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
+	
+	@Override
+	public boolean isReady() {
+		return sender.isReady();
+	}
+	
+	@Override
+	public ConnectDataType receivableType() {
+		return new SingleConnectDataType(Data.class);
+	}
+	
 	@Override
 	public void run() {
 		FlowingData flowdata = sender.onCall();
-//		IDUMODataPrimitive data = (IDUMODataPrimitive) flowdata.next();
-//		System.out.println(data.getValue());
-		Iterator<Data> it = flowdata.iterator();
+		// IDUMODataPrimitive data = (IDUMODataPrimitive) flowdata.next();
+		// System.out.println(data.getValue());
 		for (Data idumoData : flowdata) {
-			System.out.println(((TextElement)idumoData).getText());
+			System.out.println(((TextElement) idumoData).getText());
 		}
-//		IDUMOData data = (IDUMOData) flowdata.next();
-//		System.out.println(data);
+		// IDUMOData data = (IDUMOData) flowdata.next();
+		// System.out.println(data);
 	}
-
+	
 	@Override
 	public void setSender(Sendable... handler) throws IDUMOException {
 		vSize.validate(handler);
 		sender = handler[0];
 	}
-
-	@Override
-	public boolean isReady() {
-		return sender.isReady();
-	}
-
-	@Override
-	public ConnectDataType receivableType() {
-		return new SingleConnectDataType(Data.class);
-	}
-
+	
 }

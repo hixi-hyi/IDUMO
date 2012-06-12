@@ -18,21 +18,21 @@
 package com.hixi_hyi.idumo.android.data;
 
 import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
-import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
 import com.hixi_hyi.idumo.core.data.Data.AbstractData;
+import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
 
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class AndroidGPSData extends AbstractData implements LatLngDataElement{
+public class AndroidGPSData extends AbstractData implements LatLngDataElement {
 	public static final String	LATITUDE	= "latitude";
 	public static final String	LONGITUDE	= "longitude";
 	public static final String	ALTITUDE	= "altitude";
 	public static final String	TIME		= "time";
 	public static final String	BEARING		= "bearing";
 	public static final String	SPEED		= "speed";
-
+	
 	public AndroidGPSData(double latitude, double longitude, double altitude, long time, float bearing, float speed) {
 		add(new NumberRawDataType(LATITUDE, latitude, "Android GPS latitude"));
 		add(new NumberRawDataType(LONGITUDE, longitude, "Android GPS Longitude"));
@@ -41,35 +41,35 @@ public class AndroidGPSData extends AbstractData implements LatLngDataElement{
 		add(new NumberRawDataType(BEARING, bearing, "Android GPS Bearing"));
 		add(new NumberRawDataType(SPEED, speed, "Android GPS Speed"));
 	}
-
+	
+	public double getAltitude() {
+		return (Double) getValue(ALTITUDE);
+	}
+	
+	public float getBearing() {
+		return (Float) getValue(BEARING);
+	}
+	
 	@Override
 	public double getLatitude() {
 		return (Double) getValue(LATITUDE);
 	}
-
+	
 	@Override
 	public double getLongitude() {
 		return (Double) getValue(LONGITUDE);
 	}
-
-	public double getAltitude() {
-		return (Double) getValue(ALTITUDE);
-	}
-
-	public long getTime() {
-		return (Long) getValue(TIME);
-	}
-
-	public float getBearing() {
-		return (Float) getValue(BEARING);
-	}
-
+	
 	public float getSpeed() {
 		return (Float) getValue(SPEED);
 	}
-
+	
+	public long getTime() {
+		return (Long) getValue(TIME);
+	}
+	
 	@Override
-	public String toString(){
+	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(LATITUDE);
 		sb.append(":");

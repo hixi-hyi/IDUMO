@@ -32,10 +32,15 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
  */
 public class NumberProvider implements Sendable {
 	
-	private Double	num;
+	private Double num;
 	
 	public NumberProvider(Double num) {
 		this.num = num;
+	}
+	
+	@Override
+	public boolean isReady() {
+		return true;
 	}
 	
 	@Override
@@ -44,11 +49,6 @@ public class NumberProvider implements Sendable {
 		FlowingData pipes = new FlowingData();
 		pipes.add(new NumberPrimitiveData(num));
 		return pipes;
-	}
-	
-	@Override
-	public boolean isReady() {
-		return true;
 	}
 	
 	@Override

@@ -9,19 +9,50 @@ import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.CoreController;
-import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Executable;
+import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 public class _SerialSendReceiptor implements Executable, Receivable, CoreController {
 	
-	private OutputStream	out;
-	private Sendable	sender;
-	private String			serial;
+	private OutputStream out;
+	private Sendable sender;
+	private String serial;
 	
 	public _SerialSendReceiptor(String serial) {
 		this.serial = serial;
+	}
+	
+	@Override
+	public boolean isReady() {
+		return sender.isReady();
+	}
+	
+	@Override
+	public void onIdumoStart() {
+		try {
+			out = new FileOutputStream(serial);
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void onIdumoStop() {
+		try {
+			out.close();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public ConnectDataType receivableType() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 	
 	@Override
@@ -46,15 +77,11 @@ public class _SerialSendReceiptor implements Executable, Receivable, CoreControl
 		try {
 			out.write(bytedata);
 			out.flush();
-		} catch (Exception exception) {
+		}
+		catch (Exception exception) {
 			exception.printStackTrace();
 		}
 		
-	}
-	
-	@Override
-	public boolean isReady() {
-		return sender.isReady();
 	}
 	
 	@Override
@@ -67,31 +94,7 @@ public class _SerialSendReceiptor implements Executable, Receivable, CoreControl
 		// return false;
 		// }
 		// }
-		this.sender = senders[0];
-	}
-	
-	@Override
-	public void onIdumoStart() {
-		try {
-			out = new FileOutputStream(serial);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@Override
-	public void onIdumoStop() {
-		try {
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@Override
-	public ConnectDataType receivableType() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		sender = senders[0];
 	}
 	
 }

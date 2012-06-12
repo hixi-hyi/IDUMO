@@ -13,10 +13,10 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
 public class _ConditionStringHandler implements Sendable, Receivable {
 	
-	private Sendable			sender;
-	private String					condition;
-	private ReceiveValidatorSize	validator	= new ReceiveValidatorSize(1);
-	private ReceiveValidatorType	vType		= new ReceiveValidatorType(1, StringPrimitiveData.class);
+	private Sendable sender;
+	private String condition;
+	private ReceiveValidatorSize validator = new ReceiveValidatorSize(1);
+	private ReceiveValidatorType vType = new ReceiveValidatorType(1, StringPrimitiveData.class);
 	
 	public _ConditionStringHandler(String condition) {
 		this.condition = condition;
@@ -25,13 +25,6 @@ public class _ConditionStringHandler implements Sendable, Receivable {
 	@Override
 	public boolean isReady() {
 		return sender.isReady();
-	}
-	
-	@Override
-	public void setSender(Sendable... senders) throws IDUMOException {
-		validator.validate(senders);
-		vType.validate(senders);
-		this.sender = senders[0];
 	}
 	
 	@Override
@@ -52,5 +45,12 @@ public class _ConditionStringHandler implements Sendable, Receivable {
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(BoolPrimitiveData.class);
+	}
+	
+	@Override
+	public void setSender(Sendable... senders) throws IDUMOException {
+		validator.validate(senders);
+		vType.validate(senders);
+		sender = senders[0];
 	}
 }

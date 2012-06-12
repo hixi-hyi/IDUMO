@@ -10,8 +10,8 @@ import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Executable;
+import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
@@ -26,7 +26,7 @@ public class _TCPByteStreamReceiptor implements Receivable, AndroidController, E
 	private int				port;
 	private Socket			socket;
 	private OutputStream	outstream;
-	private Sendable	sender;
+	private Sendable		sender;
 	
 	public _TCPByteStreamReceiptor(String ip, int port) {
 		this.ip = ip;
@@ -40,20 +40,17 @@ public class _TCPByteStreamReceiptor implements Receivable, AndroidController, E
 	}
 	
 	@Override
-	public void setSender(Sendable... senders) throws IDUMOException {
-		// if (senders.length != 1) {
-		// return false;
-		// }
-		// for (Object o : senders[0].getDataType()) {
-		// if (o != Byte.class) {
-		// return false;
-		// }
-		// }
-		this.sender = senders[0];
-	}
+	public void onIdumoDestroy() {}
 	
 	@Override
-	public void onIdumoStart() {}
+	public void onIdumoPause() {
+		try {
+			socket.close();
+			outstream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	@Override
 	public void onIdumoRestart() {}
@@ -71,20 +68,16 @@ public class _TCPByteStreamReceiptor implements Receivable, AndroidController, E
 	}
 	
 	@Override
-	public void onIdumoPause() {
-		try {
-			socket.close();
-			outstream.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	public void onIdumoStart() {}
 	
 	@Override
 	public void onIdumoStop() {}
 	
 	@Override
-	public void onIdumoDestroy() {}
+	public ConnectDataType receivableType() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 	
 	@Override
 	public void run() {
@@ -108,9 +101,16 @@ public class _TCPByteStreamReceiptor implements Receivable, AndroidController, E
 	}
 	
 	@Override
-	public ConnectDataType receivableType() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+	public void setSender(Sendable... senders) throws IDUMOException {
+		// if (senders.length != 1) {
+		// return false;
+		// }
+		// for (Object o : senders[0].getDataType()) {
+		// if (o != Byte.class) {
+		// return false;
+		// }
+		// }
+		sender = senders[0];
 	}
 	
 }

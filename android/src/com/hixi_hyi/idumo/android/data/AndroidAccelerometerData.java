@@ -25,32 +25,31 @@ import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
  * @version 2.0
  */
 public class AndroidAccelerometerData extends AbstractData {
-
-	private static final String X="x";
-	private static final String Y="y";
-	private static final String Z="z";
-
+	
+	private static final String	X	= "x";
+	private static final String	Y	= "y";
+	private static final String	Z	= "z";
+	
 	public AndroidAccelerometerData(float x, float y, float z) {
 		add(new NumberRawDataType(X, x, "Android Accelerometer X"));
 		add(new NumberRawDataType(Y, y, "Android Accelerometer Y"));
 		add(new NumberRawDataType(Z, z, "Android Accelerometer Z"));
 	}
-
+	
 	public float getX() {
 		return (Float) getValue(X);
 	}
-
+	
 	public float getY() {
 		return (Float) getValue(Y);
 	}
-
+	
 	public float getZ() {
 		return (Float) getValue(Z);
 	}
-
-
+	
 	@Override
-	public String toString(){
-		return String.format("%s:%f\n%s:%f\n%s:%f",X,getX(),Y,getY(),Z,getZ());
+	public String toString() {
+		return String.format("%s:%f\n%s:%f\n%s:%f", X, getX(), Y, getY(), Z, getZ());
 	}
 }

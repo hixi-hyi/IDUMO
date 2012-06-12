@@ -25,30 +25,30 @@ import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
  * @version 2.0
  */
 public class AndroidMagneticFieldData extends AbstractData {
-	private static final String X="x";
-	private static final String Y="y";
-	private static final String Z="z";
-
+	private static final String	X	= "x";
+	private static final String	Y	= "y";
+	private static final String	Z	= "z";
+	
 	public AndroidMagneticFieldData(float x, float y, float z) {
 		add(new NumberRawDataType(X, x, "Android MagneticField X"));
 		add(new NumberRawDataType(Y, y, "Android MagneticField Y"));
 		add(new NumberRawDataType(Z, z, "Android MagneticField Z"));
 	}
-
+	
 	public float getX() {
 		return (Float) getValue(X);
 	}
-
+	
 	public float getY() {
 		return (Float) getValue(Y);
 	}
-
+	
 	public float getZ() {
 		return (Float) getValue(Z);
 	}
-
+	
 	@Override
-	public String toString(){
-		return String.format("%s:%f\n%s:%f\n%s:%f",X,getX(),Y,getY(),Z,getZ());
+	public String toString() {
+		return String.format("%s:%f\n%s:%f\n%s:%f", X, getX(), Y, getY(), Z, getZ());
 	}
 }

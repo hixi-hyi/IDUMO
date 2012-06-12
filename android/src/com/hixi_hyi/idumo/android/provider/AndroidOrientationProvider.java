@@ -34,15 +34,15 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * Android上の傾きの情報を取得できるProvider 地磁気センサと加速度センサにより傾きを算出
- *
+ * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- *
+ * 
  */
 public class AndroidOrientationProvider implements Sendable, AndroidController {
-
+	
 	private OrientationSensor	sensor;
-
+	
 	public AndroidOrientationProvider(Activity activity) {
 		OrientationSensor orientationSensor = OrientationSensor.INSTANCE;
 		if (!orientationSensor.isInit()) {
@@ -60,7 +60,12 @@ public class AndroidOrientationProvider implements Sendable, AndroidController {
 		}
 		sensor = orientationSensor;
 	}
-
+	
+	@Override
+	public boolean isReady() {
+		return sensor.isReady();
+	}
+	
 	@Override
 	public FlowingData onCall() {
 		LogManager.log();
@@ -68,34 +73,29 @@ public class AndroidOrientationProvider implements Sendable, AndroidController {
 		p.add(new AndroidOrientationData(sensor.getPitch(), sensor.getRoll(), sensor.getAzmuth()));
 		return p;
 	}
-
-	@Override
-	public boolean isReady() {
-		return sensor.isReady();
-	}
-
+	
 	@Override
 	public void onIdumoDestroy() {}
-
+	
 	@Override
 	public void onIdumoPause() {
 		sensor.unregister();
 	}
-
+	
 	@Override
 	public void onIdumoRestart() {}
-
+	
 	@Override
 	public void onIdumoResume() {
 		sensor.register();
 	}
-
+	
 	@Override
 	public void onIdumoStart() {}
-
+	
 	@Override
 	public void onIdumoStop() {}
-
+	
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(AndroidOrientationData.class);

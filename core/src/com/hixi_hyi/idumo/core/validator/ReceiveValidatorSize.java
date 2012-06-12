@@ -22,7 +22,7 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
 
 public class ReceiveValidatorSize implements ReceiveValidator {
 	
-	private int	size;
+	private int size;
 	
 	public ReceiveValidatorSize(int size) {
 		this.size = size;

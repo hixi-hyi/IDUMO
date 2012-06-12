@@ -17,11 +17,9 @@
  */
 package com.hixi_hyi.idumo.android.receiptor;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
-import android.R;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -30,17 +28,15 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
-import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
-import com.hixi_hyi.idumo.common.data.GPSData;
 import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
 import com.hixi_hyi.idumo.core.data.Data;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Executable;
+import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
 import com.hixi_hyi.idumo.core.util.LogManager;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
@@ -54,15 +50,15 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
  */
 public class AndroidPinMapViewReceiptor extends MapView implements Receivable, Executable {
 	
-	private Sendable	sender;
-	private Activity					activity;
-	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
+	private Sendable				sender;
+	private Activity				activity;
+	private ReceiveValidatorSize	vSize		= new ReceiveValidatorSize(1);
 	
-	private static final int ZOOM_LEVEL = 10;
-	private MapController controller;
-	private DefaultItemizedOverlay overlay;
+	private static final int		ZOOM_LEVEL	= 10;
+	private MapController			controller;
+	private DefaultItemizedOverlay	overlay;
 	
-	private static final String API_KEY = "0RPjiLm_GLRAHM0HCn22WyqMNKfeWGuSvvXnqoA";
+	private static final String		API_KEY		= "0RPjiLm_GLRAHM0HCn22WyqMNKfeWGuSvvXnqoA";
 	
 	public AndroidPinMapViewReceiptor(Context context) {
 		super(context, API_KEY);
@@ -83,12 +79,22 @@ public class AndroidPinMapViewReceiptor extends MapView implements Receivable, E
 	}
 	
 	@Override
+	public boolean isReady() {
+		return true;
+	}
+	
+	@Override
+	public ConnectDataType receivableType() {
+		return new SingleConnectDataType(LatLngDataElement.class);
+	}
+	
+	@Override
 	public void run() {
 		LogManager.log();
 		FlowingData idf = sender.onCall();
-		for(Data id:idf){
-			LatLngDataElement llde = (LatLngDataElement)id;
-			GeoPoint point = new GeoPoint((int)(llde.getLatitude()*1E6), (int)(llde.getLongitude()*1E6));	
+		for (Data id : idf) {
+			LatLngDataElement llde = (LatLngDataElement) id;
+			GeoPoint point = new GeoPoint((int) (llde.getLatitude() * 1E6), (int) (llde.getLongitude() * 1E6));
 			overlay.addPoint(point);
 			LogManager.debug(point);
 		}
@@ -101,35 +107,31 @@ public class AndroidPinMapViewReceiptor extends MapView implements Receivable, E
 		sender = handler[0];
 	}
 	
-	@Override
-	public boolean isReady() {
-		return true;
-	}
-	
-	@Override
-	public ConnectDataType receivableType() {
-		return new SingleConnectDataType(LatLngDataElement.class);
-	}
-	
 }
+
 class DefaultItemizedOverlay extends ItemizedOverlay<OverlayItem> {
-	private List<OverlayItem> items = new ArrayList<OverlayItem>();
+	private List<OverlayItem>	items	= new ArrayList<OverlayItem>();
+	
 	public DefaultItemizedOverlay(Drawable defaultMarker) {
 		super(boundCenterBottom(defaultMarker));
 	}
+	
+	public void addPoint(GeoPoint point) {
+		addPoint(point, "", "");
+	}
+	
+	public void addPoint(GeoPoint point, String title, String snippet) {
+		items.add(new OverlayItem(point, title, snippet));
+		populate();
+	}
+	
 	@Override
 	protected OverlayItem createItem(int i) {
 		return items.get(i);
 	}
+	
 	@Override
 	public int size() {
 		return items.size();
-	}
-	public void addPoint(GeoPoint point){
-		addPoint(point, "", "");
-	}
-	public void addPoint(GeoPoint point, String title, String snippet) {
-		items.add(new OverlayItem(point, title, snippet));
-		populate();
 	}
 }

@@ -17,39 +17,38 @@
  */
 package com.hixi_hyi.idumo.common.provider;
 
-import java.io.IOException;
 import java.util.List;
 
-import org.jdom.JDOMException;
-
 import com.hixi_hyi.idumo.common.component.Hotpepper;
-import com.hixi_hyi.idumo.common.component.LivedoorWeather;
 import com.hixi_hyi.idumo.common.data.GPSData;
 import com.hixi_hyi.idumo.common.data.HotpepperData;
-import com.hixi_hyi.idumo.common.data.LivedoorWeatherData;
 import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
 import com.hixi_hyi.idumo.core.data.FlowingData;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.ArrayConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
 import com.hixi_hyi.idumo.core.util.LogManager;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 /**
- *
+ * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class HotpepperHandler implements Sendable,Receivable {
-
+public class HotpepperHandler implements Sendable, Receivable {
+	
 	private Hotpepper hotpepper = new Hotpepper();
 	private Sendable sender;
 	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
-
+	
+	@Override
+	public boolean isReady() {
+		return true;
+	}
+	
 	@Override
 	public FlowingData onCall() {
 		LogManager.log();
@@ -62,25 +61,20 @@ public class HotpepperHandler implements Sendable,Receivable {
 		}
 		return p;
 	}
-
+	
 	@Override
-	public boolean isReady() {
-		return true;
+	public ConnectDataType receivableType() {
+		return new SingleConnectDataType(GPSData.class);
 	}
-
+	
 	@Override
 	public ConnectDataType sendableType() {
 		return new ArrayConnectDataType(HotpepperData.class);
 	}
-
+	
 	@Override
 	public void setSender(Sendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		sender = senders[0];
-	}
-
-	@Override
-	public ConnectDataType receivableType() {
-		return new SingleConnectDataType(GPSData.class);
 	}
 }

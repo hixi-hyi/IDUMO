@@ -16,10 +16,15 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
  */
 public class _RandomByteProvider implements Sendable {
 	
-	private Random	ramdom;
+	private Random ramdom;
 	
 	public _RandomByteProvider() {
 		ramdom = new Random();
+	}
+	
+	@Override
+	public boolean isReady() {
+		return true;
 	}
 	
 	@Override
@@ -30,11 +35,6 @@ public class _RandomByteProvider implements Sendable {
 		ramdom.nextBytes(buf);
 		pipes.add(new NumberPrimitiveData(buf[0]));
 		return pipes;
-	}
-	
-	@Override
-	public boolean isReady() {
-		return true;
 	}
 	
 	@Override

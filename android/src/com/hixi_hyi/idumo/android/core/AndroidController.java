@@ -9,11 +9,11 @@ import com.hixi_hyi.idumo.core.exec.CoreController;
  * 
  */
 public interface AndroidController extends CoreController {
-	void onIdumoRestart();
-	
-	void onIdumoResume();
+	void onIdumoDestroy();
 	
 	void onIdumoPause();
 	
-	void onIdumoDestroy();
+	void onIdumoRestart();
+	
+	void onIdumoResume();
 }

@@ -20,9 +20,9 @@ package com.hixi_hyi.idumo.core.data.raw;
 public interface RawDataType {
 	public String getName();
 	
-	public Object getValue();
+	public String getSummary();
 	
 	public Class<?> getType();
 	
-	public String getSummary();
+	public Object getValue();
 }

@@ -21,26 +21,25 @@ import com.hixi_hyi.idumo.core.data.Data.AbstractData;
 import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
 
 public class LatLngData extends AbstractData {
-
-
+	
 	private static final String LAT = "latitude";
 	private static final String LNG = "longitude";
-
-	public LatLngData(double lat,double lng) {
+	
+	public LatLngData(double lat, double lng) {
 		add(new NumberRawDataType(LAT, lat, "Primitive : GPS Latitude"));
 		add(new NumberRawDataType(LNG, lng, "Primitive : GPS Longtude"));
 	}
-
+	
 	public double getLatitude() {
 		return (Double) getValue(LAT);
 	}
-
+	
 	public double getLongitude() {
 		return (Double) getValue(LNG);
 	}
-
+	
 	@Override
-	public String toString(){
-		return String.format("[%f,%f]",getLatitude(),getLongitude());
+	public String toString() {
+		return String.format("[%f,%f]", getLatitude(), getLongitude());
 	}
 }

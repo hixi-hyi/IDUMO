@@ -22,19 +22,71 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * 
  */
 public class _ReceiveTCPProvider implements Sendable, CoreController {
-	private int					port;
-	private Socket				socket;
-	private BufferedReader		br;
-	private InputStream			in;
-	private ArrayList<String>	strs;
-	private AcceptServer		server;
+	class AcceptServer implements Runnable {
+		
+		int port;
+		ServerSocket server;
+		Socket socket;
+		boolean bool;
+		
+		public AcceptServer(int port) throws IOException {
+			this.port = port;
+			server = new ServerSocket(port);
+		}
+		
+		/**
+		 * @return socket
+		 */
+		public Socket getSocket() {
+			// if (socket.isClosed()) {
+			// IDUMOLogManager.log();
+			// new Thread(this).run();
+			// socket = null;
+			// }
+			return socket;
+		}
+		
+		public void restart() {
+			try {
+				socket.close();
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			socket = null;
+			new Thread(this).start();
+		}
+		
+		@Override
+		public void run() {
+			try {
+				bool = true;
+				socket = server.accept();
+				bool = false;
+			}
+			catch (IOException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	private int port;
+	private Socket socket;
+	private BufferedReader br;
+	private InputStream in;
+	private ArrayList<String> strs;
+	
+	private AcceptServer server;
 	
 	public _ReceiveTCPProvider(int port) {
 		this.port = port;
-		this.strs = new ArrayList<String>();
+		strs = new ArrayList<String>();
 		try {
-			this.server = new AcceptServer(port);
-		} catch (IOException e) {
+			server = new AcceptServer(port);
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -55,7 +107,8 @@ public class _ReceiveTCPProvider implements Sendable, CoreController {
 			socket = server.getSocket();
 			try {
 				in = socket.getInputStream();
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				e.printStackTrace();
 			}
 			br = new BufferedReader(new InputStreamReader(in));
@@ -70,7 +123,8 @@ public class _ReceiveTCPProvider implements Sendable, CoreController {
 					strs.add(s);
 					return true;
 				}
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
@@ -87,21 +141,6 @@ public class _ReceiveTCPProvider implements Sendable, CoreController {
 	}
 	
 	@Override
-	public void onIdumoStart() {
-		new Thread(server).run();
-	}
-	
-	@Override
-	public void onIdumoStop() {
-		try {
-			socket.close();
-			in.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@Override
 	public FlowingData onCall() {
 		FlowingData p = new FlowingData();
 		LogManager.debug(p);
@@ -111,52 +150,20 @@ public class _ReceiveTCPProvider implements Sendable, CoreController {
 		return p;
 	}
 	
-	class AcceptServer implements Runnable {
-		
-		int				port;
-		ServerSocket	server;
-		Socket			socket;
-		boolean			bool;
-		
-		public AcceptServer(int port) throws IOException {
-			this.port = port;
-			server = new ServerSocket(port);
+	@Override
+	public void onIdumoStart() {
+		new Thread(server).run();
+	}
+	
+	@Override
+	public void onIdumoStop() {
+		try {
+			socket.close();
+			in.close();
 		}
-		
-		@Override
-		public void run() {
-			try {
-				bool = true;
-				socket = server.accept();
-				bool = false;
-			} catch (IOException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
+		catch (IOException e) {
+			e.printStackTrace();
 		}
-		
-		/**
-		 * @return socket
-		 */
-		public Socket getSocket() {
-			// if (socket.isClosed()) {
-			// IDUMOLogManager.log();
-			// new Thread(this).run();
-			// socket = null;
-			// }
-			return socket;
-		}
-		
-		public void restart() {
-			try {
-				socket.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			socket = null;
-			new Thread(this).start();
-		}
-		
 	}
 	
 	@Override

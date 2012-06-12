@@ -17,10 +17,6 @@
  */
 package com.hixi_hyi.idumo.common.provider;
 
-import java.io.IOException;
-
-import org.jdom.JDOMException;
-
 import com.hixi_hyi.idumo.common.component.LivedoorWeather;
 import com.hixi_hyi.idumo.common.data.LivedoorWeatherData;
 import com.hixi_hyi.idumo.core.data.FlowingData;
@@ -31,41 +27,43 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
 
 /**
  * LivedoorWeatherからデータを取得し，提供するプロバイダ
- *
+ * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
 public class LivedoorWeatherProvider implements Sendable {
-
-	private LivedoorWeather	weather;
-
+	
+	private LivedoorWeather weather;
+	
 	public LivedoorWeatherProvider(int citynum) {
 		try {
 			weather = new LivedoorWeather(citynum);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			throw new IDUMORuntimeException(e);
 		}
 	}
-
+	
+	@Override
+	public boolean isReady() {
+		try {
+			return weather.isReady();
+		}
+		catch (Exception e) {
+			throw new IDUMORuntimeException(e);
+		}
+	}
+	
 	@Override
 	public FlowingData onCall() {
 		FlowingData p = new FlowingData();
 		p.add(weather.getData());
 		return p;
 	}
-
-	@Override
-	public boolean isReady() {
-		try {
-			return weather.isReady();
-		} catch (Exception e) {
-			throw new IDUMORuntimeException(e);
-		}
-	}
-
+	
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(LivedoorWeatherData.class);
 	}
-
+	
 }

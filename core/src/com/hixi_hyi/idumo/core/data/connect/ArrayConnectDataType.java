@@ -8,21 +8,21 @@ import com.hixi_hyi.idumo.core.data.Data;
 
 public class ArrayConnectDataType implements ConnectDataType {
 	
-	List<Class<? extends Data>>	data	= new ArrayList<Class<? extends Data>>();
+	List<Class<? extends Data>> data = new ArrayList<Class<? extends Data>>();
 	
 	public ArrayConnectDataType(Class<? extends Data> d) {
 		data.add(d);
 	}
 	
 	@Override
-	public Iterator<Class<? extends Data>> iterator() {
-		return data.iterator();
-	}
-	
-	@Override
 	public boolean equals(ConnectDataType connect) {
 		// TODO 自動生成されたメソッド・スタブ
 		return false;
+	}
+	
+	@Override
+	public Iterator<Class<? extends Data>> iterator() {
+		return data.iterator();
 	}
 	
 }

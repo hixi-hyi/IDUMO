@@ -32,24 +32,29 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * Android上の光センサの情報を取得できるProvider
- *
+ * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- *
+ * 
  */
 public class AndroidLightProvider implements Sendable, AndroidController {
-
+	
 	private LightSensor	light;
-
+	
 	public AndroidLightProvider(Activity activity) {
 		LightSensor lightSensor = LightSensor.INSTANCE;
 		if (!lightSensor.isInit()) {
 			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
 			lightSensor.init(sensor);
 		}
-		this.light = lightSensor;
+		light = lightSensor;
 	}
-
+	
+	@Override
+	public boolean isReady() {
+		return light.isReady();
+	}
+	
 	@Override
 	public FlowingData onCall() {
 		LogManager.log();
@@ -57,34 +62,29 @@ public class AndroidLightProvider implements Sendable, AndroidController {
 		p.add(new AndroidLightData(light.getLight()));
 		return p;
 	}
-
-	@Override
-	public boolean isReady() {
-		return light.isReady();
-	}
-
+	
 	@Override
 	public void onIdumoDestroy() {}
-
+	
 	@Override
 	public void onIdumoPause() {
 		light.unregister();
 	}
-
+	
 	@Override
 	public void onIdumoRestart() {}
-
+	
 	@Override
 	public void onIdumoResume() {
 		light.register();
 	}
-
+	
 	@Override
 	public void onIdumoStart() {}
-
+	
 	@Override
 	public void onIdumoStop() {}
-
+	
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(AndroidLightData.class);

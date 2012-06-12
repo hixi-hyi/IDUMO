@@ -4,49 +4,15 @@ import java.util.Collection;
 
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.Connectable;
-import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Executable;
+import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
 
 public abstract class CoreComponent {
 	
-	private CoreContainer	container	= null;
-	private CoreSetting	setting		= new CoreSetting();
-	private boolean			isReady;
-	
-	abstract public void onIdumoMakeFlowChart() throws IDUMOException;
-	
-	abstract public void onIdumoPrepare();
-	
-	/**
-	 * @param container
-	 *            セットする container
-	 */
-	public void setContainer(CoreContainer container) {
-		this.container = container;
-	}
-	
-	/**
-	 * @return container
-	 */
-	public CoreContainer getContainer() {
-		return container;
-	}
-	
-	/**
-	 * @param isReady
-	 *            セットする isReady
-	 */
-	public void setReady(boolean isReady) {
-		this.isReady = isReady;
-	}
-	
-	/**
-	 * @return isReady
-	 */
-	public boolean isReady() {
-		return isReady;
-	}
+	private CoreContainer container = null;
+	private CoreSetting setting = new CoreSetting();
+	private boolean isReady;
 	
 	/**
 	 * @param item
@@ -67,11 +33,26 @@ public abstract class CoreComponent {
 	}
 	
 	/**
-	 * @throws IDUMOException
-	 * @see com.hixi_hyi.idumo.core.exec.CoreContainer#setup()
+	 * @return
+	 * @see com.hixi_hyi.idumo.core.exec.CoreContainer#getApplicationControllers()
 	 */
-	public void setup() throws IDUMOException {
-		container.setup();
+	public Collection<CoreController> getApplicationControllers() {
+		return container.getApplicationControllers();
+	}
+	
+	/**
+	 * @return container
+	 */
+	public CoreContainer getContainer() {
+		return container;
+	}
+	
+	/**
+	 * @return
+	 * @see com.hixi_hyi.idumo.core.exec.CoreSetting#getLoopCount()
+	 */
+	public int getLoopCount() {
+		return setting.getLoopCount();
 	}
 	
 	/**
@@ -84,10 +65,29 @@ public abstract class CoreComponent {
 	
 	/**
 	 * @return
-	 * @see com.hixi_hyi.idumo.core.exec.CoreSetting#getLoopCount()
+	 * @see com.hixi_hyi.idumo.core.exec.CoreSetting#getSleepTime()
 	 */
-	public int getLoopCount() {
-		return setting.getLoopCount();
+	public int getSleepTime() {
+		return setting.getSleepTime();
+	}
+	
+	/**
+	 * @return isReady
+	 */
+	public boolean isReady() {
+		return isReady;
+	}
+	
+	abstract public void onIdumoMakeFlowChart() throws IDUMOException;
+	
+	abstract public void onIdumoPrepare();
+	
+	/**
+	 * @param container
+	 *            セットする container
+	 */
+	public void setContainer(CoreContainer container) {
+		this.container = container;
 	}
 	
 	/**
@@ -99,11 +99,11 @@ public abstract class CoreComponent {
 	}
 	
 	/**
-	 * @return
-	 * @see com.hixi_hyi.idumo.core.exec.CoreSetting#getSleepTime()
+	 * @param isReady
+	 *            セットする isReady
 	 */
-	public int getSleepTime() {
-		return setting.getSleepTime();
+	public void setReady(boolean isReady) {
+		this.isReady = isReady;
 	}
 	
 	/**
@@ -115,11 +115,11 @@ public abstract class CoreComponent {
 	}
 	
 	/**
-	 * @return
-	 * @see com.hixi_hyi.idumo.core.exec.CoreContainer#getApplicationControllers()
+	 * @throws IDUMOException
+	 * @see com.hixi_hyi.idumo.core.exec.CoreContainer#setup()
 	 */
-	public Collection<CoreController> getApplicationControllers() {
-		return container.getApplicationControllers();
+	public void setup() throws IDUMOException {
+		container.setup();
 	}
 	
 }

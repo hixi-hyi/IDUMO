@@ -23,18 +23,18 @@ import com.hixi_hyi.idumo.core.data.element.TextElement;
 import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
 import com.hixi_hyi.idumo.core.data.raw.StringRawDataType;
 
-public class HotpepperData extends AbstractData implements LatLngDataElement,TextElement{
+public class HotpepperData extends AbstractData implements LatLngDataElement, TextElement {
 	private static final String NAME = "name";
 	private static final String KANA = "kana";
-	private static final String LAT ="lat";
+	private static final String LAT = "lat";
 	private static final String LNG = "lng";
 	private static final String ADDRESS = "address";
 	private static final String CATCHCOPY = "catchcopy";
 	private static final String OPEN = "budget";
 	private static final String BUDGET = "budget";
 	private static final String AVERAGE = "average";
-
-	public HotpepperData(String name,String kana, double lat, double lng ,String address,String catchcopy, String open,String budget,String average) {
+	
+	public HotpepperData(String name, String kana, double lat, double lng, String address, String catchcopy, String open, String budget, String average) {
 		add(new StringRawDataType(NAME, name, "shop name"));
 		add(new StringRawDataType(KANA, kana, "shop kana name"));
 		add(new NumberRawDataType(LAT, lat, "shop lat"));
@@ -45,70 +45,71 @@ public class HotpepperData extends AbstractData implements LatLngDataElement,Tex
 		add(new StringRawDataType(BUDGET, budget, "shop budget"));
 		add(new StringRawDataType(AVERAGE, average, "shop average"));
 	}
-
-	public String getName(){
-		return (String)getValue(NAME);
+	
+	public String getAddress() {
+		return (String) getValue(ADDRESS);
 	}
-
-	public String getKana(){
-		return (String)getValue(KANA);
+	
+	public String getAverage() {
+		return (String) getValue(AVERAGE);
 	}
-
-	public double getLatitude(){
-		return (Double)getValue(LAT);
+	
+	public String getBudget() {
+		return (String) getValue(BUDGET);
 	}
-
-	public double getLongitude(){
-		return (Double)getValue(LNG);
+	
+	public String getCatchcopy() {
+		return (String) getValue(CATCHCOPY);
 	}
-
-	public String getAddress(){
-		return (String)getValue(ADDRESS);
+	
+	public String getKana() {
+		return (String) getValue(KANA);
 	}
-
-	public String getCatchcopy(){
-		return (String)getValue(CATCHCOPY);
+	
+	@Override
+	public double getLatitude() {
+		return (Double) getValue(LAT);
 	}
-
-	public String getOpen(){
-		return (String)getValue(OPEN);
+	
+	@Override
+	public double getLongitude() {
+		return (Double) getValue(LNG);
 	}
-
-	public String getBudget(){
-		return (String)getValue(BUDGET);
+	
+	public String getName() {
+		return (String) getValue(NAME);
 	}
-
-	public String getAverage(){
-		return (String)getValue(AVERAGE);
+	
+	public String getOpen() {
+		return (String) getValue(OPEN);
 	}
-
+	
 	@Override
 	public String getText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getName());
 		sb.append(":");
 		sb.append(getAverage());
-//		sb.append(getName());
-//		sb.append(" : ");
-//		sb.append(getKana());
-//		sb.append(" : ");
-//		sb.append("[");
-//		sb.append(getLatitude());
-//		sb.append(",");
-//		sb.append(getLongitude());
-//		sb.append("]");
-//		sb.append(" : ");
-//		sb.append(getAddress());
-//		sb.append(" : ");
-//		sb.append(getCatchcopy());
-//		sb.append(" : ");
-//		sb.append(getOpen());
-//		sb.append(" : ");
-//		sb.append(getBudget());
-//		sb.append(" : ");
-//		sb.append(getAverage());
+		// sb.append(getName());
+		// sb.append(" : ");
+		// sb.append(getKana());
+		// sb.append(" : ");
+		// sb.append("[");
+		// sb.append(getLatitude());
+		// sb.append(",");
+		// sb.append(getLongitude());
+		// sb.append("]");
+		// sb.append(" : ");
+		// sb.append(getAddress());
+		// sb.append(" : ");
+		// sb.append(getCatchcopy());
+		// sb.append(" : ");
+		// sb.append(getOpen());
+		// sb.append(" : ");
+		// sb.append(getBudget());
+		// sb.append(" : ");
+		// sb.append(getAverage());
 		return sb.toString();
 	}
-
-
+	
 }

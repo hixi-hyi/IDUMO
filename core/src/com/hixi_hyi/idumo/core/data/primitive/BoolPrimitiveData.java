@@ -20,17 +20,17 @@ package com.hixi_hyi.idumo.core.data.primitive;
 import com.hixi_hyi.idumo.core.data.raw.BoolRawDataType;
 
 public class BoolPrimitiveData extends PrimitiveData {
-
+	
 	public BoolPrimitiveData(boolean n) {
 		add(new BoolRawDataType(NAME, n, "Primitive : Number"));
 	}
-
+	
 	public boolean getBool() {
 		return (Boolean) getValue(NAME);
 	}
-
+	
 	@Override
-	public String toString(){
+	public String toString() {
 		return String.valueOf(getBool());
 	}
 }

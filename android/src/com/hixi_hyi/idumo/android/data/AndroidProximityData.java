@@ -26,17 +26,17 @@ import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
  */
 public class AndroidProximityData extends AbstractData {
 	public static final String	PROXIMITY	= "proximity";
-
+	
 	public AndroidProximityData(float proximity) {
 		add(new NumberRawDataType(PROXIMITY, proximity, "Android Proximity"));
 	}
-
+	
 	public float getProximity() {
 		return (Float) getValue(PROXIMITY);
 	}
-
+	
 	@Override
-	public String toString(){
-		return String.format("%s:%f",PROXIMITY, getProximity());
+	public String toString() {
+		return String.format("%s:%f", PROXIMITY, getProximity());
 	}
 }

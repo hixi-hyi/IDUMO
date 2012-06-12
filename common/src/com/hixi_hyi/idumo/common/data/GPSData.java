@@ -21,28 +21,30 @@ import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
 import com.hixi_hyi.idumo.core.data.Data.AbstractData;
 import com.hixi_hyi.idumo.core.data.element.TextElement;
 import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
-import com.hixi_hyi.idumo.core.data.raw.StringRawDataType;
 
-public class GPSData extends AbstractData implements LatLngDataElement,TextElement {
-
+public class GPSData extends AbstractData implements LatLngDataElement, TextElement {
+	
 	private static final String LATITUDE = "latitude";
 	private static final String LONGITUDE = "longitude";
-
-	public GPSData(double lat,double lon) {
-		add(new NumberRawDataType(LATITUDE, lat , "GPS Latitude"));
-		add(new NumberRawDataType(LONGITUDE, lon , "GPS Longitude"));
+	
+	public GPSData(double lat, double lon) {
+		add(new NumberRawDataType(LATITUDE, lat, "GPS Latitude"));
+		add(new NumberRawDataType(LONGITUDE, lon, "GPS Longitude"));
 	}
-
-	public double getLatitude(){
+	
+	@Override
+	public double getLatitude() {
 		return (Double) getValue(LATITUDE);
 	}
-
-	public double getLongitude(){
+	
+	@Override
+	public double getLongitude() {
 		return (Double) getValue(LONGITUDE);
 	}
 	
-	public String getText(){
-		return String.format("Lat:%f , Lng:%f", getLatitude(),getLongitude());
+	@Override
+	public String getText() {
+		return String.format("Lat:%f , Lng:%f", getLatitude(), getLongitude());
 	}
-
+	
 }

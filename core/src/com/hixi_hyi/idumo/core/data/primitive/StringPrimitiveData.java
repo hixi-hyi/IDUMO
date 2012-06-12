@@ -21,22 +21,22 @@ import com.hixi_hyi.idumo.core.data.raw.RawDataType;
 import com.hixi_hyi.idumo.core.data.raw.StringRawDataType;
 
 public class StringPrimitiveData extends PrimitiveData {
-
-	public StringPrimitiveData(String n) {
-		add(new StringRawDataType(NAME, n, "Primitive : String"));
-	}
-
+	
 	public StringPrimitiveData(RawDataType raw) {
 		add(new StringRawDataType(NAME, (String) raw.getValue(), raw.getSummary()));
 	}
-
+	
+	public StringPrimitiveData(String n) {
+		add(new StringRawDataType(NAME, n, "Primitive : String"));
+	}
+	
 	public String getString() {
 		String s = (String) getValue(NAME);
 		return s;
 	}
-
+	
 	@Override
-	public String toString(){
+	public String toString() {
 		return getString();
 	}
 }

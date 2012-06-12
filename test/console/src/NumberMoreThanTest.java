@@ -1,17 +1,24 @@
 import com.hixi_hyi.idumo.common.handler.raw.NumberGetValueHandler;
 import com.hixi_hyi.idumo.common.handler.raw.NumberMoreThanHandler;
 import com.hixi_hyi.idumo.common.provider.LivedoorWeatherProvider;
-import com.hixi_hyi.idumo.console.core.exec.IDUMOConsoleWrapper;
-import com.hixi_hyi.idumo.console.core.util.IDUMOConsoleLogger;
+import com.hixi_hyi.idumo.console.core.exec.ConsoleComponent;
+import com.hixi_hyi.idumo.console.core.exec.ConsoleWrapper;
+import com.hixi_hyi.idumo.console.core.util.ConsoleLogger;
 import com.hixi_hyi.idumo.console.receiptor.ConsoleViewReceiptor;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.exec.CoreComponent;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
-public class NumberMoreThanTest extends IDUMOConsoleWrapper {
+public class NumberMoreThanTest extends ConsoleWrapper {
+	public static void main(String[] args) {
+		LogManager.DEBUG = true;
+		LogManager.LOGGER = new ConsoleLogger();
+		NumberMoreThanTest main = new NumberMoreThanTest();
+		main.exec();
+	}
+	
 	@Override
 	public void init() {
-		setExecutionWithComponent(new CoreComponent() {
+		setExecutionWithComponent(new ConsoleComponent() {
 			@Override
 			public void onIdumoMakeFlowChart() throws IDUMOException {
 				LivedoorWeatherProvider idumo0 = new LivedoorWeatherProvider(63);
@@ -35,12 +42,5 @@ public class NumberMoreThanTest extends IDUMOConsoleWrapper {
 				setSleepTime(1000);
 			}
 		});
-	}
-	
-	public static void main(String[] args) {
-		LogManager.DEBUG = true;
-		LogManager.LOGGER = new IDUMOConsoleLogger();
-		NumberMoreThanTest main = new NumberMoreThanTest();
-		main.exec();
 	}
 }

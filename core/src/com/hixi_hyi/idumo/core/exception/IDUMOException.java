@@ -18,5 +18,7 @@
 package com.hixi_hyi.idumo.core.exception;
 
 public class IDUMOException extends Exception {
+
+	private static final long serialVersionUID = 1L;
 	
 }

@@ -7,8 +7,8 @@ import android.widget.ImageView;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Executable;
+import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
 
 // TODO 非検証
@@ -21,12 +21,24 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
 public class _ImageViewReceiptor extends ImageView implements Receivable, Executable {
 	
 	private Sendable	sender;
-	private Activity		activity;
+	private Activity	activity;
 	
 	public _ImageViewReceiptor(Context context) {
 		super(context);
 		activity = (Activity) context;
 		activity.setContentView(this);
+	}
+	
+	@Override
+	public boolean isReady() {
+		// TODO 自動生成されたメソッド・スタブ
+		return false;
+	}
+	
+	@Override
+	public ConnectDataType receivableType() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 	
 	@Override
@@ -44,18 +56,6 @@ public class _ImageViewReceiptor extends ImageView implements Receivable, Execut
 		// if (list.get(0) == Bitmap.class) {
 		// return true;
 		// }
-	}
-	
-	@Override
-	public boolean isReady() {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
-	}
-	
-	@Override
-	public ConnectDataType receivableType() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
 	}
 	
 }

@@ -35,29 +35,23 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
  */
 public class StringConcatHandler_Prefix implements Sendable, Receivable {
 	
-	private Sendable		provider;
-	private String				fixWord;
-	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
+	private Sendable provider;
+	private String fixWord;
+	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
 	
 	public StringConcatHandler_Prefix(String fixWord) {
 		this.fixWord = fixWord;
 	}
 	
 	@Override
+	public boolean isReady() {
+		return provider.isReady();
+	}
+	
+	@Override
 	public FlowingData onCall() {
 		String s = ((StringPrimitiveData) provider.onCall().next()).getString();
 		return new FlowingData(new StringPrimitiveData(fixWord + s));
-	}
-	
-	@Override
-	public void setSender(Sendable... senders) throws IDUMOException {
-		vSize.validate(senders);
-		this.provider = senders[0];
-	}
-	
-	@Override
-	public boolean isReady() {
-		return provider.isReady();
 	}
 	
 	@Override
@@ -68,6 +62,12 @@ public class StringConcatHandler_Prefix implements Sendable, Receivable {
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(StringPrimitiveData.class);
+	}
+	
+	@Override
+	public void setSender(Sendable... senders) throws IDUMOException {
+		vSize.validate(senders);
+		provider = senders[0];
 	}
 	
 }

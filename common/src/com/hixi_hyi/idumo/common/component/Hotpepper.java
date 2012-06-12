@@ -17,99 +17,90 @@
  */
 package com.hixi_hyi.idumo.common.component;
 
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jdom.Document;
 import org.jdom.Element;
-import org.jdom.JDOMException;
 import org.jdom.Namespace;
-import org.jdom.input.SAXBuilder;
-import org.jdom.output.Format;
-import org.jdom.output.XMLOutputter;
 
 import com.hixi_hyi.idumo.common.data.HotpepperData;
-import com.hixi_hyi.idumo.common.data.LivedoorWeatherData;
 import com.hixi_hyi.idumo.common.util.URL2XMLParser;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
- * http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=bdcd74ea41fe6b8d&lat=34.670000&lng=135.520000
- *
+ * http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=bdcd74ea41fe6b8d&
+ * lat=34.670000&lng=135.520000
+ * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
 public class Hotpepper {
 	private static final String API_KEY = "bdcd74ea41fe6b8d";
-	private static final String	REQUEST_URL_SEED	= "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key="+API_KEY+"&lat=%f&lng=%f";
-
-	private String				requestURL;
-
-	private ArrayList<HotpepperData>	list;
-	private boolean				isReady;
-
+	private static final String REQUEST_URL_SEED = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=" + API_KEY + "&lat=%f&lng=%f";
+	
+	private String requestURL;
+	
+	private ArrayList<HotpepperData> list;
+	private boolean isReady;
+	
 	private URL2XMLParser parser;
-
-
-	public Hotpepper(double lat,double lon) {
-		init(lat,lon);
+	
+	public Hotpepper() {}
+	
+	public Hotpepper(double lat, double lon) {
+		init(lat, lon);
 	}
-
-	public Hotpepper(){
+	
+	public ArrayList<HotpepperData> getData() {
+		return list;
 	}
-
-	public void setLatLon(double lat,double lon){
-		init(lat,lon);
-	}
-
-	public void init(double lat,double lon) {
-		requestURL = String.format(REQUEST_URL_SEED, lat,lon);
+	
+	public void init(double lat, double lon) {
+		requestURL = String.format(REQUEST_URL_SEED, lat, lon);
 		LogManager.debug(requestURL);
 		list = new ArrayList<HotpepperData>();
 		try {
 			parser = new URL2XMLParser(requestURL);
-//			parser.output();
-		} catch (Exception e) {
+			// parser.output();
+		}
+		catch (Exception e) {
 			throw new IDUMORuntimeException(e);
 		}
 		Element root = parser.getRoot();
 		List<Element> shops = new ArrayList<Element>();
-		List<Element> children = (List<Element>)root.getChildren();
+		List<Element> children = root.getChildren();
 		for (Element element : children) {
 			String name = element.getName();
-			if(name.equals("shop")){
+			if (name.equals("shop")) {
 				shops.add(element);
 			}
 		}
 		Namespace ns = root.getNamespace();
 		for (Element element : shops) {
-			String name = element.getChildText("name",ns);
-			String kana = element.getChildText("name_kana",ns);
-			Double glat = Double.parseDouble(element.getChildText("lat",ns));
-			Double glng = Double.parseDouble(element.getChildText("lng",ns));
-			String address = element.getChildText("address",ns);
-			String catchcopy = element.getChildText("catch",ns);
-			String open = element.getChildText("open",ns);
-			String budget = element.getChild("budget",ns).getChildText("NAME", ns);
-			String average = element.getChild("budget",ns).getChildText("average", ns);
+			String name = element.getChildText("name", ns);
+			String kana = element.getChildText("name_kana", ns);
+			Double glat = Double.parseDouble(element.getChildText("lat", ns));
+			Double glng = Double.parseDouble(element.getChildText("lng", ns));
+			String address = element.getChildText("address", ns);
+			String catchcopy = element.getChildText("catch", ns);
+			String open = element.getChildText("open", ns);
+			String budget = element.getChild("budget", ns).getChildText("NAME", ns);
+			String average = element.getChild("budget", ns).getChildText("average", ns);
 			list.add(new HotpepperData(name, kana, glat, glng, address, catchcopy, open, budget, average));
 		}
 	}
-
+	
 	public boolean isReady() {
-//		if (isReady) {
-//			return true;
-//		}
-//		init();
+		// if (isReady) {
+		// return true;
+		// }
+		// init();
 		return isReady;
 	}
-
-	public ArrayList<HotpepperData> getData() {
-		return list;
+	
+	public void setLatLon(double lat, double lon) {
+		init(lat, lon);
 	}
-
+	
 }

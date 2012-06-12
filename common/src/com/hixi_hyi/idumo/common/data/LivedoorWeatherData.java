@@ -27,12 +27,12 @@ import com.hixi_hyi.idumo.core.data.raw.StringRawDataType;
  * 
  */
 public class LivedoorWeatherData extends AbstractData {
-	public static final String	LOCATION	= "location";
-	public static final String	DATE		= "date";
-	public static final String	MAX_TEMP	= "max_temp";
-	public static final String	MIN_TEMP	= "min_temp";
-	public static final String	WEATHER		= "weather";
-	public static final String	DESCRIPTION	= "description";
+	public static final String LOCATION = "location";
+	public static final String DATE = "date";
+	public static final String MAX_TEMP = "max_temp";
+	public static final String MIN_TEMP = "min_temp";
+	public static final String WEATHER = "weather";
+	public static final String DESCRIPTION = "description";
 	
 	public LivedoorWeatherData(String location, String date, Double maxTemp, Double minTemp, String weather, String description) {
 		add(new StringRawDataType(LOCATION, location, "livedoor location"));
@@ -43,12 +43,16 @@ public class LivedoorWeatherData extends AbstractData {
 		add(new StringRawDataType(DESCRIPTION, description, "livedoor description"));
 	}
 	
-	public String getLocation() {
-		return (String) getValue(LOCATION);
-	}
-	
 	public String getDate() {
 		return (String) getValue(DATE);
+	}
+	
+	public String getDescription() {
+		return (String) getValue(DESCRIPTION);
+	}
+	
+	public String getLocation() {
+		return (String) getValue(LOCATION);
 	}
 	
 	public String getMaxTemp() {
@@ -61,9 +65,5 @@ public class LivedoorWeatherData extends AbstractData {
 	
 	public String getWeather() {
 		return (String) getValue(WEATHER);
-	}
-	
-	public String getDescription() {
-		return (String) getValue(DESCRIPTION);
 	}
 }

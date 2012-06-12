@@ -20,16 +20,20 @@ import org.jdom.input.SAXBuilder;
  */
 public class ReversedGeocording {
 	
-	private static final String	REQUEST_URL	= "http://www.finds.jp/ws/rgeocode.php?lat=%f&lon=%f";
+	private static final String REQUEST_URL = "http://www.finds.jp/ws/rgeocode.php?lat=%f&lon=%f";
 	
-	private String				requestURL;
-	private boolean				isReady;
+	private String requestURL;
+	private boolean isReady;
 	
-	private String				location;
+	private String location;
 	
 	public ReversedGeocording(double lat, double lon) {
 		requestURL = String.format(REQUEST_URL, lat, lon);
 		init();
+	}
+	
+	public String getLocation() {
+		return location;
 	}
 	
 	public void init() {
@@ -44,7 +48,8 @@ public class ReversedGeocording {
 			String sec = root.getChild("result", ns).getChild("local", ns).getChildText("section", ns);
 			location = pref + mun + sec;
 			isReady = true;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			location = "住所が特定できません";
 			isReady = true;
 		}
@@ -56,10 +61,6 @@ public class ReversedGeocording {
 		}
 		init();
 		return isReady;
-	}
-	
-	public String getLocation() {
-		return location;
 	}
 	
 }

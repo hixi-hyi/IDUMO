@@ -21,9 +21,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-
 public class FlowingData implements Iterable<Data> {
-	private ArrayList<Data>	datalist;
+	private ArrayList<Data> datalist;
 	{
 		datalist = new ArrayList<Data>();
 	}
@@ -34,10 +33,6 @@ public class FlowingData implements Iterable<Data> {
 		for (Data o : objects) {
 			datalist.add(o);
 		}
-	}
-	
-	public Collection<Data> getData() {
-		return datalist;
 	}
 	
 	/**
@@ -58,6 +53,19 @@ public class FlowingData implements Iterable<Data> {
 		return datalist.get(index);
 	}
 	
+	public Collection<Data> getData() {
+		return datalist;
+	}
+	
+	@Override
+	public Iterator<Data> iterator() {
+		return datalist.iterator();
+	}
+	
+	public Data next() {
+		return datalist.remove(0);
+	}
+	
 	/**
 	 * @return
 	 * @see java.util.ArrayList#size()
@@ -73,15 +81,6 @@ public class FlowingData implements Iterable<Data> {
 	@Override
 	public String toString() {
 		return datalist.toString();
-	}
-	
-	@Override
-	public Iterator<Data> iterator() {
-		return datalist.iterator();
-	}
-	
-	public Data next() {
-		return datalist.remove(0);
 	}
 	
 }

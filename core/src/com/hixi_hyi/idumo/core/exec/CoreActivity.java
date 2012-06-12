@@ -23,9 +23,9 @@ import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 public interface CoreActivity {
 	public void onIdumoCreated() throws IDUMOException;
 	
-	public void onIdumoStart();
-	
 	public void onIdumoExec() throws IDUMORuntimeException;
+	
+	public void onIdumoStart();
 	
 	public void onIdumoStop();
 	

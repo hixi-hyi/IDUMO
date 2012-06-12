@@ -72,8 +72,8 @@ public enum OrientationSensor {
 	
 	public void init(AccelerometerSensor accelerometerSensor, MagneticFieldSensor magneticFieldSensor) {
 		isInit = true;
-		this.accel = accelerometerSensor;
-		this.mag = magneticFieldSensor;
+		accel = accelerometerSensor;
+		mag = magneticFieldSensor;
 	}
 	
 	public boolean isInit() {

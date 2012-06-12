@@ -7,7 +7,7 @@ import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.core.exec.CoreContainer;
 import com.hixi_hyi.idumo.core.parts.Connectable;
 
-public class IDUMOAndroidContainer extends CoreContainer {
+public class AndroidContainer extends CoreContainer {
 	private ArrayList<AndroidController>	androidControllers	= new ArrayList<AndroidController>();
 	
 	@Override

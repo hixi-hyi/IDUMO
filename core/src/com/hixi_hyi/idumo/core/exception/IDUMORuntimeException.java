@@ -19,16 +19,18 @@ package com.hixi_hyi.idumo.core.exception;
 
 public class IDUMORuntimeException extends RuntimeException {
 	
+	private static final long serialVersionUID = 1L;
+
 	public IDUMORuntimeException() {
 		super();
 	}
 	
-	public IDUMORuntimeException(String detailMessage, Throwable throwable) {
-		super(detailMessage, throwable);
-	}
-	
 	public IDUMORuntimeException(String detailMessage) {
 		super(detailMessage);
+	}
+	
+	public IDUMORuntimeException(String detailMessage, Throwable throwable) {
+		super(detailMessage, throwable);
 	}
 	
 	public IDUMORuntimeException(Throwable throwable) {

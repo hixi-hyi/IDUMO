@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.hixi_hyi.idumo.android.test;
+package com.hixi_hyi.idumo.android;
 
 public final class R {
     public static final class attr {

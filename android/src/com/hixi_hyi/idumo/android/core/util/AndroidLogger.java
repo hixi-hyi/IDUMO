@@ -1,5 +1,5 @@
 /**
- * Copyright (c) <2012>, <Hiroyoshi Houchi> All rights reserved.
+ * Copyright (c) <2011>, <Hiroyoshi Houchi> All rights reserved.
  *
  * http://www.hixi-hyi.com/
  *
@@ -15,16 +15,43 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core;
+package com.hixi_hyi.idumo.android.core.util;
 
-import java.util.Map;
+import android.util.Log;
 
-import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.util.Logger;
 
-public interface SenderWithOption extends Sendable {
-	public Map<String, String> getOptions();
+public class AndroidLogger implements Logger {
+	private String	tag;
 	
-	public void setOption(OptionMethodType type) throws IDUMOException;
+	public AndroidLogger(String tag) {
+		this.tag = tag;
+	}
 	
+	@Override
+	public void debug(String s) {
+		Log.d(tag, String.format("%-10s %s", s, getFileLineMethod()));
+	}
+	
+	public String getFileLineMethod() {
+		int number = Thread.currentThread().getStackTrace()[5].getLineNumber();
+		String classname = Thread.currentThread().getStackTrace()[5].getFileName();
+		String methodname = Thread.currentThread().getStackTrace()[5].getMethodName();
+		return String.format("【%3d:%s->%s】", number, classname, methodname);
+	}
+	
+	@Override
+	public void info(String s) {
+		Log.i(tag, String.format("%-10s %s", s, getFileLineMethod()));
+	}
+	
+	@Override
+	public void log() {
+		Log.d(tag, getFileLineMethod());
+	}
+	
+	@Override
+	public void warning(String s) {
+		Log.w(tag, String.format("%-10s %s", s, getFileLineMethod()));
+	}
 }

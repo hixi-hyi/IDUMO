@@ -23,8 +23,8 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
 
 public class ReceiveValidatorType implements ReceiveValidator {
 	
-	private int							num;
-	private Class<? extends Data>	cls;
+	private int num;
+	private Class<? extends Data> cls;
 	
 	public ReceiveValidatorType(int num, Class<? extends Data> cls) {
 		this.num = num - 1;

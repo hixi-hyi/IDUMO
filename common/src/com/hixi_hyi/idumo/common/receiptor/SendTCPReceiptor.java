@@ -13,8 +13,8 @@ import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exec.CoreController;
-import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Executable;
+import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
 import com.hixi_hyi.idumo.core.util.LogManager;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
@@ -28,14 +28,14 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
  * 
  */
 public class SendTCPReceiptor implements Receivable, CoreController, Executable {
-	private String				ip;
-	private int					port;
-	private Socket				socket;
-	private PrintWriter			pw;
-	private OutputStream		outstream;
-	private Sendable		sender;
-	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
-	private ReceiveValidator	vType	= new ReceiveValidatorType(1, StringPrimitiveData.class);
+	private String ip;
+	private int port;
+	private Socket socket;
+	private PrintWriter pw;
+	private OutputStream outstream;
+	private Sendable sender;
+	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
+	private ReceiveValidator vType = new ReceiveValidatorType(1, StringPrimitiveData.class);
 	
 	public SendTCPReceiptor(String ip, int port) {
 		LogManager.log();
@@ -51,22 +51,17 @@ public class SendTCPReceiptor implements Receivable, CoreController, Executable 
 	}
 	
 	@Override
-	public void setSender(Sendable... senders) throws IDUMOException {
-		vSize.validate(senders);
-		vType.validate(senders);
-		this.sender = senders[0];
-	}
-	
-	@Override
 	public void onIdumoStart() {
 		LogManager.log();
 		try {
 			socket.connect(new InetSocketAddress(ip, port));
 			outstream = socket.getOutputStream();
 			pw = new PrintWriter(new OutputStreamWriter(outstream));
-		} catch (UnknownHostException e) {
+		}
+		catch (UnknownHostException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -76,9 +71,16 @@ public class SendTCPReceiptor implements Receivable, CoreController, Executable 
 		try {
 			socket.close();
 			outstream.close();
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public ConnectDataType receivableType() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 	
 	@Override
@@ -99,9 +101,10 @@ public class SendTCPReceiptor implements Receivable, CoreController, Executable 
 	}
 	
 	@Override
-	public ConnectDataType receivableType() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+	public void setSender(Sendable... senders) throws IDUMOException {
+		vSize.validate(senders);
+		vType.validate(senders);
+		sender = senders[0];
 	}
 	
 }

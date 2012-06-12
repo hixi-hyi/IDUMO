@@ -18,9 +18,9 @@
 package com.hixi_hyi.idumo.core.data.raw;
 
 public class BoolRawDataType implements RawDataType {
-	private String	name;
-	private Boolean	value;
-	private String	summary;
+	private String name;
+	private Boolean value;
+	private String summary;
 	
 	public BoolRawDataType(String name, Boolean value, String summary) {
 		this.name = name;
@@ -34,8 +34,8 @@ public class BoolRawDataType implements RawDataType {
 	}
 	
 	@Override
-	public Boolean getValue() {
-		return value;
+	public String getSummary() {
+		return summary;
 	}
 	
 	@Override
@@ -44,12 +44,12 @@ public class BoolRawDataType implements RawDataType {
 	}
 	
 	@Override
-	public String toString() {
-		return String.format("Bool[%s:%s]", name, value);
+	public Boolean getValue() {
+		return value;
 	}
 	
 	@Override
-	public String getSummary() {
-		return summary;
+	public String toString() {
+		return String.format("Bool[%s:%s]", name, value);
 	}
 }

@@ -8,7 +8,7 @@ import com.hixi_hyi.idumo.core.data.Data;
 
 public class MultiConnectDataType implements ConnectDataType {
 	
-	List<Class<? extends Data>>	data	= new ArrayList<Class<? extends Data>>();
+	List<Class<? extends Data>> data = new ArrayList<Class<? extends Data>>();
 	
 	public MultiConnectDataType(Class<? extends Data>... ds) {
 		for (Class<? extends Data> d : ds) {
@@ -17,14 +17,14 @@ public class MultiConnectDataType implements ConnectDataType {
 	}
 	
 	@Override
-	public Iterator<Class<? extends Data>> iterator() {
-		return data.iterator();
-	}
-	
-	@Override
 	public boolean equals(ConnectDataType connect) {
 		// TODO 自動生成されたメソッド・スタブ
 		return false;
+	}
+	
+	@Override
+	public Iterator<Class<? extends Data>> iterator() {
+		return data.iterator();
 	}
 	
 }

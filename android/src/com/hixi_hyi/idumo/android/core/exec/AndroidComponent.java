@@ -7,7 +7,7 @@ import android.app.Activity;
 import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.core.exec.CoreComponent;
 
-public abstract class IDUMOAndroidComponent extends CoreComponent {
+public abstract class AndroidComponent extends CoreComponent {
 	
 	protected Activity	activity;
 	
@@ -15,13 +15,13 @@ public abstract class IDUMOAndroidComponent extends CoreComponent {
 	// return activity;
 	// }
 	
-	public void setActivity(Activity activity) {
-		this.activity = activity;
+	public Collection<AndroidController> getAndroidControllers() {
+		AndroidContainer container = (AndroidContainer) getContainer();
+		return container.getAndroidControllers();
 	}
 	
-	public Collection<AndroidController> getAndroidControllers() {
-		IDUMOAndroidContainer container = (IDUMOAndroidContainer) getContainer();
-		return container.getAndroidControllers();
+	public void setActivity(Activity activity) {
+		this.activity = activity;
 	}
 	
 }

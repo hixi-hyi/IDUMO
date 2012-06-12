@@ -18,9 +18,9 @@
 package com.hixi_hyi.idumo.core.data.raw;
 
 public class StringRawDataType implements RawDataType {
-	private String	name;
-	private String	value;
-	private String	summary;
+	private String name;
+	private String value;
+	private String summary;
 	
 	public StringRawDataType(String name, String value, String summary) {
 		this.name = name;
@@ -34,8 +34,8 @@ public class StringRawDataType implements RawDataType {
 	}
 	
 	@Override
-	public String getValue() {
-		return value;
+	public String getSummary() {
+		return summary;
 	}
 	
 	@Override
@@ -49,7 +49,7 @@ public class StringRawDataType implements RawDataType {
 	// }
 	
 	@Override
-	public String getSummary() {
-		return summary;
+	public String getValue() {
+		return value;
 	}
 }

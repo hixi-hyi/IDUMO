@@ -32,11 +32,16 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
  */
 public class StringProvider implements Sendable {
 	
-	private String	str;
+	private String str;
 	
 	public StringProvider(String str) {
 		// IDUMOLogManager.debug(str);
 		this.str = str;
+	}
+	
+	@Override
+	public boolean isReady() {
+		return true;
 	}
 	
 	@Override
@@ -45,11 +50,6 @@ public class StringProvider implements Sendable {
 		FlowingData pipes = new FlowingData();
 		pipes.add(new StringPrimitiveData(str));
 		return pipes;
-	}
-	
-	@Override
-	public boolean isReady() {
-		return true;
 	}
 	
 	@Override

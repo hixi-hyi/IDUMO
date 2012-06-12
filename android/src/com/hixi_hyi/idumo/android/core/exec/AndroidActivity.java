@@ -10,14 +10,14 @@ import com.hixi_hyi.idumo.core.exec.CoreActivity;
 import com.hixi_hyi.idumo.core.exec.CoreController;
 import com.hixi_hyi.idumo.core.parts.Executable;
 
-public class IDUMOAndroidActivity implements CoreActivity, Runnable {
+public class AndroidActivity implements CoreActivity, Runnable {
 	
-	private IDUMOAndroidComponent	component;
-	private Handler					handler	= new Handler();
+	private AndroidComponent	component;
+	private Handler				handler	= new Handler();
 	
-	public IDUMOAndroidActivity(IDUMOAndroidComponent component) {
+	public AndroidActivity(AndroidComponent component) {
 		this.component = component;
-		this.component.setContainer(new IDUMOAndroidContainer());
+		this.component.setContainer(new AndroidContainer());
 	}
 	
 	@Override
@@ -25,30 +25,6 @@ public class IDUMOAndroidActivity implements CoreActivity, Runnable {
 		component.onIdumoMakeFlowChart();
 		component.setup();
 		component.onIdumoPrepare();
-	}
-	
-	@Override
-	public void onIdumoStart() {
-		for (AndroidController controller : component.getAndroidControllers()) {
-			controller.onIdumoStart();
-			controller.onIdumoResume();
-		}
-		for (CoreController controller : component.getApplicationControllers()) {
-			controller.onIdumoStart();
-		}
-		component.setReady(true);
-	}
-	
-	@Override
-	public void onIdumoStop() {
-		for (AndroidController controller : component.getAndroidControllers()) {
-			controller.onIdumoPause();
-			controller.onIdumoStop();
-		}
-		for (CoreController controller : component.getApplicationControllers()) {
-			controller.onIdumoStop();
-		}
-		component.setReady(false);
 	}
 	
 	@Override
@@ -89,13 +65,37 @@ public class IDUMOAndroidActivity implements CoreActivity, Runnable {
 	}
 	
 	@Override
+	public void onIdumoStart() {
+		for (AndroidController controller : component.getAndroidControllers()) {
+			controller.onIdumoStart();
+			controller.onIdumoResume();
+		}
+		for (CoreController controller : component.getApplicationControllers()) {
+			controller.onIdumoStart();
+		}
+		component.setReady(true);
+	}
+	
+	@Override
+	public void onIdumoStop() {
+		for (AndroidController controller : component.getAndroidControllers()) {
+			controller.onIdumoPause();
+			controller.onIdumoStop();
+		}
+		for (CoreController controller : component.getApplicationControllers()) {
+			controller.onIdumoStop();
+		}
+		component.setReady(false);
+	}
+	
+	@Override
 	public void run() {
 		onIdumoExec();
 	}
 	
 	/**
 	 * @param activity
-	 * @see com.hixi_hyi.idumo.android.core.exec.IDUMOAndroidComponent#setActivity(android.app.Activity)
+	 * @see com.hixi_hyi.idumo.android.core.exec.AndroidComponent#setActivity(android.app.Activity)
 	 */
 	public void setActivity(Activity activity) {
 		component.setActivity(activity);

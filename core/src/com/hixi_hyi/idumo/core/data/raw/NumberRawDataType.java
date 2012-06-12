@@ -18,9 +18,9 @@
 package com.hixi_hyi.idumo.core.data.raw;
 
 public class NumberRawDataType implements RawDataType {
-	private String	name;
-	private Number	value;
-	private String	summary;
+	private String name;
+	private Number value;
+	private String summary;
 	
 	public NumberRawDataType(String name, Number value, String summary) {
 		this.name = name;
@@ -34,8 +34,8 @@ public class NumberRawDataType implements RawDataType {
 	}
 	
 	@Override
-	public Number getValue() {
-		return value;
+	public String getSummary() {
+		return summary;
 	}
 	
 	@Override
@@ -44,12 +44,12 @@ public class NumberRawDataType implements RawDataType {
 	}
 	
 	@Override
-	public String toString() {
-		return String.format("Number[%s:%s]", name, value);
+	public Number getValue() {
+		return value;
 	}
 	
 	@Override
-	public String getSummary() {
-		return summary;
+	public String toString() {
+		return String.format("Number[%s:%s]", name, value);
 	}
 }

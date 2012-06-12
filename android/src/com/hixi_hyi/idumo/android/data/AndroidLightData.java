@@ -26,17 +26,17 @@ import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
  */
 public class AndroidLightData extends AbstractData {
 	public static final String	LIGHT	= "light";
-
+	
 	public AndroidLightData(float light) {
 		add(new NumberRawDataType(LIGHT, light, "Android Light"));
 	}
-
+	
 	public float getLight() {
 		return (Float) getValue(LIGHT);
 	}
-
+	
 	@Override
-	public String toString(){
-		return String.format("%s:%f",LIGHT,getLight());
+	public String toString() {
+		return String.format("%s:%f", LIGHT, getLight());
 	}
 }

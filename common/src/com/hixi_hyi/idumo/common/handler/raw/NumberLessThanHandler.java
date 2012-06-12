@@ -25,7 +25,6 @@ import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
-import com.hixi_hyi.idumo.core.util.LogManager;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
@@ -35,10 +34,10 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
  */
 public class NumberLessThanHandler implements Sendable, Receivable {
 	
-	private Sendable			sender;
-	private double					condition;
-	private ReceiveValidatorSize	validator	= new ReceiveValidatorSize(1);
-	private ReceiveValidatorType	vType		= new ReceiveValidatorType(1, NumberPrimitiveData.class);
+	private Sendable sender;
+	private double condition;
+	private ReceiveValidatorSize validator = new ReceiveValidatorSize(1);
+	private ReceiveValidatorType vType = new ReceiveValidatorType(1, NumberPrimitiveData.class);
 	
 	public NumberLessThanHandler(double condition) {
 		this.condition = condition;
@@ -47,13 +46,6 @@ public class NumberLessThanHandler implements Sendable, Receivable {
 	@Override
 	public boolean isReady() {
 		return sender.isReady();
-	}
-	
-	@Override
-	public void setSender(Sendable... senders) throws IDUMOException {
-		validator.validate(senders);
-		vType.validate(senders);
-		this.sender = senders[0];
 	}
 	
 	@Override
@@ -76,5 +68,12 @@ public class NumberLessThanHandler implements Sendable, Receivable {
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(BoolPrimitiveData.class);
+	}
+	
+	@Override
+	public void setSender(Sendable... senders) throws IDUMOException {
+		validator.validate(senders);
+		vType.validate(senders);
+		sender = senders[0];
 	}
 }

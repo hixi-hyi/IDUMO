@@ -100,7 +100,7 @@ public enum GPSSensor implements LocationListener {
 	
 	public void init(LocationManager manager) {
 		isInit = true;
-		this.locationManager = manager;
+		locationManager = manager;
 		location = locationManager.getLastKnownLocation(locationManager.getBestProvider(new Criteria(), true));
 		// isReady = true;
 		// IDUMOAndroidLogger.d(location);

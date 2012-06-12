@@ -32,24 +32,29 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * Android上の地磁気センサの情報を取得できるProvider
- *
+ * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- *
+ * 
  */
 public class AndroidMagneticFieldProvider implements Sendable, AndroidController {
-
+	
 	private MagneticFieldSensor	magnet;
-
+	
 	public AndroidMagneticFieldProvider(Activity activity) {
 		MagneticFieldSensor magneticFieldSensor = MagneticFieldSensor.INSTANCE;
 		if (!magneticFieldSensor.isInit()) {
 			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
 			magneticFieldSensor.init(sensor);
 		}
-		this.magnet = magneticFieldSensor;
+		magnet = magneticFieldSensor;
 	}
-
+	
+	@Override
+	public boolean isReady() {
+		return magnet.isReady();
+	}
+	
 	@Override
 	public FlowingData onCall() {
 		LogManager.log();
@@ -58,37 +63,32 @@ public class AndroidMagneticFieldProvider implements Sendable, AndroidController
 		p.add(data);
 		return p;
 	}
-
-	@Override
-	public boolean isReady() {
-		return magnet.isReady();
-	}
-
+	
 	@Override
 	public void onIdumoDestroy() {}
-
+	
 	@Override
 	public void onIdumoPause() {
 		magnet.unregister();
 	}
-
+	
 	@Override
 	public void onIdumoRestart() {}
-
+	
 	@Override
 	public void onIdumoResume() {
 		magnet.register();
 	}
-
+	
 	@Override
 	public void onIdumoStart() {}
-
+	
 	@Override
 	public void onIdumoStop() {}
-
+	
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(AndroidMagneticFieldData.class);
 	}
-
+	
 }

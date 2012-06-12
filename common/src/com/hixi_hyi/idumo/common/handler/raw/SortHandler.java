@@ -17,16 +17,13 @@
  */
 package com.hixi_hyi.idumo.common.handler.raw;
 
-import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
 import com.hixi_hyi.idumo.core.data.Data;
 import com.hixi_hyi.idumo.core.data.FlowingData;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.ArrayConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
-import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveData;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
@@ -39,30 +36,19 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
  * @version 2.0
  */
 public class SortHandler implements Sendable, Receivable {
-	private String				name;
-	private Sendable		sender;
-	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
-
+	private String name;
+	private Sendable sender;
+	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
+	
 	public SortHandler(String name) {
 		this.name = name;
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		return sender.isReady();
 	}
-
-	@Override
-	public void setSender(Sendable... senders) throws IDUMOException {
-		vSize.validate(senders);
-		sender = senders[0];
-	}
-
-	@Override
-	public ConnectDataType receivableType() {
-		return new ArrayConnectDataType(Data.class);
-	}
-
+	
 	@Override
 	public FlowingData onCall() {
 		TreeMap<Object, Data> map = new TreeMap<Object, Data>();
@@ -70,16 +56,27 @@ public class SortHandler implements Sendable, Receivable {
 			map.put(d.get(name).getValue(), d);
 			LogManager.debug(d.get(name).getValue());
 		}
-		FlowingData idf =  new FlowingData();
-		for(Map.Entry<Object, Data> e: map.entrySet()){
+		FlowingData idf = new FlowingData();
+		for (Map.Entry<Object, Data> e : map.entrySet()) {
 			idf.add(e.getValue());
 		}
 		return idf;
 	}
-
+	
+	@Override
+	public ConnectDataType receivableType() {
+		return new ArrayConnectDataType(Data.class);
+	}
+	
 	@Override
 	public ConnectDataType sendableType() {
 		return new ArrayConnectDataType(Data.class);
 	}
-
+	
+	@Override
+	public void setSender(Sendable... senders) throws IDUMOException {
+		vSize.validate(senders);
+		sender = senders[0];
+	}
+	
 }

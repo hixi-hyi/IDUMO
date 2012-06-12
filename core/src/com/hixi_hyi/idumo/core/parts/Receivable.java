@@ -27,6 +27,8 @@ import com.hixi_hyi.idumo.core.exception.IDUMOException;
  * 
  */
 public interface Receivable extends Connectable {
+	public ConnectDataType receivableType();
+	
 	/**
 	 * データを受け取るSender(Provider,Handlerに相当)をsetするメソッド
 	 * 
@@ -35,6 +37,4 @@ public interface Receivable extends Connectable {
 	 * @throws IDUMOException
 	 */
 	public void setSender(Sendable... senders) throws IDUMOException;
-	
-	public ConnectDataType receivableType();
 }

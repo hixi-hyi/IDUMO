@@ -18,8 +18,8 @@
 package com.hixi_hyi.idumo.core.util;
 
 public class LogManager {
-	public static boolean		DEBUG;
-	public static Logger	LOGGER;
+	public static boolean DEBUG;
+	public static Logger LOGGER;
 	
 	public static void debug(Object o) {
 		if (DEBUG && (LOGGER != null)) {
@@ -33,15 +33,15 @@ public class LogManager {
 		}
 	}
 	
-	public static void warning(Object o) {
-		if (DEBUG && (LOGGER != null)) {
-			LOGGER.warning(o.toString());
-		}
-	}
-	
 	public static void log() {
 		if (DEBUG && (LOGGER != null)) {
 			LOGGER.log();
+		}
+	}
+	
+	public static void warning(Object o) {
+		if (DEBUG && (LOGGER != null)) {
+			LOGGER.warning(o.toString());
 		}
 	}
 	

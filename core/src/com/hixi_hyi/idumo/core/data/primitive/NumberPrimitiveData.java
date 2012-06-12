@@ -20,17 +20,17 @@ package com.hixi_hyi.idumo.core.data.primitive;
 import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
 
 public class NumberPrimitiveData extends PrimitiveData {
-
+	
 	public NumberPrimitiveData(double n) {
 		add(new NumberRawDataType(NAME, n, "Primitive : Number"));
 	}
-
+	
 	public double getNumber() {
 		return (Double) getValue(NAME);
 	}
-
+	
 	@Override
-	public String toString(){
+	public String toString() {
 		return String.valueOf(getNumber());
 	}
 }

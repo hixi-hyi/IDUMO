@@ -32,24 +32,29 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * Android上の近接センサの情報を取得できるProvider
- *
+ * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- *
+ * 
  */
 public class AndroidProximityProvider implements Sendable, AndroidController {
-
+	
 	private ProximitySensor	proximity;
-
+	
 	public AndroidProximityProvider(Activity activity) {
 		ProximitySensor proximitySensor = ProximitySensor.INSTANCE;
 		if (!proximitySensor.isInit()) {
 			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
 			proximitySensor.init(sensor);
 		}
-		this.proximity = proximitySensor;
+		proximity = proximitySensor;
 	}
-
+	
+	@Override
+	public boolean isReady() {
+		return proximity.isReady();
+	}
+	
 	@Override
 	public FlowingData onCall() {
 		LogManager.log();
@@ -57,37 +62,32 @@ public class AndroidProximityProvider implements Sendable, AndroidController {
 		p.add(new AndroidProximityData(proximity.getProximity()));
 		return p;
 	}
-
-	@Override
-	public boolean isReady() {
-		return proximity.isReady();
-	}
-
+	
 	@Override
 	public void onIdumoDestroy() {}
-
+	
 	@Override
 	public void onIdumoPause() {
 		proximity.unregister();
 	}
-
+	
 	@Override
 	public void onIdumoRestart() {}
-
+	
 	@Override
 	public void onIdumoResume() {
 		proximity.register();
 	}
-
+	
 	@Override
 	public void onIdumoStart() {}
-
+	
 	@Override
 	public void onIdumoStop() {}
-
+	
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(AndroidProximityData.class);
 	}
-
+	
 }

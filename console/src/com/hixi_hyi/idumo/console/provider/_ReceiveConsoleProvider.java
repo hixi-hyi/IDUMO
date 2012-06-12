@@ -13,7 +13,7 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
 
 public class _ReceiveConsoleProvider implements Sendable {
 	
-	private BufferedReader	br;
+	private BufferedReader br;
 	
 	public _ReceiveConsoleProvider() {
 		br = new BufferedReader(new InputStreamReader(System.in));
@@ -30,7 +30,8 @@ public class _ReceiveConsoleProvider implements Sendable {
 		FlowingData p = new FlowingData();
 		try {
 			p.add(new StringPrimitiveData(br.readLine()));
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			throw new IDUMORuntimeException(e);
 		}
 		return p;

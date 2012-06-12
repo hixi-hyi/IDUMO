@@ -57,7 +57,7 @@ public enum TemperatureSensor implements SensorEventListener {
 	
 	public void init(SensorManager manager) {
 		isInit = true;
-		this.sensorManager = manager;
+		sensorManager = manager;
 	}
 	
 	public boolean isInit() {
@@ -74,7 +74,7 @@ public enum TemperatureSensor implements SensorEventListener {
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		if (sensor.getType() == useSensorType()) {
-			this.accurary = accuracy;
+			accurary = accuracy;
 		}
 	}
 	

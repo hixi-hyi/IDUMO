@@ -87,7 +87,7 @@ public enum AccelerometerSensor implements SensorEventListener {
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		if (sensor.getType() == useSensorType()) {
-			this.accurary = accuracy;
+			accurary = accuracy;
 		}
 	}
 	

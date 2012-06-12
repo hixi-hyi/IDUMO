@@ -25,29 +25,30 @@ import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
  * @version 2.0
  */
 public class AndroidOrientationData extends AbstractData {
-	private static final String PITCH="pitch";
-	private static final String ROLL="roll";
-	private static final String AZMUTH="azmuth";
-
+	private static final String	PITCH	= "pitch";
+	private static final String	ROLL	= "roll";
+	private static final String	AZMUTH	= "azmuth";
+	
 	public AndroidOrientationData(float pitch, float roll, float azmuth) {
 		add(new NumberRawDataType(PITCH, pitch, "Android Orientation Pitch"));
 		add(new NumberRawDataType(ROLL, roll, "Android Orientation Roll"));
 		add(new NumberRawDataType(AZMUTH, azmuth, "Android Orientation Azmuth"));
 	}
-
-	public float getPitch() {
-		return (Float) getValue(PITCH);
-	}
-
-	public float getRoll() {
-		return (Float) getValue(ROLL);
-	}
-
+	
 	public float getAzmuth() {
 		return (Float) getValue(AZMUTH);
 	}
+	
+	public float getPitch() {
+		return (Float) getValue(PITCH);
+	}
+	
+	public float getRoll() {
+		return (Float) getValue(ROLL);
+	}
+	
 	@Override
-	public String toString(){
-		return String.format("%s:%f\n%s:%f\n%s:%f",PITCH,getPitch(),ROLL,getRoll(),AZMUTH,getAzmuth());
+	public String toString() {
+		return String.format("%s:%f\n%s:%f\n%s:%f", PITCH, getPitch(), ROLL, getRoll(), AZMUTH, getAzmuth());
 	}
 }

@@ -17,19 +17,17 @@
  */
 package com.hixi_hyi.idumo.android.receiptor;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Context;
 import android.widget.TextView;
 
 import com.hixi_hyi.idumo.core.data.Data;
 import com.hixi_hyi.idumo.core.data.FlowingData;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.ArrayConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Executable;
+import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
 import com.hixi_hyi.idumo.core.util.LogManager;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
@@ -43,15 +41,25 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
  */
 public class AndroidTextViewReceiptor extends TextView implements Receivable, Executable {
 	
-	private Sendable	sender;
-	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
-	private Activity					activity;
+	private Sendable				sender;
+	private ReceiveValidatorSize	vSize	= new ReceiveValidatorSize(1);
+	private Activity				activity;
 	
 	public AndroidTextViewReceiptor(Context context) {
 		super(context);
 		activity = (Activity) context;
 		activity.setContentView(this);
 		setTextSize(30.0f);
+	}
+	
+	@Override
+	public boolean isReady() {
+		return true;
+	}
+	
+	@Override
+	public ConnectDataType receivableType() {
+		return new ArrayConnectDataType(Data.class);
 	}
 	
 	@Override
@@ -73,16 +81,6 @@ public class AndroidTextViewReceiptor extends TextView implements Receivable, Ex
 	public void setSender(Sendable... handler) throws IDUMOException {
 		vSize.validate(handler);
 		sender = handler[0];
-	}
-	
-	@Override
-	public boolean isReady() {
-		return true;
-	}
-	
-	@Override
-	public ConnectDataType receivableType() {
-		return new ArrayConnectDataType(Data.class);
 	}
 	
 }

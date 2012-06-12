@@ -32,24 +32,29 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * GPS情報を取得できるProvider
- *
+ * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- *
+ * 
  */
 public class AndroidGPSProvider implements Sendable, AndroidController {
-
+	
 	private GPSSensor	gps;
-
+	
 	public AndroidGPSProvider(Activity activity) {
 		GPSSensor gpsSensor = GPSSensor.INSTANCE;
 		if (!gpsSensor.isInit()) {
 			LocationManager location = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
 			gpsSensor.init(location);
 		}
-		this.gps = gpsSensor;
+		gps = gpsSensor;
 	}
-
+	
+	@Override
+	public boolean isReady() {
+		return gps.isReady();
+	}
+	
 	@Override
 	public FlowingData onCall() {
 		LogManager.log();
@@ -57,37 +62,32 @@ public class AndroidGPSProvider implements Sendable, AndroidController {
 		p.add(new AndroidGPSData(gps.getLatitude(), gps.getLongitude(), gps.getAltitude(), gps.getTime(), gps.getBearing(), gps.getSpeed()));
 		return p;
 	}
-
-	@Override
-	public boolean isReady() {
-		return gps.isReady();
-	}
-
+	
 	@Override
 	public void onIdumoDestroy() {}
-
+	
 	@Override
 	public void onIdumoPause() {
 		gps.unregister();
 	}
-
+	
 	@Override
 	public void onIdumoRestart() {}
-
+	
 	@Override
 	public void onIdumoResume() {
 		gps.register();
 	}
-
+	
 	@Override
 	public void onIdumoStart() {}
-
+	
 	@Override
 	public void onIdumoStop() {}
-
+	
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(AndroidGPSData.class);
 	}
-
+	
 }
