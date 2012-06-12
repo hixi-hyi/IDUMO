@@ -24,7 +24,7 @@ import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
 
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * GPSセンサ
@@ -118,13 +118,13 @@ public enum GPSSensor implements LocationListener {
 	public void onLocationChanged(Location location) {
 		this.location = location;
 		isReady = true;
-		IDUMOLogManager.debug("Latitude:" + String.valueOf(location.getLatitude()));
-		IDUMOLogManager.debug("Longitude:" + String.valueOf(location.getLongitude()));
-		IDUMOLogManager.debug("Accurary:" + String.valueOf(location.getAccuracy()));
-		IDUMOLogManager.debug("Altitude:" + String.valueOf(location.getAltitude()));
-		IDUMOLogManager.debug("Time:" + String.valueOf(location.getTime()));
-		IDUMOLogManager.debug("Speed:" + String.valueOf(location.getSpeed()));
-		IDUMOLogManager.debug("Bearing:" + String.valueOf(location.getBearing()));
+		LogManager.debug("Latitude:" + String.valueOf(location.getLatitude()));
+		LogManager.debug("Longitude:" + String.valueOf(location.getLongitude()));
+		LogManager.debug("Accurary:" + String.valueOf(location.getAccuracy()));
+		LogManager.debug("Altitude:" + String.valueOf(location.getAltitude()));
+		LogManager.debug("Time:" + String.valueOf(location.getTime()));
+		LogManager.debug("Speed:" + String.valueOf(location.getSpeed()));
+		LogManager.debug("Bearing:" + String.valueOf(location.getBearing()));
 		
 	}
 	
@@ -138,13 +138,13 @@ public enum GPSSensor implements LocationListener {
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 		switch (status) {
 			case LocationProvider.AVAILABLE:
-				IDUMOLogManager.debug("STATUS AVAILABLE");
+				LogManager.debug("STATUS AVAILABLE");
 				break;
 			case LocationProvider.OUT_OF_SERVICE:
-				IDUMOLogManager.debug("STATUS OUT_OF_SERVICE");
+				LogManager.debug("STATUS OUT_OF_SERVICE");
 				break;
 			case LocationProvider.TEMPORARILY_UNAVAILABLE:
-				IDUMOLogManager.debug("STATUS TEMPORARILY_UNAVAILABLE");
+				LogManager.debug("STATUS TEMPORARILY_UNAVAILABLE");
 				break;
 		}
 	}

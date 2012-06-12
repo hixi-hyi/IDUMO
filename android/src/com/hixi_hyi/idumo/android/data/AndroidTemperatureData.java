@@ -17,18 +17,18 @@
  */
 package com.hixi_hyi.idumo.android.data;
 
-import com.hixi_hyi.idumo.core.data.Data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.raw.RawDataTypeNumber;
+import com.hixi_hyi.idumo.core.data.Data.AbstractData;
+import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
 
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class AndroidTemperatureData extends IDUMODataBase {
+public class AndroidTemperatureData extends AbstractData {
 	public static final String	TEMPERATURE	= "temperature";
 	
 	public AndroidTemperatureData(float temperature) {
-		add(new RawDataTypeNumber(TEMPERATURE, temperature, "Android Temperature"));
+		add(new NumberRawDataType(TEMPERATURE, temperature, "Android Temperature"));
 	}
 	
 	public float getProximity() {

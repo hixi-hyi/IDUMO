@@ -17,16 +17,16 @@
  */
 package com.hixi_hyi.idumo.common.data;
 
-import com.hixi_hyi.idumo.core.data.Data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.raw.RawDataTypeNumber;
-import com.hixi_hyi.idumo.core.data.raw.RawDataTypeString;
+import com.hixi_hyi.idumo.core.data.Data.AbstractData;
+import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
+import com.hixi_hyi.idumo.core.data.raw.StringRawDataType;
 
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  * 
  */
-public class LivedoorWeatherData extends IDUMODataBase {
+public class LivedoorWeatherData extends AbstractData {
 	public static final String	LOCATION	= "location";
 	public static final String	DATE		= "date";
 	public static final String	MAX_TEMP	= "max_temp";
@@ -35,12 +35,12 @@ public class LivedoorWeatherData extends IDUMODataBase {
 	public static final String	DESCRIPTION	= "description";
 	
 	public LivedoorWeatherData(String location, String date, Double maxTemp, Double minTemp, String weather, String description) {
-		add(new RawDataTypeString(LOCATION, location, "livedoor location"));
-		add(new RawDataTypeString(DATE, date, "livedoor date"));
-		add(new RawDataTypeNumber(MAX_TEMP, maxTemp, "livedoor max temp"));
-		add(new RawDataTypeNumber(MIN_TEMP, minTemp, "livedoor min temp"));
-		add(new RawDataTypeString(WEATHER, weather, "livedoor weather"));
-		add(new RawDataTypeString(DESCRIPTION, description, "livedoor description"));
+		add(new StringRawDataType(LOCATION, location, "livedoor location"));
+		add(new StringRawDataType(DATE, date, "livedoor date"));
+		add(new NumberRawDataType(MAX_TEMP, maxTemp, "livedoor max temp"));
+		add(new NumberRawDataType(MIN_TEMP, minTemp, "livedoor min temp"));
+		add(new StringRawDataType(WEATHER, weather, "livedoor weather"));
+		add(new StringRawDataType(DESCRIPTION, description, "livedoor description"));
 	}
 	
 	public String getLocation() {

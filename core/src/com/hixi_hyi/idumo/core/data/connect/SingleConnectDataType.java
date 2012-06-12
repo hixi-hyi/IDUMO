@@ -6,11 +6,11 @@ import java.util.List;
 
 import com.hixi_hyi.idumo.core.data.Data;
 
-public class ConnectDataTypeArray implements ConnectDataType {
+public class SingleConnectDataType implements ConnectDataType {
 	
 	List<Class<? extends Data>>	data	= new ArrayList<Class<? extends Data>>();
 	
-	public ConnectDataTypeArray(Class<? extends Data> d) {
+	public SingleConnectDataType(Class<? extends Data> d) {
 		data.add(d);
 	}
 	

@@ -36,13 +36,13 @@ import com.hixi_hyi.idumo.common.data.GPSData;
 import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
-import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.parts.Receivable;
+import com.hixi_hyi.idumo.core.parts.Executable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 /**
  * Android上にテキスト情報を出力するReceiptorです
@@ -51,11 +51,11 @@ import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
  * @version 2.0
  * 
  */
-public class AndroidMapViewReceiptor extends MapView implements IDUMOReceivable, IDUMORunnable {
+public class AndroidMapViewReceiptor extends MapView implements Receivable, Executable {
 	
-	private IDUMOSendable	sender;
+	private Sendable	sender;
 	private Activity					activity;
-	private IDUMOReceiveValidatorSize vSize = new IDUMOReceiveValidatorSize(1);
+	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
 	
 	private static final int ZOOM_LEVEL = 10;
 	private MapController controller;
@@ -78,17 +78,17 @@ public class AndroidMapViewReceiptor extends MapView implements IDUMOReceivable,
 	
 	@Override
 	public void run() {
-		IDUMOLogManager.log();
+		LogManager.log();
 		FlowingData idf = sender.onCall();
 		LatLngDataElement llde = (LatLngDataElement)idf.next();
 		GeoPoint point = new GeoPoint((int)(llde.getLatitude()*1E6), (int)(llde.getLongitude()*1E6));	
-		IDUMOLogManager.debug(point);
+		LogManager.debug(point);
 		controller.setCenter(point);	
 		invalidate();
 	}
 	
 	@Override
-	public void setSender(IDUMOSendable... handler) throws IDUMOException {
+	public void setSender(Sendable... handler) throws IDUMOException {
 		vSize.validate(handler);
 		sender = handler[0];
 	}
@@ -100,7 +100,7 @@ public class AndroidMapViewReceiptor extends MapView implements IDUMOReceivable,
 	
 	@Override
 	public ConnectDataType receivableType() {
-		return new ConnectDataTypeSingle(LatLngDataElement.class);
+		return new SingleConnectDataType(LatLngDataElement.class);
 	}
 	
 }

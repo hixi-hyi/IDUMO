@@ -7,9 +7,9 @@ import android.widget.ImageView;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
-import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
+import com.hixi_hyi.idumo.core.parts.Receivable;
+import com.hixi_hyi.idumo.core.parts.Executable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
 
 // TODO 非検証
 /**
@@ -18,9 +18,9 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class _ImageViewReceiptor extends ImageView implements IDUMOReceivable, IDUMORunnable {
+public class _ImageViewReceiptor extends ImageView implements Receivable, Executable {
 	
-	private IDUMOSendable	sender;
+	private Sendable	sender;
 	private Activity		activity;
 	
 	public _ImageViewReceiptor(Context context) {
@@ -37,8 +37,8 @@ public class _ImageViewReceiptor extends ImageView implements IDUMOReceivable, I
 	}
 	
 	@Override
-	public void setSender(IDUMOSendable... senders) throws IDUMOException {
-		IDUMOSendable sender = senders[0];
+	public void setSender(Sendable... senders) throws IDUMOException {
+		Sendable sender = senders[0];
 		// ArrayList<Class<?>> list = new
 		// ArrayList<Class<?>>(sender.getDataType());
 		// if (list.get(0) == Bitmap.class) {

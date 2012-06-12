@@ -3,42 +3,42 @@ package com.hixi_hyi.idumo.common.converter;
 import java.util.ArrayList;
 
 import com.hixi_hyi.idumo.core.data.FlowingData;
-import com.hixi_hyi.idumo.core.data.PrimitiveDataNumber;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
+import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidator;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorType;
+import com.hixi_hyi.idumo.core.parts.Receivable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
-public class _Number2AccelerometerConverter implements IDUMOSendable, IDUMOReceivable {
+public class _Number2AccelerometerConverter implements Sendable, Receivable {
 	
-	private ArrayList<IDUMOSendable>	sender	= new ArrayList<IDUMOSendable>();
-	private IDUMOReceiveValidator			vSize	= new IDUMOReceiveValidatorSize(3);
-	private IDUMOReceiveValidator			vType1	= new IDUMOReceiveValidatorType(1, PrimitiveDataNumber.class);
-	private IDUMOReceiveValidator			vType2	= new IDUMOReceiveValidatorType(2, PrimitiveDataNumber.class);
-	private IDUMOReceiveValidator			vType3	= new IDUMOReceiveValidatorType(3, PrimitiveDataNumber.class);
+	private ArrayList<Sendable>	sender	= new ArrayList<Sendable>();
+	private ReceiveValidator			vSize	= new ReceiveValidatorSize(3);
+	private ReceiveValidator			vType1	= new ReceiveValidatorType(1, NumberPrimitiveData.class);
+	private ReceiveValidator			vType2	= new ReceiveValidatorType(2, NumberPrimitiveData.class);
+	private ReceiveValidator			vType3	= new ReceiveValidatorType(3, NumberPrimitiveData.class);
 	
 	public _Number2AccelerometerConverter() {}
 	
 	@Override
 	public boolean isReady() {
 		boolean flag = true;
-		for (IDUMOSendable s : sender) {
+		for (Sendable s : sender) {
 			flag = flag && (s != null) && s.isReady();
 		}
 		return flag;
 	}
 	
 	@Override
-	public void setSender(IDUMOSendable... senders) throws IDUMOException {
+	public void setSender(Sendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		vType1.validate(senders);
 		vType2.validate(senders);
 		vType3.validate(senders);
-		for (IDUMOSendable s : senders) {
+		for (Sendable s : senders) {
 			sender.add(s);
 		}
 	}

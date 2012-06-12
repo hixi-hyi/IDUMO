@@ -15,26 +15,28 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core.parts;
+package com.hixi_hyi.idumo.core.data.primitive;
 
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.exception.IDUMOException;
+import com.hixi_hyi.idumo.core.data.raw.RawDataType;
+import com.hixi_hyi.idumo.core.data.raw.StringRawDataType;
 
-/**
- * IdumoComponentのHandler,Receiptorを作成する際に実装してください
- * 
- * @author Hiroyoshi HOUCHI
- * 
- */
-public interface IDUMOReceivable extends IDUMOConnectable {
-	/**
-	 * データを受け取るSender(Provider,Handlerに相当)をsetするメソッド
-	 * 
-	 * @param senders
-	 * @return
-	 * @throws IDUMOException
-	 */
-	public void setSender(IDUMOSendable... senders) throws IDUMOException;
-	
-	public ConnectDataType receivableType();
+public class StringPrimitiveData extends PrimitiveData {
+
+	public StringPrimitiveData(String n) {
+		add(new StringRawDataType(NAME, n, "Primitive : String"));
+	}
+
+	public StringPrimitiveData(RawDataType raw) {
+		add(new StringRawDataType(NAME, (String) raw.getValue(), raw.getSummary()));
+	}
+
+	public String getString() {
+		String s = (String) getValue(NAME);
+		return s;
+	}
+
+	@Override
+	public String toString(){
+		return getString();
+	}
 }

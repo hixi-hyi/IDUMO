@@ -15,41 +15,24 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core.data.raw;
+package com.hixi_hyi.idumo.core.parts;
 
-public class RawDataTypeBool implements RawDataType {
-	private String	name;
-	private Boolean	value;
-	private String	summary;
+import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+
+/**
+ * IdumoのProvider,Handlerを作成するときに実装してください
+ * 
+ * @author Hiroyoshi HOUCHI
+ * 
+ */
+public interface Sendable extends Connectable {
+	/**
+	 * データを取得する際に呼び出されるメソッド
+	 * 
+	 * @return
+	 */
+	public FlowingData onCall();
 	
-	public RawDataTypeBool(String name, Boolean value, String summary) {
-		this.name = name;
-		this.value = value;
-		this.summary = summary;
-	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
-	
-	@Override
-	public Boolean getValue() {
-		return value;
-	}
-	
-	@Override
-	public Class<?> getType() {
-		return Boolean.class;
-	}
-	
-	@Override
-	public String toString() {
-		return String.format("Bool[%s:%s]", name, value);
-	}
-	
-	@Override
-	public String getSummary() {
-		return summary;
-	}
+	public ConnectDataType sendableType();
 }

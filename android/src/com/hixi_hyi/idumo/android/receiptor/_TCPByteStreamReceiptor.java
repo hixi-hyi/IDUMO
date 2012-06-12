@@ -10,10 +10,10 @@ import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
-import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import com.hixi_hyi.idumo.core.parts.Receivable;
+import com.hixi_hyi.idumo.core.parts.Executable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * バイト情報をTCP通信を用いて送ることが出来るReceiptor
@@ -21,12 +21,12 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class _TCPByteStreamReceiptor implements IDUMOReceivable, AndroidController, IDUMORunnable {
+public class _TCPByteStreamReceiptor implements Receivable, AndroidController, Executable {
 	private String			ip;
 	private int				port;
 	private Socket			socket;
 	private OutputStream	outstream;
-	private IDUMOSendable	sender;
+	private Sendable	sender;
 	
 	public _TCPByteStreamReceiptor(String ip, int port) {
 		this.ip = ip;
@@ -40,7 +40,7 @@ public class _TCPByteStreamReceiptor implements IDUMOReceivable, AndroidControll
 	}
 	
 	@Override
-	public void setSender(IDUMOSendable... senders) throws IDUMOException {
+	public void setSender(Sendable... senders) throws IDUMOException {
 		// if (senders.length != 1) {
 		// return false;
 		// }
@@ -88,13 +88,13 @@ public class _TCPByteStreamReceiptor implements IDUMOReceivable, AndroidControll
 	
 	@Override
 	public void run() {
-		IDUMOLogManager.log();
+		LogManager.log();
 		FlowingData data = sender.onCall();
 		byte[] bytedata = new byte[data.size()];
 		int i = 0;
-		IDUMOLogManager.debug("size: " + data.size());
+		LogManager.debug("size: " + data.size());
 		for (Object o : data) {
-			IDUMOLogManager.debug(o.toString());
+			LogManager.debug(o.toString());
 			bytedata[i] = (Byte) o;
 			i++;
 		}

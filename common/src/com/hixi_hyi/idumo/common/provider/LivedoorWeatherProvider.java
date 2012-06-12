@@ -25,9 +25,9 @@ import com.hixi_hyi.idumo.common.component.LivedoorWeather;
 import com.hixi_hyi.idumo.common.data.LivedoorWeatherData;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
 
 /**
  * LivedoorWeatherからデータを取得し，提供するプロバイダ
@@ -35,7 +35,7 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class LivedoorWeatherProvider implements IDUMOSendable {
+public class LivedoorWeatherProvider implements Sendable {
 
 	private LivedoorWeather	weather;
 
@@ -65,7 +65,7 @@ public class LivedoorWeatherProvider implements IDUMOSendable {
 
 	@Override
 	public ConnectDataType sendableType() {
-		return new ConnectDataTypeSingle(LivedoorWeatherData.class);
+		return new SingleConnectDataType(LivedoorWeatherData.class);
 	}
 
 }

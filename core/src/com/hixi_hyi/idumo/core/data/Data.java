@@ -10,7 +10,7 @@ public interface Data {
 
 	RawDataType get(String name);
 
-	public abstract class IDUMODataBase implements Data,TextElement{
+	public abstract class AbstractData implements Data,TextElement{
 		private Map<String, RawDataType>	raw	= new TreeMap<String, RawDataType>();
 		
 		public RawDataType add(RawDataType value) {

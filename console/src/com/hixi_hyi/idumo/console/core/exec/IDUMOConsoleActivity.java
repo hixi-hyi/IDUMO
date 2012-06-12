@@ -2,18 +2,18 @@ package com.hixi_hyi.idumo.console.core.exec;
 
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
-import com.hixi_hyi.idumo.core.exec.IDUMOActivity;
-import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
-import com.hixi_hyi.idumo.core.exec.IDUMOContainer;
-import com.hixi_hyi.idumo.core.exec.IDUMOController;
-import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
+import com.hixi_hyi.idumo.core.exec.CoreActivity;
+import com.hixi_hyi.idumo.core.exec.CoreComponent;
+import com.hixi_hyi.idumo.core.exec.CoreContainer;
+import com.hixi_hyi.idumo.core.exec.CoreController;
+import com.hixi_hyi.idumo.core.parts.Executable;
 
-public class IDUMOConsoleActivity implements IDUMOActivity {
-	private IDUMOComponent	component;
+public class IDUMOConsoleActivity implements CoreActivity {
+	private CoreComponent	component;
 	
-	public IDUMOConsoleActivity(IDUMOComponent component) {
+	public IDUMOConsoleActivity(CoreComponent component) {
 		this.component = component;
-		this.component.setContainer(new IDUMOContainer());
+		this.component.setContainer(new CoreContainer());
 	}
 	
 	@Override
@@ -26,7 +26,7 @@ public class IDUMOConsoleActivity implements IDUMOActivity {
 	@Override
 	public void onIdumoStart() {
 		component.onIdumoPrepare();
-		for (IDUMOController controller : component.getApplicationControllers()) {
+		for (CoreController controller : component.getApplicationControllers()) {
 			controller.onIdumoStart();
 		}
 		component.setReady(true);
@@ -34,7 +34,7 @@ public class IDUMOConsoleActivity implements IDUMOActivity {
 	
 	@Override
 	public void onIdumoStop() {
-		for (IDUMOController controller : component.getApplicationControllers()) {
+		for (CoreController controller : component.getApplicationControllers()) {
 			controller.onIdumoStop();
 		}
 		component.setReady(false);
@@ -47,7 +47,7 @@ public class IDUMOConsoleActivity implements IDUMOActivity {
 				Thread.sleep(component.getSleepTime());
 			} catch (InterruptedException e) {}
 		}
-		IDUMORunnable runnable = component.getRunnable();
+		Executable runnable = component.getRunnable();
 		while (!runnable.isReady()) {
 			try {
 				Thread.sleep(component.getSleepTime());

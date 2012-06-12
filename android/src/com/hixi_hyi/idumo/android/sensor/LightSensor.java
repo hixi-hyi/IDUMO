@@ -22,7 +22,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * 光センサ
@@ -80,7 +80,7 @@ public enum LightSensor implements SensorEventListener {
 	
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-		IDUMOLogManager.log();
+		LogManager.log();
 		if (event.sensor.getType() == useSensorType()) {
 			light = event.values[0];
 			isReady = true;

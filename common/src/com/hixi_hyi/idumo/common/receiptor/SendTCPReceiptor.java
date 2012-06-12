@@ -9,17 +9,17 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import com.hixi_hyi.idumo.core.data.FlowingData;
-import com.hixi_hyi.idumo.core.data.PrimitiveDataString;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.exec.IDUMOController;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
-import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidator;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorType;
+import com.hixi_hyi.idumo.core.exec.CoreController;
+import com.hixi_hyi.idumo.core.parts.Receivable;
+import com.hixi_hyi.idumo.core.parts.Executable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
 /**
  * バイト情報をTCP通信を用いて送ることが出来るReceiptor
@@ -27,18 +27,18 @@ import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorType;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController, IDUMORunnable {
+public class SendTCPReceiptor implements Receivable, CoreController, Executable {
 	private String				ip;
 	private int					port;
 	private Socket				socket;
 	private PrintWriter			pw;
 	private OutputStream		outstream;
-	private IDUMOSendable		sender;
-	private IDUMOReceiveValidator	vSize	= new IDUMOReceiveValidatorSize(1);
-	private IDUMOReceiveValidator	vType	= new IDUMOReceiveValidatorType(1, PrimitiveDataString.class);
+	private Sendable		sender;
+	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
+	private ReceiveValidator	vType	= new ReceiveValidatorType(1, StringPrimitiveData.class);
 	
 	public SendTCPReceiptor(String ip, int port) {
-		IDUMOLogManager.log();
+		LogManager.log();
 		this.ip = ip;
 		this.port = port;
 		socket = new Socket();
@@ -46,12 +46,12 @@ public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController, IDUMO
 	
 	@Override
 	public boolean isReady() {
-		IDUMOLogManager.log();
+		LogManager.log();
 		return sender.isReady() && socket.isConnected();
 	}
 	
 	@Override
-	public void setSender(IDUMOSendable... senders) throws IDUMOException {
+	public void setSender(Sendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		vType.validate(senders);
 		this.sender = senders[0];
@@ -59,7 +59,7 @@ public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController, IDUMO
 	
 	@Override
 	public void onIdumoStart() {
-		IDUMOLogManager.log();
+		LogManager.log();
 		try {
 			socket.connect(new InetSocketAddress(ip, port));
 			outstream = socket.getOutputStream();
@@ -83,7 +83,7 @@ public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController, IDUMO
 	
 	@Override
 	public void run() {
-		IDUMOLogManager.log();
+		LogManager.log();
 		if (!sender.isReady()) {
 			return;
 		}
@@ -92,7 +92,7 @@ public class SendTCPReceiptor implements IDUMOReceivable, IDUMOController, IDUMO
 			return;
 		}
 		for (Object o : data) {
-			IDUMOLogManager.debug(o.toString());
+			LogManager.debug(o.toString());
 			pw.println(o.toString());
 			pw.flush();
 		}

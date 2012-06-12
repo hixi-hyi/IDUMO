@@ -12,13 +12,13 @@ import com.hixi_hyi.idumo.common.converter.Number2GPSConverter;
 import com.hixi_hyi.idumo.common.provider.HotpepperHandler;
 import com.hixi_hyi.idumo.common.provider.NumberProvider;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 public class Shop2MapView extends IDUMOAndroidWrapper {
 	@Override
 	public void init() {
-		IDUMOLogManager.DEBUG = true;
-		IDUMOLogManager.LOGGER = new IDUMOAndroidLogger("IDUMO");
+		LogManager.DEBUG = true;
+		LogManager.LOGGER = new IDUMOAndroidLogger("IDUMO");
 		setExecutionWithComponent(new IDUMOAndroidComponent() {
 
 			@Override

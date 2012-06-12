@@ -15,22 +15,26 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core.data;
+package com.hixi_hyi.idumo.core.parts;
 
-import com.hixi_hyi.idumo.core.data.raw.RawDataTypeBool;
+import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.exception.IDUMOException;
 
-public class PrimitiveDataBool extends PrimitiveData {
-
-	public PrimitiveDataBool(boolean n) {
-		add(new RawDataTypeBool(NAME, n, "Primitive : Number"));
-	}
-
-	public boolean getBool() {
-		return (Boolean) getValue(NAME);
-	}
-
-	@Override
-	public String toString(){
-		return String.valueOf(getBool());
-	}
+/**
+ * IdumoComponentのHandler,Receiptorを作成する際に実装してください
+ * 
+ * @author Hiroyoshi HOUCHI
+ * 
+ */
+public interface Receivable extends Connectable {
+	/**
+	 * データを受け取るSender(Provider,Handlerに相当)をsetするメソッド
+	 * 
+	 * @param senders
+	 * @return
+	 * @throws IDUMOException
+	 */
+	public void setSender(Sendable... senders) throws IDUMOException;
+	
+	public ConnectDataType receivableType();
 }

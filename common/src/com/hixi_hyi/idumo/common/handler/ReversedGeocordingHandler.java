@@ -6,16 +6,16 @@ import com.hixi_hyi.idumo.common.component.ReversedGeocording;
 import com.hixi_hyi.idumo.common.data.GPSData;
 import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
 import com.hixi_hyi.idumo.core.data.FlowingData;
-import com.hixi_hyi.idumo.core.data.PrimitiveDataNumber;
-import com.hixi_hyi.idumo.core.data.PrimitiveDataString;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeMulti;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
+import com.hixi_hyi.idumo.core.data.connect.MultiConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
+import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveData;
+import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorType;
+import com.hixi_hyi.idumo.core.parts.Receivable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
 /**
  * 逆ジオコーディング(lat,lon->住所)のハンドラです． senderにはlat,lonの順番で設定してください．
@@ -23,11 +23,11 @@ import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorType;
  * @author Hiroyoshi
  *
  */
-public class ReversedGeocordingHandler implements IDUMOSendable, IDUMOReceivable {
+public class ReversedGeocordingHandler implements Sendable, Receivable {
 
-	private IDUMOSendable sender;
-	private IDUMOReceiveValidatorSize		vSize	= new IDUMOReceiveValidatorSize(1);
-	private IDUMOReceiveValidatorType		v1Type	= new IDUMOReceiveValidatorType(1, GPSData.class);
+	private Sendable sender;
+	private ReceiveValidatorSize		vSize	= new ReceiveValidatorSize(1);
+	private ReceiveValidatorType		v1Type	= new ReceiveValidatorType(1, GPSData.class);
 
 	@Override
 	public FlowingData onCall() {
@@ -36,13 +36,13 @@ public class ReversedGeocordingHandler implements IDUMOSendable, IDUMOReceivable
 		ReversedGeocording rg = new ReversedGeocording(gd.getLatitude(), gd.getLongitude());
 
 		FlowingData p = new FlowingData();
-		p.add(new PrimitiveDataString(rg.getLocation()));
+		p.add(new StringPrimitiveData(rg.getLocation()));
 
 		return p;
 	}
 
 	@Override
-	public void setSender(IDUMOSendable... senders) throws IDUMOException {
+	public void setSender(Sendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		v1Type.validate(senders);
 		sender = senders[0];
@@ -55,12 +55,12 @@ public class ReversedGeocordingHandler implements IDUMOSendable, IDUMOReceivable
 
 	@Override
 	public ConnectDataType receivableType() {
-		return new ConnectDataTypeSingle(GPSData.class);
+		return new SingleConnectDataType(GPSData.class);
 	}
 
 	@Override
 	public ConnectDataType sendableType() {
-		return new ConnectDataTypeSingle(PrimitiveDataString.class);
+		return new SingleConnectDataType(StringPrimitiveData.class);
 	}
 
 }

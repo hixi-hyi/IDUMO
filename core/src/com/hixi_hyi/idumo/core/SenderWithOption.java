@@ -20,9 +20,9 @@ package com.hixi_hyi.idumo.core;
 import java.util.Map;
 
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
 
-public interface SenderWithOption extends IDUMOSendable {
+public interface SenderWithOption extends Sendable {
 	public Map<String, String> getOptions();
 	
 	public void setOption(OptionMethodType type) throws IDUMOException;

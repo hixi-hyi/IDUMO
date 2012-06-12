@@ -6,14 +6,12 @@ import java.util.List;
 
 import com.hixi_hyi.idumo.core.data.Data;
 
-public class ConnectDataTypeMulti implements ConnectDataType {
+public class ArrayConnectDataType implements ConnectDataType {
 	
 	List<Class<? extends Data>>	data	= new ArrayList<Class<? extends Data>>();
 	
-	public ConnectDataTypeMulti(Class<? extends Data>... ds) {
-		for (Class<? extends Data> d : ds) {
-			data.add(d);
-		}
+	public ArrayConnectDataType(Class<? extends Data> d) {
+		data.add(d);
 	}
 	
 	@Override

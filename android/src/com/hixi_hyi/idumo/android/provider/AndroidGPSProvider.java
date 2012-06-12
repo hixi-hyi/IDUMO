@@ -26,9 +26,9 @@ import com.hixi_hyi.idumo.android.data.AndroidGPSData;
 import com.hixi_hyi.idumo.android.sensor.GPSSensor;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * GPS情報を取得できるProvider
@@ -37,7 +37,7 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @version 2.0
  *
  */
-public class AndroidGPSProvider implements IDUMOSendable, AndroidController {
+public class AndroidGPSProvider implements Sendable, AndroidController {
 
 	private GPSSensor	gps;
 
@@ -52,7 +52,7 @@ public class AndroidGPSProvider implements IDUMOSendable, AndroidController {
 
 	@Override
 	public FlowingData onCall() {
-		IDUMOLogManager.log();
+		LogManager.log();
 		FlowingData p = new FlowingData();
 		p.add(new AndroidGPSData(gps.getLatitude(), gps.getLongitude(), gps.getAltitude(), gps.getTime(), gps.getBearing(), gps.getSpeed()));
 		return p;
@@ -87,7 +87,7 @@ public class AndroidGPSProvider implements IDUMOSendable, AndroidController {
 
 	@Override
 	public ConnectDataType sendableType() {
-		return new ConnectDataTypeSingle(AndroidGPSData.class);
+		return new SingleConnectDataType(AndroidGPSData.class);
 	}
 
 }

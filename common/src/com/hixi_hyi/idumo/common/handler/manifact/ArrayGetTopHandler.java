@@ -3,16 +3,16 @@ package com.hixi_hyi.idumo.common.handler.manifact;
 import com.hixi_hyi.idumo.core.data.Data;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeArray;
+import com.hixi_hyi.idumo.core.data.connect.ArrayConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.parts.Receivable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
-public class ArrayGetTopHandler implements IDUMOSendable,IDUMOReceivable{
+public class ArrayGetTopHandler implements Sendable,Receivable{
 
-	private IDUMOSendable sender;
-	private IDUMOReceiveValidatorSize vSize = new IDUMOReceiveValidatorSize(1);
+	private Sendable sender;
+	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
 
 	@Override
 	public boolean isReady() {
@@ -20,14 +20,14 @@ public class ArrayGetTopHandler implements IDUMOSendable,IDUMOReceivable{
 	}
 
 	@Override
-	public void setSender(IDUMOSendable... senders) throws IDUMOException {
+	public void setSender(Sendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		sender = senders[0];
 	}
 
 	@Override
 	public ConnectDataType receivableType() {
-		return new ConnectDataTypeArray(Data.class);
+		return new ArrayConnectDataType(Data.class);
 	}
 
 	@Override

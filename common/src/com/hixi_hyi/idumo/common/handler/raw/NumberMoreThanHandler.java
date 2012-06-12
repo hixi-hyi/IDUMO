@@ -18,27 +18,27 @@
 package com.hixi_hyi.idumo.common.handler.raw;
 
 import com.hixi_hyi.idumo.core.data.FlowingData;
-import com.hixi_hyi.idumo.core.data.PrimitiveDataBool;
-import com.hixi_hyi.idumo.core.data.PrimitiveDataNumber;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
+import com.hixi_hyi.idumo.core.data.primitive.BoolPrimitiveData;
+import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorType;
+import com.hixi_hyi.idumo.core.parts.Receivable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class NumberMoreThanHandler implements IDUMOSendable, IDUMOReceivable {
+public class NumberMoreThanHandler implements Sendable, Receivable {
 	
-	private IDUMOSendable			sender;
+	private Sendable			sender;
 	private double					condition;
-	private IDUMOReceiveValidatorSize	validator	= new IDUMOReceiveValidatorSize(1);
-	private IDUMOReceiveValidatorType	vType		= new IDUMOReceiveValidatorType(1, PrimitiveDataNumber.class);
+	private ReceiveValidatorSize	validator	= new ReceiveValidatorSize(1);
+	private ReceiveValidatorType	vType		= new ReceiveValidatorType(1, NumberPrimitiveData.class);
 	
 	public NumberMoreThanHandler(double condition) {
 		this.condition = condition;
@@ -50,7 +50,7 @@ public class NumberMoreThanHandler implements IDUMOSendable, IDUMOReceivable {
 	}
 	
 	@Override
-	public void setSender(IDUMOSendable... senders) throws IDUMOException {
+	public void setSender(Sendable... senders) throws IDUMOException {
 		validator.validate(senders);
 		vType.validate(senders);
 		this.sender = senders[0];
@@ -58,23 +58,23 @@ public class NumberMoreThanHandler implements IDUMOSendable, IDUMOReceivable {
 	
 	@Override
 	public FlowingData onCall() {
-		PrimitiveDataNumber number = (PrimitiveDataNumber) sender.onCall().next();
+		NumberPrimitiveData number = (NumberPrimitiveData) sender.onCall().next();
 		double d = number.getNumber();
 		// IDUMOLogManager.debug(d);
 		// IDUMOLogManager.debug(String.format("raw:%.0f,con:%.0f",d,condition));
 		if (condition < d) {
-			return new FlowingData(new PrimitiveDataBool(true));
+			return new FlowingData(new BoolPrimitiveData(true));
 		}
-		return new FlowingData(new PrimitiveDataBool(false));
+		return new FlowingData(new BoolPrimitiveData(false));
 	}
 	
 	@Override
 	public ConnectDataType receivableType() {
-		return new ConnectDataTypeSingle(PrimitiveDataNumber.class);
+		return new SingleConnectDataType(NumberPrimitiveData.class);
 	}
 	
 	@Override
 	public ConnectDataType sendableType() {
-		return new ConnectDataTypeSingle(PrimitiveDataBool.class);
+		return new SingleConnectDataType(BoolPrimitiveData.class);
 	}
 }

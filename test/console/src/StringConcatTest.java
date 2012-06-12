@@ -5,13 +5,13 @@ import com.hixi_hyi.idumo.console.core.exec.IDUMOConsoleWrapper;
 import com.hixi_hyi.idumo.console.core.util.IDUMOConsoleLogger;
 import com.hixi_hyi.idumo.console.receiptor.ConsoleViewReceiptor;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import com.hixi_hyi.idumo.core.exec.CoreComponent;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 public class StringConcatTest extends IDUMOConsoleWrapper {
 	@Override
 	public void init() {
-		setExecutionWithComponent(new IDUMOComponent() {
+		setExecutionWithComponent(new CoreComponent() {
 			@Override
 			public void onIdumoMakeFlowChart() throws IDUMOException {
 				StringProvider idumo0 = new StringProvider("'str_test'");
@@ -38,8 +38,8 @@ public class StringConcatTest extends IDUMOConsoleWrapper {
 	}
 	
 	public static void main(String[] args) {
-		IDUMOLogManager.DEBUG = true;
-		IDUMOLogManager.LOGGER = new IDUMOConsoleLogger();
+		LogManager.DEBUG = true;
+		LogManager.LOGGER = new IDUMOConsoleLogger();
 		StringConcatTest main = new StringConcatTest();
 		main.exec();
 	}

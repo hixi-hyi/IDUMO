@@ -5,9 +5,9 @@ import android.os.Bundle;
 
 import com.google.android.maps.MapActivity;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.exec.IDUMOWrapper;
+import com.hixi_hyi.idumo.core.exec.CoreWrapper;
 
-public abstract class IDUMOAndroidWrapper extends MapActivity implements IDUMOWrapper {
+public abstract class IDUMOAndroidWrapper extends MapActivity implements CoreWrapper {
 
 	@Override
 	protected boolean isRouteDisplayed() {

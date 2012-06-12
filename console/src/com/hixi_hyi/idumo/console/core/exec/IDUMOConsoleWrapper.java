@@ -1,14 +1,14 @@
 package com.hixi_hyi.idumo.console.core.exec;
 
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
-import com.hixi_hyi.idumo.core.exec.IDUMOWrapper;
+import com.hixi_hyi.idumo.core.exec.CoreComponent;
+import com.hixi_hyi.idumo.core.exec.CoreWrapper;
 
-public abstract class IDUMOConsoleWrapper implements IDUMOWrapper {
+public abstract class IDUMOConsoleWrapper implements CoreWrapper {
 	
 	private IDUMOConsoleActivity	execution;
 	
-	public void setExecutionWithComponent(IDUMOComponent component) {
+	public void setExecutionWithComponent(CoreComponent component) {
 		this.execution = new IDUMOConsoleActivity(component);
 	}
 	

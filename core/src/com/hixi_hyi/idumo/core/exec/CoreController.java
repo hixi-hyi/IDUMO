@@ -15,24 +15,10 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core.validator;
+package com.hixi_hyi.idumo.core.exec;
 
-import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-
-public class IDUMOReceiveValidatorSize implements IDUMOReceiveValidator {
+public interface CoreController {
+	public void onIdumoStart();
 	
-	private int	size;
-	
-	public IDUMOReceiveValidatorSize(int size) {
-		this.size = size;
-	}
-	
-	@Override
-	public void validate(IDUMOSendable... senders) throws IDUMOException {
-		if (senders.length == size) {
-			return;
-		}
-		throw new IDUMOException();
-	}
+	public void onIdumoStop();
 }

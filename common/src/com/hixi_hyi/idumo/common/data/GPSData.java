@@ -18,19 +18,19 @@
 package com.hixi_hyi.idumo.common.data;
 
 import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
-import com.hixi_hyi.idumo.core.data.Data.IDUMODataBase;
+import com.hixi_hyi.idumo.core.data.Data.AbstractData;
 import com.hixi_hyi.idumo.core.data.element.TextElement;
-import com.hixi_hyi.idumo.core.data.raw.RawDataTypeNumber;
-import com.hixi_hyi.idumo.core.data.raw.RawDataTypeString;
+import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
+import com.hixi_hyi.idumo.core.data.raw.StringRawDataType;
 
-public class GPSData extends IDUMODataBase implements LatLngDataElement,TextElement {
+public class GPSData extends AbstractData implements LatLngDataElement,TextElement {
 
 	private static final String LATITUDE = "latitude";
 	private static final String LONGITUDE = "longitude";
 
 	public GPSData(double lat,double lon) {
-		add(new RawDataTypeNumber(LATITUDE, lat , "GPS Latitude"));
-		add(new RawDataTypeNumber(LONGITUDE, lon , "GPS Longitude"));
+		add(new NumberRawDataType(LATITUDE, lat , "GPS Latitude"));
+		add(new NumberRawDataType(LONGITUDE, lon , "GPS Longitude"));
 	}
 
 	public double getLatitude(){

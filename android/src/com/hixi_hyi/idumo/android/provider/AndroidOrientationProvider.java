@@ -28,9 +28,9 @@ import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
 import com.hixi_hyi.idumo.android.sensor.OrientationSensor;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * Android上の傾きの情報を取得できるProvider 地磁気センサと加速度センサにより傾きを算出
@@ -39,7 +39,7 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @version 2.0
  *
  */
-public class AndroidOrientationProvider implements IDUMOSendable, AndroidController {
+public class AndroidOrientationProvider implements Sendable, AndroidController {
 
 	private OrientationSensor	sensor;
 
@@ -63,7 +63,7 @@ public class AndroidOrientationProvider implements IDUMOSendable, AndroidControl
 
 	@Override
 	public FlowingData onCall() {
-		IDUMOLogManager.log();
+		LogManager.log();
 		FlowingData p = new FlowingData();
 		p.add(new AndroidOrientationData(sensor.getPitch(), sensor.getRoll(), sensor.getAzmuth()));
 		return p;
@@ -98,6 +98,6 @@ public class AndroidOrientationProvider implements IDUMOSendable, AndroidControl
 
 	@Override
 	public ConnectDataType sendableType() {
-		return new ConnectDataTypeSingle(AndroidOrientationData.class);
+		return new SingleConnectDataType(AndroidOrientationData.class);
 	}
 }

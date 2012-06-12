@@ -1,8 +1,8 @@
 package com.hixi_hyi.idumo.console.core.util;
 
-import com.hixi_hyi.idumo.core.util.IDUMOLogger;
+import com.hixi_hyi.idumo.core.util.Logger;
 
-public class IDUMOConsoleLogger implements IDUMOLogger {
+public class IDUMOConsoleLogger implements Logger {
 	
 	private static final int	NUMBER	= 4;
 	

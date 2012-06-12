@@ -21,15 +21,15 @@ import java.util.Iterator;
 
 import com.hixi_hyi.idumo.core.data.Data;
 import com.hixi_hyi.idumo.core.data.FlowingData;
-import com.hixi_hyi.idumo.core.data.PrimitiveData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
 import com.hixi_hyi.idumo.core.data.element.TextElement;
+import com.hixi_hyi.idumo.core.data.primitive.PrimitiveData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
-import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.parts.Receivable;
+import com.hixi_hyi.idumo.core.parts.Executable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 /**
  * Systemoutに出力するReceiptor
@@ -38,10 +38,10 @@ import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
  * @version 2.0
  *
  */
-public class ConsoleViewReceiptor implements IDUMOReceivable, IDUMORunnable {
+public class ConsoleViewReceiptor implements Receivable, Executable {
 
-	private IDUMOSendable			sender;
-	private IDUMOReceiveValidatorSize	vSize	= new IDUMOReceiveValidatorSize(1);
+	private Sendable			sender;
+	private ReceiveValidatorSize	vSize	= new ReceiveValidatorSize(1);
 
 	@Override
 	public void run() {
@@ -57,7 +57,7 @@ public class ConsoleViewReceiptor implements IDUMOReceivable, IDUMORunnable {
 	}
 
 	@Override
-	public void setSender(IDUMOSendable... handler) throws IDUMOException {
+	public void setSender(Sendable... handler) throws IDUMOException {
 		vSize.validate(handler);
 		sender = handler[0];
 	}
@@ -69,7 +69,7 @@ public class ConsoleViewReceiptor implements IDUMOReceivable, IDUMORunnable {
 
 	@Override
 	public ConnectDataType receivableType() {
-		return new ConnectDataTypeSingle(Data.class);
+		return new SingleConnectDataType(Data.class);
 	}
 
 }

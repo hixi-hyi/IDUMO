@@ -8,16 +8,16 @@ import java.io.OutputStream;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.exec.IDUMOController;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
-import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import com.hixi_hyi.idumo.core.exec.CoreController;
+import com.hixi_hyi.idumo.core.parts.Receivable;
+import com.hixi_hyi.idumo.core.parts.Executable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
-public class _SerialSendReceiptor implements IDUMORunnable, IDUMOReceivable, IDUMOController {
+public class _SerialSendReceiptor implements Executable, Receivable, CoreController {
 	
 	private OutputStream	out;
-	private IDUMOSendable	sender;
+	private Sendable	sender;
 	private String			serial;
 	
 	public _SerialSendReceiptor(String serial) {
@@ -26,7 +26,7 @@ public class _SerialSendReceiptor implements IDUMORunnable, IDUMOReceivable, IDU
 	
 	@Override
 	public void run() {
-		IDUMOLogManager.log();
+		LogManager.log();
 		if (!sender.isReady()) {
 			return;
 		}
@@ -36,9 +36,9 @@ public class _SerialSendReceiptor implements IDUMORunnable, IDUMOReceivable, IDU
 		}
 		byte[] bytedata = new byte[data.size()];
 		int i = 0;
-		IDUMOLogManager.debug("size: " + data.size());
+		LogManager.debug("size: " + data.size());
 		for (Object o : data) {
-			IDUMOLogManager.debug(o.toString());
+			LogManager.debug(o.toString());
 			bytedata[i] = (Byte) o;
 			i++;
 		}
@@ -58,7 +58,7 @@ public class _SerialSendReceiptor implements IDUMORunnable, IDUMOReceivable, IDU
 	}
 	
 	@Override
-	public void setSender(IDUMOSendable... senders) throws IDUMOException {
+	public void setSender(Sendable... senders) throws IDUMOException {
 		// if (senders.length != 1) {
 		// return false;
 		// }

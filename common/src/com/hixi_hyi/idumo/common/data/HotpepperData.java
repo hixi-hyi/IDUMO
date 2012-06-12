@@ -18,12 +18,12 @@
 package com.hixi_hyi.idumo.common.data;
 
 import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
-import com.hixi_hyi.idumo.core.data.Data.IDUMODataBase;
+import com.hixi_hyi.idumo.core.data.Data.AbstractData;
 import com.hixi_hyi.idumo.core.data.element.TextElement;
-import com.hixi_hyi.idumo.core.data.raw.RawDataTypeNumber;
-import com.hixi_hyi.idumo.core.data.raw.RawDataTypeString;
+import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
+import com.hixi_hyi.idumo.core.data.raw.StringRawDataType;
 
-public class HotpepperData extends IDUMODataBase implements LatLngDataElement,TextElement{
+public class HotpepperData extends AbstractData implements LatLngDataElement,TextElement{
 	private static final String NAME = "name";
 	private static final String KANA = "kana";
 	private static final String LAT ="lat";
@@ -35,15 +35,15 @@ public class HotpepperData extends IDUMODataBase implements LatLngDataElement,Te
 	private static final String AVERAGE = "average";
 
 	public HotpepperData(String name,String kana, double lat, double lng ,String address,String catchcopy, String open,String budget,String average) {
-		add(new RawDataTypeString(NAME, name, "shop name"));
-		add(new RawDataTypeString(KANA, kana, "shop kana name"));
-		add(new RawDataTypeNumber(LAT, lat, "shop lat"));
-		add(new RawDataTypeNumber(LNG, lng, "shop lng"));
-		add(new RawDataTypeString(ADDRESS, address, "shop address"));
-		add(new RawDataTypeString(CATCHCOPY, catchcopy, "shop catchcopy"));
-		add(new RawDataTypeString(OPEN, open, "shop open"));
-		add(new RawDataTypeString(BUDGET, budget, "shop budget"));
-		add(new RawDataTypeString(AVERAGE, average, "shop average"));
+		add(new StringRawDataType(NAME, name, "shop name"));
+		add(new StringRawDataType(KANA, kana, "shop kana name"));
+		add(new NumberRawDataType(LAT, lat, "shop lat"));
+		add(new NumberRawDataType(LNG, lng, "shop lng"));
+		add(new StringRawDataType(ADDRESS, address, "shop address"));
+		add(new StringRawDataType(CATCHCOPY, catchcopy, "shop catchcopy"));
+		add(new StringRawDataType(OPEN, open, "shop open"));
+		add(new StringRawDataType(BUDGET, budget, "shop budget"));
+		add(new StringRawDataType(AVERAGE, average, "shop average"));
 	}
 
 	public String getName(){

@@ -6,11 +6,11 @@ import android.os.Handler;
 import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
-import com.hixi_hyi.idumo.core.exec.IDUMOActivity;
-import com.hixi_hyi.idumo.core.exec.IDUMOController;
-import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
+import com.hixi_hyi.idumo.core.exec.CoreActivity;
+import com.hixi_hyi.idumo.core.exec.CoreController;
+import com.hixi_hyi.idumo.core.parts.Executable;
 
-public class IDUMOAndroidActivity implements IDUMOActivity, Runnable {
+public class IDUMOAndroidActivity implements CoreActivity, Runnable {
 	
 	private IDUMOAndroidComponent	component;
 	private Handler					handler	= new Handler();
@@ -33,7 +33,7 @@ public class IDUMOAndroidActivity implements IDUMOActivity, Runnable {
 			controller.onIdumoStart();
 			controller.onIdumoResume();
 		}
-		for (IDUMOController controller : component.getApplicationControllers()) {
+		for (CoreController controller : component.getApplicationControllers()) {
 			controller.onIdumoStart();
 		}
 		component.setReady(true);
@@ -45,7 +45,7 @@ public class IDUMOAndroidActivity implements IDUMOActivity, Runnable {
 			controller.onIdumoPause();
 			controller.onIdumoStop();
 		}
-		for (IDUMOController controller : component.getApplicationControllers()) {
+		for (CoreController controller : component.getApplicationControllers()) {
 			controller.onIdumoStop();
 		}
 		component.setReady(false);
@@ -58,7 +58,7 @@ public class IDUMOAndroidActivity implements IDUMOActivity, Runnable {
 				Thread.sleep(component.getSleepTime());
 			} catch (InterruptedException e) {}
 		}
-		IDUMORunnable runnable = component.getRunnable();
+		Executable runnable = component.getRunnable();
 		while (!runnable.isReady()) {
 			try {
 				Thread.sleep(component.getSleepTime());

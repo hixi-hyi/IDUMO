@@ -15,11 +15,18 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core.validator;
+package com.hixi_hyi.idumo.core.exec;
 
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
+import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 
-public interface IDUMOReceiveValidator {
-	public void validate(IDUMOSendable... senders) throws IDUMOException;
+public interface CoreActivity {
+	public void onIdumoCreated() throws IDUMOException;
+	
+	public void onIdumoStart();
+	
+	public void onIdumoExec() throws IDUMORuntimeException;
+	
+	public void onIdumoStop();
+	
 }

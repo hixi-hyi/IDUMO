@@ -19,23 +19,23 @@ package com.hixi_hyi.idumo.common.handler.raw;
 
 import com.hixi_hyi.idumo.core.data.Data;
 import com.hixi_hyi.idumo.core.data.FlowingData;
-import com.hixi_hyi.idumo.core.data.PrimitiveDataNumber;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
+import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidator;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.parts.Receivable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class NumberGetValueHandler implements IDUMOSendable, IDUMOReceivable {
+public class NumberGetValueHandler implements Sendable, Receivable {
 	private String				name;
-	private IDUMOSendable		sender;
-	private IDUMOReceiveValidator	vSize	= new IDUMOReceiveValidatorSize(1);
+	private Sendable		sender;
+	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
 	
 	public NumberGetValueHandler(String name) {
 		this.name = name;
@@ -47,14 +47,14 @@ public class NumberGetValueHandler implements IDUMOSendable, IDUMOReceivable {
 	}
 	
 	@Override
-	public void setSender(IDUMOSendable... senders) throws IDUMOException {
+	public void setSender(Sendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		sender = senders[0];
 	}
 	
 	@Override
 	public ConnectDataType receivableType() {
-		return new ConnectDataTypeSingle(Data.class);
+		return new SingleConnectDataType(Data.class);
 	}
 	
 	@Override
@@ -63,12 +63,12 @@ public class NumberGetValueHandler implements IDUMOSendable, IDUMOReceivable {
 		// sender.onCall().next().get(NAME);
 		// IDUMOLogManager.debug(s);
 		String s = sender.onCall().next().get(name).getValue().toString();
-		return new FlowingData(new PrimitiveDataNumber(Double.parseDouble(s)));
+		return new FlowingData(new NumberPrimitiveData(Double.parseDouble(s)));
 	}
 	
 	@Override
 	public ConnectDataType sendableType() {
-		return new ConnectDataTypeSingle(PrimitiveDataNumber.class);
+		return new SingleConnectDataType(NumberPrimitiveData.class);
 	}
 	
 }

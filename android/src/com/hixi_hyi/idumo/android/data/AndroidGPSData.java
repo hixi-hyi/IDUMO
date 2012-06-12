@@ -18,14 +18,14 @@
 package com.hixi_hyi.idumo.android.data;
 
 import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
-import com.hixi_hyi.idumo.core.data.raw.RawDataTypeNumber;
-import com.hixi_hyi.idumo.core.data.Data.IDUMODataBase;
+import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
+import com.hixi_hyi.idumo.core.data.Data.AbstractData;
 
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class AndroidGPSData extends IDUMODataBase implements LatLngDataElement{
+public class AndroidGPSData extends AbstractData implements LatLngDataElement{
 	public static final String	LATITUDE	= "latitude";
 	public static final String	LONGITUDE	= "longitude";
 	public static final String	ALTITUDE	= "altitude";
@@ -34,12 +34,12 @@ public class AndroidGPSData extends IDUMODataBase implements LatLngDataElement{
 	public static final String	SPEED		= "speed";
 
 	public AndroidGPSData(double latitude, double longitude, double altitude, long time, float bearing, float speed) {
-		add(new RawDataTypeNumber(LATITUDE, latitude, "Android GPS latitude"));
-		add(new RawDataTypeNumber(LONGITUDE, longitude, "Android GPS Longitude"));
-		add(new RawDataTypeNumber(ALTITUDE, altitude, "Android GPS Altitude"));
-		add(new RawDataTypeNumber(TIME, time, "Android GPS Time"));
-		add(new RawDataTypeNumber(BEARING, bearing, "Android GPS Bearing"));
-		add(new RawDataTypeNumber(SPEED, speed, "Android GPS Speed"));
+		add(new NumberRawDataType(LATITUDE, latitude, "Android GPS latitude"));
+		add(new NumberRawDataType(LONGITUDE, longitude, "Android GPS Longitude"));
+		add(new NumberRawDataType(ALTITUDE, altitude, "Android GPS Altitude"));
+		add(new NumberRawDataType(TIME, time, "Android GPS Time"));
+		add(new NumberRawDataType(BEARING, bearing, "Android GPS Bearing"));
+		add(new NumberRawDataType(SPEED, speed, "Android GPS Speed"));
 	}
 
 	@Override

@@ -9,8 +9,8 @@ import com.hixi_hyi.idumo.android.data.AndroidTemperatureData;
 import com.hixi_hyi.idumo.android.sensor.TemperatureSensor;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * Android上の温度センサの情報を取得できるProvider
@@ -18,7 +18,7 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class _TemperatureProvider implements IDUMOSendable, AndroidController {
+public class _TemperatureProvider implements Sendable, AndroidController {
 	
 	private TemperatureSensor	sensor;
 	
@@ -33,7 +33,7 @@ public class _TemperatureProvider implements IDUMOSendable, AndroidController {
 	
 	@Override
 	public FlowingData onCall() {
-		IDUMOLogManager.log();
+		LogManager.log();
 		FlowingData p = new FlowingData();
 		p.add(new AndroidTemperatureData(sensor.getTemperature()));
 		return p;

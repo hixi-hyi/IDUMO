@@ -4,8 +4,8 @@ import com.hixi_hyi.idumo.console.core.exec.IDUMOConsoleWrapper;
 import com.hixi_hyi.idumo.console.core.util.IDUMOConsoleLogger;
 import com.hixi_hyi.idumo.console.receiptor.ConsoleViewReceiptor;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.exec.IDUMOComponent;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import com.hixi_hyi.idumo.core.exec.CoreComponent;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 public class LivedoorGetStringConsoleTest extends IDUMOConsoleWrapper {
 	@Override
@@ -14,14 +14,14 @@ public class LivedoorGetStringConsoleTest extends IDUMOConsoleWrapper {
 	}
 	
 	public static void main(String[] args) {
-		IDUMOLogManager.DEBUG = true;
-		IDUMOLogManager.LOGGER = new IDUMOConsoleLogger();
+		LogManager.DEBUG = true;
+		LogManager.LOGGER = new IDUMOConsoleLogger();
 		LivedoorGetStringConsoleTest main = new LivedoorGetStringConsoleTest();
 		main.exec();
 	}
 }
 
-class LivedoorWeatherConsoleComponent extends IDUMOComponent {
+class LivedoorWeatherConsoleComponent extends CoreComponent {
 	@Override
 	public void onIdumoMakeFlowChart() throws IDUMOException {
 		LivedoorWeatherProvider idumo0 = new LivedoorWeatherProvider(63);

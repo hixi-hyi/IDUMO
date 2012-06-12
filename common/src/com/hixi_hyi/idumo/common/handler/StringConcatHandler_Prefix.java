@@ -19,25 +19,25 @@ package com.hixi_hyi.idumo.common.handler;
 
 import com.hixi_hyi.idumo.core.data.Data;
 import com.hixi_hyi.idumo.core.data.FlowingData;
-import com.hixi_hyi.idumo.core.data.PrimitiveDataString;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
+import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidator;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.parts.Receivable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  * 
  */
-public class StringConcatHandler_Prefix implements IDUMOSendable, IDUMOReceivable {
+public class StringConcatHandler_Prefix implements Sendable, Receivable {
 	
-	private IDUMOSendable		provider;
+	private Sendable		provider;
 	private String				fixWord;
-	private IDUMOReceiveValidator	vSize	= new IDUMOReceiveValidatorSize(1);
+	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
 	
 	public StringConcatHandler_Prefix(String fixWord) {
 		this.fixWord = fixWord;
@@ -45,12 +45,12 @@ public class StringConcatHandler_Prefix implements IDUMOSendable, IDUMOReceivabl
 	
 	@Override
 	public FlowingData onCall() {
-		String s = ((PrimitiveDataString) provider.onCall().next()).getString();
-		return new FlowingData(new PrimitiveDataString(fixWord + s));
+		String s = ((StringPrimitiveData) provider.onCall().next()).getString();
+		return new FlowingData(new StringPrimitiveData(fixWord + s));
 	}
 	
 	@Override
-	public void setSender(IDUMOSendable... senders) throws IDUMOException {
+	public void setSender(Sendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		this.provider = senders[0];
 	}
@@ -62,12 +62,12 @@ public class StringConcatHandler_Prefix implements IDUMOSendable, IDUMOReceivabl
 	
 	@Override
 	public ConnectDataType receivableType() {
-		return new ConnectDataTypeSingle(Data.class);
+		return new SingleConnectDataType(Data.class);
 	}
 	
 	@Override
 	public ConnectDataType sendableType() {
-		return new ConnectDataTypeSingle(PrimitiveDataString.class);
+		return new SingleConnectDataType(StringPrimitiveData.class);
 	}
 	
 }

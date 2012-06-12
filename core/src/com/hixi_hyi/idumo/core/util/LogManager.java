@@ -1,5 +1,5 @@
 /**
- * Copyright (c) <2012>, <Hiroyoshi Houchi> All rights reserved.
+ * Copyright (c) <2011>, <Hiroyoshi Houchi> All rights reserved.
  *
  * http://www.hixi-hyi.com/
  *
@@ -15,28 +15,34 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core.data;
+package com.hixi_hyi.idumo.core.util;
 
-import com.hixi_hyi.idumo.core.data.raw.RawDataType;
-import com.hixi_hyi.idumo.core.data.raw.RawDataTypeString;
-
-public class PrimitiveDataString extends PrimitiveData {
-
-	public PrimitiveDataString(String n) {
-		add(new RawDataTypeString(NAME, n, "Primitive : String"));
+public class LogManager {
+	public static boolean		DEBUG;
+	public static Logger	LOGGER;
+	
+	public static void debug(Object o) {
+		if (DEBUG && (LOGGER != null)) {
+			LOGGER.debug(o.toString());
+		}
 	}
-
-	public PrimitiveDataString(RawDataType raw) {
-		add(new RawDataTypeString(NAME, (String) raw.getValue(), raw.getSummary()));
+	
+	public static void info(Object o) {
+		if (DEBUG && (LOGGER != null)) {
+			LOGGER.info(o.toString());
+		}
 	}
-
-	public String getString() {
-		String s = (String) getValue(NAME);
-		return s;
+	
+	public static void warning(Object o) {
+		if (DEBUG && (LOGGER != null)) {
+			LOGGER.warning(o.toString());
+		}
 	}
-
-	@Override
-	public String toString(){
-		return getString();
+	
+	public static void log() {
+		if (DEBUG && (LOGGER != null)) {
+			LOGGER.log();
+		}
 	}
+	
 }

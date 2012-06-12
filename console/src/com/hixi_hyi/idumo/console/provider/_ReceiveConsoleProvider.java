@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import com.hixi_hyi.idumo.core.data.FlowingData;
-import com.hixi_hyi.idumo.core.data.PrimitiveDataString;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
+import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveData;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
 
-public class _ReceiveConsoleProvider implements IDUMOSendable {
+public class _ReceiveConsoleProvider implements Sendable {
 	
 	private BufferedReader	br;
 	
@@ -29,7 +29,7 @@ public class _ReceiveConsoleProvider implements IDUMOSendable {
 	public FlowingData onCall() {
 		FlowingData p = new FlowingData();
 		try {
-			p.add(new PrimitiveDataString(br.readLine()));
+			p.add(new StringPrimitiveData(br.readLine()));
 		} catch (IOException e) {
 			throw new IDUMORuntimeException(e);
 		}
@@ -38,7 +38,7 @@ public class _ReceiveConsoleProvider implements IDUMOSendable {
 	
 	@Override
 	public ConnectDataType sendableType() {
-		return new ConnectDataTypeSingle(PrimitiveDataString.class);
+		return new SingleConnectDataType(StringPrimitiveData.class);
 	}
 	
 }

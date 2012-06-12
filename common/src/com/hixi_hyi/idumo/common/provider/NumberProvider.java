@@ -18,10 +18,10 @@
 package com.hixi_hyi.idumo.common.provider;
 
 import com.hixi_hyi.idumo.core.data.FlowingData;
-import com.hixi_hyi.idumo.core.data.PrimitiveDataNumber;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
+import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveData;
+import com.hixi_hyi.idumo.core.parts.Sendable;
 
 /**
  * ランダムなバイト情報を送るためのProvider(DebugClass)
@@ -30,7 +30,7 @@ import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
  * @version 2.0
  * 
  */
-public class NumberProvider implements IDUMOSendable {
+public class NumberProvider implements Sendable {
 	
 	private Double	num;
 	
@@ -42,7 +42,7 @@ public class NumberProvider implements IDUMOSendable {
 	public FlowingData onCall() {
 		// IDUMOLogManager.log();
 		FlowingData pipes = new FlowingData();
-		pipes.add(new PrimitiveDataNumber(num));
+		pipes.add(new NumberPrimitiveData(num));
 		return pipes;
 	}
 	
@@ -53,7 +53,7 @@ public class NumberProvider implements IDUMOSendable {
 	
 	@Override
 	public ConnectDataType sendableType() {
-		return new ConnectDataTypeSingle(PrimitiveDataNumber.class);
+		return new SingleConnectDataType(NumberPrimitiveData.class);
 	}
 	
 }

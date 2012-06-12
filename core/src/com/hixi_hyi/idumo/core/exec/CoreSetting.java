@@ -1,6 +1,6 @@
 package com.hixi_hyi.idumo.core.exec;
 
-public class IDUMOSetting {
+public class CoreSetting {
 	
 	private int	loopCount;
 	private int	sleepTime;

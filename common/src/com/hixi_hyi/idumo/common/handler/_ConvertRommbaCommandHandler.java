@@ -2,21 +2,21 @@ package com.hixi_hyi.idumo.common.handler;
 
 import com.hixi_hyi.idumo.common.component._ConvertRoombaCommand;
 import com.hixi_hyi.idumo.core.data.FlowingData;
-import com.hixi_hyi.idumo.core.data.PrimitiveDataNumber;
-import com.hixi_hyi.idumo.core.data.PrimitiveDataString;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
+import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveData;
+import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorType;
+import com.hixi_hyi.idumo.core.parts.Receivable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
-public class _ConvertRommbaCommandHandler implements IDUMOSendable, IDUMOReceivable {
+public class _ConvertRommbaCommandHandler implements Sendable, Receivable {
 	
-	private IDUMOSendable			sender;
-	private IDUMOReceiveValidatorSize	vSize	= new IDUMOReceiveValidatorSize(1);
-	private IDUMOReceiveValidatorType	vType	= new IDUMOReceiveValidatorType(1, PrimitiveDataString.class);
+	private Sendable			sender;
+	private ReceiveValidatorSize	vSize	= new ReceiveValidatorSize(1);
+	private ReceiveValidatorType	vType	= new ReceiveValidatorType(1, StringPrimitiveData.class);
 	
 	public _ConvertRommbaCommandHandler() {}
 	
@@ -26,7 +26,7 @@ public class _ConvertRommbaCommandHandler implements IDUMOSendable, IDUMOReceiva
 	}
 	
 	@Override
-	public void setSender(IDUMOSendable... senders) throws IDUMOException {
+	public void setSender(Sendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		vType.validate(senders);
 		this.sender = senders[0];
@@ -34,23 +34,23 @@ public class _ConvertRommbaCommandHandler implements IDUMOSendable, IDUMOReceiva
 	
 	@Override
 	public FlowingData onCall() {
-		PrimitiveDataString data = (PrimitiveDataString) sender.onCall().next();
+		StringPrimitiveData data = (StringPrimitiveData) sender.onCall().next();
 		String command = data.getString();
 		FlowingData p = new FlowingData();
 		if (_ConvertRoombaCommand.containsKey(command)) {
-			p.add(new PrimitiveDataNumber(_ConvertRoombaCommand.getCommand(command)));
+			p.add(new NumberPrimitiveData(_ConvertRoombaCommand.getCommand(command)));
 		}
 		return p;
 	}
 	
 	@Override
 	public ConnectDataType receivableType() {
-		return new ConnectDataTypeSingle(PrimitiveDataString.class);
+		return new SingleConnectDataType(StringPrimitiveData.class);
 	}
 	
 	@Override
 	public ConnectDataType sendableType() {
-		return new ConnectDataTypeSingle(PrimitiveDataNumber.class);
+		return new SingleConnectDataType(NumberPrimitiveData.class);
 	}
 	
 }

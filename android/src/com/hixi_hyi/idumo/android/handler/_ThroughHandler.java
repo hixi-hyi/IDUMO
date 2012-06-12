@@ -3,20 +3,20 @@ package com.hixi_hyi.idumo.android.handler;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidator;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.parts.Receivable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
-public class _ThroughHandler implements IDUMOSendable, IDUMOReceivable {
+public class _ThroughHandler implements Sendable, Receivable {
 	
-	private IDUMOSendable		provider;
-	private IDUMOReceiveValidator	vSize	= new IDUMOReceiveValidatorSize(1);
+	private Sendable		provider;
+	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
 	
 	@Override
 	public FlowingData onCall() {
-		IDUMOLogManager.log();
+		LogManager.log();
 		if (!provider.isReady()) {
 			return null;
 		}
@@ -24,7 +24,7 @@ public class _ThroughHandler implements IDUMOSendable, IDUMOReceivable {
 	}
 	
 	@Override
-	public void setSender(IDUMOSendable... provider) throws IDUMOException {
+	public void setSender(Sendable... provider) throws IDUMOException {
 		vSize.validate(provider);
 		this.provider = provider[0];
 	}

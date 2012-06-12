@@ -17,22 +17,22 @@
  */
 package com.hixi_hyi.idumo.android.data;
 
-import com.hixi_hyi.idumo.core.data.Data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.raw.RawDataTypeNumber;
+import com.hixi_hyi.idumo.core.data.Data.AbstractData;
+import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
 
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class AndroidOrientationData extends IDUMODataBase {
+public class AndroidOrientationData extends AbstractData {
 	private static final String PITCH="pitch";
 	private static final String ROLL="roll";
 	private static final String AZMUTH="azmuth";
 
 	public AndroidOrientationData(float pitch, float roll, float azmuth) {
-		add(new RawDataTypeNumber(PITCH, pitch, "Android Orientation Pitch"));
-		add(new RawDataTypeNumber(ROLL, roll, "Android Orientation Roll"));
-		add(new RawDataTypeNumber(AZMUTH, azmuth, "Android Orientation Azmuth"));
+		add(new NumberRawDataType(PITCH, pitch, "Android Orientation Pitch"));
+		add(new NumberRawDataType(ROLL, roll, "Android Orientation Roll"));
+		add(new NumberRawDataType(AZMUTH, azmuth, "Android Orientation Azmuth"));
 	}
 
 	public float getPitch() {

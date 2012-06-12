@@ -26,13 +26,13 @@ import android.widget.TextView;
 import com.hixi_hyi.idumo.core.data.Data;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeArray;
+import com.hixi_hyi.idumo.core.data.connect.ArrayConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
-import com.hixi_hyi.idumo.core.parts.IDUMORunnable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.parts.Receivable;
+import com.hixi_hyi.idumo.core.parts.Executable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 /**
  * Android上にテキスト情報を出力するReceiptorです
@@ -41,10 +41,10 @@ import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
  * @version 2.0
  * 
  */
-public class AndroidTextViewReceiptor extends TextView implements IDUMOReceivable, IDUMORunnable {
+public class AndroidTextViewReceiptor extends TextView implements Receivable, Executable {
 	
-	private IDUMOSendable	sender;
-	private IDUMOReceiveValidatorSize vSize = new IDUMOReceiveValidatorSize(1);
+	private Sendable	sender;
+	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
 	private Activity					activity;
 	
 	public AndroidTextViewReceiptor(Context context) {
@@ -56,21 +56,21 @@ public class AndroidTextViewReceiptor extends TextView implements IDUMOReceivabl
 	
 	@Override
 	public void run() {
-		IDUMOLogManager.log();
+		LogManager.log();
 		FlowingData idf = sender.onCall();
 		StringBuilder sb = new StringBuilder();
 		for (Data d : idf) {
 			sb.append(d.toString());
 		}
 		
-		IDUMOLogManager.debug(sb.toString());
+		LogManager.debug(sb.toString());
 		
 		setText(sb.toString());
 		
 	}
 	
 	@Override
-	public void setSender(IDUMOSendable... handler) throws IDUMOException {
+	public void setSender(Sendable... handler) throws IDUMOException {
 		vSize.validate(handler);
 		sender = handler[0];
 	}
@@ -82,7 +82,7 @@ public class AndroidTextViewReceiptor extends TextView implements IDUMOReceivabl
 	
 	@Override
 	public ConnectDataType receivableType() {
-		return new ConnectDataTypeArray(Data.class);
+		return new ArrayConnectDataType(Data.class);
 	}
 	
 }

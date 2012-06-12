@@ -9,11 +9,11 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import com.hixi_hyi.idumo.core.data.FlowingData;
-import com.hixi_hyi.idumo.core.data.PrimitiveDataString;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.exec.IDUMOController;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveData;
+import com.hixi_hyi.idumo.core.exec.CoreController;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * バイト情報を受け取ることが出来るProvider
@@ -21,7 +21,7 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public class _ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
+public class _ReceiveTCPProvider implements Sendable, CoreController {
 	private int					port;
 	private Socket				socket;
 	private BufferedReader		br;
@@ -41,10 +41,10 @@ public class _ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
 	
 	@Override
 	public boolean isReady() {
-		IDUMOLogManager.log();
+		LogManager.log();
 		
 		if (server.getSocket() == null) {
-			IDUMOLogManager.debug("null");
+			LogManager.debug("null");
 			socket = null;
 			if (!server.bool) {
 				new Thread(server).start();
@@ -104,9 +104,9 @@ public class _ReceiveTCPProvider implements IDUMOSendable, IDUMOController {
 	@Override
 	public FlowingData onCall() {
 		FlowingData p = new FlowingData();
-		IDUMOLogManager.debug(p);
+		LogManager.debug(p);
 		String s = strs.remove(0);
-		p.add(new PrimitiveDataString(s));
+		p.add(new StringPrimitiveData(s));
 		server.restart();
 		return p;
 	}

@@ -22,7 +22,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.LogManager;
 
 import org.jdom.Document;
 import org.jdom.Element;
@@ -36,7 +35,7 @@ import com.hixi_hyi.idumo.common.data.HotpepperData;
 import com.hixi_hyi.idumo.common.data.LivedoorWeatherData;
 import com.hixi_hyi.idumo.common.util.URL2XMLParser;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=bdcd74ea41fe6b8d&lat=34.670000&lng=135.520000
@@ -69,7 +68,7 @@ public class Hotpepper {
 
 	public void init(double lat,double lon) {
 		requestURL = String.format(REQUEST_URL_SEED, lat,lon);
-		IDUMOLogManager.debug(requestURL);
+		LogManager.debug(requestURL);
 		list = new ArrayList<HotpepperData>();
 		try {
 			parser = new URL2XMLParser(requestURL);

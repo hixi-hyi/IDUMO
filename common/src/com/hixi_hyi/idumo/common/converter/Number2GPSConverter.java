@@ -4,26 +4,26 @@ import java.util.ArrayList;
 
 import com.hixi_hyi.idumo.common.data.GPSData;
 import com.hixi_hyi.idumo.core.data.FlowingData;
-import com.hixi_hyi.idumo.core.data.PrimitiveDataNumber;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeMulti;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
+import com.hixi_hyi.idumo.core.data.connect.MultiConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
+import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidator;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorType;
+import com.hixi_hyi.idumo.core.parts.Receivable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
-public class Number2GPSConverter implements IDUMOSendable, IDUMOReceivable {
+public class Number2GPSConverter implements Sendable, Receivable {
 
-	private IDUMOSendable sender1;
-	private IDUMOSendable sender2;
+	private Sendable sender1;
+	private Sendable sender2;
 
-	private IDUMOReceiveValidator			vSize	= new IDUMOReceiveValidatorSize(2);
-	private IDUMOReceiveValidator			vType1	= new IDUMOReceiveValidatorType(1, PrimitiveDataNumber.class);
-	private IDUMOReceiveValidator			vType2	= new IDUMOReceiveValidatorType(2, PrimitiveDataNumber.class);
+	private ReceiveValidator			vSize	= new ReceiveValidatorSize(2);
+	private ReceiveValidator			vType1	= new ReceiveValidatorType(1, NumberPrimitiveData.class);
+	private ReceiveValidator			vType2	= new ReceiveValidatorType(2, NumberPrimitiveData.class);
 
 	public Number2GPSConverter() {}
 
@@ -36,7 +36,7 @@ public class Number2GPSConverter implements IDUMOSendable, IDUMOReceivable {
 	}
 
 	@Override
-	public void setSender(IDUMOSendable... senders) throws IDUMOException {
+	public void setSender(Sendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		vType1.validate(senders);
 		vType2.validate(senders);
@@ -46,13 +46,13 @@ public class Number2GPSConverter implements IDUMOSendable, IDUMOReceivable {
 
 	@Override
 	public ConnectDataType receivableType() {
-		return new ConnectDataTypeMulti(PrimitiveDataNumber.class,PrimitiveDataNumber.class);
+		return new MultiConnectDataType(NumberPrimitiveData.class,NumberPrimitiveData.class);
 	}
 
 	@Override
 	public FlowingData onCall() {
-		PrimitiveDataNumber num1 = (PrimitiveDataNumber) sender1.onCall().next();
-		PrimitiveDataNumber num2 = (PrimitiveDataNumber) sender2.onCall().next();
+		NumberPrimitiveData num1 = (NumberPrimitiveData) sender1.onCall().next();
+		NumberPrimitiveData num2 = (NumberPrimitiveData) sender2.onCall().next();
 		GPSData gd = new GPSData(num1.getNumber(), num2.getNumber());
 //		IDUMOLogManager.debug(gd);
 		return new FlowingData(gd);
@@ -60,7 +60,7 @@ public class Number2GPSConverter implements IDUMOSendable, IDUMOReceivable {
 
 	@Override
 	public ConnectDataType sendableType() {
-		return new ConnectDataTypeSingle(GPSData.class);
+		return new SingleConnectDataType(GPSData.class);
 	}
 
 }

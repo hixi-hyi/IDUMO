@@ -26,9 +26,9 @@ import com.hixi_hyi.idumo.android.data.AndroidAccelerometerData;
 import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * Android上の加速度センサの値を提供するProvider
@@ -37,7 +37,7 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @version 2.0
  *
  */
-public class AndroidAccelerometerProvider implements IDUMOSendable, AndroidController {
+public class AndroidAccelerometerProvider implements Sendable, AndroidController {
 
 	private AccelerometerSensor	accel;
 
@@ -52,7 +52,7 @@ public class AndroidAccelerometerProvider implements IDUMOSendable, AndroidContr
 
 	@Override
 	public FlowingData onCall() {
-		IDUMOLogManager.log();
+		LogManager.log();
 		FlowingData p = new FlowingData();
 		AndroidAccelerometerData data = new AndroidAccelerometerData(accel.getX(), accel.getY(), accel.getZ());
 		p.add(data);
@@ -88,7 +88,7 @@ public class AndroidAccelerometerProvider implements IDUMOSendable, AndroidContr
 
 	@Override
 	public ConnectDataType sendableType() {
-		return new ConnectDataTypeSingle(AndroidAccelerometerData.class);
+		return new SingleConnectDataType(AndroidAccelerometerData.class);
 	}
 
 }

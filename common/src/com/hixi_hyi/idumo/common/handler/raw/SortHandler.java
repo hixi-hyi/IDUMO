@@ -23,25 +23,25 @@ import java.util.TreeMap;
 
 import com.hixi_hyi.idumo.core.data.Data;
 import com.hixi_hyi.idumo.core.data.FlowingData;
-import com.hixi_hyi.idumo.core.data.PrimitiveDataString;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeArray;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
+import com.hixi_hyi.idumo.core.data.connect.ArrayConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
+import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.IDUMOReceivable;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidator;
-import com.hixi_hyi.idumo.core.validator.IDUMOReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.parts.Receivable;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.util.LogManager;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class SortHandler implements IDUMOSendable, IDUMOReceivable {
+public class SortHandler implements Sendable, Receivable {
 	private String				name;
-	private IDUMOSendable		sender;
-	private IDUMOReceiveValidator	vSize	= new IDUMOReceiveValidatorSize(1);
+	private Sendable		sender;
+	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
 
 	public SortHandler(String name) {
 		this.name = name;
@@ -53,14 +53,14 @@ public class SortHandler implements IDUMOSendable, IDUMOReceivable {
 	}
 
 	@Override
-	public void setSender(IDUMOSendable... senders) throws IDUMOException {
+	public void setSender(Sendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		sender = senders[0];
 	}
 
 	@Override
 	public ConnectDataType receivableType() {
-		return new ConnectDataTypeArray(Data.class);
+		return new ArrayConnectDataType(Data.class);
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class SortHandler implements IDUMOSendable, IDUMOReceivable {
 		TreeMap<Object, Data> map = new TreeMap<Object, Data>();
 		for (Data d : sender.onCall()) {
 			map.put(d.get(name).getValue(), d);
-			IDUMOLogManager.debug(d.get(name).getValue());
+			LogManager.debug(d.get(name).getValue());
 		}
 		FlowingData idf =  new FlowingData();
 		for(Map.Entry<Object, Data> e: map.entrySet()){
@@ -79,7 +79,7 @@ public class SortHandler implements IDUMOSendable, IDUMOReceivable {
 
 	@Override
 	public ConnectDataType sendableType() {
-		return new ConnectDataTypeArray(Data.class);
+		return new ArrayConnectDataType(Data.class);
 	}
 
 }

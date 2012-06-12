@@ -1,6 +1,6 @@
 package com.hixi_hyi.idumo.android.core;
 
-import com.hixi_hyi.idumo.core.exec.IDUMOController;
+import com.hixi_hyi.idumo.core.exec.CoreController;
 
 /**
  * ApplicationのON/OFF時に必要な処理を書くためのインタフェース
@@ -8,7 +8,7 @@ import com.hixi_hyi.idumo.core.exec.IDUMOController;
  * @author Hiroyoshi HOUCHI
  * 
  */
-public interface AndroidController extends IDUMOController {
+public interface AndroidController extends CoreController {
 	void onIdumoRestart();
 	
 	void onIdumoResume();

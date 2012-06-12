@@ -1,5 +1,5 @@
 /**
- * Copyright (c) <2012>, <Hiroyoshi Houchi> All rights reserved.
+ * Copyright (c) <2011>, <Hiroyoshi Houchi> All rights reserved.
  *
  * http://www.hixi-hyi.com/
  *
@@ -15,24 +15,14 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core.parts;
+package com.hixi_hyi.idumo.core.util;
 
-import com.hixi_hyi.idumo.core.data.FlowingData;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-
-/**
- * IdumoのProvider,Handlerを作成するときに実装してください
- * 
- * @author Hiroyoshi HOUCHI
- * 
- */
-public interface IDUMOSendable extends IDUMOConnectable {
-	/**
-	 * データを取得する際に呼び出されるメソッド
-	 * 
-	 * @return
-	 */
-	public FlowingData onCall();
+public interface Logger {
+	public void debug(String s);
 	
-	public ConnectDataType sendableType();
+	public void info(String s);
+	
+	public void warning(String s);
+	
+	public void log();
 }

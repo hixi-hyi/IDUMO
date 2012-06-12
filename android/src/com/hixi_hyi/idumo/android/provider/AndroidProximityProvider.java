@@ -26,9 +26,9 @@ import com.hixi_hyi.idumo.android.data.AndroidProximityData;
 import com.hixi_hyi.idumo.android.sensor.ProximitySensor;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * Android上の近接センサの情報を取得できるProvider
@@ -37,7 +37,7 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @version 2.0
  *
  */
-public class AndroidProximityProvider implements IDUMOSendable, AndroidController {
+public class AndroidProximityProvider implements Sendable, AndroidController {
 
 	private ProximitySensor	proximity;
 
@@ -52,7 +52,7 @@ public class AndroidProximityProvider implements IDUMOSendable, AndroidControlle
 
 	@Override
 	public FlowingData onCall() {
-		IDUMOLogManager.log();
+		LogManager.log();
 		FlowingData p = new FlowingData();
 		p.add(new AndroidProximityData(proximity.getProximity()));
 		return p;
@@ -87,7 +87,7 @@ public class AndroidProximityProvider implements IDUMOSendable, AndroidControlle
 
 	@Override
 	public ConnectDataType sendableType() {
-		return new ConnectDataTypeSingle(AndroidProximityData.class);
+		return new SingleConnectDataType(AndroidProximityData.class);
 	}
 
 }

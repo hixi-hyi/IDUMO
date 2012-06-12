@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import com.hixi_hyi.idumo.android.core.AndroidController;
-import com.hixi_hyi.idumo.core.exec.IDUMOContainer;
-import com.hixi_hyi.idumo.core.parts.IDUMOConnectable;
+import com.hixi_hyi.idumo.core.exec.CoreContainer;
+import com.hixi_hyi.idumo.core.parts.Connectable;
 
-public class IDUMOAndroidContainer extends IDUMOContainer {
+public class IDUMOAndroidContainer extends CoreContainer {
 	private ArrayList<AndroidController>	androidControllers	= new ArrayList<AndroidController>();
 	
 	@Override
-	public void add(IDUMOConnectable item) {
+	public void add(Connectable item) {
 		super.add(item);
 		if (item instanceof AndroidController) {
 			androidControllers.add((AndroidController) item);

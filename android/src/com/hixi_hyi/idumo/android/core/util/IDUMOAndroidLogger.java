@@ -19,9 +19,9 @@ package com.hixi_hyi.idumo.android.core.util;
 
 import android.util.Log;
 
-import com.hixi_hyi.idumo.core.util.IDUMOLogger;
+import com.hixi_hyi.idumo.core.util.Logger;
 
-public class IDUMOAndroidLogger implements IDUMOLogger {
+public class IDUMOAndroidLogger implements Logger {
 	private String	tag;
 	
 	public IDUMOAndroidLogger(String tag) {

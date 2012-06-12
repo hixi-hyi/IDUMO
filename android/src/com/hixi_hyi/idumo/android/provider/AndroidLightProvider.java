@@ -26,9 +26,9 @@ import com.hixi_hyi.idumo.android.data.AndroidLightData;
 import com.hixi_hyi.idumo.android.sensor.LightSensor;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataTypeSingle;
-import com.hixi_hyi.idumo.core.parts.IDUMOSendable;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
+import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * Android上の光センサの情報を取得できるProvider
@@ -37,7 +37,7 @@ import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
  * @version 2.0
  *
  */
-public class AndroidLightProvider implements IDUMOSendable, AndroidController {
+public class AndroidLightProvider implements Sendable, AndroidController {
 
 	private LightSensor	light;
 
@@ -52,7 +52,7 @@ public class AndroidLightProvider implements IDUMOSendable, AndroidController {
 
 	@Override
 	public FlowingData onCall() {
-		IDUMOLogManager.log();
+		LogManager.log();
 		FlowingData p = new FlowingData();
 		p.add(new AndroidLightData(light.getLight()));
 		return p;
@@ -87,6 +87,6 @@ public class AndroidLightProvider implements IDUMOSendable, AndroidController {
 
 	@Override
 	public ConnectDataType sendableType() {
-		return new ConnectDataTypeSingle(AndroidLightData.class);
+		return new SingleConnectDataType(AndroidLightData.class);
 	}
 }

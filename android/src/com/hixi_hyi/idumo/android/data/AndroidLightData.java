@@ -17,18 +17,18 @@
  */
 package com.hixi_hyi.idumo.android.data;
 
-import com.hixi_hyi.idumo.core.data.Data.IDUMODataBase;
-import com.hixi_hyi.idumo.core.data.raw.RawDataTypeNumber;
+import com.hixi_hyi.idumo.core.data.Data.AbstractData;
+import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
 
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class AndroidLightData extends IDUMODataBase {
+public class AndroidLightData extends AbstractData {
 	public static final String	LIGHT	= "light";
 
 	public AndroidLightData(float light) {
-		add(new RawDataTypeNumber(LIGHT, light, "Android Light"));
+		add(new NumberRawDataType(LIGHT, light, "Android Light"));
 	}
 
 	public float getLight() {

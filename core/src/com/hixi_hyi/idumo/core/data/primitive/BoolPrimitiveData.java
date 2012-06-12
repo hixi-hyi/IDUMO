@@ -1,5 +1,5 @@
 /**
- * Copyright (c) <2011>, <Hiroyoshi Houchi> All rights reserved.
+ * Copyright (c) <2012>, <Hiroyoshi Houchi> All rights reserved.
  *
  * http://www.hixi-hyi.com/
  *
@@ -15,34 +15,22 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.core.util;
+package com.hixi_hyi.idumo.core.data.primitive;
 
-public class IDUMOLogManager {
-	public static boolean		DEBUG;
-	public static IDUMOLogger	LOGGER;
-	
-	public static void debug(Object o) {
-		if (DEBUG && (LOGGER != null)) {
-			LOGGER.debug(o.toString());
-		}
+import com.hixi_hyi.idumo.core.data.raw.BoolRawDataType;
+
+public class BoolPrimitiveData extends PrimitiveData {
+
+	public BoolPrimitiveData(boolean n) {
+		add(new BoolRawDataType(NAME, n, "Primitive : Number"));
 	}
-	
-	public static void info(Object o) {
-		if (DEBUG && (LOGGER != null)) {
-			LOGGER.info(o.toString());
-		}
+
+	public boolean getBool() {
+		return (Boolean) getValue(NAME);
 	}
-	
-	public static void warning(Object o) {
-		if (DEBUG && (LOGGER != null)) {
-			LOGGER.warning(o.toString());
-		}
+
+	@Override
+	public String toString(){
+		return String.valueOf(getBool());
 	}
-	
-	public static void log() {
-		if (DEBUG && (LOGGER != null)) {
-			LOGGER.log();
-		}
-	}
-	
 }

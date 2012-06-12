@@ -23,7 +23,7 @@ import android.widget.ListView;
 
 import com.hixi_hyi.idumo.android.core.util.DeployUtil;
 import com.hixi_hyi.idumo.android.core.util.IDUMOAndroidLogger;
-import com.hixi_hyi.idumo.core.util.IDUMOLogManager;
+import com.hixi_hyi.idumo.core.util.LogManager;
 
 //import com.hixi_hyi.idumo.android.test.core.util.IDUMOAndroidLogger;
 //import com.hixi_hyi.idumo.android.test.core.util.DeployUtil;
