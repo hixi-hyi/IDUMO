@@ -2,5 +2,5 @@
 package com.hixi_hyi.idumo.android.test;
 
 public final class BuildConfig {
-	public final static boolean DEBUG = true;
+    public final static boolean DEBUG = true;
 }

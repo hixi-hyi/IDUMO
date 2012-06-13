@@ -4,7 +4,7 @@ import com.hixi_hyi.idumo.android.core.exec.AndroidComponent;
 import com.hixi_hyi.idumo.android.core.exec.AndroidWrapper;
 import com.hixi_hyi.idumo.android.core.util.AndroidLogger;
 import com.hixi_hyi.idumo.android.receiptor.AndroidMapViewReceiptor;
-import com.hixi_hyi.idumo.common.converter.Number2GPSConverter;
+import com.hixi_hyi.idumo.common.adapter.Number2GPSAdapter;
 import com.hixi_hyi.idumo.common.provider.NumberProvider;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.util.LogManager;
@@ -22,7 +22,7 @@ public class Number2MapView extends AndroidWrapper {
 				add(idumo0);
 				NumberProvider idumo1 = new NumberProvider(139.767084);
 				add(idumo1);
-				Number2GPSConverter idumo2 = new Number2GPSConverter();
+				Number2GPSAdapter idumo2 = new Number2GPSAdapter();
 				add(idumo2);
 				
 				AndroidMapViewReceiptor idumor = new AndroidMapViewReceiptor(activity);

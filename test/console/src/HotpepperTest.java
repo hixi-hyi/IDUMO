@@ -1,4 +1,4 @@
-import com.hixi_hyi.idumo.common.converter.Number2GPSConverter;
+import com.hixi_hyi.idumo.common.adapter.Number2GPSAdapter;
 import com.hixi_hyi.idumo.common.provider.HotpepperHandler;
 import com.hixi_hyi.idumo.common.provider.NumberProvider;
 import com.hixi_hyi.idumo.console.core.exec.ConsoleComponent;
@@ -26,7 +26,7 @@ public class HotpepperTest extends ConsoleWrapper {
 				add(idumo0);
 				NumberProvider idumo1 = new NumberProvider(135.52);
 				add(idumo1);
-				Number2GPSConverter idumo2 = new Number2GPSConverter();
+				Number2GPSAdapter idumo2 = new Number2GPSAdapter();
 				add(idumo2);
 				HotpepperHandler idumo3 = new HotpepperHandler();
 				add(idumo3);

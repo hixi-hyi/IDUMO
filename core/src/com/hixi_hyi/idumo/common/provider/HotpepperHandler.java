@@ -15,58 +15,66 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.console.receiptor;
+package com.hixi_hyi.idumo.common.provider;
 
+import java.util.List;
 
-import com.hixi_hyi.idumo.common.data.element.TextElement;
-import com.hixi_hyi.idumo.core.data.Data;
+import com.hixi_hyi.idumo.common.component.Hotpepper;
+import com.hixi_hyi.idumo.common.data.HotpepperData;
+import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
+import com.hixi_hyi.idumo.common.data.element.LatLngDataElement.LatLngData;
 import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.connect.ArrayConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.Executable;
 import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
+import com.hixi_hyi.idumo.core.util.LogManager;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 /**
- * Systemoutに出力するReceiptor
  * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- * 
  */
-public class ConsoleViewReceiptor implements Receivable, Executable {
+public class HotpepperHandler implements Sendable, Receivable {
 	
+	private Hotpepper hotpepper = new Hotpepper();
 	private Sendable sender;
 	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
 	
 	@Override
 	public boolean isReady() {
-		return sender.isReady();
+		return true;
+	}
+	
+	@Override
+	public FlowingData onCall() {
+		LogManager.log();
+		LatLngDataElement gd = (LatLngDataElement) sender.onCall().next();
+		hotpepper.setLatLon(gd.getLatitude(), gd.getLongitude());
+		FlowingData p = new FlowingData();
+		List<HotpepperData> data = hotpepper.getData();
+		for (HotpepperData d : data) {
+			p.add(d);
+		}
+		return p;
 	}
 	
 	@Override
 	public ConnectDataType receivableType() {
-		return new SingleConnectDataType(Data.class);
+		return new SingleConnectDataType(LatLngData.class);
 	}
 	
 	@Override
-	public void run() {
-		FlowingData flowdata = sender.onCall();
-		// IDUMODataPrimitive data = (IDUMODataPrimitive) flowdata.next();
-		// System.out.println(data.getValue());
-		for (Data idumoData : flowdata) {
-			System.out.println(((TextElement) idumoData).getText());
-		}
-		// IDUMOData data = (IDUMOData) flowdata.next();
-		// System.out.println(data);
+	public ConnectDataType sendableType() {
+		return new ArrayConnectDataType(HotpepperData.class);
 	}
 	
 	@Override
-	public void setSender(Sendable... handler) throws IDUMOException {
-		vSize.validate(handler);
-		sender = handler[0];
+	public void setSender(Sendable... senders) throws IDUMOException {
+		vSize.validate(senders);
+		sender = senders[0];
 	}
-	
 }

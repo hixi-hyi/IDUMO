@@ -1,4 +1,4 @@
-import com.hixi_hyi.idumo.common.converter.Number2GPSConverter;
+import com.hixi_hyi.idumo.common.adapter.Number2GPSAdapter;
 import com.hixi_hyi.idumo.common.handler.ReversedGeocordingHandler;
 import com.hixi_hyi.idumo.common.provider.NumberProvider;
 import com.hixi_hyi.idumo.console.core.exec.ConsoleComponent;
@@ -25,7 +25,7 @@ public class Number2AddressTest extends ConsoleWrapper {
 				add(idumo0);
 				NumberProvider idumo1 = new NumberProvider(139.4505);
 				add(idumo1);
-				Number2GPSConverter idumo2 = new Number2GPSConverter();
+				Number2GPSAdapter idumo2 = new Number2GPSAdapter();
 				add(idumo2);
 				ReversedGeocordingHandler idumo3 = new ReversedGeocordingHandler();
 				add(idumo3);

@@ -3,7 +3,7 @@ package com.hixi_hyi.idumo.core.data;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.hixi_hyi.idumo.core.data.element.TextElement;
+import com.hixi_hyi.idumo.common.data.element.TextElement;
 import com.hixi_hyi.idumo.core.data.raw.RawDataType;
 
 public interface Data {
