@@ -1,6 +1,6 @@
 package com.hixi_hyi.idumo.common.adapter;
 
-import com.hixi_hyi.idumo.common.data.element.LatLngDataElement.LatLngData;
+import com.hixi_hyi.idumo.common.data.element.LatLngElement.LatLngData;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.MultiConnectDataType;

@@ -23,7 +23,7 @@ import android.content.Context;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
-import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
+import com.hixi_hyi.idumo.common.data.element.LatLngElement;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
@@ -73,14 +73,14 @@ public class AndroidMapViewReceiptor extends MapView implements Receivable, Exec
 	
 	@Override
 	public ConnectDataType receivableType() {
-		return new SingleConnectDataType(LatLngDataElement.class);
+		return new SingleConnectDataType(LatLngElement.class);
 	}
 	
 	@Override
 	public void run() {
 		LogManager.log();
 		FlowingData idf = sender.onCall();
-		LatLngDataElement llde = (LatLngDataElement) idf.next();
+		LatLngElement llde = (LatLngElement) idf.next();
 		GeoPoint point = new GeoPoint((int) (llde.getLatitude() * 1E6), (int) (llde.getLongitude() * 1E6));
 		LogManager.debug(point);
 		controller.setCenter(point);

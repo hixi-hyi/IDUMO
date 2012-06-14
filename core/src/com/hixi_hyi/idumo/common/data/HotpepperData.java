@@ -17,13 +17,13 @@
  */
 package com.hixi_hyi.idumo.common.data;
 
-import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
+import com.hixi_hyi.idumo.common.data.element.LatLngElement;
 import com.hixi_hyi.idumo.common.data.element.TextElement;
 import com.hixi_hyi.idumo.core.data.Data.AbstractData;
 import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
 import com.hixi_hyi.idumo.core.data.raw.StringRawDataType;
 
-public class HotpepperData extends AbstractData implements LatLngDataElement, TextElement {
+public class HotpepperData extends AbstractData implements LatLngElement, TextElement {
 	private static final String NAME = "name";
 	private static final String KANA = "kana";
 	private static final String LAT = "lat";

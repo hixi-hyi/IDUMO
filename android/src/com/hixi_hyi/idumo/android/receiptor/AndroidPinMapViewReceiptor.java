@@ -29,7 +29,7 @@ import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
-import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
+import com.hixi_hyi.idumo.common.data.element.LatLngElement;
 import com.hixi_hyi.idumo.core.data.Data;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
@@ -85,7 +85,7 @@ public class AndroidPinMapViewReceiptor extends MapView implements Receivable, E
 	
 	@Override
 	public ConnectDataType receivableType() {
-		return new SingleConnectDataType(LatLngDataElement.class);
+		return new SingleConnectDataType(LatLngElement.class);
 	}
 	
 	@Override
@@ -93,7 +93,7 @@ public class AndroidPinMapViewReceiptor extends MapView implements Receivable, E
 		LogManager.log();
 		FlowingData idf = sender.onCall();
 		for (Data id : idf) {
-			LatLngDataElement llde = (LatLngDataElement) id;
+			LatLngElement llde = (LatLngElement) id;
 			GeoPoint point = new GeoPoint((int) (llde.getLatitude() * 1E6), (int) (llde.getLongitude() * 1E6));
 			overlay.addPoint(point);
 			LogManager.debug(point);

@@ -17,7 +17,7 @@
  */
 package com.hixi_hyi.idumo.android.data;
 
-import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
+import com.hixi_hyi.idumo.common.data.element.LatLngElement;
 import com.hixi_hyi.idumo.core.data.Data.AbstractData;
 import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
 
@@ -25,7 +25,7 @@ import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class AndroidGPSData extends AbstractData implements LatLngDataElement {
+public class AndroidGPSData extends AbstractData implements LatLngElement {
 	public static final String	LATITUDE	= "latitude";
 	public static final String	LONGITUDE	= "longitude";
 	public static final String	ALTITUDE	= "altitude";

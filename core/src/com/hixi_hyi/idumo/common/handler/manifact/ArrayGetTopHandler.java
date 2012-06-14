@@ -1,5 +1,7 @@
 package com.hixi_hyi.idumo.common.handler.manifact;
 
+import com.hixi_hyi.idumo.core.annotation.IDUMOItemAnnotation;
+import com.hixi_hyi.idumo.core.annotation.IDUMOItemAnnotation.IDUMOType;
 import com.hixi_hyi.idumo.core.data.Data;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ArrayConnectDataType;
@@ -9,6 +11,7 @@ import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
+@IDUMOItemAnnotation(author="Hiroyoshi HOUCHI",name="配列の一番上を取得",type=IDUMOType.Handler)
 public class ArrayGetTopHandler implements Sendable, Receivable {
 	
 	private Sendable sender;

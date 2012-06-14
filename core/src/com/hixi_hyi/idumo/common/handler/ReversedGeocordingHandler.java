@@ -1,8 +1,8 @@
 package com.hixi_hyi.idumo.common.handler;
 
 import com.hixi_hyi.idumo.common.component.ReversedGeocording;
-import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
-import com.hixi_hyi.idumo.common.data.element.LatLngDataElement.LatLngData;
+import com.hixi_hyi.idumo.common.data.element.LatLngElement;
+import com.hixi_hyi.idumo.common.data.element.LatLngElement.LatLngData;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
@@ -32,7 +32,7 @@ public class ReversedGeocordingHandler implements Sendable, Receivable {
 	
 	@Override
 	public FlowingData onCall() {
-		LatLngDataElement gd = (LatLngDataElement) sender.onCall().next();
+		LatLngElement gd = (LatLngElement) sender.onCall().next();
 		
 		ReversedGeocording rg = new ReversedGeocording(gd.getLatitude(), gd.getLongitude());
 		

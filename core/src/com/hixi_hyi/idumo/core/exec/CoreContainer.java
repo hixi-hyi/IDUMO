@@ -13,21 +13,9 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
 
 public class CoreContainer {
 	
-	public class Connect {
-		private ArrayList<Sendable> senders = new ArrayList<Sendable>();
-		
-		public void add(Sendable sender) {
-			senders.add(sender);
-		}
-		
-		public Sendable[] getSenders() {
-			return senders.toArray(new Sendable[0]);
-		}
-	}
-	
 	private ArrayList<Connectable> items = new ArrayList<Connectable>();
-	private ArrayList<Executable> runnables = new ArrayList<Executable>();
 	
+	private ArrayList<Executable> runnables = new ArrayList<Executable>();
 	private ArrayList<CoreController> controllers = new ArrayList<CoreController>();
 	
 	private HashMap<Receivable, Connect> connector = new HashMap<Receivable, Connect>();
@@ -72,6 +60,18 @@ public class CoreContainer {
 			receiver.setSender(connect.getSenders());
 		}
 		
+	}
+	
+	public class Connect {
+		private ArrayList<Sendable> senders = new ArrayList<Sendable>();
+		
+		public void add(Sendable sender) {
+			senders.add(sender);
+		}
+		
+		public Sendable[] getSenders() {
+			return senders.toArray(new Sendable[0]);
+		}
 	}
 	
 }

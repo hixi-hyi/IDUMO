@@ -3,12 +3,12 @@ package com.hixi_hyi.idumo.common.data.element;
 import com.hixi_hyi.idumo.core.data.Data;
 import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
 
-public interface LatLngDataElement extends Data {
+public interface LatLngElement extends Data {
 	public double getLatitude();
 	
 	public double getLongitude();
 	
-	public class LatLngData extends AbstractData implements LatLngDataElement {
+	public class LatLngData extends AbstractData implements LatLngElement {
 		
 		private static final String LAT = "lat";
 		private static final String LNG = "lng";

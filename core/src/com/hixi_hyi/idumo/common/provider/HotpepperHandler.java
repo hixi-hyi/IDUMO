@@ -21,8 +21,8 @@ import java.util.List;
 
 import com.hixi_hyi.idumo.common.component.Hotpepper;
 import com.hixi_hyi.idumo.common.data.HotpepperData;
-import com.hixi_hyi.idumo.common.data.element.LatLngDataElement;
-import com.hixi_hyi.idumo.common.data.element.LatLngDataElement.LatLngData;
+import com.hixi_hyi.idumo.common.data.element.LatLngElement;
+import com.hixi_hyi.idumo.common.data.element.LatLngElement.LatLngData;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ArrayConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
@@ -52,7 +52,7 @@ public class HotpepperHandler implements Sendable, Receivable {
 	@Override
 	public FlowingData onCall() {
 		LogManager.log();
-		LatLngDataElement gd = (LatLngDataElement) sender.onCall().next();
+		LatLngElement gd = (LatLngElement) sender.onCall().next();
 		hotpepper.setLatLon(gd.getLatitude(), gd.getLongitude());
 		FlowingData p = new FlowingData();
 		List<HotpepperData> data = hotpepper.getData();

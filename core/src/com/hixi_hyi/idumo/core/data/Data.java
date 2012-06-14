@@ -8,6 +8,8 @@ import com.hixi_hyi.idumo.core.data.raw.RawDataType;
 
 public interface Data {
 	
+	RawDataType get(String name);
+	
 	public abstract class AbstractData implements Data, TextElement {
 		private Map<String, RawDataType> raw = new TreeMap<String, RawDataType>();
 		
@@ -32,6 +34,7 @@ public interface Data {
 				sb.append("[\"");
 				sb.append(entry.getKey());
 				sb.append("\":");
+				
 				sb.append(entry.getValue().getValue());
 				sb.append("]");
 			}
@@ -43,7 +46,5 @@ public interface Data {
 			return raw.get(name).getValue();
 		}
 	}
-	
-	RawDataType get(String name);
 	
 }
