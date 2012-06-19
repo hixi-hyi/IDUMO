@@ -4,7 +4,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
 @Target({ ElementType.TYPE })
-public @interface IDUMOItemAnnotation {
+public @interface IDUMOItem {
 	String author();
 	String name();
 	String description() default "";

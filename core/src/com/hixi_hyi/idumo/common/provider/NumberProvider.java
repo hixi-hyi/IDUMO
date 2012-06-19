@@ -17,8 +17,8 @@
  */
 package com.hixi_hyi.idumo.common.provider;
 
-import com.hixi_hyi.idumo.core.annotation.IDUMOItemAnnotation;
-import com.hixi_hyi.idumo.core.annotation.IDUMOItemAnnotation.IDUMOType;
+import com.hixi_hyi.idumo.core.annotation.IDUMOItem;
+import com.hixi_hyi.idumo.core.annotation.IDUMOItem.IDUMOType;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
@@ -32,7 +32,7 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
  * @version 2.0
  * 
  */
-@IDUMOItemAnnotation(author="Hiroyoshi HOUCHI",name="ランダムな数字",type=IDUMOType.Provider)
+@IDUMOItem(author="Hiroyoshi HOUCHI",name="ランダムな数字",type=IDUMOType.Provider)
 public class NumberProvider implements Sendable {
 	
 	private Double num;
