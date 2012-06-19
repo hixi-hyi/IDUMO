@@ -15,7 +15,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.common.provider;
+package com.hixi_hyi.idumo.common.handler;
 
 import java.util.List;
 
@@ -23,6 +23,7 @@ import com.hixi_hyi.idumo.common.component.Hotpepper;
 import com.hixi_hyi.idumo.common.data.HotpepperData;
 import com.hixi_hyi.idumo.common.data.element.LatLngElement;
 import com.hixi_hyi.idumo.common.data.element.LatLngElement.LatLngData;
+import com.hixi_hyi.idumo.core.annotation.IDUMOHandler;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ArrayConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
@@ -38,11 +39,12 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
+@IDUMOHandler(author = "Hiroyoshi HOUCHI", description = "現在地情報からHotpepperの情報を取得します", name = "Hotpepper", receive = LatLngElement.class, send = HotpepperData.class)
 public class HotpepperHandler implements Sendable, Receivable {
 	
-	private Hotpepper hotpepper = new Hotpepper();
-	private Sendable sender;
-	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
+	private Hotpepper				hotpepper	= new Hotpepper();
+	private Sendable				sender;
+	private ReceiveValidatorSize	vSize		= new ReceiveValidatorSize(1);
 	
 	@Override
 	public boolean isReady() {

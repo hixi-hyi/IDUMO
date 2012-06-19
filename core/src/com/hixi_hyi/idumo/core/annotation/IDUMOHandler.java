@@ -11,7 +11,7 @@ public @interface IDUMOHandler {
 
 	String name();
 
-	String description();
+	String description() default "";
 
 	Class<? extends DataElement> send();
 

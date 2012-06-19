@@ -24,6 +24,7 @@ import android.hardware.SensorManager;
 import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.android.data.AndroidAccelerometerData;
 import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
+import com.hixi_hyi.idumo.core.annotation.IDUMOProvider;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
@@ -32,15 +33,16 @@ import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * Android上の加速度センサの値を提供するProvider
- * 
+ *
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- * 
+ *
  */
+@IDUMOProvider(author="Hiroyoshi HOUCHI",name="加速度センサの値",send=AndroidAccelerometerData.class)
 public class AndroidAccelerometerProvider implements Sendable, AndroidController {
-	
+
 	private AccelerometerSensor	accel;
-	
+
 	public AndroidAccelerometerProvider(Activity activity) {
 		AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
 		if (!accelerometerSensor.isInit()) {
@@ -49,12 +51,12 @@ public class AndroidAccelerometerProvider implements Sendable, AndroidController
 		}
 		accel = accelerometerSensor;
 	}
-	
+
 	@Override
 	public boolean isReady() {
 		return accel.isReady();
 	}
-	
+
 	@Override
 	public FlowingData onCall() {
 		LogManager.log();
@@ -63,32 +65,32 @@ public class AndroidAccelerometerProvider implements Sendable, AndroidController
 		p.add(data);
 		return p;
 	}
-	
+
 	@Override
 	public void onIdumoDestroy() {}
-	
+
 	@Override
 	public void onIdumoPause() {
 		accel.unregister();
 	}
-	
+
 	@Override
 	public void onIdumoRestart() {}
-	
+
 	@Override
 	public void onIdumoResume() {
 		accel.register();
 	}
-	
+
 	@Override
 	public void onIdumoStart() {}
-	
+
 	@Override
 	public void onIdumoStop() {}
-	
+
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(AndroidAccelerometerData.class);
 	}
-	
+
 }

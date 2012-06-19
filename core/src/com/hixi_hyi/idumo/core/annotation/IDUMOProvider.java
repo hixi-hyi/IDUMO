@@ -8,10 +8,10 @@ import com.hixi_hyi.idumo.core.data.DataElement;
 @Target({ ElementType.TYPE })
 public @interface IDUMOProvider {
 	String author();
-
+	
 	String name();
-
-	String description();
-
+	
+	String description() default "";
+	
 	Class<? extends DataElement> send();
 }

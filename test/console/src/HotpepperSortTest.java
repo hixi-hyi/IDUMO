@@ -1,6 +1,6 @@
 import com.hixi_hyi.idumo.common.adapter.Number2GPSAdapter;
+import com.hixi_hyi.idumo.common.handler.HotpepperHandler;
 import com.hixi_hyi.idumo.common.handler.raw.SortHandler;
-import com.hixi_hyi.idumo.common.provider.HotpepperHandler;
 import com.hixi_hyi.idumo.common.provider.NumberProvider;
 import com.hixi_hyi.idumo.console.core.exec.ConsoleComponent;
 import com.hixi_hyi.idumo.console.core.exec.ConsoleWrapper;

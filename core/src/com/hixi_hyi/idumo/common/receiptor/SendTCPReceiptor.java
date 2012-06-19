@@ -8,6 +8,9 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import com.hixi_hyi.idumo.common.data.element.TextElement;
+import com.hixi_hyi.idumo.core.annotation.IDUMOReceiptor;
+import com.hixi_hyi.idumo.core.data.DataElement;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveElement;
@@ -27,6 +30,7 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
  * @author Hiroyoshi HOUCHI
  *
  */
+@IDUMOReceiptor(author="Hiroyoshi HOUCHI",name="指定IPにTCP送信",receive=TextElement.class)
 public class SendTCPReceiptor implements Receivable, CoreController, Executable {
 	private String				ip;
 	private int					port;

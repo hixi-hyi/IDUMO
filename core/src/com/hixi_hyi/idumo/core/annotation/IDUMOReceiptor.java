@@ -11,7 +11,7 @@ public @interface IDUMOReceiptor {
 
 	String name();
 
-	String description();
+	String description() default "";
 
 	Class<? extends DataElement> receive();
 }
