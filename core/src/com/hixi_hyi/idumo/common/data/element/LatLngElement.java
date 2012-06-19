@@ -1,9 +1,9 @@
 package com.hixi_hyi.idumo.common.data.element;
 
-import com.hixi_hyi.idumo.core.data.Data;
+import com.hixi_hyi.idumo.core.data.DataElement;
 import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
 
-public interface LatLngElement extends Data {
+public interface LatLngElement extends DataElement {
 	public double getLatitude();
 	
 	public double getLongitude();

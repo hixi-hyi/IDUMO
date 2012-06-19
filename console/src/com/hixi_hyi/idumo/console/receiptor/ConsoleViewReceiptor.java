@@ -19,7 +19,7 @@ package com.hixi_hyi.idumo.console.receiptor;
 
 
 import com.hixi_hyi.idumo.common.data.element.TextElement;
-import com.hixi_hyi.idumo.core.data.Data;
+import com.hixi_hyi.idumo.core.data.DataElement;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
@@ -48,7 +48,7 @@ public class ConsoleViewReceiptor implements Receivable, Executable {
 	
 	@Override
 	public ConnectDataType receivableType() {
-		return new SingleConnectDataType(Data.class);
+		return new SingleConnectDataType(DataElement.class);
 	}
 	
 	@Override
@@ -56,7 +56,7 @@ public class ConsoleViewReceiptor implements Receivable, Executable {
 		FlowingData flowdata = sender.onCall();
 		// IDUMODataPrimitive data = (IDUMODataPrimitive) flowdata.next();
 		// System.out.println(data.getValue());
-		for (Data idumoData : flowdata) {
+		for (DataElement idumoData : flowdata) {
 			System.out.println(((TextElement) idumoData).getText());
 		}
 		// IDUMOData data = (IDUMOData) flowdata.next();

@@ -17,7 +17,7 @@
  */
 package com.hixi_hyi.idumo.common.data;
 
-import com.hixi_hyi.idumo.core.data.Data.AbstractData;
+import com.hixi_hyi.idumo.core.data.DataElement.AbstractData;
 import com.hixi_hyi.idumo.core.data.raw.NumberRawDataType;
 import com.hixi_hyi.idumo.core.data.raw.StringRawDataType;
 

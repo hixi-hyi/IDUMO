@@ -21,7 +21,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.widget.TextView;
 
-import com.hixi_hyi.idumo.core.data.Data;
+import com.hixi_hyi.idumo.core.data.DataElement;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ArrayConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
@@ -59,7 +59,7 @@ public class AndroidTextViewReceiptor extends TextView implements Receivable, Ex
 	
 	@Override
 	public ConnectDataType receivableType() {
-		return new ArrayConnectDataType(Data.class);
+		return new ArrayConnectDataType(DataElement.class);
 	}
 	
 	@Override
@@ -67,7 +67,7 @@ public class AndroidTextViewReceiptor extends TextView implements Receivable, Ex
 		LogManager.log();
 		FlowingData idf = sender.onCall();
 		StringBuilder sb = new StringBuilder();
-		for (Data d : idf) {
+		for (DataElement d : idf) {
 			sb.append(d.toString());
 		}
 		

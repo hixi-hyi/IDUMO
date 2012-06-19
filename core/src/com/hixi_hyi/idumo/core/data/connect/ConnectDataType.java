@@ -17,8 +17,8 @@
  */
 package com.hixi_hyi.idumo.core.data.connect;
 
-import com.hixi_hyi.idumo.core.data.Data;
+import com.hixi_hyi.idumo.core.data.DataElement;
 
-public interface ConnectDataType extends Iterable<Class<? extends Data>> {
+public interface ConnectDataType extends Iterable<Class<? extends DataElement>> {
 	public boolean equals(ConnectDataType connect);
 }

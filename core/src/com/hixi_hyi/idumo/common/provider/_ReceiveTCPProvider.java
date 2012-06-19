@@ -10,26 +10,26 @@ import java.util.ArrayList;
 
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveData;
+import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveElement;
 import com.hixi_hyi.idumo.core.exec.CoreController;
 import com.hixi_hyi.idumo.core.parts.Sendable;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
  * バイト情報を受け取ることが出来るProvider
- * 
+ *
  * @author Hiroyoshi HOUCHI
- * 
+ *
  */
 public class _ReceiveTCPProvider implements Sendable, CoreController {
 	private int port;
-	
+
 	private Socket socket;
 	private BufferedReader br;
 	private InputStream in;
 	private ArrayList<String> strs;
 	private AcceptServer server;
-	
+
 	public _ReceiveTCPProvider(int port) {
 		this.port = port;
 		strs = new ArrayList<String>();
@@ -40,11 +40,11 @@ public class _ReceiveTCPProvider implements Sendable, CoreController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public boolean isReady() {
 		LogManager.log();
-		
+
 		if (server.getSocket() == null) {
 			LogManager.debug("null");
 			socket = null;
@@ -63,7 +63,7 @@ public class _ReceiveTCPProvider implements Sendable, CoreController {
 			}
 			br = new BufferedReader(new InputStreamReader(in));
 		}
-		
+
 		if (strs.size() != 0) {
 			return true;
 		} else {
@@ -79,7 +79,7 @@ public class _ReceiveTCPProvider implements Sendable, CoreController {
 			}
 		}
 		return false;
-		
+
 		/*
 		 * if (server.getSocket() == null) { return false; } socket =
 		 * server.getSocket(); try { in = socket.getInputStream(); } catch
@@ -89,22 +89,22 @@ public class _ReceiveTCPProvider implements Sendable, CoreController {
 		 * (IOException e) { e.printStackTrace(); } return false;
 		 */
 	}
-	
+
 	@Override
 	public FlowingData onCall() {
 		FlowingData p = new FlowingData();
 		LogManager.debug(p);
 		String s = strs.remove(0);
-		p.add(new StringPrimitiveData(s));
+		p.add(new StringPrimitiveElement.StringPrimitiveData(s));
 		server.restart();
 		return p;
 	}
-	
+
 	@Override
 	public void onIdumoStart() {
 		new Thread(server).run();
 	}
-	
+
 	@Override
 	public void onIdumoStop() {
 		try {
@@ -115,25 +115,25 @@ public class _ReceiveTCPProvider implements Sendable, CoreController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public ConnectDataType sendableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
-	
+
 	class AcceptServer implements Runnable {
-		
+
 		int port;
 		ServerSocket server;
 		Socket socket;
 		boolean bool;
-		
+
 		public AcceptServer(int port) throws IOException {
 			this.port = port;
 			server = new ServerSocket(port);
 		}
-		
+
 		/**
 		 * @return socket
 		 */
@@ -145,7 +145,7 @@ public class _ReceiveTCPProvider implements Sendable, CoreController {
 			// }
 			return socket;
 		}
-		
+
 		public void restart() {
 			try {
 				socket.close();
@@ -156,7 +156,7 @@ public class _ReceiveTCPProvider implements Sendable, CoreController {
 			socket = null;
 			new Thread(this).start();
 		}
-		
+
 		@Override
 		public void run() {
 			try {
@@ -169,6 +169,6 @@ public class _ReceiveTCPProvider implements Sendable, CoreController {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
 }

@@ -20,7 +20,7 @@ package com.hixi_hyi.idumo.common.handler.raw;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.hixi_hyi.idumo.core.data.Data;
+import com.hixi_hyi.idumo.core.data.DataElement;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ArrayConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
@@ -51,13 +51,13 @@ public class SortHandler implements Sendable, Receivable {
 	
 	@Override
 	public FlowingData onCall() {
-		TreeMap<Object, Data> map = new TreeMap<Object, Data>();
-		for (Data d : sender.onCall()) {
+		TreeMap<Object, DataElement> map = new TreeMap<Object, DataElement>();
+		for (DataElement d : sender.onCall()) {
 			map.put(d.get(name).getValue(), d);
 			LogManager.debug(d.get(name).getValue());
 		}
 		FlowingData idf = new FlowingData();
-		for (Map.Entry<Object, Data> e : map.entrySet()) {
+		for (Map.Entry<Object, DataElement> e : map.entrySet()) {
 			idf.add(e.getValue());
 		}
 		return idf;
@@ -65,12 +65,12 @@ public class SortHandler implements Sendable, Receivable {
 	
 	@Override
 	public ConnectDataType receivableType() {
-		return new ArrayConnectDataType(Data.class);
+		return new ArrayConnectDataType(DataElement.class);
 	}
 	
 	@Override
 	public ConnectDataType sendableType() {
-		return new ArrayConnectDataType(Data.class);
+		return new ArrayConnectDataType(DataElement.class);
 	}
 	
 	@Override

@@ -17,12 +17,10 @@
  */
 package com.hixi_hyi.idumo.common.provider;
 
-import com.hixi_hyi.idumo.core.annotation.IDUMOItem;
-import com.hixi_hyi.idumo.core.annotation.IDUMOItem.IDUMOType;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
-import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveData;
+import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveElement;
 import com.hixi_hyi.idumo.core.parts.Sendable;
 
 /**
@@ -32,10 +30,9 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
  * @version 2.0
  * 
  */
-@IDUMOItem(author="Hiroyoshi HOUCHI",name="ランダムデータ",type=IDUMOType.Provider)
 public class StringProvider implements Sendable {
 	
-	private String str;
+	private String	str;
 	
 	public StringProvider(String str) {
 		// IDUMOLogManager.debug(str);
@@ -51,13 +48,13 @@ public class StringProvider implements Sendable {
 	public FlowingData onCall() {
 		// IDUMOLogManager.log();
 		FlowingData pipes = new FlowingData();
-		pipes.add(new StringPrimitiveData(str));
+		pipes.add(new StringPrimitiveElement.StringPrimitiveData(str));
 		return pipes;
 	}
 	
 	@Override
 	public ConnectDataType sendableType() {
-		return new SingleConnectDataType(StringPrimitiveData.class);
+		return new SingleConnectDataType(StringPrimitiveElement.class);
 	}
 	
 }

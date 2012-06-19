@@ -20,8 +20,8 @@ package com.hixi_hyi.idumo.common.handler.raw;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
-import com.hixi_hyi.idumo.core.data.primitive.BoolPrimitiveData;
-import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveData;
+import com.hixi_hyi.idumo.core.data.primitive.BoolPrimitiveElement;
+import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveElement;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
@@ -34,10 +34,10 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
  */
 public class NumberMoreThanHandler implements Sendable, Receivable {
 	
-	private Sendable sender;
-	private double condition;
-	private ReceiveValidatorSize validator = new ReceiveValidatorSize(1);
-	private ReceiveValidatorType vType = new ReceiveValidatorType(1, NumberPrimitiveData.class);
+	private Sendable				sender;
+	private double					condition;
+	private ReceiveValidatorSize	validator	= new ReceiveValidatorSize(1);
+	private ReceiveValidatorType	vType		= new ReceiveValidatorType(1, NumberPrimitiveElement.class);
 	
 	public NumberMoreThanHandler(double condition) {
 		this.condition = condition;
@@ -50,24 +50,24 @@ public class NumberMoreThanHandler implements Sendable, Receivable {
 	
 	@Override
 	public FlowingData onCall() {
-		NumberPrimitiveData number = (NumberPrimitiveData) sender.onCall().next();
+		NumberPrimitiveElement number = (NumberPrimitiveElement) sender.onCall().next();
 		double d = number.getNumber();
 		// IDUMOLogManager.debug(d);
 		// IDUMOLogManager.debug(String.format("raw:%.0f,con:%.0f",d,condition));
 		if (condition < d) {
-			return new FlowingData(new BoolPrimitiveData(true));
+			return new FlowingData(new BoolPrimitiveElement.BoolPrimitiveData(true));
 		}
-		return new FlowingData(new BoolPrimitiveData(false));
+		return new FlowingData(new BoolPrimitiveElement.BoolPrimitiveData(false));
 	}
 	
 	@Override
 	public ConnectDataType receivableType() {
-		return new SingleConnectDataType(NumberPrimitiveData.class);
+		return new SingleConnectDataType(NumberPrimitiveElement.class);
 	}
 	
 	@Override
 	public ConnectDataType sendableType() {
-		return new SingleConnectDataType(BoolPrimitiveData.class);
+		return new SingleConnectDataType(BoolPrimitiveElement.class);
 	}
 	
 	@Override

@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.hixi_hyi.idumo.core.data.Data;
+import com.hixi_hyi.idumo.core.data.DataElement;
 
 public class MultiConnectDataType implements ConnectDataType {
 	
-	List<Class<? extends Data>> data = new ArrayList<Class<? extends Data>>();
+	List<Class<? extends DataElement>> data = new ArrayList<Class<? extends DataElement>>();
 	
-	public MultiConnectDataType(Class<? extends Data>... ds) {
-		for (Class<? extends Data> d : ds) {
+	public MultiConnectDataType(Class<? extends DataElement>... ds) {
+		for (Class<? extends DataElement> d : ds) {
 			data.add(d);
 		}
 	}
@@ -23,7 +23,7 @@ public class MultiConnectDataType implements ConnectDataType {
 	}
 	
 	@Override
-	public Iterator<Class<? extends Data>> iterator() {
+	public Iterator<Class<? extends DataElement>> iterator() {
 		return data.iterator();
 	}
 	

@@ -1,6 +1,6 @@
 package com.hixi_hyi.idumo.core.data.primitive;
 
-import com.hixi_hyi.idumo.core.data.Data.AbstractData;
+import com.hixi_hyi.idumo.core.data.DataElement.AbstractData;
 
 public abstract class PrimitiveData extends AbstractData {
 	protected static final String NAME = "value";

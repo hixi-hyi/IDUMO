@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveData;
+import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveElement;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
@@ -16,9 +16,9 @@ public class _Number2AccelerometerConverter implements Sendable, Receivable {
 	
 	private ArrayList<Sendable> sender = new ArrayList<Sendable>();
 	private ReceiveValidator vSize = new ReceiveValidatorSize(3);
-	private ReceiveValidator vType1 = new ReceiveValidatorType(1, NumberPrimitiveData.class);
-	private ReceiveValidator vType2 = new ReceiveValidatorType(2, NumberPrimitiveData.class);
-	private ReceiveValidator vType3 = new ReceiveValidatorType(3, NumberPrimitiveData.class);
+	private ReceiveValidator vType1 = new ReceiveValidatorType(1, NumberPrimitiveElement.class);
+	private ReceiveValidator vType2 = new ReceiveValidatorType(2, NumberPrimitiveElement.class);
+	private ReceiveValidator vType3 = new ReceiveValidatorType(3, NumberPrimitiveElement.class);
 	
 	public _Number2AccelerometerConverter() {}
 	

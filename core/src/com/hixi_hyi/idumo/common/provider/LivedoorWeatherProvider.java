@@ -19,8 +19,6 @@ package com.hixi_hyi.idumo.common.provider;
 
 import com.hixi_hyi.idumo.common.component.LivedoorWeather;
 import com.hixi_hyi.idumo.common.data.LivedoorWeatherData;
-import com.hixi_hyi.idumo.core.annotation.IDUMOItem;
-import com.hixi_hyi.idumo.core.annotation.IDUMOItem.IDUMOType;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
@@ -33,16 +31,14 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-@IDUMOItem(author = "Hiroyoshi HOUCHI", type = IDUMOType.Provider, name = "天気予報取得")
 public class LivedoorWeatherProvider implements Sendable {
 	
-	private LivedoorWeather weather;
+	private LivedoorWeather	weather;
 	
 	public LivedoorWeatherProvider(int citynum) {
 		try {
 			weather = new LivedoorWeather(citynum);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new IDUMORuntimeException(e);
 		}
 	}
@@ -51,8 +47,7 @@ public class LivedoorWeatherProvider implements Sendable {
 	public boolean isReady() {
 		try {
 			return weather.isReady();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new IDUMORuntimeException(e);
 		}
 	}

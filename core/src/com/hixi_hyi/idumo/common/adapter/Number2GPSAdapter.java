@@ -5,7 +5,7 @@ import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.MultiConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
-import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveData;
+import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveElement;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
@@ -19,8 +19,8 @@ public class Number2GPSAdapter implements Sendable, Receivable {
 	private Sendable sender2;
 	
 	private ReceiveValidator vSize = new ReceiveValidatorSize(2);
-	private ReceiveValidator vType1 = new ReceiveValidatorType(1, NumberPrimitiveData.class);
-	private ReceiveValidator vType2 = new ReceiveValidatorType(2, NumberPrimitiveData.class);
+	private ReceiveValidator vType1 = new ReceiveValidatorType(1, NumberPrimitiveElement.class);
+	private ReceiveValidator vType2 = new ReceiveValidatorType(2, NumberPrimitiveElement.class);
 	
 	public Number2GPSAdapter() {}
 	
@@ -34,8 +34,8 @@ public class Number2GPSAdapter implements Sendable, Receivable {
 	
 	@Override
 	public FlowingData onCall() {
-		NumberPrimitiveData num1 = (NumberPrimitiveData) sender1.onCall().next();
-		NumberPrimitiveData num2 = (NumberPrimitiveData) sender2.onCall().next();
+		NumberPrimitiveElement num1 = (NumberPrimitiveElement) sender1.onCall().next();
+		NumberPrimitiveElement num2 = (NumberPrimitiveElement) sender2.onCall().next();
 		LatLngData latlng = new LatLngData(num1.getNumber(), num2.getNumber());
 		// IDUMOLogManager.debug(gd);
 		return new FlowingData(latlng);
@@ -43,7 +43,7 @@ public class Number2GPSAdapter implements Sendable, Receivable {
 	
 	@Override
 	public ConnectDataType receivableType() {
-		return new MultiConnectDataType(NumberPrimitiveData.class, NumberPrimitiveData.class);
+		return new MultiConnectDataType(NumberPrimitiveElement.class, NumberPrimitiveElement.class);
 	}
 	
 	@Override

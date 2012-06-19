@@ -7,39 +7,38 @@ import java.io.InputStreamReader;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
-import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveData;
+import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveElement;
 import com.hixi_hyi.idumo.core.exception.IDUMORuntimeException;
 import com.hixi_hyi.idumo.core.parts.Sendable;
 
 public class _ReceiveConsoleProvider implements Sendable {
-	
-	private BufferedReader br;
-	
+
+	private BufferedReader	br;
+
 	public _ReceiveConsoleProvider() {
 		br = new BufferedReader(new InputStreamReader(System.in));
-		
+
 	}
-	
+
 	@Override
 	public boolean isReady() {
 		return true;
 	}
-	
+
 	@Override
 	public FlowingData onCall() {
 		FlowingData p = new FlowingData();
 		try {
-			p.add(new StringPrimitiveData(br.readLine()));
-		}
-		catch (IOException e) {
+			p.add(new StringPrimitiveElement.StringPrimitiveData(br.readLine()));
+		} catch (IOException e) {
 			throw new IDUMORuntimeException(e);
 		}
 		return p;
 	}
-	
+
 	@Override
 	public ConnectDataType sendableType() {
-		return new SingleConnectDataType(StringPrimitiveData.class);
+		return new SingleConnectDataType(StringPrimitiveElement.class);
 	}
-	
+
 }

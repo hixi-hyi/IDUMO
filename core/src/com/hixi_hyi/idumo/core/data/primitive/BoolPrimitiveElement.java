@@ -17,26 +17,28 @@
  */
 package com.hixi_hyi.idumo.core.data.primitive;
 
-import com.hixi_hyi.idumo.core.data.raw.RawDataType;
-import com.hixi_hyi.idumo.core.data.raw.StringRawDataType;
+import com.hixi_hyi.idumo.core.data.DataElement;
+import com.hixi_hyi.idumo.core.data.raw.BoolRawDataType;
 
-public class StringPrimitiveData extends PrimitiveData {
-	
-	public StringPrimitiveData(RawDataType raw) {
-		add(new StringRawDataType(NAME, (String) raw.getValue(), raw.getSummary()));
+public interface BoolPrimitiveElement extends DataElement {
+
+	public boolean getBool();
+
+	public static class BoolPrimitiveData extends PrimitiveData implements BoolPrimitiveElement {
+
+		public BoolPrimitiveData(boolean n) {
+			add(new BoolRawDataType(NAME, n, "Primitive : Number"));
+		}
+
+		@Override
+		public boolean getBool() {
+			return (Boolean) getValue(NAME);
+		}
+
+		@Override
+		public String toString() {
+			return String.valueOf(getBool());
+		}
 	}
-	
-	public StringPrimitiveData(String n) {
-		add(new StringRawDataType(NAME, n, "Primitive : String"));
-	}
-	
-	public String getString() {
-		String s = (String) getValue(NAME);
-		return s;
-	}
-	
-	@Override
-	public String toString() {
-		return getString();
-	}
+
 }

@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.hixi_hyi.idumo.core.data.Data;
+import com.hixi_hyi.idumo.core.data.DataElement;
 
 public class SingleConnectDataType implements ConnectDataType {
 	
-	List<Class<? extends Data>> data = new ArrayList<Class<? extends Data>>();
+	List<Class<? extends DataElement>> data = new ArrayList<Class<? extends DataElement>>();
 	
-	public SingleConnectDataType(Class<? extends Data> d) {
+	public SingleConnectDataType(Class<? extends DataElement> d) {
 		data.add(d);
 	}
 	
@@ -21,7 +21,7 @@ public class SingleConnectDataType implements ConnectDataType {
 	}
 	
 	@Override
-	public Iterator<Class<? extends Data>> iterator() {
+	public Iterator<Class<? extends DataElement>> iterator() {
 		return data.iterator();
 	}
 	

@@ -21,16 +21,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class FlowingData implements Iterable<Data> {
-	private ArrayList<Data> datalist;
+public class FlowingData implements Iterable<DataElement> {
+	private ArrayList<DataElement> datalist;
 	{
-		datalist = new ArrayList<Data>();
+		datalist = new ArrayList<DataElement>();
 	}
 	
 	public FlowingData() {}
 	
-	public FlowingData(Data... objects) {
-		for (Data o : objects) {
+	public FlowingData(DataElement... objects) {
+		for (DataElement o : objects) {
 			datalist.add(o);
 		}
 	}
@@ -40,7 +40,7 @@ public class FlowingData implements Iterable<Data> {
 	 * @return
 	 * @see java.util.ArrayList#add(java.lang.Object)
 	 */
-	public boolean add(Data object) {
+	public boolean add(DataElement object) {
 		return datalist.add(object);
 	}
 	
@@ -49,20 +49,20 @@ public class FlowingData implements Iterable<Data> {
 	 * @return
 	 * @see java.util.ArrayList#get(int)
 	 */
-	public Data get(int index) {
+	public DataElement get(int index) {
 		return datalist.get(index);
 	}
 	
-	public Collection<Data> getData() {
+	public Collection<DataElement> getData() {
 		return datalist;
 	}
 	
 	@Override
-	public Iterator<Data> iterator() {
+	public Iterator<DataElement> iterator() {
 		return datalist.iterator();
 	}
 	
-	public Data next() {
+	public DataElement next() {
 		return datalist.remove(0);
 	}
 	

@@ -1,6 +1,6 @@
 package com.hixi_hyi.idumo.common.data.element;
 
-import com.hixi_hyi.idumo.core.data.Data.AbstractData;
+import com.hixi_hyi.idumo.core.data.DataElement.AbstractData;
 import com.hixi_hyi.idumo.core.data.raw.StringRawDataType;
 
 public interface TextElement {
