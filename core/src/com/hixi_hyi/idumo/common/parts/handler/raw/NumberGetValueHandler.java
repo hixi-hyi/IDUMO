@@ -17,11 +17,13 @@
  */
 package com.hixi_hyi.idumo.common.parts.handler.raw;
 
+import com.hixi_hyi.idumo.core.annotation.IDUMOHandler;
 import com.hixi_hyi.idumo.core.data.DataElement;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
 import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveElement;
+import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveElement.NumberPrimitiveData;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
@@ -32,20 +34,21 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
+@IDUMOHandler(author = "Hiroyoshi HOUCHI", name = "指定された項目の数字を取得", receive = DataElement.class, send = NumberPrimitiveData.class)
 public class NumberGetValueHandler implements Sendable, Receivable {
-	private String				name;
-	private Sendable			sender;
-	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
-
+	private String name;
+	private Sendable sender;
+	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
+	
 	public NumberGetValueHandler(String name) {
 		this.name = name;
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		return sender.isReady();
 	}
-
+	
 	@Override
 	public FlowingData onCall() {
 		// IDUMODataTypeRawString s = (IDUMODataTypeRawString)
@@ -54,21 +57,21 @@ public class NumberGetValueHandler implements Sendable, Receivable {
 		String s = sender.onCall().next().get(name).getValue().toString();
 		return new FlowingData(new NumberPrimitiveElement.NumberPrimitiveData(Double.parseDouble(s)));
 	}
-
+	
 	@Override
 	public ConnectDataType receivableType() {
 		return new SingleConnectDataType(DataElement.class);
 	}
-
+	
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(NumberPrimitiveElement.class);
 	}
-
+	
 	@Override
 	public void setSender(Sendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		sender = senders[0];
 	}
-
+	
 }

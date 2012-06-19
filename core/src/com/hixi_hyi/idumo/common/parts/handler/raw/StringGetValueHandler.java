@@ -17,6 +17,7 @@
  */
 package com.hixi_hyi.idumo.common.parts.handler.raw;
 
+import com.hixi_hyi.idumo.core.annotation.IDUMOHandler;
 import com.hixi_hyi.idumo.core.data.DataElement;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
@@ -32,20 +33,21 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
+@IDUMOHandler(author = "Hiroyoshi HOUCHI", name = "指定した項目の文字列を取得", receive = DataElement.class, send = StringPrimitiveElement.class)
 public class StringGetValueHandler implements Sendable, Receivable {
-	private String				name;
-	private Sendable			sender;
-	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
-
+	private String name;
+	private Sendable sender;
+	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
+	
 	public StringGetValueHandler(String name) {
 		this.name = name;
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		return sender.isReady();
 	}
-
+	
 	@Override
 	public FlowingData onCall() {
 		// IDUMODataTypeRawString s = (IDUMODataTypeRawString)
@@ -54,21 +56,21 @@ public class StringGetValueHandler implements Sendable, Receivable {
 		Object o = sender.onCall().next().get(name).getValue();
 		return new FlowingData(new StringPrimitiveElement.StringPrimitiveData(o.toString()));
 	}
-
+	
 	@Override
 	public ConnectDataType receivableType() {
 		return new SingleConnectDataType(DataElement.class);
 	}
-
+	
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(StringPrimitiveElement.class);
 	}
-
+	
 	@Override
 	public void setSender(Sendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		sender = senders[0];
 	}
-
+	
 }

@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.common.provider;
+package com.hixi_hyi.idumo.common.parts.provider;
 
 import java.util.Random;
 

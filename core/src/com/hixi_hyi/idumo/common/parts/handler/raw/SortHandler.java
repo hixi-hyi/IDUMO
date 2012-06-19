@@ -20,8 +20,10 @@ package com.hixi_hyi.idumo.common.parts.handler.raw;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.hixi_hyi.idumo.core.annotation.IDUMOHandler;
 import com.hixi_hyi.idumo.core.data.DataElement;
 import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.ThroughElement;
 import com.hixi_hyi.idumo.core.data.connect.ArrayConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
@@ -35,6 +37,7 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
+@IDUMOHandler(author = "Hiroyoshi HOUCHI", name = "指定した項目でソート", receive = DataElement.class, send = ThroughElement.class)
 public class SortHandler implements Sendable, Receivable {
 	private String name;
 	private Sendable sender;

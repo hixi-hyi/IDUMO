@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.common.receiptor;
+package com.hixi_hyi.idumo.common.parts.receiptor;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -10,7 +10,6 @@ import java.net.UnknownHostException;
 
 import com.hixi_hyi.idumo.common.data.element.TextElement;
 import com.hixi_hyi.idumo.core.annotation.IDUMOReceiptor;
-import com.hixi_hyi.idumo.core.data.DataElement;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveElement;
@@ -26,34 +25,34 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
 /**
  * バイト情報をTCP通信を用いて送ることが出来るReceiptor
- *
+ * 
  * @author Hiroyoshi HOUCHI
- *
+ * 
  */
-@IDUMOReceiptor(author="Hiroyoshi HOUCHI",name="指定IPにTCP送信",receive=TextElement.class)
+@IDUMOReceiptor(author = "Hiroyoshi HOUCHI", name = "指定IPにTCP送信", receive = TextElement.class)
 public class SendTCPReceiptor implements Receivable, CoreController, Executable {
-	private String				ip;
-	private int					port;
-	private Socket				socket;
-	private PrintWriter			pw;
-	private OutputStream		outstream;
-	private Sendable			sender;
-	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
-	private ReceiveValidator	vType	= new ReceiveValidatorType(1, StringPrimitiveElement.class);
-
+	private String ip;
+	private int port;
+	private Socket socket;
+	private PrintWriter pw;
+	private OutputStream outstream;
+	private Sendable sender;
+	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
+	private ReceiveValidator vType = new ReceiveValidatorType(1, StringPrimitiveElement.class);
+	
 	public SendTCPReceiptor(String ip, int port) {
 		LogManager.log();
 		this.ip = ip;
 		this.port = port;
 		socket = new Socket();
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		LogManager.log();
 		return sender.isReady() && socket.isConnected();
 	}
-
+	
 	@Override
 	public void onIdumoStart() {
 		LogManager.log();
@@ -61,29 +60,32 @@ public class SendTCPReceiptor implements Receivable, CoreController, Executable 
 			socket.connect(new InetSocketAddress(ip, port));
 			outstream = socket.getOutputStream();
 			pw = new PrintWriter(new OutputStreamWriter(outstream));
-		} catch (UnknownHostException e) {
+		}
+		catch (UnknownHostException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	public void onIdumoStop() {
 		try {
 			socket.close();
 			outstream.close();
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	public ConnectDataType receivableType() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
-
+	
 	@Override
 	public void run() {
 		LogManager.log();
@@ -100,12 +102,12 @@ public class SendTCPReceiptor implements Receivable, CoreController, Executable 
 			pw.flush();
 		}
 	}
-
+	
 	@Override
 	public void setSender(Sendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		vType.validate(senders);
 		sender = senders[0];
 	}
-
+	
 }

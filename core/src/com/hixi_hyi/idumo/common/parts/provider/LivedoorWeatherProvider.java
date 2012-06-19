@@ -15,7 +15,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.common.provider;
+package com.hixi_hyi.idumo.common.parts.provider;
 
 import com.hixi_hyi.idumo.common.component.LivedoorWeather;
 import com.hixi_hyi.idumo.common.data.LivedoorWeatherData;
@@ -35,12 +35,13 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
 @IDUMOProvider(author = "Hiroyoshi HOUCHI", description = "LivedoorWeatherからデータを取得する", name = "Livedoor", send = LivedoorWeatherData.class)
 public class LivedoorWeatherProvider implements Sendable {
 	
-	private LivedoorWeather	weather;
+	private LivedoorWeather weather;
 	
 	public LivedoorWeatherProvider(int citynum) {
 		try {
 			weather = new LivedoorWeather(citynum);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			throw new IDUMORuntimeException(e);
 		}
 	}
@@ -49,7 +50,8 @@ public class LivedoorWeatherProvider implements Sendable {
 	public boolean isReady() {
 		try {
 			return weather.isReady();
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			throw new IDUMORuntimeException(e);
 		}
 	}

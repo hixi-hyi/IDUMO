@@ -17,10 +17,12 @@
  */
 package com.hixi_hyi.idumo.common.parts.handler.raw;
 
+import com.hixi_hyi.idumo.core.annotation.IDUMOHandler;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
 import com.hixi_hyi.idumo.core.data.primitive.BoolPrimitiveElement;
+import com.hixi_hyi.idumo.core.data.primitive.BoolPrimitiveElement.BoolPrimitiveData;
 import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveElement;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.Receivable;
@@ -32,12 +34,13 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
+@IDUMOHandler(author = "Hiroyoshi HOUCHI", name = "指定した数字より大きければ", receive = NumberPrimitiveElement.class, send = BoolPrimitiveData.class)
 public class NumberMoreThanHandler implements Sendable, Receivable {
 	
-	private Sendable				sender;
-	private double					condition;
-	private ReceiveValidatorSize	validator	= new ReceiveValidatorSize(1);
-	private ReceiveValidatorType	vType		= new ReceiveValidatorType(1, NumberPrimitiveElement.class);
+	private Sendable sender;
+	private double condition;
+	private ReceiveValidatorSize validator = new ReceiveValidatorSize(1);
+	private ReceiveValidatorType vType = new ReceiveValidatorType(1, NumberPrimitiveElement.class);
 	
 	public NumberMoreThanHandler(double condition) {
 		this.condition = condition;

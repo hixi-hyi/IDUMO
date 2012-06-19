@@ -15,7 +15,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.common.provider;
+package com.hixi_hyi.idumo.common.parts.provider;
 
 import com.hixi_hyi.idumo.core.annotation.IDUMOProvider;
 import com.hixi_hyi.idumo.core.data.FlowingData;
@@ -26,26 +26,26 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
 
 /**
  * ランダムなバイト情報を送るためのProvider(DebugClass)
- *
+ * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- *
+ * 
  */
-@IDUMOProvider(author="Hiroyoshi HOUCHI",name="指定した文字列を送信",send=StringPrimitiveElement.class)
+@IDUMOProvider(author = "Hiroyoshi HOUCHI", name = "指定した文字列を送信", send = StringPrimitiveElement.class)
 public class StringProvider implements Sendable {
-
-	private String	str;
-
+	
+	private String str;
+	
 	public StringProvider(String str) {
 		// IDUMOLogManager.debug(str);
 		this.str = str;
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		return true;
 	}
-
+	
 	@Override
 	public FlowingData onCall() {
 		// IDUMOLogManager.log();
@@ -53,10 +53,10 @@ public class StringProvider implements Sendable {
 		pipes.add(new StringPrimitiveElement.StringPrimitiveData(str));
 		return pipes;
 	}
-
+	
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(StringPrimitiveElement.class);
 	}
-
+	
 }
