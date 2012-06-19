@@ -1,10 +1,9 @@
-package com.hixi_hyi.idumo.common.handler;
+package com.hixi_hyi.idumo.common.parts.handler;
 
-import com.hixi_hyi.idumo.common.component._ConvertRoombaCommand;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
-import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveElement;
+import com.hixi_hyi.idumo.core.data.primitive.BoolPrimitiveElement;
 import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveElement;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.Receivable;
@@ -12,13 +11,16 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
-public class _ConvertRommbaCommandHandler implements Sendable, Receivable {
+public class _ConditionStringHandler implements Sendable, Receivable {
 
 	private Sendable sender;
-	private ReceiveValidatorSize vSize = new ReceiveValidatorSize(1);
+	private String condition;
+	private ReceiveValidatorSize validator = new ReceiveValidatorSize(1);
 	private ReceiveValidatorType vType = new ReceiveValidatorType(1, StringPrimitiveElement.class);
 
-	public _ConvertRommbaCommandHandler() {}
+	public _ConditionStringHandler(String condition) {
+		this.condition = condition;
+	}
 
 	@Override
 	public boolean isReady() {
@@ -28,12 +30,11 @@ public class _ConvertRommbaCommandHandler implements Sendable, Receivable {
 	@Override
 	public FlowingData onCall() {
 		StringPrimitiveElement data = (StringPrimitiveElement) sender.onCall().next();
-		String command = data.getString();
-		FlowingData p = new FlowingData();
-		if (_ConvertRoombaCommand.containsKey(command)) {
-			p.add(new NumberPrimitiveElement.NumberPrimitiveData(_ConvertRoombaCommand.getCommand(command)));
+		String str = data.getString();
+		if (condition.equals(str)) {
+			return new FlowingData(new BoolPrimitiveElement.BoolPrimitiveData(true));
 		}
-		return p;
+		return new FlowingData(new BoolPrimitiveElement.BoolPrimitiveData(false));
 	}
 
 	@Override
@@ -43,14 +44,13 @@ public class _ConvertRommbaCommandHandler implements Sendable, Receivable {
 
 	@Override
 	public ConnectDataType sendableType() {
-		return new SingleConnectDataType(NumberPrimitiveElement.class);
+		return new SingleConnectDataType(BoolPrimitiveElement.class);
 	}
 
 	@Override
 	public void setSender(Sendable... senders) throws IDUMOException {
-		vSize.validate(senders);
+		validator.validate(senders);
 		vType.validate(senders);
 		sender = senders[0];
 	}
-
 }

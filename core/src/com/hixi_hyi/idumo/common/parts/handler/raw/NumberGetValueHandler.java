@@ -15,13 +15,13 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.common.handler.raw;
+package com.hixi_hyi.idumo.common.parts.handler.raw;
 
 import com.hixi_hyi.idumo.core.data.DataElement;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
-import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveElement;
+import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveElement;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
@@ -32,12 +32,12 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class StringGetValueHandler implements Sendable, Receivable {
+public class NumberGetValueHandler implements Sendable, Receivable {
 	private String				name;
 	private Sendable			sender;
 	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
 
-	public StringGetValueHandler(String name) {
+	public NumberGetValueHandler(String name) {
 		this.name = name;
 	}
 
@@ -51,8 +51,8 @@ public class StringGetValueHandler implements Sendable, Receivable {
 		// IDUMODataTypeRawString s = (IDUMODataTypeRawString)
 		// sender.onCall().next().get(NAME);
 		// IDUMOLogManager.debug(s);
-		Object o = sender.onCall().next().get(name).getValue();
-		return new FlowingData(new StringPrimitiveElement.StringPrimitiveData(o.toString()));
+		String s = sender.onCall().next().get(name).getValue().toString();
+		return new FlowingData(new NumberPrimitiveElement.NumberPrimitiveData(Double.parseDouble(s)));
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class StringGetValueHandler implements Sendable, Receivable {
 
 	@Override
 	public ConnectDataType sendableType() {
-		return new SingleConnectDataType(StringPrimitiveElement.class);
+		return new SingleConnectDataType(NumberPrimitiveElement.class);
 	}
 
 	@Override

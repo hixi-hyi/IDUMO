@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.common.adapter;
+package com.hixi_hyi.idumo.common.parts.adapter;
 
 import java.util.ArrayList;
 
@@ -12,6 +12,7 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
+//@IDUMOAdaptor(author="Hiroyoshi HOUCHI",name="Number->Accelerometer",receive={NumberPrimitiveElement.class,NumberPrimitiveElement.class},send=A)
 public class _Number2AccelerometerConverter implements Sendable, Receivable {
 	
 	private ArrayList<Sendable> sender = new ArrayList<Sendable>();

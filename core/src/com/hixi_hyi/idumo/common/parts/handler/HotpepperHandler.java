@@ -15,62 +15,63 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.common.handler.raw;
+package com.hixi_hyi.idumo.common.parts.handler;
 
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.List;
 
-import com.hixi_hyi.idumo.core.data.DataElement;
+import com.hixi_hyi.idumo.common.component.Hotpepper;
+import com.hixi_hyi.idumo.common.data.HotpepperData;
+import com.hixi_hyi.idumo.common.data.element.LatLngElement;
+import com.hixi_hyi.idumo.common.data.element.LatLngElement.LatLngData;
+import com.hixi_hyi.idumo.core.annotation.IDUMOHandler;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ArrayConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
+import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
 import com.hixi_hyi.idumo.core.util.LogManager;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 /**
+ * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class SortHandler implements Sendable, Receivable {
-	private String name;
-	private Sendable sender;
-	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
+@IDUMOHandler(author = "Hiroyoshi HOUCHI", description = "現在地情報からHotpepperの情報を取得します", name = "Hotpepper", receive = LatLngElement.class, send = HotpepperData.class)
+public class HotpepperHandler implements Sendable, Receivable {
 	
-	public SortHandler(String name) {
-		this.name = name;
-	}
+	private Hotpepper				hotpepper	= new Hotpepper();
+	private Sendable				sender;
+	private ReceiveValidatorSize	vSize		= new ReceiveValidatorSize(1);
 	
 	@Override
 	public boolean isReady() {
-		return sender.isReady();
+		return true;
 	}
 	
 	@Override
 	public FlowingData onCall() {
-		TreeMap<Object, DataElement> map = new TreeMap<Object, DataElement>();
-		for (DataElement d : sender.onCall()) {
-			map.put(d.get(name).getValue(), d);
-			LogManager.debug(d.get(name).getValue());
+		LogManager.log();
+		LatLngElement gd = (LatLngElement) sender.onCall().next();
+		hotpepper.setLatLon(gd.getLatitude(), gd.getLongitude());
+		FlowingData p = new FlowingData();
+		List<HotpepperData> data = hotpepper.getData();
+		for (HotpepperData d : data) {
+			p.add(d);
 		}
-		FlowingData idf = new FlowingData();
-		for (Map.Entry<Object, DataElement> e : map.entrySet()) {
-			idf.add(e.getValue());
-		}
-		return idf;
+		return p;
 	}
 	
 	@Override
 	public ConnectDataType receivableType() {
-		return new ArrayConnectDataType(DataElement.class);
+		return new SingleConnectDataType(LatLngData.class);
 	}
 	
 	@Override
 	public ConnectDataType sendableType() {
-		return new ArrayConnectDataType(DataElement.class);
+		return new ArrayConnectDataType(HotpepperData.class);
 	}
 	
 	@Override
@@ -78,5 +79,4 @@ public class SortHandler implements Sendable, Receivable {
 		vSize.validate(senders);
 		sender = senders[0];
 	}
-	
 }

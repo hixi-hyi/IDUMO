@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.common.handler.manifact;
+package com.hixi_hyi.idumo.common.parts.handler.manifact;
 
 import com.hixi_hyi.idumo.core.annotation.IDUMOHandler;
 import com.hixi_hyi.idumo.core.data.DataElement;

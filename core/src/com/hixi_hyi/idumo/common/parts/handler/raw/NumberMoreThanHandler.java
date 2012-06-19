@@ -15,7 +15,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.common.handler.raw;
+package com.hixi_hyi.idumo.common.parts.handler.raw;
 
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
@@ -32,14 +32,14 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-public class NumberLessThanHandler implements Sendable, Receivable {
+public class NumberMoreThanHandler implements Sendable, Receivable {
 	
 	private Sendable				sender;
 	private double					condition;
 	private ReceiveValidatorSize	validator	= new ReceiveValidatorSize(1);
 	private ReceiveValidatorType	vType		= new ReceiveValidatorType(1, NumberPrimitiveElement.class);
 	
-	public NumberLessThanHandler(double condition) {
+	public NumberMoreThanHandler(double condition) {
 		this.condition = condition;
 	}
 	
@@ -54,7 +54,7 @@ public class NumberLessThanHandler implements Sendable, Receivable {
 		double d = number.getNumber();
 		// IDUMOLogManager.debug(d);
 		// IDUMOLogManager.debug(String.format("raw:%.0f,con:%.0f",d,condition));
-		if (d < condition) {
+		if (condition < d) {
 			return new FlowingData(new BoolPrimitiveElement.BoolPrimitiveData(true));
 		}
 		return new FlowingData(new BoolPrimitiveElement.BoolPrimitiveData(false));

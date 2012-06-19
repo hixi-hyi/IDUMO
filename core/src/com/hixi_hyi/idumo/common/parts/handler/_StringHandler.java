@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.common.handler;
+package com.hixi_hyi.idumo.common.parts.handler;
 
 //package com.hixi_hyi.idumo.common.handler;
 //

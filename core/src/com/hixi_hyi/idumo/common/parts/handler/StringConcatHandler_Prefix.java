@@ -15,13 +15,14 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.common.handler.raw;
+package com.hixi_hyi.idumo.common.parts.handler;
 
+import com.hixi_hyi.idumo.core.annotation.IDUMOHandler;
 import com.hixi_hyi.idumo.core.data.DataElement;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
-import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveElement;
+import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveElement;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
@@ -31,28 +32,28 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
+ *
  */
-public class NumberGetValueHandler implements Sendable, Receivable {
-	private String				name;
-	private Sendable			sender;
+@IDUMOHandler(author = "Hiroyoshi HOUCHI", description = "文字列の前に指定された文字を埋め込みます", name = "文頭に文字列を追加", receive = DataElement.class, send = StringPrimitiveElement.class)
+public class StringConcatHandler_Prefix implements Sendable, Receivable {
+
+	private Sendable			provider;
+	private String				fixWord;
 	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
 
-	public NumberGetValueHandler(String name) {
-		this.name = name;
+	public StringConcatHandler_Prefix(String fixWord) {
+		this.fixWord = fixWord;
 	}
 
 	@Override
 	public boolean isReady() {
-		return sender.isReady();
+		return provider.isReady();
 	}
 
 	@Override
 	public FlowingData onCall() {
-		// IDUMODataTypeRawString s = (IDUMODataTypeRawString)
-		// sender.onCall().next().get(NAME);
-		// IDUMOLogManager.debug(s);
-		String s = sender.onCall().next().get(name).getValue().toString();
-		return new FlowingData(new NumberPrimitiveElement.NumberPrimitiveData(Double.parseDouble(s)));
+		String s = ((StringPrimitiveElement) provider.onCall().next()).getString();
+		return new FlowingData(new StringPrimitiveElement.StringPrimitiveData(fixWord + s));
 	}
 
 	@Override
@@ -62,13 +63,13 @@ public class NumberGetValueHandler implements Sendable, Receivable {
 
 	@Override
 	public ConnectDataType sendableType() {
-		return new SingleConnectDataType(NumberPrimitiveElement.class);
+		return new SingleConnectDataType(StringPrimitiveElement.class);
 	}
 
 	@Override
 	public void setSender(Sendable... senders) throws IDUMOException {
 		vSize.validate(senders);
-		sender = senders[0];
+		provider = senders[0];
 	}
 
 }

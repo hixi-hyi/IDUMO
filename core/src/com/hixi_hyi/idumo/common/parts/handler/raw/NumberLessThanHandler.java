@@ -15,61 +15,65 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.common.handler;
+package com.hixi_hyi.idumo.common.parts.handler.raw;
 
-import com.hixi_hyi.idumo.core.annotation.IDUMOHandler;
-import com.hixi_hyi.idumo.core.data.DataElement;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
-import com.hixi_hyi.idumo.core.data.primitive.StringPrimitiveElement;
+import com.hixi_hyi.idumo.core.data.primitive.BoolPrimitiveElement;
+import com.hixi_hyi.idumo.core.data.primitive.NumberPrimitiveElement;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
+import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- *
  */
-@IDUMOHandler(author = "Hiroyoshi HOUCHI", description = "文字列の前に指定された文字を埋め込みます", name = "文頭に文字列を追加", receive = DataElement.class, send = StringPrimitiveElement.class)
-public class StringConcatHandler_Prefix implements Sendable, Receivable {
-
-	private Sendable			provider;
-	private String				fixWord;
-	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
-
-	public StringConcatHandler_Prefix(String fixWord) {
-		this.fixWord = fixWord;
+public class NumberLessThanHandler implements Sendable, Receivable {
+	
+	private Sendable				sender;
+	private double					condition;
+	private ReceiveValidatorSize	validator	= new ReceiveValidatorSize(1);
+	private ReceiveValidatorType	vType		= new ReceiveValidatorType(1, NumberPrimitiveElement.class);
+	
+	public NumberLessThanHandler(double condition) {
+		this.condition = condition;
 	}
-
+	
 	@Override
 	public boolean isReady() {
-		return provider.isReady();
+		return sender.isReady();
 	}
-
+	
 	@Override
 	public FlowingData onCall() {
-		String s = ((StringPrimitiveElement) provider.onCall().next()).getString();
-		return new FlowingData(new StringPrimitiveElement.StringPrimitiveData(fixWord + s));
+		NumberPrimitiveElement number = (NumberPrimitiveElement) sender.onCall().next();
+		double d = number.getNumber();
+		// IDUMOLogManager.debug(d);
+		// IDUMOLogManager.debug(String.format("raw:%.0f,con:%.0f",d,condition));
+		if (d < condition) {
+			return new FlowingData(new BoolPrimitiveElement.BoolPrimitiveData(true));
+		}
+		return new FlowingData(new BoolPrimitiveElement.BoolPrimitiveData(false));
 	}
-
+	
 	@Override
 	public ConnectDataType receivableType() {
-		return new SingleConnectDataType(DataElement.class);
+		return new SingleConnectDataType(NumberPrimitiveElement.class);
 	}
-
+	
 	@Override
 	public ConnectDataType sendableType() {
-		return new SingleConnectDataType(StringPrimitiveElement.class);
+		return new SingleConnectDataType(BoolPrimitiveElement.class);
 	}
-
+	
 	@Override
 	public void setSender(Sendable... senders) throws IDUMOException {
-		vSize.validate(senders);
-		provider = senders[0];
+		validator.validate(senders);
+		vType.validate(senders);
+		sender = senders[0];
 	}
-
 }

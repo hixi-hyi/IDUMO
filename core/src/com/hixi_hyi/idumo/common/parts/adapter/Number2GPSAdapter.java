@@ -1,6 +1,7 @@
-package com.hixi_hyi.idumo.common.adapter;
+package com.hixi_hyi.idumo.common.parts.adapter;
 
 import com.hixi_hyi.idumo.common.data.element.LatLngElement.LatLngData;
+import com.hixi_hyi.idumo.core.annotation.IDUMOAdaptor;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.MultiConnectDataType;
@@ -13,6 +14,7 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
+@IDUMOAdaptor(author = "Hiroyoshi HOUCHI", name = "Number->GPS", receive = { NumberPrimitiveElement.class, NumberPrimitiveElement.class }, send = LatLngData.class)
 public class Number2GPSAdapter implements Sendable, Receivable {
 	
 	private Sendable sender1;

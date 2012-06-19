@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.common.handler;
+package com.hixi_hyi.idumo.common.parts.handler;
 
 import com.hixi_hyi.idumo.common.component.ReversedGeocording;
 import com.hixi_hyi.idumo.common.data.element.LatLngElement;
