@@ -14,7 +14,10 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidator;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 import com.hixi_hyi.idumo.core.validator.ReceiveValidatorType;
 
-@IDUMOAdaptor(author = "Hiroyoshi HOUCHI", name = "Number->GPS", receive = { NumberPrimitiveElement.class, NumberPrimitiveElement.class }, send = LatLngData.class)
+@IDUMOAdaptor(author = "Hiroyoshi HOUCHI", name = "Number->GPS", 
+receive = { NumberPrimitiveElement.class, NumberPrimitiveElement.class },
+send = LatLngData.class)
+
 public class Number2GPSAdapter implements Sendable, Receivable {
 	
 	private Sendable sender1;

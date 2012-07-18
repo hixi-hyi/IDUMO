@@ -125,17 +125,17 @@ class IDUMOItemData {
 		json.append("{");
 		json.append(normal);
 		if (isSend) {
-			String sendParts = String.format("send:%s, ", send);
+			String sendParts = String.format("send:'%s', ", send);
 			json.append(sendParts);
 		}
 		if (isReceive) {
 			StringBuilder receive = new StringBuilder();
-			receive.append("receive:{");
+			receive.append("receive:[");
 			for (String s : receives) {
 				receive.append("'" + s + "'");
 				receive.append(",");
 			}
-			receive.append("}, ");
+			receive.append("], ");
 			json.append(receive.toString());
 		}
 		json.append("}");

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="jar">
+	<target name="jar">
+		<jar jarfile="idumo.jar">
+			<fileset dir="../core/bin" includes="**/*.class" />
+			<fileset dir="../core/src" includes="**/*.java" />
+			<fileset dir="../android/bin/classes" includes="**/*.class" />
+			<fileset dir="../android/src" includes="**/*.java" />
+			<fileset dir="../console/bin" includes="**/*.class" />
+			<fileset dir="../console/src" includes="**/*.java" />
+		</jar>
+	</target>
+</project>

@@ -7,3 +7,6 @@ javadoc.xml
 ##
 bin/
 **/*.class
+
+idumo.jar
+idumoitem.json

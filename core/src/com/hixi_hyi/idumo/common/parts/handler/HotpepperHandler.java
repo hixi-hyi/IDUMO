@@ -39,7 +39,10 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
-@IDUMOHandler(author = "Hiroyoshi HOUCHI", description = "現在地情報からHotpepperの情報を取得します", name = "Hotpepper", receive = LatLngElement.class, send = HotpepperData.class)
+
+@IDUMOHandler(author = "Hiroyoshi HOUCHI", description = "現在地情報からHotpepperの情報を取得します",
+	name = "Hotpepper", receive = LatLngElement.class, send = HotpepperData.class)
+
 public class HotpepperHandler implements Sendable, Receivable {
 	
 	private Hotpepper				hotpepper	= new Hotpepper();
