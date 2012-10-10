@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="idumoitem">
+    <property name="root"         value="../../"/>
+    <property name="android_path" value="/home/idumo/android/"/>
+	<property name="android"      value="${android_path}/platforms/android-8/android.jar:${android_path}/add-ons/addon-google_apis-google-8/libs/maps.jar"/>
+	<property name="java"         value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar"/>
+	<property name="libs"         value="${root}/core/lib/*:${root}/android/lib/*:${root}/console/lib/*:"/>
+	<property name="annotation"   value="${android_path}/tools/support/annotations.jar"/>
+	<property name="package"      value="com.hixi_hyi.idumo.*"/>
+	<property name="src"          value="${root}/android/src:${root}/console/src:${root}/core/src"/>
+	
+	<target name="idumoitem">
+		<javadoc access="public" 
+			additionalparam="-encoding UTF-8 -bootclasspath ${android}:${java}" 
+			classpath="${libs}:${annotation}" 
+			packagenames="${package}"
+			sourcepath="${src}"
+			>
+			<doclet name="com.hixi_hyi.idumo.core.doclet.IDUMOVisualDoclet" path="${root}/core/bin"/>
+		</javadoc>
+	</target>
+	
+	<target name="jar">
+		<jar jarfile="idumo.jar">
+			<fileset dir="${root}/core/bin" includes="**/*.class" />
+			<fileset dir="${root}/core/src" includes="**/*.java" />
+			<fileset dir="${root}/android/bin/classes" includes="**/*.class" />
+			<fileset dir="${root}/android/src" includes="**/*.java" />
+			<fileset dir="${root}/console/bin" includes="**/*.class" />
+			<fileset dir="${root}/console/src" includes="**/*.java" />
+		</jar>
+	</target>
+</project>

@@ -24,6 +24,7 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.hixi_hyi.idumo.common.data.element.LatLngElement;
+import com.hixi_hyi.idumo.core.annotation.IDUMOReceiptor;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
@@ -41,6 +42,9 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
  * @version 2.0
  * 
  */
+
+@IDUMOReceiptor(author="Hiroyoshi HOUCHI",name="地図の表示",receive=LatLngElement.class)
+
 public class AndroidMapViewReceiptor extends MapView implements Receivable, Executable {
 	
 	private Sendable				sender;
