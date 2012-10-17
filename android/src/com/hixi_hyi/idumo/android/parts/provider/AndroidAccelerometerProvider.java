@@ -15,15 +15,15 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.android.provider;
+package com.hixi_hyi.idumo.android.parts.provider;
 
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.SensorManager;
 
+import com.hixi_hyi.idumo.android.component.sensor.AccelerometerSensor;
 import com.hixi_hyi.idumo.android.core.AndroidController;
 import com.hixi_hyi.idumo.android.data.AndroidAccelerometerData;
-import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
 import com.hixi_hyi.idumo.core.annotation.IDUMOProvider;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
@@ -38,7 +38,7 @@ import com.hixi_hyi.idumo.core.util.LogManager;
  * @version 2.0
  *
  */
-@IDUMOProvider(author="Hiroyoshi HOUCHI",name="加速度センサの値",send=AndroidAccelerometerData.class)
+@IDUMOProvider(author="Hiroyoshi HOUCHI",name="加速度センサ",send=AndroidAccelerometerData.class)
 public class AndroidAccelerometerProvider implements Sendable, AndroidController {
 
 	private AccelerometerSensor	accel;

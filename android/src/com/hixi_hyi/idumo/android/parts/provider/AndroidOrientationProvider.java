@@ -15,15 +15,18 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.android.provider;
+package com.hixi_hyi.idumo.android.parts.provider;
 
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.SensorManager;
 
+import com.hixi_hyi.idumo.android.component.sensor.AccelerometerSensor;
+import com.hixi_hyi.idumo.android.component.sensor.MagneticFieldSensor;
+import com.hixi_hyi.idumo.android.component.sensor.OrientationSensor;
 import com.hixi_hyi.idumo.android.core.AndroidController;
-import com.hixi_hyi.idumo.android.data.AndroidMagneticFieldData;
-import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
+import com.hixi_hyi.idumo.android.data.AndroidOrientationData;
+import com.hixi_hyi.idumo.core.annotation.IDUMOProvider;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
@@ -31,36 +34,45 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
- * Android上の地磁気センサの情報を取得できるProvider
+ * Android上の傾きの情報を取得できるProvider 地磁気センサと加速度センサにより傾きを算出
  * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  * 
  */
-public class AndroidMagneticFieldProvider implements Sendable, AndroidController {
+@IDUMOProvider(author="Hiroyoshi HOUCHI",name="傾きセンサ",send=AndroidOrientationData.class)
+public class AndroidOrientationProvider implements Sendable, AndroidController {
 	
-	private MagneticFieldSensor	magnet;
+	private OrientationSensor	sensor;
 	
-	public AndroidMagneticFieldProvider(Activity activity) {
-		MagneticFieldSensor magneticFieldSensor = MagneticFieldSensor.INSTANCE;
-		if (!magneticFieldSensor.isInit()) {
-			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-			magneticFieldSensor.init(sensor);
+	public AndroidOrientationProvider(Activity activity) {
+		OrientationSensor orientationSensor = OrientationSensor.INSTANCE;
+		if (!orientationSensor.isInit()) {
+			AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
+			if (!accelerometerSensor.isInit()) {
+				SensorManager sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+				accelerometerSensor.init(sensorManager);
+			}
+			MagneticFieldSensor magneticFieldSensor = MagneticFieldSensor.INSTANCE;
+			if (!magneticFieldSensor.isInit()) {
+				SensorManager sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+				magneticFieldSensor.init(sensorManager);
+			}
+			orientationSensor.init(accelerometerSensor, magneticFieldSensor);
 		}
-		magnet = magneticFieldSensor;
+		sensor = orientationSensor;
 	}
 	
 	@Override
 	public boolean isReady() {
-		return magnet.isReady();
+		return sensor.isReady();
 	}
 	
 	@Override
 	public FlowingData onCall() {
 		LogManager.log();
 		FlowingData p = new FlowingData();
-		AndroidMagneticFieldData data = new AndroidMagneticFieldData(magnet.getX(), magnet.getY(), magnet.getZ());
-		p.add(data);
+		p.add(new AndroidOrientationData(sensor.getPitch(), sensor.getRoll(), sensor.getAzmuth()));
 		return p;
 	}
 	
@@ -69,7 +81,7 @@ public class AndroidMagneticFieldProvider implements Sendable, AndroidController
 	
 	@Override
 	public void onIdumoPause() {
-		magnet.unregister();
+		sensor.unregister();
 	}
 	
 	@Override
@@ -77,7 +89,7 @@ public class AndroidMagneticFieldProvider implements Sendable, AndroidController
 	
 	@Override
 	public void onIdumoResume() {
-		magnet.register();
+		sensor.register();
 	}
 	
 	@Override
@@ -88,7 +100,6 @@ public class AndroidMagneticFieldProvider implements Sendable, AndroidController
 	
 	@Override
 	public ConnectDataType sendableType() {
-		return new SingleConnectDataType(AndroidMagneticFieldData.class);
+		return new SingleConnectDataType(AndroidOrientationData.class);
 	}
-	
 }

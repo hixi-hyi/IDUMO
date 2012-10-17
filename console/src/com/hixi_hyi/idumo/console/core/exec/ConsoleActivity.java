@@ -47,17 +47,16 @@ public class ConsoleActivity implements CoreActivity {
 				}
 				catch (InterruptedException e) {}
 			}
-		} else {
-			for (int i = 0; i < count;) {
-				if (runnable.isReady()) {
-					runnable.run();
-					i++;
-				}
-				try {
-					Thread.sleep(component.getSleepTime());
-				}
-				catch (InterruptedException e) {}
+		}
+		for (int i = 0; i < count;) {
+			if (runnable.isReady()) {
+				runnable.run();
+				i++;
 			}
+			try {
+				Thread.sleep(component.getSleepTime());
+			}
+			catch (InterruptedException e) {}
 		}
 		
 	}

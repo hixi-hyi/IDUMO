@@ -1,8 +1,8 @@
-import com.hixi_hyi.idumo.common.adapter.Number2GPSAdapter;
-import com.hixi_hyi.idumo.common.handler.HotpepperHandler;
-import com.hixi_hyi.idumo.common.handler.manifact.ArrayGetTopHandler;
-import com.hixi_hyi.idumo.common.handler.raw.SortHandler;
-import com.hixi_hyi.idumo.common.provider.NumberProvider;
+import com.hixi_hyi.idumo.common.parts.adapter.Number2GPSAdapter;
+import com.hixi_hyi.idumo.common.parts.handler.HotpepperHandler;
+import com.hixi_hyi.idumo.common.parts.handler.manifact.ArrayGetTopHandler;
+import com.hixi_hyi.idumo.common.parts.handler.raw.SortHandler;
+import com.hixi_hyi.idumo.common.parts.provider.NumberProvider;
 import com.hixi_hyi.idumo.console.core.exec.ConsoleComponent;
 import com.hixi_hyi.idumo.console.core.exec.ConsoleWrapper;
 import com.hixi_hyi.idumo.console.core.util.ConsoleLogger;

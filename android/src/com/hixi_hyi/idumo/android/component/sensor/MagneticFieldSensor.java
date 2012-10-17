@@ -15,82 +15,114 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.android.sensor;
+package com.hixi_hyi.idumo.android.component.sensor;
 
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+import com.hixi_hyi.idumo.core.util.LogManager;
+
 /**
- * 傾き(地磁気&加速度)
+ * 地磁気センサ
  * 
  * @author Hiroyoshi HOUCHI
  * 
  */
-public enum OrientationSensor {
+public enum MagneticFieldSensor implements SensorEventListener {
 	
 	INSTANCE;
 	
-	private AccelerometerSensor	accel;
-	private MagneticFieldSensor	mag;
+	private SensorManager	sensorManager;
+	private Sensor			sensor;
+	private int				accurary;
+	private float[]			magnet	= new float[3];
+	private boolean			isReady;
+	private boolean			isInit;
 	
-	private float[]				orient		= new float[3];
-	
-	// 回転行列
-	private static final int	MATRIX_SIZE	= 16;
-	float[]						inR			= new float[MATRIX_SIZE];
-	float[]						outR		= new float[MATRIX_SIZE];
-	float[]						I			= new float[MATRIX_SIZE];
-	private boolean				isInit;
-	
-	private void calcOrientation() {
-		float[] a = accel.getAccelerometer();
-		float[] m = mag.getMagneticField();
-		SensorManager.getRotationMatrix(inR, I, a, m);
-		// Activityの表示が縦固定の場合。横向きになる場合、修正が必要です
-		SensorManager.remapCoordinateSystem(inR, SensorManager.AXIS_X, SensorManager.AXIS_Z, outR);
-		SensorManager.getOrientation(outR, orient);
+	/**
+	 * @return accurary
+	 */
+	public int getAccurary() {
+		return accurary;
 	}
 	
-	public float getAzmuth() {
-		calcOrientation();
-		return orient[0];
+	public float[] getMagneticField() {
+		return magnet;
 	}
 	
-	public float[] getOrientation() {
-		calcOrientation();
-		return orient;
+	/**
+	 * @return x
+	 */
+	public float getX() {
+		return magnet[0];
 	}
 	
-	public float getPitch() {
-		calcOrientation();
-		return orient[1];
+	/**
+	 * @return y
+	 */
+	public float getY() {
+		return magnet[1];
 	}
 	
-	public float getRoll() {
-		calcOrientation();
-		return orient[2];
+	/**
+	 * @return z
+	 */
+	public float getZ() {
+		return magnet[2];
 	}
 	
-	public void init(AccelerometerSensor accelerometerSensor, MagneticFieldSensor magneticFieldSensor) {
+	public void init(SensorManager sensorManager) {
 		isInit = true;
-		accel = accelerometerSensor;
-		mag = magneticFieldSensor;
+		this.sensorManager = sensorManager;
 	}
 	
 	public boolean isInit() {
 		return isInit;
 	}
 	
+	/**
+	 * @return isReady
+	 */
 	public boolean isReady() {
-		return accel.isReady() && mag.isReady();
+		return isReady;
+	}
+	
+	@Override
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+		if (sensor.getType() == useSensorType()) {
+			accurary = accuracy;
+		}
+	}
+	
+	@Override
+	public void onSensorChanged(SensorEvent event) {
+		LogManager.log();
+		if (event.sensor.getType() == useSensorType()) {
+			magnet = event.values.clone();
+			isReady = true;
+		}
 	}
 	
 	public void register() {
-		accel.register();
-		mag.register();
+		if (sensor == null) {
+			LogManager.log();
+			sensor = sensorManager.getDefaultSensor(useSensorType());
+			sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI);
+		}
 	}
 	
 	public void unregister() {
-		accel.unregister();
-		mag.unregister();
+		if (sensor != null) {
+			LogManager.log();
+			sensor = null;
+			sensorManager.unregisterListener(this);
+		}
 	}
+	
+	public int useSensorType() {
+		return Sensor.TYPE_MAGNETIC_FIELD;
+	}
+	
 }

@@ -1,6 +1,6 @@
-import com.hixi_hyi.idumo.common.handler.raw.NumberGetValueHandler;
-import com.hixi_hyi.idumo.common.handler.raw.NumberMoreThanHandler;
-import com.hixi_hyi.idumo.common.provider.LivedoorWeatherProvider;
+import com.hixi_hyi.idumo.common.parts.handler.raw.NumberGetValueHandler;
+import com.hixi_hyi.idumo.common.parts.handler.raw.NumberMoreThanHandler;
+import com.hixi_hyi.idumo.common.parts.provider.LivedoorWeatherProvider;
 import com.hixi_hyi.idumo.console.core.exec.ConsoleComponent;
 import com.hixi_hyi.idumo.console.core.exec.ConsoleWrapper;
 import com.hixi_hyi.idumo.console.core.util.ConsoleLogger;

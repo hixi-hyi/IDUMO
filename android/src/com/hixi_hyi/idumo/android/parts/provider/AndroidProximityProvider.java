@@ -15,15 +15,16 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.android.provider;
+package com.hixi_hyi.idumo.android.parts.provider;
 
 import android.app.Activity;
 import android.content.Context;
-import android.location.LocationManager;
+import android.hardware.SensorManager;
 
+import com.hixi_hyi.idumo.android.component.sensor.ProximitySensor;
 import com.hixi_hyi.idumo.android.core.AndroidController;
-import com.hixi_hyi.idumo.android.data.AndroidGPSData;
-import com.hixi_hyi.idumo.android.sensor.GPSSensor;
+import com.hixi_hyi.idumo.android.data.AndroidProximityData;
+import com.hixi_hyi.idumo.core.annotation.IDUMOProvider;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
@@ -31,35 +32,36 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
- * GPS情報を取得できるProvider
+ * Android上の近接センサの情報を取得できるProvider
  * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  * 
  */
-public class AndroidGPSProvider implements Sendable, AndroidController {
+@IDUMOProvider(author="Hiroyoshi HOUCHI",name="近接センサ",send=AndroidProximityData.class)
+public class AndroidProximityProvider implements Sendable, AndroidController {
 	
-	private GPSSensor	gps;
+	private ProximitySensor	proximity;
 	
-	public AndroidGPSProvider(Activity activity) {
-		GPSSensor gpsSensor = GPSSensor.INSTANCE;
-		if (!gpsSensor.isInit()) {
-			LocationManager location = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-			gpsSensor.init(location);
+	public AndroidProximityProvider(Activity activity) {
+		ProximitySensor proximitySensor = ProximitySensor.INSTANCE;
+		if (!proximitySensor.isInit()) {
+			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+			proximitySensor.init(sensor);
 		}
-		gps = gpsSensor;
+		proximity = proximitySensor;
 	}
 	
 	@Override
 	public boolean isReady() {
-		return gps.isReady();
+		return proximity.isReady();
 	}
 	
 	@Override
 	public FlowingData onCall() {
 		LogManager.log();
 		FlowingData p = new FlowingData();
-		p.add(new AndroidGPSData(gps.getLatitude(), gps.getLongitude(), gps.getAltitude(), gps.getTime(), gps.getBearing(), gps.getSpeed()));
+		p.add(new AndroidProximityData(proximity.getProximity()));
 		return p;
 	}
 	
@@ -68,7 +70,7 @@ public class AndroidGPSProvider implements Sendable, AndroidController {
 	
 	@Override
 	public void onIdumoPause() {
-		gps.unregister();
+		proximity.unregister();
 	}
 	
 	@Override
@@ -76,7 +78,7 @@ public class AndroidGPSProvider implements Sendable, AndroidController {
 	
 	@Override
 	public void onIdumoResume() {
-		gps.register();
+		proximity.register();
 	}
 	
 	@Override
@@ -87,7 +89,7 @@ public class AndroidGPSProvider implements Sendable, AndroidController {
 	
 	@Override
 	public ConnectDataType sendableType() {
-		return new SingleConnectDataType(AndroidGPSData.class);
+		return new SingleConnectDataType(AndroidProximityData.class);
 	}
 	
 }

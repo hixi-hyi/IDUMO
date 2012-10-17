@@ -3,9 +3,9 @@ package com.hixi_hyi.idumo.android.test.view;
 import com.hixi_hyi.idumo.android.core.exec.AndroidComponent;
 import com.hixi_hyi.idumo.android.core.exec.AndroidWrapper;
 import com.hixi_hyi.idumo.android.core.util.AndroidLogger;
-import com.hixi_hyi.idumo.android.provider.AndroidGPSProvider;
-import com.hixi_hyi.idumo.android.receiptor.AndroidPinMapViewReceiptor;
-import com.hixi_hyi.idumo.common.handler.HotpepperHandler;
+import com.hixi_hyi.idumo.android.parts.provider.AndroidGPSProvider;
+import com.hixi_hyi.idumo.android.parts.receiptor.AndroidPinMapViewReceiptor;
+import com.hixi_hyi.idumo.common.parts.handler.HotpepperHandler;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.util.LogManager;
 

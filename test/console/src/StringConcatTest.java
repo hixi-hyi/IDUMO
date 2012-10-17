@@ -1,6 +1,6 @@
-import com.hixi_hyi.idumo.common.handler.StringConcatHandler_Prefix;
-import com.hixi_hyi.idumo.common.handler.StringConcatHandler_Suffix;
-import com.hixi_hyi.idumo.common.provider.StringProvider;
+import com.hixi_hyi.idumo.common.parts.handler.StringConcatHandler_Prefix;
+import com.hixi_hyi.idumo.common.parts.handler.StringConcatHandler_Suffix;
+import com.hixi_hyi.idumo.common.parts.provider.StringProvider;
 import com.hixi_hyi.idumo.console.core.exec.ConsoleComponent;
 import com.hixi_hyi.idumo.console.core.exec.ConsoleWrapper;
 import com.hixi_hyi.idumo.console.core.util.ConsoleLogger;

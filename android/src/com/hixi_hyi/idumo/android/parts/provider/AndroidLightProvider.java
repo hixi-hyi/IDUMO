@@ -15,17 +15,16 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.android.provider;
+package com.hixi_hyi.idumo.android.parts.provider;
 
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.SensorManager;
 
+import com.hixi_hyi.idumo.android.component.sensor.LightSensor;
 import com.hixi_hyi.idumo.android.core.AndroidController;
-import com.hixi_hyi.idumo.android.data.AndroidOrientationData;
-import com.hixi_hyi.idumo.android.sensor.AccelerometerSensor;
-import com.hixi_hyi.idumo.android.sensor.MagneticFieldSensor;
-import com.hixi_hyi.idumo.android.sensor.OrientationSensor;
+import com.hixi_hyi.idumo.android.data.AndroidLightData;
+import com.hixi_hyi.idumo.core.annotation.IDUMOProvider;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
@@ -33,44 +32,36 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
- * Android上の傾きの情報を取得できるProvider 地磁気センサと加速度センサにより傾きを算出
+ * Android上の光センサの情報を取得できるProvider
  * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  * 
  */
-public class AndroidOrientationProvider implements Sendable, AndroidController {
+@IDUMOProvider(author="Hiroyoshi HOUCHI",name="光センサ",send=AndroidLightData.class)
+public class AndroidLightProvider implements Sendable, AndroidController {
 	
-	private OrientationSensor	sensor;
+	private LightSensor	light;
 	
-	public AndroidOrientationProvider(Activity activity) {
-		OrientationSensor orientationSensor = OrientationSensor.INSTANCE;
-		if (!orientationSensor.isInit()) {
-			AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
-			if (!accelerometerSensor.isInit()) {
-				SensorManager sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-				accelerometerSensor.init(sensorManager);
-			}
-			MagneticFieldSensor magneticFieldSensor = MagneticFieldSensor.INSTANCE;
-			if (!magneticFieldSensor.isInit()) {
-				SensorManager sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-				magneticFieldSensor.init(sensorManager);
-			}
-			orientationSensor.init(accelerometerSensor, magneticFieldSensor);
+	public AndroidLightProvider(Activity activity) {
+		LightSensor lightSensor = LightSensor.INSTANCE;
+		if (!lightSensor.isInit()) {
+			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+			lightSensor.init(sensor);
 		}
-		sensor = orientationSensor;
+		light = lightSensor;
 	}
 	
 	@Override
 	public boolean isReady() {
-		return sensor.isReady();
+		return light.isReady();
 	}
 	
 	@Override
 	public FlowingData onCall() {
 		LogManager.log();
 		FlowingData p = new FlowingData();
-		p.add(new AndroidOrientationData(sensor.getPitch(), sensor.getRoll(), sensor.getAzmuth()));
+		p.add(new AndroidLightData(light.getLight()));
 		return p;
 	}
 	
@@ -79,7 +70,7 @@ public class AndroidOrientationProvider implements Sendable, AndroidController {
 	
 	@Override
 	public void onIdumoPause() {
-		sensor.unregister();
+		light.unregister();
 	}
 	
 	@Override
@@ -87,7 +78,7 @@ public class AndroidOrientationProvider implements Sendable, AndroidController {
 	
 	@Override
 	public void onIdumoResume() {
-		sensor.register();
+		light.register();
 	}
 	
 	@Override
@@ -98,6 +89,6 @@ public class AndroidOrientationProvider implements Sendable, AndroidController {
 	
 	@Override
 	public ConnectDataType sendableType() {
-		return new SingleConnectDataType(AndroidOrientationData.class);
+		return new SingleConnectDataType(AndroidLightData.class);
 	}
 }

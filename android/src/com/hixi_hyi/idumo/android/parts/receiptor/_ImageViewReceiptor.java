@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.android.receiptor;
+package com.hixi_hyi.idumo.android.parts.receiptor;
 
 import android.app.Activity;
 import android.content.Context;

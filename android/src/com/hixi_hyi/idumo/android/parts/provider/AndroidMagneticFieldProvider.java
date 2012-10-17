@@ -15,86 +15,82 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.android.receiptor;
+package com.hixi_hyi.idumo.android.parts.provider;
 
 import android.app.Activity;
 import android.content.Context;
+import android.hardware.SensorManager;
 
-import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapController;
-import com.google.android.maps.MapView;
-import com.hixi_hyi.idumo.common.data.element.LatLngElement;
-import com.hixi_hyi.idumo.core.annotation.IDUMOReceiptor;
+import com.hixi_hyi.idumo.android.component.sensor.MagneticFieldSensor;
+import com.hixi_hyi.idumo.android.core.AndroidController;
+import com.hixi_hyi.idumo.android.data.AndroidMagneticFieldData;
+import com.hixi_hyi.idumo.core.annotation.IDUMOProvider;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
-import com.hixi_hyi.idumo.core.exception.IDUMOException;
-import com.hixi_hyi.idumo.core.parts.Executable;
-import com.hixi_hyi.idumo.core.parts.Receivable;
 import com.hixi_hyi.idumo.core.parts.Sendable;
 import com.hixi_hyi.idumo.core.util.LogManager;
-import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
 
 /**
- * Android上にテキスト情報を出力するReceiptorです
+ * Android上の地磁気センサの情報を取得できるProvider
  * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  * 
  */
-
-@IDUMOReceiptor(author="Hiroyoshi HOUCHI",name="地図の表示",receive=LatLngElement.class)
-
-public class AndroidMapViewReceiptor extends MapView implements Receivable, Executable {
+@IDUMOProvider(author="Hiroyoshi HOUCHI",name="地磁気センサ",send=AndroidMagneticFieldData.class)
+public class AndroidMagneticFieldProvider implements Sendable, AndroidController {
 	
-	private Sendable				sender;
-	private Activity				activity;
-	private ReceiveValidatorSize	vSize		= new ReceiveValidatorSize(1);
+	private MagneticFieldSensor	magnet;
 	
-	private static final int		ZOOM_LEVEL	= 10;
-	private MapController			controller;
-	
-	private static final String		API_KEY		= "0RPjiLm_GLRAHM0HCn22WyqMNKfeWGuSvvXnqoA";
-	
-	public AndroidMapViewReceiptor(Context context) {
-		super(context, API_KEY);
-		activity = (Activity) context;
-		activity.setContentView(this);
-		
-		controller = getController();
-		controller.setZoom(ZOOM_LEVEL);
-		
-		setClickable(true);
-		setBuiltInZoomControls(true);
-		setSatellite(false);
-		
+	public AndroidMagneticFieldProvider(Activity activity) {
+		MagneticFieldSensor magneticFieldSensor = MagneticFieldSensor.INSTANCE;
+		if (!magneticFieldSensor.isInit()) {
+			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+			magneticFieldSensor.init(sensor);
+		}
+		magnet = magneticFieldSensor;
 	}
 	
 	@Override
 	public boolean isReady() {
-		return true;
+		return magnet.isReady();
 	}
 	
 	@Override
-	public ConnectDataType receivableType() {
-		return new SingleConnectDataType(LatLngElement.class);
-	}
-	
-	@Override
-	public void run() {
+	public FlowingData onCall() {
 		LogManager.log();
-		FlowingData idf = sender.onCall();
-		LatLngElement llde = (LatLngElement) idf.next();
-		GeoPoint point = new GeoPoint((int) (llde.getLatitude() * 1E6), (int) (llde.getLongitude() * 1E6));
-		LogManager.debug(point);
-		controller.setCenter(point);
-		invalidate();
+		FlowingData p = new FlowingData();
+		AndroidMagneticFieldData data = new AndroidMagneticFieldData(magnet.getX(), magnet.getY(), magnet.getZ());
+		p.add(data);
+		return p;
 	}
 	
 	@Override
-	public void setSender(Sendable... handler) throws IDUMOException {
-		vSize.validate(handler);
-		sender = handler[0];
+	public void onIdumoDestroy() {}
+	
+	@Override
+	public void onIdumoPause() {
+		magnet.unregister();
+	}
+	
+	@Override
+	public void onIdumoRestart() {}
+	
+	@Override
+	public void onIdumoResume() {
+		magnet.register();
+	}
+	
+	@Override
+	public void onIdumoStart() {}
+	
+	@Override
+	public void onIdumoStop() {}
+	
+	@Override
+	public ConnectDataType sendableType() {
+		return new SingleConnectDataType(AndroidMagneticFieldData.class);
 	}
 	
 }

@@ -15,79 +15,94 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.android.provider;
+package com.hixi_hyi.idumo.android.component.sensor;
 
-import android.app.Activity;
-import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-import com.hixi_hyi.idumo.android.core.AndroidController;
-import com.hixi_hyi.idumo.android.data.AndroidProximityData;
-import com.hixi_hyi.idumo.android.sensor.ProximitySensor;
-import com.hixi_hyi.idumo.core.data.FlowingData;
-import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
-import com.hixi_hyi.idumo.core.parts.Sendable;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
- * Android上の近接センサの情報を取得できるProvider
+ * 温度センサ
  * 
  * @author Hiroyoshi HOUCHI
- * @version 2.0
  * 
  */
-public class AndroidProximityProvider implements Sendable, AndroidController {
+public enum TemperatureSensor implements SensorEventListener {
 	
-	private ProximitySensor	proximity;
+	INSTANCE;
 	
-	public AndroidProximityProvider(Activity activity) {
-		ProximitySensor proximitySensor = ProximitySensor.INSTANCE;
-		if (!proximitySensor.isInit()) {
-			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-			proximitySensor.init(sensor);
-		}
-		proximity = proximitySensor;
+	private SensorManager	sensorManager;
+	private Sensor			sensor;
+	private int				accurary;
+	private float			temp;
+	private boolean			isReady;
+	private boolean			isInit;
+	
+	/**
+	 * @return accurary
+	 */
+	public int getAccurary() {
+		return accurary;
 	}
 	
-	@Override
+	/**
+	 * @return temp
+	 */
+	public float getTemperature() {
+		return temp;
+	}
+	
+	public void init(SensorManager manager) {
+		isInit = true;
+		sensorManager = manager;
+	}
+	
+	public boolean isInit() {
+		return isInit;
+	}
+	
+	/**
+	 * @return isReady
+	 */
 	public boolean isReady() {
-		return proximity.isReady();
+		return isReady;
 	}
 	
 	@Override
-	public FlowingData onCall() {
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+		if (sensor.getType() == useSensorType()) {
+			accurary = accuracy;
+		}
+	}
+	
+	@Override
+	public void onSensorChanged(SensorEvent event) {
 		LogManager.log();
-		FlowingData p = new FlowingData();
-		p.add(new AndroidProximityData(proximity.getProximity()));
-		return p;
+		if (event.sensor.getType() == useSensorType()) {
+			temp = event.values[0];
+			isReady = true;
+		}
 	}
 	
-	@Override
-	public void onIdumoDestroy() {}
-	
-	@Override
-	public void onIdumoPause() {
-		proximity.unregister();
+	public void register() {
+		if (sensor == null) {
+			sensor = sensorManager.getDefaultSensor(useSensorType());
+			sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI);
+		}
 	}
 	
-	@Override
-	public void onIdumoRestart() {}
-	
-	@Override
-	public void onIdumoResume() {
-		proximity.register();
+	public void unregister() {
+		if (sensor != null) {
+			sensor = null;
+			sensorManager.unregisterListener(this);
+		}
 	}
 	
-	@Override
-	public void onIdumoStart() {}
-	
-	@Override
-	public void onIdumoStop() {}
-	
-	@Override
-	public ConnectDataType sendableType() {
-		return new SingleConnectDataType(AndroidProximityData.class);
+	public int useSensorType() {
+		return Sensor.TYPE_TEMPERATURE;
 	}
 	
 }

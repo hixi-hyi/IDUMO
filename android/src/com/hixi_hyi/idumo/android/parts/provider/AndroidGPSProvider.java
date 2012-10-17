@@ -15,15 +15,16 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.android.provider;
+package com.hixi_hyi.idumo.android.parts.provider;
 
 import android.app.Activity;
 import android.content.Context;
-import android.hardware.SensorManager;
+import android.location.LocationManager;
 
+import com.hixi_hyi.idumo.android.component.sensor.GPSSensor;
 import com.hixi_hyi.idumo.android.core.AndroidController;
-import com.hixi_hyi.idumo.android.data.AndroidLightData;
-import com.hixi_hyi.idumo.android.sensor.LightSensor;
+import com.hixi_hyi.idumo.android.data.AndroidGPSData;
+import com.hixi_hyi.idumo.core.annotation.IDUMOProvider;
 import com.hixi_hyi.idumo.core.data.FlowingData;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
@@ -31,35 +32,36 @@ import com.hixi_hyi.idumo.core.parts.Sendable;
 import com.hixi_hyi.idumo.core.util.LogManager;
 
 /**
- * Android上の光センサの情報を取得できるProvider
+ * GPS情報を取得できるProvider
  * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  * 
  */
-public class AndroidLightProvider implements Sendable, AndroidController {
+@IDUMOProvider(author = "Hiroyoshi HOUCHI", name = "GPSセンサ", send = AndroidGPSData.class)
+public class AndroidGPSProvider implements Sendable, AndroidController {
 	
-	private LightSensor	light;
+	private GPSSensor	gps;
 	
-	public AndroidLightProvider(Activity activity) {
-		LightSensor lightSensor = LightSensor.INSTANCE;
-		if (!lightSensor.isInit()) {
-			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-			lightSensor.init(sensor);
+	public AndroidGPSProvider(Activity activity) {
+		GPSSensor gpsSensor = GPSSensor.INSTANCE;
+		if (!gpsSensor.isInit()) {
+			LocationManager location = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+			gpsSensor.init(location);
 		}
-		light = lightSensor;
+		gps = gpsSensor;
 	}
 	
 	@Override
 	public boolean isReady() {
-		return light.isReady();
+		return gps.isReady();
 	}
 	
 	@Override
 	public FlowingData onCall() {
 		LogManager.log();
 		FlowingData p = new FlowingData();
-		p.add(new AndroidLightData(light.getLight()));
+		p.add(new AndroidGPSData(gps.getLatitude(), gps.getLongitude(), gps.getAltitude(), gps.getTime(), gps.getBearing(), gps.getSpeed()));
 		return p;
 	}
 	
@@ -68,7 +70,7 @@ public class AndroidLightProvider implements Sendable, AndroidController {
 	
 	@Override
 	public void onIdumoPause() {
-		light.unregister();
+		gps.unregister();
 	}
 	
 	@Override
@@ -76,7 +78,7 @@ public class AndroidLightProvider implements Sendable, AndroidController {
 	
 	@Override
 	public void onIdumoResume() {
-		light.register();
+		gps.register();
 	}
 	
 	@Override
@@ -87,6 +89,7 @@ public class AndroidLightProvider implements Sendable, AndroidController {
 	
 	@Override
 	public ConnectDataType sendableType() {
-		return new SingleConnectDataType(AndroidLightData.class);
+		return new SingleConnectDataType(AndroidGPSData.class);
 	}
+	
 }

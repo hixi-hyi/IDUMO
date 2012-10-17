@@ -50,17 +50,16 @@ public class AndroidActivity implements CoreActivity, Runnable {
 					Thread.sleep(component.getSleepTime());
 				} catch (InterruptedException e) {}
 			}
-		} else {
-			for (int i = 0; i < count;) {
-				if (runnable.isReady()) {
-					handler.post(runnable);
-					i++;
-				}
-				try {
-					Thread.sleep(component.getSleepTime());
-				} catch (InterruptedException e) {}
-				
+		}
+		for (int i = 0; i < count;) {
+			if (runnable.isReady()) {
+				handler.post(runnable);
+				i++;
 			}
+			try {
+				Thread.sleep(component.getSleepTime());
+			} catch (InterruptedException e) {}
+			
 		}
 	}
 	

@@ -66,17 +66,16 @@ public class _ReceiveTCPProvider implements Sendable, CoreController {
 
 		if (strs.size() != 0) {
 			return true;
-		} else {
-			String s;
-			try {
-				if ((s = br.readLine()) != null) {
-					strs.add(s);
-					return true;
-				}
+		}
+		String s;
+		try {
+			if ((s = br.readLine()) != null) {
+				strs.add(s);
+				return true;
 			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
+		}
+		catch (IOException e) {
+			e.printStackTrace();
 		}
 		return false;
 

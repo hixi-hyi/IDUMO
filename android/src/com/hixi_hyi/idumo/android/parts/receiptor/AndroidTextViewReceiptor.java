@@ -15,25 +15,16 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.idumo.android.receiptor;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.hixi_hyi.idumo.android.parts.receiptor;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.widget.TextView;
 
-import com.google.android.maps.GeoPoint;
-import com.google.android.maps.ItemizedOverlay;
-import com.google.android.maps.MapController;
-import com.google.android.maps.MapView;
-import com.google.android.maps.OverlayItem;
-import com.hixi_hyi.idumo.common.data.element.LatLngElement;
 import com.hixi_hyi.idumo.core.data.DataElement;
 import com.hixi_hyi.idumo.core.data.FlowingData;
+import com.hixi_hyi.idumo.core.data.connect.ArrayConnectDataType;
 import com.hixi_hyi.idumo.core.data.connect.ConnectDataType;
-import com.hixi_hyi.idumo.core.data.connect.SingleConnectDataType;
 import com.hixi_hyi.idumo.core.exception.IDUMOException;
 import com.hixi_hyi.idumo.core.parts.Executable;
 import com.hixi_hyi.idumo.core.parts.Receivable;
@@ -48,34 +39,17 @@ import com.hixi_hyi.idumo.core.validator.ReceiveValidatorSize;
  * @version 2.0
  * 
  */
-public class AndroidPinMapViewReceiptor extends MapView implements Receivable, Executable {
+public class AndroidTextViewReceiptor extends TextView implements Receivable, Executable {
 	
 	private Sendable				sender;
+	private ReceiveValidatorSize	vSize	= new ReceiveValidatorSize(1);
 	private Activity				activity;
-	private ReceiveValidatorSize	vSize		= new ReceiveValidatorSize(1);
 	
-	private static final int		ZOOM_LEVEL	= 10;
-	private MapController			controller;
-	private DefaultItemizedOverlay	overlay;
-	
-	private static final String		API_KEY		= "0RPjiLm_GLRAHM0HCn22WyqMNKfeWGuSvvXnqoA";
-	
-	public AndroidPinMapViewReceiptor(Context context) {
-		super(context, API_KEY);
+	public AndroidTextViewReceiptor(Context context) {
+		super(context);
 		activity = (Activity) context;
 		activity.setContentView(this);
-		
-		controller = getController();
-		controller.setZoom(ZOOM_LEVEL);
-		
-		Drawable marker = activity.getResources().getDrawable(com.hixi_hyi.idumo.android.R.drawable.androidmarker);
-		overlay = new DefaultItemizedOverlay(marker);
-		getOverlays().add(overlay);
-		
-		setClickable(true);
-		setBuiltInZoomControls(true);
-		setSatellite(false);
-		
+		setTextSize(30.0f);
 	}
 	
 	@Override
@@ -85,20 +59,22 @@ public class AndroidPinMapViewReceiptor extends MapView implements Receivable, E
 	
 	@Override
 	public ConnectDataType receivableType() {
-		return new SingleConnectDataType(LatLngElement.class);
+		return new ArrayConnectDataType(DataElement.class);
 	}
 	
 	@Override
 	public void run() {
 		LogManager.log();
 		FlowingData idf = sender.onCall();
-		for (DataElement id : idf) {
-			LatLngElement llde = (LatLngElement) id;
-			GeoPoint point = new GeoPoint((int) (llde.getLatitude() * 1E6), (int) (llde.getLongitude() * 1E6));
-			overlay.addPoint(point);
-			LogManager.debug(point);
+		StringBuilder sb = new StringBuilder();
+		for (DataElement d : idf) {
+			sb.append(d.toString());
 		}
-		invalidate();
+		
+		LogManager.debug(sb.toString());
+		
+		setText(sb.toString());
+		
 	}
 	
 	@Override
@@ -107,31 +83,4 @@ public class AndroidPinMapViewReceiptor extends MapView implements Receivable, E
 		sender = handler[0];
 	}
 	
-}
-
-class DefaultItemizedOverlay extends ItemizedOverlay<OverlayItem> {
-	private List<OverlayItem>	items	= new ArrayList<OverlayItem>();
-	
-	public DefaultItemizedOverlay(Drawable defaultMarker) {
-		super(boundCenterBottom(defaultMarker));
-	}
-	
-	public void addPoint(GeoPoint point) {
-		addPoint(point, "", "");
-	}
-	
-	public void addPoint(GeoPoint point, String title, String snippet) {
-		items.add(new OverlayItem(point, title, snippet));
-		populate();
-	}
-	
-	@Override
-	protected OverlayItem createItem(int i) {
-		return items.get(i);
-	}
-	
-	@Override
-	public int size() {
-		return items.size();
-	}
 }

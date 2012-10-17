@@ -1,4 +1,4 @@
-package com.hixi_hyi.idumo.android.receiptor;
+package com.hixi_hyi.idumo.android.parts.receiptor;
 
 import java.io.IOException;
 import java.io.OutputStream;
