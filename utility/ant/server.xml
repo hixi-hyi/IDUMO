@@ -31,13 +31,14 @@
 	<property name="iconsole.bin"  value="${root}/console/bin/"/>
 	<property name="iconsole.lib"  value="${root}/console/libs/"/>
 
+	<property name="iutility"      value="${root}/utility/"/>
+
 	<property name="src"          value="${icore.src}:${iandroid.src}:${iconsole.lib}"/>
 	<property name="lib"          value="${icore.lib}:${iandroid.lib}:${iconsole.lib}"/>
 
 	<property name="package"      value="com.hixi_hyi.idumo.*"/>
 	<property name="doclet"       value="com.hixi_hyi.idumo.core.doclet.IDUMOVisualDoclet"/>
-
-
+	
 	<path id="icore.libpath">
 		<pathelement location="${java.tools}"/>
 		<fileset dir="${icore.lib}">
@@ -111,7 +112,8 @@
 
 	<target name="idumoitem" depends="compile">
 		<javadoc access="public" 
-			additionalparam="-encoding UTF-8 " 
+			additionalparam="-encoding UTF-8 -bootclasspath ${android.lib}:${java.tools}" 
+			classpath="${lib}:${annotation}"
 			packagenames="${package}"
 			sourcepath="${src}"
 			>

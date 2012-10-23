@@ -24,7 +24,7 @@ public class IDUMOVisualDoclet {
 	
 	public static boolean start(RootDoc root) throws FileNotFoundException, UnsupportedEncodingException {
 		
-		File file = new File("./idumoitem.json");
+		File file = new File(System.getProperty("user.dir")+"/idumoitem.json");
 		System.out.println(file.getPath());
 		FileOutputStream fos = new FileOutputStream(file);
 		OutputStreamWriter osw = new OutputStreamWriter(fos,"UTF-8");
