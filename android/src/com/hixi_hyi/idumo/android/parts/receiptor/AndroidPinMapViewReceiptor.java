@@ -68,9 +68,9 @@ public class AndroidPinMapViewReceiptor extends MapView implements Receivable, E
 		controller = getController();
 		controller.setZoom(ZOOM_LEVEL);
 		
-		Drawable marker = activity.getResources().getDrawable(com.hixi_hyi.idumo.android.R.drawable.androidmarker);
-		overlay = new DefaultItemizedOverlay(marker);
-		getOverlays().add(overlay);
+//		Drawable marker = activity.getResources().getDrawable(com.hixi_hyi.idumo.android.R.drawable.androidmarker);
+//		overlay = new DefaultItemizedOverlay(marker);
+//		getOverlays().add(overlay);
 		
 		setClickable(true);
 		setBuiltInZoomControls(true);
