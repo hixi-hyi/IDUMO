@@ -21,9 +21,9 @@
 	<property name="android"      value="${android_path}/platforms/android-8/android.jar:${android_path}/add-ons/addon-google_apis-google-8/libs/maps.jar"/>
 	<property name="java"         value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar"/>
 	<property name="annotation"   value="${android_path}/tools/support/annotations.jar"/>
-	<property name="doclet"       value="com.hixi_hyi.idumo.core.doclet.IDUMOVisualDoclet"/>
+	<property name="doclet"       value="jp.idumo.core.doclet.IDUMOVisualDoclet"/>
 	
-	<property name="package"      value="com.hixi_hyi.idumo.*"/>
+	<property name="package"      value="jp.idumo.*"/>
 	<property name="src"          value="${icore.src}:${iandroid.src}:${iconsole.lib}"/>
 	<property name="lib"          value="${icore.lib}:${iandroid.lib}:${iconsole.lib}:"/>
 		

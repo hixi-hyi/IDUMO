@@ -8,7 +8,7 @@
 	<classpathentry kind="lib" path="libs/google-api-client-googleapis-1.4.1-beta.jar"/>
 	<classpathentry kind="lib" path="libs/google-api-client-googleapis-extensions-android2-1.4.1-beta.jar"/>
 	<classpathentry kind="lib" path="libs/guava-r09.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/IDUMO"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/IDUMO"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
