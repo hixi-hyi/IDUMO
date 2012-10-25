@@ -7,22 +7,6 @@
 	<property name="java.home"    value="/usr/lib/jvm/java-6-sun-1.6.0.35/"/>
 	<property name="java.tools"   value="/usr/lib/jvm/java-6-sun-1.6.0.35/lib/tools.jar"/>
 
-	<!-- call -->
-	<property name="common.xml" location="common.xml"/>
-	<!-- target -->
-	<target name="clean">
-		<ant antfile="${common.xml}" inheritAll="true" target="clean" />
-	</target>
+	<import file="common.xml"/>
 
-	<target name="compile">
-		<ant antfile="${common.xml}" inheritAll="true" target="compile" />
-	</target>
-
-	<target name="jar">
-		<ant antfile="${common.xml}" inheritAll="true" target="jar" />
-	</target>
-
-	<target name="idumoitem">
-		<ant antfile="${common.xml}" inheritAll="true" target="idumoitem" />
-	</target>
 </project>

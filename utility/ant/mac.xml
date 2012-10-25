@@ -6,25 +6,8 @@
 	<property name="annotation"   value="${android.path}/tools/support/annotations.jar"/>
 	<property name="java.tools"         value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar"/>
 	<property name="java.home"    value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/"/>
+
+	<import file="common.xml"/>
 	
-	<!-- call -->
-	<property name="common.xml" location="common.xml"/>
-	<!-- target -->
-	<target name="clean">
-		<ant antfile="${common.xml}" inheritAll="true" target="clean" />
-	</target>
-
-	<target name="compile">
-		<ant antfile="${common.xml}" inheritAll="true" target="compile" />
-	</target>
-
-	<target name="jar">
-		<ant antfile="${common.xml}" inheritAll="true" target="jar" />
-	</target>
-
-	<target name="idumoitem">
-		<ant antfile="${common.xml}" inheritAll="true" target="idumoitem" />
-	</target>
-
 </project>
 	
