@@ -18,6 +18,7 @@
 package jp.idumo.android.parts.provider;
 
 import jp.idumo.android.component.sensor.ProximitySensor;
+import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidProximityData;
 import jp.idumo.core.annotation.IDUMOProvider;
@@ -39,17 +40,13 @@ import android.hardware.SensorManager;
  * 
  */
 @IDUMOProvider(author="Hiroyoshi HOUCHI",name="近接センサ",send=AndroidProximityData.class)
-public class AndroidProximityProvider implements Sendable, AndroidController {
+public class AndroidProximityProvider implements Sendable, AndroidController,AndroidActivityController {
 	
 	private ProximitySensor	proximity;
 	
-	public AndroidProximityProvider(Activity activity) {
-		ProximitySensor proximitySensor = ProximitySensor.INSTANCE;
-		if (!proximitySensor.isInit()) {
-			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-			proximitySensor.init(sensor);
-		}
-		proximity = proximitySensor;
+	public AndroidProximityProvider() {
+		proximity = ProximitySensor.INSTANCE;
+		// lazy initialize (method of registActivity)
 	}
 	
 	@Override
@@ -90,6 +87,14 @@ public class AndroidProximityProvider implements Sendable, AndroidController {
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(AndroidProximityData.class);
+	}
+
+	@Override
+	public void registActivity(Activity activity) {
+		if (!proximity.isInit()) {
+			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+			proximity.init(sensor);
+		}		
 	}
 	
 }

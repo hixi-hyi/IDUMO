@@ -18,7 +18,7 @@ public class Shop2MapView extends AndroidWrapper {
 			
 			@Override
 			public void onIdumoMakeFlowChart() throws IDUMOException {
-				AndroidGPSProvider idumo0 = new AndroidGPSProvider(activity);
+				AndroidGPSProvider idumo0 = new AndroidGPSProvider();
 				add(idumo0);
 				// NumberProvider idumo0 = new NumberProvider(34.67);
 				// add(idumo0);
@@ -29,7 +29,7 @@ public class Shop2MapView extends AndroidWrapper {
 				
 				HotpepperHandler idumoh = new HotpepperHandler();
 				add(idumoh);
-				AndroidPinMapViewReceiptor idumor = new AndroidPinMapViewReceiptor(activity);
+				AndroidPinMapViewReceiptor idumor = new AndroidPinMapViewReceiptor();
 				add(idumor);
 				
 				// connect(idumo0,idumo2);

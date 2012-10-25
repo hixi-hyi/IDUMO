@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project default="idumoitem">
-	<property name="root"         value="../../"/>
-
-	<!-- global setting -->
-	<property name="debuglevel" value="source,lines,vars"/>
-	<property name="target" value="1.6"/>
-	<property name="source" value="1.6"/>
-
 	<!-- special setting -->
 	<property name="android.path" value="/home/idumo/android/"/>
 	<property name="android.lib"  value="${android.path}/platforms/android-8/android.jar:${android.path}/add-ons/addon-google_apis-google-8/libs/maps.jar"/>
@@ -14,112 +7,22 @@
 	<property name="java.home"    value="/usr/lib/jvm/java-6-sun-1.6.0.35/"/>
 	<property name="java.tools"   value="/usr/lib/jvm/java-6-sun-1.6.0.35/lib/tools.jar"/>
 
-
-	<!-- common setting -->
-	<property name="icore"         value="${root}/core/"/>
-	<property name="icore.src"     value="${root}/core/src/"/>
-	<property name="icore.bin"     value="${root}/core/bin/"/>
-	<property name="icore.lib"     value="${root}/core/libs/"/>
-
-	<property name="iandroid"      value="${root}/android/"/>
-	<property name="iandroid.src"  value="${root}/android/src/"/>
-	<property name="iandroid.bin"  value="${root}/android/bin/classes/"/>
-	<property name="iandroid.lib"  value="${root}/android/libs/"/>
-
-	<property name="iconsole"      value="${root}/console/"/>
-	<property name="iconsole.src"  value="${root}/console/src/"/>
-	<property name="iconsole.bin"  value="${root}/console/bin/"/>
-	<property name="iconsole.lib"  value="${root}/console/libs/"/>
-
-	<property name="iutility"      value="${root}/utility/"/>
-
-	<property name="src"          value="${icore.src}:${iandroid.src}:${iconsole.lib}"/>
-	<property name="lib"          value="${icore.lib}:${iandroid.lib}:${iconsole.lib}"/>
-
-	<property name="package"      value="jp.idumo.*"/>
-	<property name="doclet"       value="jp.idumo.core.doclet.IDUMOVisualDoclet"/>
-	
-	<path id="icore.libpath">
-		<pathelement location="${java.tools}"/>
-		<fileset dir="${icore.lib}">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-
-	<path id="icore.classpath">
-		<pathelement location="${icore.bin}"/>
-	</path>
-	<path id="iandroid.libpath">
-		<path refid="icore.classpath"/>
-		<pathelement location="/home/idumo/android/add-ons/addon-google_apis-google-8/libs/maps.jar"/>
-		<fileset dir="${iandroid.lib}">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-	<path id="iconsole.libpath">
-		<path refid="icore.classpath"/>
-		<fileset dir="${iconsole.lib}">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-
+	<!-- call -->
+	<property name="common.xml" location="common.xml"/>
 	<!-- target -->
 	<target name="clean">
-		<delete dir="${icore.bin}"/>
-		<delete dir="${iandroid.bin}"/>
-		<delete dir="${iconsole.bin}"/>
+		<ant antfile="${common.xml}" inheritAll="true" target="clean" />
 	</target>
 
-	<target name="compile" depends="clean">
-		<echo message="build core"/>
-		<mkdir dir="${icore.bin}"/>
-		<javac debug="true" includeantruntime="false" debuglevel="${debuglevel}" destdir="${icore.bin}" source="${source}" target="${target}" encoding="UTF-8" classpathref="icore.libpath">
-			<src path="${icore.src}"/>
-			<!--
-			<exclude name="**/*Doclet.java"/>
-			-->
-		</javac>
-		<echo message="build android"/>
-		<mkdir dir="${iandroid.bin}"/>
-		<javac debug="true" includeantruntime="false" debuglevel="${debuglevel}" destdir="${iandroid.bin}" source="${source}" target="${target}" encoding="UTF-8" classpathref="iandroid.libpath">
-			<src path="${iandroid.src}"/>
-		</javac>
-		<echo message="build console"/>
-		<mkdir dir="${iconsole.bin}"/>
-		<javac debug="true" includeantruntime="false" debuglevel="${debuglevel}" destdir="${iconsole.bin}" source="${source}" target="${target}" encoding="UTF-8" classpathref="iconsole.libpath">
-			<src path="${iconsole.src}"/>
-		</javac>
+	<target name="compile">
+		<ant antfile="${common.xml}" inheritAll="true" target="compile" />
 	</target>
 
-	<target name="jar" depends="compile">
-		<jar jarfile="idumo.jar">
-			<fileset dir="${icore.bin}" includes="**/*.class" />
-			<fileset dir="${icore.src}" includes="**/*.java" />
-			<fileset dir="${iandroid.bin}" includes="**/*.class" />
-			<fileset dir="${iandroid.src}" includes="**/*.java" />
-			<fileset dir="${iconsole.bin}" includes="**/*.class" />
-			<fileset dir="${iconsole.src}" includes="**/*.java" />
-		</jar>
-		<echo message="create idumo.jar"/>
+	<target name="jar">
+		<ant antfile="${common.xml}" inheritAll="true" target="jar" />
 	</target>
 
-	<path id="javadoc.libpath">
-		<pathelement location="${icore.bin}"/>
-		<pathelement location="${iandroid.bin}"/>
-		<pathelement location="${iconsole.bin}"/>
-	</path>
-	
-
-	<target name="idumoitem" depends="compile">
-		<javadoc access="public" 
-			additionalparam="-encoding UTF-8 -bootclasspath ${android.lib}:${java.tools}" 
-			classpath="${lib}:${annotation}"
-			packagenames="${package}"
-			sourcepath="${src}"
-			>
-			<doclet name="${doclet}" path="${icore.bin}"/>
-		</javadoc>
-		<echo message="create idumoitem.json"/>
+	<target name="idumoitem">
+		<ant antfile="${common.xml}" inheritAll="true" target="idumoitem" />
 	</target>
-
 </project>

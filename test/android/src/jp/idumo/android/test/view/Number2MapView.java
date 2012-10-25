@@ -25,7 +25,7 @@ public class Number2MapView extends AndroidWrapper {
 				Number2GPSAdapter idumo2 = new Number2GPSAdapter();
 				add(idumo2);
 				
-				AndroidMapViewReceiptor idumor = new AndroidMapViewReceiptor(activity);
+				AndroidMapViewReceiptor idumor = new AndroidMapViewReceiptor();
 				add(idumor);
 				
 				connect(idumo0, idumo2);

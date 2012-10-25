@@ -1,25 +1,31 @@
-package jp.idumo.android.test.sensor;
+package jp.idumo.android.test.web;
 
 import jp.idumo.android.core.exec.AndroidComponent;
 import jp.idumo.android.core.exec.AndroidWrapper;
-import jp.idumo.android.parts.provider.AndroidProximityProvider;
+import jp.idumo.android.core.util.AndroidLogger;
+import jp.idumo.android.parts.provider.AndroidGPSProvider;
+import jp.idumo.android.parts.receiptor.AndroidMapViewReceiptor;
 import jp.idumo.android.parts.receiptor.AndroidTextViewReceiptor;
+import jp.idumo.common.parts.provider.LivedoorWeatherProvider;
 import jp.idumo.core.exception.IDUMOException;
+import jp.idumo.core.util.LogManager;
 
-public class AndroidProximity extends AndroidWrapper {
+public class LivedoorWeather extends AndroidWrapper {
 	@Override
 	public void init() {
+		LogManager.DEBUG = true;
+		LogManager.LOGGER = new AndroidLogger("IDUMO");
 		setExecutionWithComponent(new AndroidComponent() {
 			
 			@Override
 			public void onIdumoMakeFlowChart() throws IDUMOException {
-				AndroidProximityProvider idumo1 = new AndroidProximityProvider();
-				add(idumo1);
-				
+				LivedoorWeatherProvider idumo0 = new LivedoorWeatherProvider(63); 
+				add(idumo0);
 				AndroidTextViewReceiptor idumor = new AndroidTextViewReceiptor();
 				add(idumor);
 				
-				connect(idumo1, idumor);
+				connect(idumo0, idumor);
+				
 			}
 			
 			@Override

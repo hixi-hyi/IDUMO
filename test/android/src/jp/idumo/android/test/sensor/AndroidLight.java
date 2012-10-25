@@ -13,10 +13,10 @@ public class AndroidLight extends AndroidWrapper {
 			
 			@Override
 			public void onIdumoMakeFlowChart() throws IDUMOException {
-				AndroidLightProvider idumo1 = new AndroidLightProvider(activity);
+				AndroidLightProvider idumo1 = new AndroidLightProvider();
 				add(idumo1);
 				
-				AndroidTextViewReceiptor idumor = new AndroidTextViewReceiptor(activity);
+				AndroidTextViewReceiptor idumor = new AndroidTextViewReceiptor();
 				add(idumor);
 				
 				connect(idumo1, idumor);

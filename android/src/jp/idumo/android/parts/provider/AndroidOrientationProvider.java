@@ -20,6 +20,7 @@ package jp.idumo.android.parts.provider;
 import jp.idumo.android.component.sensor.AccelerometerSensor;
 import jp.idumo.android.component.sensor.MagneticFieldSensor;
 import jp.idumo.android.component.sensor.OrientationSensor;
+import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidOrientationData;
 import jp.idumo.core.annotation.IDUMOProvider;
@@ -41,26 +42,13 @@ import android.hardware.SensorManager;
  * 
  */
 @IDUMOProvider(author="Hiroyoshi HOUCHI",name="傾きセンサ",send=AndroidOrientationData.class)
-public class AndroidOrientationProvider implements Sendable, AndroidController {
+public class AndroidOrientationProvider implements Sendable, AndroidController,AndroidActivityController {
 	
 	private OrientationSensor	sensor;
 	
-	public AndroidOrientationProvider(Activity activity) {
-		OrientationSensor orientationSensor = OrientationSensor.INSTANCE;
-		if (!orientationSensor.isInit()) {
-			AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
-			if (!accelerometerSensor.isInit()) {
-				SensorManager sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-				accelerometerSensor.init(sensorManager);
-			}
-			MagneticFieldSensor magneticFieldSensor = MagneticFieldSensor.INSTANCE;
-			if (!magneticFieldSensor.isInit()) {
-				SensorManager sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-				magneticFieldSensor.init(sensorManager);
-			}
-			orientationSensor.init(accelerometerSensor, magneticFieldSensor);
-		}
-		sensor = orientationSensor;
+	public AndroidOrientationProvider() {
+		sensor = OrientationSensor.INSTANCE;
+		// lazy initialize (method of registActivity)
 	}
 	
 	@Override
@@ -101,5 +89,22 @@ public class AndroidOrientationProvider implements Sendable, AndroidController {
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(AndroidOrientationData.class);
+	}
+
+	@Override
+	public void registActivity(Activity activity) {
+		if (!sensor.isInit()) {
+			AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
+			if (!accelerometerSensor.isInit()) {
+				SensorManager sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+				accelerometerSensor.init(sensorManager);
+			}
+			MagneticFieldSensor magneticFieldSensor = MagneticFieldSensor.INSTANCE;
+			if (!magneticFieldSensor.isInit()) {
+				SensorManager sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+				magneticFieldSensor.init(sensorManager);
+			}
+			sensor.init(accelerometerSensor, magneticFieldSensor);
+		}		
 	}
 }

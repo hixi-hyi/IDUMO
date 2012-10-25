@@ -17,6 +17,7 @@
  */
 package jp.idumo.android.parts.receiptor;
 
+import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.core.data.DataElement;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ArrayConnectDataType;
@@ -39,18 +40,11 @@ import android.widget.TextView;
  * @version 2.0
  * 
  */
-public class AndroidTextViewReceiptor extends TextView implements Receivable, Executable {
+public class AndroidTextViewReceiptor implements Receivable, Executable,AndroidActivityController {
 	
+	private TextView view;
 	private Sendable				sender;
 	private ReceiveValidatorSize	vSize	= new ReceiveValidatorSize(1);
-	private Activity				activity;
-	
-	public AndroidTextViewReceiptor(Context context) {
-		super(context);
-		activity = (Activity) context;
-		activity.setContentView(this);
-		setTextSize(30.0f);
-	}
 	
 	@Override
 	public boolean isReady() {
@@ -73,14 +67,20 @@ public class AndroidTextViewReceiptor extends TextView implements Receivable, Ex
 		
 		LogManager.debug(sb.toString());
 		
-		setText(sb.toString());
-		
+		view.setText(sb.toString());
 	}
 	
 	@Override
 	public void setSender(Sendable... handler) throws IDUMOException {
 		vSize.validate(handler);
 		sender = handler[0];
+	}
+
+	@Override
+	public void registActivity(Activity activity) {
+		view = new TextView(activity);
+		activity.setContentView(view);
+		view.setTextSize(30.0f);		
 	}
 	
 }

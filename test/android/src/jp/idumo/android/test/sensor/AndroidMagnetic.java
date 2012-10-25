@@ -13,10 +13,10 @@ public class AndroidMagnetic extends AndroidWrapper {
 			
 			@Override
 			public void onIdumoMakeFlowChart() throws IDUMOException {
-				AndroidMagneticFieldProvider idumo1 = new AndroidMagneticFieldProvider(activity);
+				AndroidMagneticFieldProvider idumo1 = new AndroidMagneticFieldProvider();
 				add(idumo1);
 				
-				AndroidTextViewReceiptor idumor = new AndroidTextViewReceiptor(activity);
+				AndroidTextViewReceiptor idumor = new AndroidTextViewReceiptor();
 				add(idumor);
 				
 				connect(idumo1, idumor);

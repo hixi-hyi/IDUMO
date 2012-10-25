@@ -18,6 +18,7 @@
 package jp.idumo.android.parts.provider;
 
 import jp.idumo.android.component.sensor.GPSSensor;
+import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidGPSData;
 import jp.idumo.core.annotation.IDUMOProvider;
@@ -39,17 +40,13 @@ import android.location.LocationManager;
  * 
  */
 @IDUMOProvider(author = "Hiroyoshi HOUCHI", name = "GPSセンサ", send = AndroidGPSData.class)
-public class AndroidGPSProvider implements Sendable, AndroidController {
+public class AndroidGPSProvider implements Sendable, AndroidController,AndroidActivityController {
 	
 	private GPSSensor	gps;
 	
-	public AndroidGPSProvider(Activity activity) {
-		GPSSensor gpsSensor = GPSSensor.INSTANCE;
-		if (!gpsSensor.isInit()) {
-			LocationManager location = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-			gpsSensor.init(location);
-		}
-		gps = gpsSensor;
+	public AndroidGPSProvider() {
+		gps = GPSSensor.INSTANCE;
+		// lazy initialize (method of registActivity)
 	}
 	
 	@Override
@@ -90,6 +87,14 @@ public class AndroidGPSProvider implements Sendable, AndroidController {
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(AndroidGPSData.class);
+	}
+
+	@Override
+	public void registActivity(Activity activity) {
+		if (!gps.isInit()) {
+			LocationManager location = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+			gps.init(location);
+		}
 	}
 	
 }

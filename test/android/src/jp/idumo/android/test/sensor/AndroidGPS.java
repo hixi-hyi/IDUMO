@@ -13,10 +13,10 @@ public class AndroidGPS extends AndroidWrapper {
 			
 			@Override
 			public void onIdumoMakeFlowChart() throws IDUMOException {
-				AndroidGPSProvider idumo1 = new AndroidGPSProvider(activity);
+				AndroidGPSProvider idumo1 = new AndroidGPSProvider();
 				add(idumo1);
 				
-				AndroidTextViewReceiptor idumor = new AndroidTextViewReceiptor(activity);
+				AndroidTextViewReceiptor idumor = new AndroidTextViewReceiptor();
 				add(idumor);
 				
 				connect(idumo1, idumor);

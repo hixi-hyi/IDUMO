@@ -13,10 +13,10 @@ public class AndroidOrientation extends AndroidWrapper {
 			
 			@Override
 			public void onIdumoMakeFlowChart() throws IDUMOException {
-				AndroidOrientationProvider idumo1 = new AndroidOrientationProvider(activity);
+				AndroidOrientationProvider idumo1 = new AndroidOrientationProvider();
 				add(idumo1);
 				
-				AndroidTextViewReceiptor idumor = new AndroidTextViewReceiptor(activity);
+				AndroidTextViewReceiptor idumor = new AndroidTextViewReceiptor();
 				add(idumor);
 				
 				connect(idumo1, idumor);

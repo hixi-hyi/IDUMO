@@ -18,6 +18,7 @@
 package jp.idumo.android.parts.provider;
 
 import jp.idumo.android.component.sensor.LightSensor;
+import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidLightData;
 import jp.idumo.core.annotation.IDUMOProvider;
@@ -39,17 +40,13 @@ import android.hardware.SensorManager;
  * 
  */
 @IDUMOProvider(author="Hiroyoshi HOUCHI",name="光センサ",send=AndroidLightData.class)
-public class AndroidLightProvider implements Sendable, AndroidController {
+public class AndroidLightProvider implements Sendable, AndroidController,AndroidActivityController {
 	
 	private LightSensor	light;
 	
-	public AndroidLightProvider(Activity activity) {
-		LightSensor lightSensor = LightSensor.INSTANCE;
-		if (!lightSensor.isInit()) {
-			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-			lightSensor.init(sensor);
-		}
-		light = lightSensor;
+	public AndroidLightProvider() {
+		light = LightSensor.INSTANCE;
+		// lazy initialize (method of registActivity)
 	}
 	
 	@Override
@@ -90,5 +87,13 @@ public class AndroidLightProvider implements Sendable, AndroidController {
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(AndroidLightData.class);
+	}
+
+	@Override
+	public void registActivity(Activity activity) {
+		if (!light.isInit()) {
+			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+			light.init(sensor);
+		}
 	}
 }

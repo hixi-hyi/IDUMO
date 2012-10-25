@@ -18,6 +18,7 @@
 package jp.idumo.android.parts.provider;
 
 import jp.idumo.android.component.sensor.AccelerometerSensor;
+import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidAccelerometerData;
 import jp.idumo.core.annotation.IDUMOProvider;
@@ -39,17 +40,13 @@ import android.hardware.SensorManager;
  *
  */
 @IDUMOProvider(author="Hiroyoshi HOUCHI",name="加速度センサ",send=AndroidAccelerometerData.class)
-public class AndroidAccelerometerProvider implements Sendable, AndroidController {
+public class AndroidAccelerometerProvider implements Sendable, AndroidController,AndroidActivityController {
 
 	private AccelerometerSensor	accel;
 
-	public AndroidAccelerometerProvider(Activity activity) {
-		AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
-		if (!accelerometerSensor.isInit()) {
-			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-			accelerometerSensor.init(sensor);
-		}
-		accel = accelerometerSensor;
+	public AndroidAccelerometerProvider() {
+		accel = AccelerometerSensor.INSTANCE;
+		// lazy initialize (method of registActivity)
 	}
 
 	@Override
@@ -93,4 +90,12 @@ public class AndroidAccelerometerProvider implements Sendable, AndroidController
 		return new SingleConnectDataType(AndroidAccelerometerData.class);
 	}
 
+	@Override
+	public void registActivity(Activity activity) {
+		if (!accel.isInit()) {
+			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+			accel.init(sensor);
+		}
+	}
+	
 }

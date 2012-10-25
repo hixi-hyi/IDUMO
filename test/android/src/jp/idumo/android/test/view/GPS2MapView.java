@@ -17,9 +17,9 @@ public class GPS2MapView extends AndroidWrapper {
 			
 			@Override
 			public void onIdumoMakeFlowChart() throws IDUMOException {
-				AndroidGPSProvider idumo0 = new AndroidGPSProvider(activity);
+				AndroidGPSProvider idumo0 = new AndroidGPSProvider();
 				add(idumo0);
-				AndroidMapViewReceiptor idumor = new AndroidMapViewReceiptor(activity);
+				AndroidMapViewReceiptor idumor = new AndroidMapViewReceiptor();
 				add(idumor);
 				
 				connect(idumo0, idumor);

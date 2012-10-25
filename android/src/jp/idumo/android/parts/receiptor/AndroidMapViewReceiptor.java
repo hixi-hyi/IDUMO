@@ -17,6 +17,7 @@
  */
 package jp.idumo.android.parts.receiptor;
 
+import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.common.data.element.LatLngElement;
 import jp.idumo.core.annotation.IDUMOReceiptor;
 import jp.idumo.core.data.FlowingData;
@@ -45,8 +46,9 @@ import com.google.android.maps.MapView;
 
 @IDUMOReceiptor(author="Hiroyoshi HOUCHI",name="地図の表示",receive=LatLngElement.class)
 
-public class AndroidMapViewReceiptor extends MapView implements Receivable, Executable {
+public class AndroidMapViewReceiptor implements Receivable, Executable,AndroidActivityController {
 	
+	private MapView view;
 	private Sendable				sender;
 	private Activity				activity;
 	private ReceiveValidatorSize	vSize		= new ReceiveValidatorSize(1);
@@ -54,21 +56,8 @@ public class AndroidMapViewReceiptor extends MapView implements Receivable, Exec
 	private static final int		ZOOM_LEVEL	= 10;
 	private MapController			controller;
 	
-	private static final String		API_KEY		= "0RPjiLm_GLRAHM0HCn22WyqMNKfeWGuSvvXnqoA";
+	private static final String		API_KEY		= "0A1Cx9Pq6v1LrPccIpXJpStEaqtgxeo-1qC6zJw";
 	
-	public AndroidMapViewReceiptor(Context context) {
-		super(context, API_KEY);
-		activity = (Activity) context;
-		activity.setContentView(this);
-		
-		controller = getController();
-		controller.setZoom(ZOOM_LEVEL);
-		
-		setClickable(true);
-		setBuiltInZoomControls(true);
-		setSatellite(false);
-		
-	}
 	
 	@Override
 	public boolean isReady() {
@@ -88,13 +77,26 @@ public class AndroidMapViewReceiptor extends MapView implements Receivable, Exec
 		GeoPoint point = new GeoPoint((int) (llde.getLatitude() * 1E6), (int) (llde.getLongitude() * 1E6));
 		LogManager.debug(point);
 		controller.setCenter(point);
-		invalidate();
+		view.invalidate();
 	}
 	
 	@Override
 	public void setSender(Sendable... handler) throws IDUMOException {
 		vSize.validate(handler);
 		sender = handler[0];
+	}
+
+	@Override
+	public void registActivity(Activity activity) {
+		view = new MapView(activity, API_KEY);
+		activity.setContentView(view);
+		
+		controller = view.getController();
+		controller.setZoom(ZOOM_LEVEL);
+		
+		view.setClickable(true);
+		view.setBuiltInZoomControls(true);
+		view.setSatellite(false);		
 	}
 	
 }

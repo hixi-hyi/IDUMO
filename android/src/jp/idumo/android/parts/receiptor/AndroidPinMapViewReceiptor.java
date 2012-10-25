@@ -20,6 +20,7 @@ package jp.idumo.android.parts.receiptor;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.common.data.element.LatLngElement;
 import jp.idumo.core.data.DataElement;
 import jp.idumo.core.data.FlowingData;
@@ -41,6 +42,7 @@ import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
+import jp.idumo.android.R;
 
 /**
  * Android上にテキスト情報を出力するReceiptorです
@@ -49,35 +51,18 @@ import com.google.android.maps.OverlayItem;
  * @version 2.0
  * 
  */
-public class AndroidPinMapViewReceiptor extends MapView implements Receivable, Executable {
+@Deprecated
+public class AndroidPinMapViewReceiptor implements Receivable, Executable,AndroidActivityController {
 	
+	private MapView view;
 	private Sendable				sender;
-	private Activity				activity;
 	private ReceiveValidatorSize	vSize		= new ReceiveValidatorSize(1);
 	
 	private static final int		ZOOM_LEVEL	= 10;
 	private MapController			controller;
 	private DefaultItemizedOverlay	overlay;
 	
-	private static final String		API_KEY		= "0RPjiLm_GLRAHM0HCn22WyqMNKfeWGuSvvXnqoA";
-	
-	public AndroidPinMapViewReceiptor(Context context) {
-		super(context, API_KEY);
-		activity = (Activity) context;
-		activity.setContentView(this);
-		
-		controller = getController();
-		controller.setZoom(ZOOM_LEVEL);
-		
-//		Drawable marker = activity.getResources().getDrawable(com.hixi_hyi.idumo.android.R.drawable.androidmarker);
-//		overlay = new DefaultItemizedOverlay(marker);
-//		getOverlays().add(overlay);
-		
-		setClickable(true);
-		setBuiltInZoomControls(true);
-		setSatellite(false);
-		
-	}
+	private static final String		API_KEY		= "0A1Cx9Pq6v1LrPccIpXJpStEaqtgxeo-1qC6zJw";
 	
 	@Override
 	public boolean isReady() {
@@ -96,16 +81,33 @@ public class AndroidPinMapViewReceiptor extends MapView implements Receivable, E
 		for (DataElement id : idf) {
 			LatLngElement llde = (LatLngElement) id;
 			GeoPoint point = new GeoPoint((int) (llde.getLatitude() * 1E6), (int) (llde.getLongitude() * 1E6));
-			overlay.addPoint(point);
+//			overlay.addPoint(point);
 			LogManager.debug(point);
 		}
-		invalidate();
+		view.invalidate();
 	}
 	
 	@Override
 	public void setSender(Sendable... handler) throws IDUMOException {
 		vSize.validate(handler);
 		sender = handler[0];
+	}
+
+	@Override
+	public void registActivity(Activity activity) {
+		view = new MapView(activity,API_KEY);
+		activity.setContentView(view);
+		
+		controller = view.getController();
+		controller.setZoom(ZOOM_LEVEL);
+	
+		Drawable marker = activity.getResources().getDrawable(R.drawable.androidmarker);
+		overlay = new DefaultItemizedOverlay(marker);
+		view.getOverlays().add(overlay);
+		
+		view.setClickable(true);
+		view.setBuiltInZoomControls(true);
+		view.setSatellite(false);		
 	}
 	
 }

@@ -126,6 +126,17 @@
                 <category android:name="android.intent.category.IDUMO_SAMPLES" />
             </intent-filter>
         </activity>
+        
+        
+        <activity
+            android:name=".web.LivedoorWeather"
+            android:label="Web/LivedoorWeather" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.IDUMO_SAMPLES" />
+            </intent-filter>
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

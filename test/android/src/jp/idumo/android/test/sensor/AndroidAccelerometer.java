@@ -13,10 +13,10 @@ public class AndroidAccelerometer extends AndroidWrapper {
 			
 			@Override
 			public void onIdumoMakeFlowChart() throws IDUMOException {
-				AndroidAccelerometerProvider idumo1 = new AndroidAccelerometerProvider(activity);
+				AndroidAccelerometerProvider idumo1 = new AndroidAccelerometerProvider();
 				add(idumo1);
 				
-				AndroidTextViewReceiptor idumor = new AndroidTextViewReceiptor(activity);
+				AndroidTextViewReceiptor idumor = new AndroidTextViewReceiptor();
 				add(idumor);
 				
 				connect(idumo1, idumor);
