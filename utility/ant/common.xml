@@ -65,9 +65,9 @@
 	
 	<!-- target -->
 	<target name="clean">
-		<delete dir="${icore.bin}"/>
-		<delete dir="${iandroid.bin}"/>
-		<delete dir="${iconsole.bin}"/>
+		<delete dir="${icore.bin}" failonerror="false"/>
+		<delete dir="${iandroid.bin}" failonerror="false"/>
+		<delete dir="${iconsole.bin}" failonerror="false"/>
 	</target>
 
 	<target name="compile" depends="clean">
