@@ -45,7 +45,6 @@ import com.google.android.maps.MapView;
  */
 
 @IDUMOReceiptor(author="Hiroyoshi HOUCHI",name="地図の表示",receive=LatLngElement.class)
-
 public class AndroidMapViewReceiptor implements Receivable, Executable,AndroidActivityController {
 	
 	private MapView view;

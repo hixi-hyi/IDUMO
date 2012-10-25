@@ -18,6 +18,8 @@
 package jp.idumo.android.parts.receiptor;
 
 import jp.idumo.android.core.AndroidActivityController;
+import jp.idumo.common.data.element.TextElement;
+import jp.idumo.core.annotation.IDUMOReceiptor;
 import jp.idumo.core.data.DataElement;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ArrayConnectDataType;
@@ -40,6 +42,7 @@ import android.widget.TextView;
  * @version 2.0
  * 
  */
+@IDUMOReceiptor(author="Hiroyoshi HOUCHI",name="テキストの表示",receive=TextElement.class)
 public class AndroidTextViewReceiptor implements Receivable, Executable,AndroidActivityController {
 	
 	private TextView view;
