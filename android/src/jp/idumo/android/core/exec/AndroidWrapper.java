@@ -10,6 +10,8 @@ public abstract class AndroidWrapper extends MapActivity implements CoreWrapper 
 	
 	private AndroidActivity	execution;
 	
+	public AndroidWrapper(){}
+	
 	@Override
 	protected boolean isRouteDisplayed() {
 		return false;
