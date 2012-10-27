@@ -17,6 +17,7 @@
  */
 package jp.idumo.common.parts.handler;
 
+import jp.idumo.common.annotation.IDUMOCommon;
 import jp.idumo.core.annotation.IDUMOHandler;
 import jp.idumo.core.data.DataElement;
 import jp.idumo.core.data.FlowingData;
@@ -31,45 +32,45 @@ import jp.idumo.core.validator.ReceiveValidatorSize;
 
 /**
  * @author Hiroyoshi HOUCHI
- * @version 2.0
- *
+ * 
  */
+@IDUMOCommon
 @IDUMOHandler(author = "Hiroyoshi HOUCHI", description = "文字列の前に指定された文字を埋め込みます", name = "文頭に文字列を追加", receive = DataElement.class, send = StringPrimitiveElement.class)
 public class StringConcatHandler_Prefix implements Sendable, Receivable {
-
+	
 	private Sendable			provider;
 	private String				fixWord;
 	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
-
+	
 	public StringConcatHandler_Prefix(String fixWord) {
 		this.fixWord = fixWord;
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		return provider.isReady();
 	}
-
+	
 	@Override
 	public FlowingData onCall() {
 		String s = ((StringPrimitiveElement) provider.onCall().next()).getString();
 		return new FlowingData(new StringPrimitiveElement.StringPrimitiveData(fixWord + s));
 	}
-
+	
 	@Override
 	public ConnectDataType receivableType() {
 		return new SingleConnectDataType(DataElement.class);
 	}
-
+	
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(StringPrimitiveElement.class);
 	}
-
+	
 	@Override
 	public void setSender(Sendable... senders) throws IDUMOException {
 		vSize.validate(senders);
 		provider = senders[0];
 	}
-
+	
 }

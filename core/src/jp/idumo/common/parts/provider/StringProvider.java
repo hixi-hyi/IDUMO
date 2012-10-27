@@ -17,6 +17,7 @@
  */
 package jp.idumo.common.parts.provider;
 
+import jp.idumo.common.annotation.IDUMOCommon;
 import jp.idumo.core.annotation.IDUMOProvider;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
@@ -25,16 +26,13 @@ import jp.idumo.core.data.primitive.StringPrimitiveElement;
 import jp.idumo.core.parts.Sendable;
 
 /**
- * ランダムなバイト情報を送るためのProvider(DebugClass)
- * 
  * @author Hiroyoshi HOUCHI
- * @version 2.0
- * 
  */
+@IDUMOCommon
 @IDUMOProvider(author = "Hiroyoshi HOUCHI", name = "指定した文字列を送信", send = StringPrimitiveElement.class)
 public class StringProvider implements Sendable {
 	
-	private String str;
+	private String	str;
 	
 	public StringProvider(String str) {
 		// IDUMOLogManager.debug(str);

@@ -17,10 +17,12 @@
  */
 package jp.idumo.android.parts.provider;
 
+import jp.idumo.android.annotation.IDUMOAndroid;
 import jp.idumo.android.component.sensor.LightSensor;
 import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidLightData;
+import jp.idumo.android.manifest.AndroidFeature;
 import jp.idumo.core.annotation.IDUMOProvider;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
@@ -31,7 +33,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.hardware.SensorManager;
 
-
 /**
  * Android上の光センサの情報を取得できるProvider
  * 
@@ -39,8 +40,9 @@ import android.hardware.SensorManager;
  * @version 2.0
  * 
  */
-@IDUMOProvider(author="Hiroyoshi HOUCHI",name="光センサ",send=AndroidLightData.class)
-public class AndroidLightProvider implements Sendable, AndroidController,AndroidActivityController {
+@IDUMOAndroid(features = { AndroidFeature.SENSOR_LIGHT })
+@IDUMOProvider(author = "Hiroyoshi HOUCHI", name = "光センサ", send = AndroidLightData.class)
+public class AndroidLightProvider implements Sendable, AndroidController, AndroidActivityController {
 	
 	private LightSensor	light;
 	
@@ -88,7 +90,7 @@ public class AndroidLightProvider implements Sendable, AndroidController,Android
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(AndroidLightData.class);
 	}
-
+	
 	@Override
 	public void registActivity(Activity activity) {
 		if (!light.isInit()) {

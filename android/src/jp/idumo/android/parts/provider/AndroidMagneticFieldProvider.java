@@ -17,10 +17,12 @@
  */
 package jp.idumo.android.parts.provider;
 
+import jp.idumo.android.annotation.IDUMOAndroid;
 import jp.idumo.android.component.sensor.MagneticFieldSensor;
 import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidMagneticFieldData;
+import jp.idumo.android.manifest.AndroidFeature;
 import jp.idumo.core.annotation.IDUMOProvider;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
@@ -31,7 +33,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.hardware.SensorManager;
 
-
 /**
  * Android上の地磁気センサの情報を取得できるProvider
  * 
@@ -39,8 +40,9 @@ import android.hardware.SensorManager;
  * @version 2.0
  * 
  */
-@IDUMOProvider(author="Hiroyoshi HOUCHI",name="地磁気センサ",send=AndroidMagneticFieldData.class)
-public class AndroidMagneticFieldProvider implements Sendable, AndroidController,AndroidActivityController {
+@IDUMOAndroid(features = { AndroidFeature.SENSOR_COMPASS })
+@IDUMOProvider(author = "Hiroyoshi HOUCHI", name = "地磁気センサ", send = AndroidMagneticFieldData.class)
+public class AndroidMagneticFieldProvider implements Sendable, AndroidController, AndroidActivityController {
 	
 	private MagneticFieldSensor	magnet;
 	
@@ -89,13 +91,13 @@ public class AndroidMagneticFieldProvider implements Sendable, AndroidController
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(AndroidMagneticFieldData.class);
 	}
-
+	
 	@Override
 	public void registActivity(Activity activity) {
 		if (!magnet.isInit()) {
 			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
 			magnet.init(sensor);
-		}		
+		}
 	}
 	
 }

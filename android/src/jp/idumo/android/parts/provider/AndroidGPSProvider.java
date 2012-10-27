@@ -17,10 +17,13 @@
  */
 package jp.idumo.android.parts.provider;
 
+import jp.idumo.android.annotation.IDUMOAndroid;
 import jp.idumo.android.component.sensor.GPSSensor;
 import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidGPSData;
+import jp.idumo.android.manifest.AndroidFeature;
+import jp.idumo.android.manifest.AndroidPermission;
 import jp.idumo.core.annotation.IDUMOProvider;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
@@ -31,7 +34,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.location.LocationManager;
 
-
 /**
  * GPS情報を取得できるProvider
  * 
@@ -39,8 +41,9 @@ import android.location.LocationManager;
  * @version 2.0
  * 
  */
+@IDUMOAndroid(permissions = { AndroidPermission.ACCESS_FINE_LOCATION, AndroidPermission.ACCESS_MOCK_LOCATION, AndroidPermission.ACCESS_COARSE_LOCATION }, features = { AndroidFeature.LOCATION, AndroidFeature.LOCATION_GPS, AndroidFeature.LOCATION_NETWORK })
 @IDUMOProvider(author = "Hiroyoshi HOUCHI", name = "GPSセンサ", send = AndroidGPSData.class)
-public class AndroidGPSProvider implements Sendable, AndroidController,AndroidActivityController {
+public class AndroidGPSProvider implements Sendable, AndroidController, AndroidActivityController {
 	
 	private GPSSensor	gps;
 	
@@ -88,7 +91,7 @@ public class AndroidGPSProvider implements Sendable, AndroidController,AndroidAc
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(AndroidGPSData.class);
 	}
-
+	
 	@Override
 	public void registActivity(Activity activity) {
 		if (!gps.isInit()) {

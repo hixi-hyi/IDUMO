@@ -17,7 +17,10 @@
  */
 package jp.idumo.android.parts.receiptor;
 
+import jp.idumo.android.annotation.IDUMOAndroid;
 import jp.idumo.android.core.AndroidActivityController;
+import jp.idumo.android.manifest.AndroidLibrary;
+import jp.idumo.android.manifest.AndroidPermission;
 import jp.idumo.common.data.element.LatLngElement;
 import jp.idumo.core.annotation.IDUMOReceiptor;
 import jp.idumo.core.data.FlowingData;
@@ -30,7 +33,6 @@ import jp.idumo.core.parts.Sendable;
 import jp.idumo.core.util.LogManager;
 import jp.idumo.core.validator.ReceiveValidatorSize;
 import android.app.Activity;
-import android.content.Context;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
@@ -43,11 +45,11 @@ import com.google.android.maps.MapView;
  * @version 2.0
  * 
  */
-
-@IDUMOReceiptor(author="Hiroyoshi HOUCHI",name="地図の表示",receive=LatLngElement.class)
-public class AndroidMapViewReceiptor implements Receivable, Executable,AndroidActivityController {
+@IDUMOAndroid(libraries = { AndroidLibrary.MAPS }, permissions = { AndroidPermission.INTERNET })
+@IDUMOReceiptor(author = "Hiroyoshi HOUCHI", name = "地図の表示", receive = LatLngElement.class)
+public class AndroidMapViewReceiptor implements Receivable, Executable, AndroidActivityController {
 	
-	private MapView view;
+	private MapView					view;
 	private Sendable				sender;
 	private Activity				activity;
 	private ReceiveValidatorSize	vSize		= new ReceiveValidatorSize(1);
@@ -56,7 +58,6 @@ public class AndroidMapViewReceiptor implements Receivable, Executable,AndroidAc
 	private MapController			controller;
 	
 	private static final String		API_KEY		= "0A1Cx9Pq6v1LrPccIpXJpStEaqtgxeo-1qC6zJw";
-	
 	
 	@Override
 	public boolean isReady() {
@@ -84,7 +85,7 @@ public class AndroidMapViewReceiptor implements Receivable, Executable,AndroidAc
 		vSize.validate(handler);
 		sender = handler[0];
 	}
-
+	
 	@Override
 	public void registActivity(Activity activity) {
 		view = new MapView(activity, API_KEY);
@@ -95,7 +96,7 @@ public class AndroidMapViewReceiptor implements Receivable, Executable,AndroidAc
 		
 		view.setClickable(true);
 		view.setBuiltInZoomControls(true);
-		view.setSatellite(false);		
+		view.setSatellite(false);
 	}
 	
 }

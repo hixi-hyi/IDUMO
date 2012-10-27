@@ -19,6 +19,7 @@ package jp.idumo.common.parts.handler;
 
 import java.util.List;
 
+import jp.idumo.common.annotation.IDUMOCommon;
 import jp.idumo.common.component.Hotpepper;
 import jp.idumo.common.data.HotpepperData;
 import jp.idumo.common.data.element.LatLngElement;
@@ -34,16 +35,11 @@ import jp.idumo.core.parts.Sendable;
 import jp.idumo.core.util.LogManager;
 import jp.idumo.core.validator.ReceiveValidatorSize;
 
-
 /**
- * 
  * @author Hiroyoshi HOUCHI
- * @version 2.0
  */
-
-@IDUMOHandler(author = "Hiroyoshi HOUCHI", description = "現在地情報からHotpepperの情報を取得します",
-	name = "Hotpepper", receive = LatLngElement.class, send = HotpepperData.class)
-
+@IDUMOCommon
+@IDUMOHandler(author = "Hiroyoshi HOUCHI", description = "現在地情報からHotpepperの情報を取得します", name = "Hotpepper", receive = LatLngElement.class, send = HotpepperData.class)
 public class HotpepperHandler implements Sendable, Receivable {
 	
 	private Hotpepper				hotpepper	= new Hotpepper();

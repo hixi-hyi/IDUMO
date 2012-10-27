@@ -17,12 +17,14 @@
  */
 package jp.idumo.android.parts.provider;
 
+import jp.idumo.android.annotation.IDUMOAndroid;
 import jp.idumo.android.component.sensor.AccelerometerSensor;
 import jp.idumo.android.component.sensor.MagneticFieldSensor;
 import jp.idumo.android.component.sensor.OrientationSensor;
 import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidOrientationData;
+import jp.idumo.android.manifest.AndroidFeature;
 import jp.idumo.core.annotation.IDUMOProvider;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
@@ -33,7 +35,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.hardware.SensorManager;
 
-
 /**
  * Android上の傾きの情報を取得できるProvider 地磁気センサと加速度センサにより傾きを算出
  * 
@@ -41,8 +42,9 @@ import android.hardware.SensorManager;
  * @version 2.0
  * 
  */
-@IDUMOProvider(author="Hiroyoshi HOUCHI",name="傾きセンサ",send=AndroidOrientationData.class)
-public class AndroidOrientationProvider implements Sendable, AndroidController,AndroidActivityController {
+@IDUMOAndroid(features = { AndroidFeature.SENSOR_ACCELEROMETOR, AndroidFeature.SENSOR_BAROMETOR })
+@IDUMOProvider(author = "Hiroyoshi HOUCHI", name = "傾きセンサ", send = AndroidOrientationData.class)
+public class AndroidOrientationProvider implements Sendable, AndroidController, AndroidActivityController {
 	
 	private OrientationSensor	sensor;
 	
@@ -90,7 +92,7 @@ public class AndroidOrientationProvider implements Sendable, AndroidController,A
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(AndroidOrientationData.class);
 	}
-
+	
 	@Override
 	public void registActivity(Activity activity) {
 		if (!sensor.isInit()) {
@@ -105,6 +107,6 @@ public class AndroidOrientationProvider implements Sendable, AndroidController,A
 				magneticFieldSensor.init(sensorManager);
 			}
 			sensor.init(accelerometerSensor, magneticFieldSensor);
-		}		
+		}
 	}
 }

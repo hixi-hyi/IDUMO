@@ -17,6 +17,7 @@
  */
 package jp.idumo.android.parts.receiptor;
 
+import jp.idumo.android.annotation.IDUMOAndroid;
 import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.common.data.element.TextElement;
 import jp.idumo.core.annotation.IDUMOReceiptor;
@@ -31,9 +32,7 @@ import jp.idumo.core.parts.Sendable;
 import jp.idumo.core.util.LogManager;
 import jp.idumo.core.validator.ReceiveValidatorSize;
 import android.app.Activity;
-import android.content.Context;
 import android.widget.TextView;
-
 
 /**
  * Android上にテキスト情報を出力するReceiptorです
@@ -42,10 +41,11 @@ import android.widget.TextView;
  * @version 2.0
  * 
  */
-@IDUMOReceiptor(author="Hiroyoshi HOUCHI",name="テキストの表示",receive=TextElement.class)
-public class AndroidTextViewReceiptor implements Receivable, Executable,AndroidActivityController {
+@IDUMOAndroid
+@IDUMOReceiptor(author = "Hiroyoshi HOUCHI", name = "テキストの表示", receive = TextElement.class)
+public class AndroidTextViewReceiptor implements Receivable, Executable, AndroidActivityController {
 	
-	private TextView view;
+	private TextView				view;
 	private Sendable				sender;
 	private ReceiveValidatorSize	vSize	= new ReceiveValidatorSize(1);
 	
@@ -78,12 +78,12 @@ public class AndroidTextViewReceiptor implements Receivable, Executable,AndroidA
 		vSize.validate(handler);
 		sender = handler[0];
 	}
-
+	
 	@Override
 	public void registActivity(Activity activity) {
 		view = new TextView(activity);
 		activity.setContentView(view);
-		view.setTextSize(30.0f);		
+		view.setTextSize(30.0f);
 	}
 	
 }

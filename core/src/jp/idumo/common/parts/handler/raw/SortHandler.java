@@ -20,6 +20,7 @@ package jp.idumo.common.parts.handler.raw;
 import java.util.Map;
 import java.util.TreeMap;
 
+import jp.idumo.common.annotation.IDUMOCommon;
 import jp.idumo.core.annotation.IDUMOHandler;
 import jp.idumo.core.data.DataElement;
 import jp.idumo.core.data.FlowingData;
@@ -33,16 +34,16 @@ import jp.idumo.core.util.LogManager;
 import jp.idumo.core.validator.ReceiveValidator;
 import jp.idumo.core.validator.ReceiveValidatorSize;
 
-
 /**
  * @author Hiroyoshi HOUCHI
  * @version 2.0
  */
+@IDUMOCommon
 @IDUMOHandler(author = "Hiroyoshi HOUCHI", name = "指定した項目でソート", receive = DataElement.class, send = ThroughElement.class)
 public class SortHandler implements Sendable, Receivable {
-	private String name;
-	private Sendable sender;
-	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
+	private String				name;
+	private Sendable			sender;
+	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
 	
 	public SortHandler(String name) {
 		this.name = name;

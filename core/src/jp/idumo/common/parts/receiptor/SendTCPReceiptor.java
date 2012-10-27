@@ -8,6 +8,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import jp.idumo.common.annotation.IDUMOCommon;
 import jp.idumo.common.data.element.TextElement;
 import jp.idumo.core.annotation.IDUMOReceiptor;
 import jp.idumo.core.data.FlowingData;
@@ -23,23 +24,22 @@ import jp.idumo.core.validator.ReceiveValidator;
 import jp.idumo.core.validator.ReceiveValidatorSize;
 import jp.idumo.core.validator.ReceiveValidatorType;
 
-
 /**
  * バイト情報をTCP通信を用いて送ることが出来るReceiptor
  * 
  * @author Hiroyoshi HOUCHI
- * 
  */
+@IDUMOCommon
 @IDUMOReceiptor(author = "Hiroyoshi HOUCHI", name = "指定IPにTCP送信", receive = TextElement.class)
 public class SendTCPReceiptor implements Receivable, CoreController, Executable {
-	private String ip;
-	private int port;
-	private Socket socket;
-	private PrintWriter pw;
-	private OutputStream outstream;
-	private Sendable sender;
-	private ReceiveValidator vSize = new ReceiveValidatorSize(1);
-	private ReceiveValidator vType = new ReceiveValidatorType(1, StringPrimitiveElement.class);
+	private String				ip;
+	private int					port;
+	private Socket				socket;
+	private PrintWriter			pw;
+	private OutputStream		outstream;
+	private Sendable			sender;
+	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
+	private ReceiveValidator	vType	= new ReceiveValidatorType(1, StringPrimitiveElement.class);
 	
 	public SendTCPReceiptor(String ip, int port) {
 		LogManager.log();
@@ -61,11 +61,9 @@ public class SendTCPReceiptor implements Receivable, CoreController, Executable 
 			socket.connect(new InetSocketAddress(ip, port));
 			outstream = socket.getOutputStream();
 			pw = new PrintWriter(new OutputStreamWriter(outstream));
-		}
-		catch (UnknownHostException e) {
+		} catch (UnknownHostException e) {
 			e.printStackTrace();
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -75,8 +73,7 @@ public class SendTCPReceiptor implements Receivable, CoreController, Executable 
 		try {
 			socket.close();
 			outstream.close();
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

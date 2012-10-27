@@ -1,0 +1,1 @@
+less Manifest.permission.html | grep '<td class="jd-linkcol"><a href="/reference/android/Manifest.permission.html' | sed -e 's/<[^>]*>//g' | sed -e 's/ //g' | awk '{ printf("%s(android.Manifest.permission.%s),\n",$1,$1) }'

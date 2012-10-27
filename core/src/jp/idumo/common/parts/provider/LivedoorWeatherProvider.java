@@ -17,6 +17,7 @@
  */
 package jp.idumo.common.parts.provider;
 
+import jp.idumo.common.annotation.IDUMOCommon;
 import jp.idumo.common.component.LivedoorWeather;
 import jp.idumo.common.data.LivedoorWeatherData;
 import jp.idumo.core.annotation.IDUMOProvider;
@@ -30,18 +31,17 @@ import jp.idumo.core.parts.Sendable;
  * LivedoorWeatherからデータを取得し，提供するプロバイダ
  * 
  * @author Hiroyoshi HOUCHI
- * @version 2.0
  */
+@IDUMOCommon
 @IDUMOProvider(author = "Hiroyoshi HOUCHI", description = "LivedoorWeatherからデータを取得する", name = "Livedoor", send = LivedoorWeatherData.class)
 public class LivedoorWeatherProvider implements Sendable {
 	
-	private LivedoorWeather weather;
+	private LivedoorWeather	weather;
 	
 	public LivedoorWeatherProvider(int citynum) {
 		try {
 			weather = new LivedoorWeather(citynum);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new IDUMORuntimeException(e);
 		}
 	}
@@ -50,8 +50,7 @@ public class LivedoorWeatherProvider implements Sendable {
 	public boolean isReady() {
 		try {
 			return weather.isReady();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new IDUMORuntimeException(e);
 		}
 	}

@@ -17,10 +17,12 @@
  */
 package jp.idumo.android.parts.provider;
 
+import jp.idumo.android.annotation.IDUMOAndroid;
 import jp.idumo.android.component.sensor.AccelerometerSensor;
 import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidAccelerometerData;
+import jp.idumo.android.manifest.AndroidFeature;
 import jp.idumo.core.annotation.IDUMOProvider;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
@@ -31,29 +33,29 @@ import android.app.Activity;
 import android.content.Context;
 import android.hardware.SensorManager;
 
-
 /**
  * Android上の加速度センサの値を提供するProvider
- *
+ * 
  * @author Hiroyoshi HOUCHI
  * @version 2.0
- *
+ * 
  */
-@IDUMOProvider(author="Hiroyoshi HOUCHI",name="加速度センサ",send=AndroidAccelerometerData.class)
-public class AndroidAccelerometerProvider implements Sendable, AndroidController,AndroidActivityController {
-
+@IDUMOAndroid(features = AndroidFeature.SENSOR_ACCELEROMETOR)
+@IDUMOProvider(author = "Hiroyoshi HOUCHI", name = "加速度センサ", send = AndroidAccelerometerData.class)
+public class AndroidAccelerometerProvider implements Sendable, AndroidController, AndroidActivityController {
+	
 	private AccelerometerSensor	accel;
-
+	
 	public AndroidAccelerometerProvider() {
 		accel = AccelerometerSensor.INSTANCE;
 		// lazy initialize (method of registActivity)
 	}
-
+	
 	@Override
 	public boolean isReady() {
 		return accel.isReady();
 	}
-
+	
 	@Override
 	public FlowingData onCall() {
 		LogManager.log();
@@ -62,34 +64,34 @@ public class AndroidAccelerometerProvider implements Sendable, AndroidController
 		p.add(data);
 		return p;
 	}
-
+	
 	@Override
 	public void onIdumoDestroy() {}
-
+	
 	@Override
 	public void onIdumoPause() {
 		accel.unregister();
 	}
-
+	
 	@Override
 	public void onIdumoRestart() {}
-
+	
 	@Override
 	public void onIdumoResume() {
 		accel.register();
 	}
-
+	
 	@Override
 	public void onIdumoStart() {}
-
+	
 	@Override
 	public void onIdumoStop() {}
-
+	
 	@Override
 	public ConnectDataType sendableType() {
 		return new SingleConnectDataType(AndroidAccelerometerData.class);
 	}
-
+	
 	@Override
 	public void registActivity(Activity activity) {
 		if (!accel.isInit()) {
