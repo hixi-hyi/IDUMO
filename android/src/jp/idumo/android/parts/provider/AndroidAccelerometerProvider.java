@@ -23,6 +23,7 @@ import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidAccelerometerData;
 import jp.idumo.android.manifest.AndroidFeature;
+import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.annotation.IDUMOProvider;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
@@ -41,7 +42,8 @@ import android.hardware.SensorManager;
  * 
  */
 @IDUMOAndroid(features = AndroidFeature.SENSOR_ACCELEROMETOR)
-@IDUMOProvider(author = "Hiroyoshi HOUCHI", name = "加速度センサ", send = AndroidAccelerometerData.class)
+@IDUMOProvider(send = AndroidAccelerometerData.class)
+@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "加速度センサ", summary = "Androidの加速度センサ")
 public class AndroidAccelerometerProvider implements Sendable, AndroidController, AndroidActivityController {
 	
 	private AccelerometerSensor	accel;

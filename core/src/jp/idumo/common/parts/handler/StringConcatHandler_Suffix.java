@@ -19,6 +19,7 @@ package jp.idumo.common.parts.handler;
 
 import jp.idumo.common.annotation.IDUMOCommon;
 import jp.idumo.core.annotation.IDUMOHandler;
+import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.data.DataElement;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
@@ -34,7 +35,8 @@ import jp.idumo.core.validator.ReceiveValidatorSize;
  * @author Hiroyoshi HOUCHI
  */
 @IDUMOCommon
-@IDUMOHandler(author = "Hiroyoshi HOUCHI", description = "文末に文字列を追加します", name = "文末に文字列を追加", receive = DataElement.class, send = StringPrimitiveElement.class)
+@IDUMOHandler(receive = DataElement.class, send = StringPrimitiveElement.class)
+@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "文末に文字列を追加", summary = "文末に文字列を追加します")
 public class StringConcatHandler_Suffix implements Sendable, Receivable {
 	
 	private Sendable			provider;

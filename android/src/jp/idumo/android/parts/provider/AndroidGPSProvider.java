@@ -24,6 +24,7 @@ import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidGPSData;
 import jp.idumo.android.manifest.AndroidFeature;
 import jp.idumo.android.manifest.AndroidPermission;
+import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.annotation.IDUMOProvider;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
@@ -42,7 +43,8 @@ import android.location.LocationManager;
  * 
  */
 @IDUMOAndroid(permissions = { AndroidPermission.ACCESS_FINE_LOCATION, AndroidPermission.ACCESS_MOCK_LOCATION, AndroidPermission.ACCESS_COARSE_LOCATION }, features = { AndroidFeature.LOCATION, AndroidFeature.LOCATION_GPS, AndroidFeature.LOCATION_NETWORK })
-@IDUMOProvider(author = "Hiroyoshi HOUCHI", name = "GPSセンサ", send = AndroidGPSData.class)
+@IDUMOProvider(send = AndroidGPSData.class)
+@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "GPSセンサ", summary = "AndroidのGPSセンサ")
 public class AndroidGPSProvider implements Sendable, AndroidController, AndroidActivityController {
 	
 	private GPSSensor	gps;

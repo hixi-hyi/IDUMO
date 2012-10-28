@@ -18,6 +18,7 @@
 package jp.idumo.common.parts.provider;
 
 import jp.idumo.common.annotation.IDUMOCommon;
+import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.annotation.IDUMOProvider;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
@@ -29,7 +30,8 @@ import jp.idumo.core.parts.Sendable;
  * @author Hiroyoshi HOUCHI
  */
 @IDUMOCommon
-@IDUMOProvider(author = "Hiroyoshi HOUCHI", name = "指定した文字列を送信", send = StringPrimitiveElement.class)
+@IDUMOProvider(send = StringPrimitiveElement.class)
+@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "文字列の指定", summary = "指定した文字列を次のモジュールに接続")
 public class StringProvider implements Sendable {
 	
 	private String	str;

@@ -25,6 +25,7 @@ import jp.idumo.common.data.HotpepperData;
 import jp.idumo.common.data.element.LatLngElement;
 import jp.idumo.common.data.element.LatLngElement.LatLngData;
 import jp.idumo.core.annotation.IDUMOHandler;
+import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ArrayConnectDataType;
 import jp.idumo.core.data.connect.ConnectDataType;
@@ -39,7 +40,8 @@ import jp.idumo.core.validator.ReceiveValidatorSize;
  * @author Hiroyoshi HOUCHI
  */
 @IDUMOCommon
-@IDUMOHandler(author = "Hiroyoshi HOUCHI", description = "現在地情報からHotpepperの情報を取得します", name = "Hotpepper", receive = LatLngElement.class, send = HotpepperData.class)
+@IDUMOHandler(receive = LatLngElement.class, send = HotpepperData.class)
+@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "近隣の飲食店情報の取得", summary = "LatLngElementから近くの飲食店情報を取得します(Hotpepper)")
 public class HotpepperHandler implements Sendable, Receivable {
 	
 	private Hotpepper				hotpepper	= new Hotpepper();

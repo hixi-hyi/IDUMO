@@ -23,6 +23,7 @@ import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidLightData;
 import jp.idumo.android.manifest.AndroidFeature;
+import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.annotation.IDUMOProvider;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
@@ -41,7 +42,8 @@ import android.hardware.SensorManager;
  * 
  */
 @IDUMOAndroid(features = { AndroidFeature.SENSOR_LIGHT })
-@IDUMOProvider(author = "Hiroyoshi HOUCHI", name = "光センサ", send = AndroidLightData.class)
+@IDUMOProvider(send = AndroidLightData.class)
+@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "光センサ", summary = "Androidの光センサ")
 public class AndroidLightProvider implements Sendable, AndroidController, AndroidActivityController {
 	
 	private LightSensor	light;

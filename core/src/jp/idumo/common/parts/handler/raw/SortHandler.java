@@ -22,6 +22,7 @@ import java.util.TreeMap;
 
 import jp.idumo.common.annotation.IDUMOCommon;
 import jp.idumo.core.annotation.IDUMOHandler;
+import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.data.DataElement;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.ThroughElement;
@@ -39,7 +40,8 @@ import jp.idumo.core.validator.ReceiveValidatorSize;
  * @version 2.0
  */
 @IDUMOCommon
-@IDUMOHandler(author = "Hiroyoshi HOUCHI", name = "指定した項目でソート", receive = DataElement.class, send = ThroughElement.class)
+@IDUMOHandler(receive = DataElement.class, send = ThroughElement.class)
+@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "指定した項目でソート", summary = "入力データを指定した項目でソートする")
 public class SortHandler implements Sendable, Receivable {
 	private String				name;
 	private Sendable			sender;

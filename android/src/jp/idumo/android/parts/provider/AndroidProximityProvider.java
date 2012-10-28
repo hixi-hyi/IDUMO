@@ -23,6 +23,7 @@ import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidProximityData;
 import jp.idumo.android.manifest.AndroidFeature;
+import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.annotation.IDUMOProvider;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
@@ -41,7 +42,8 @@ import android.hardware.SensorManager;
  * 
  */
 @IDUMOAndroid(features = { AndroidFeature.SENSOR_PROXIMITY })
-@IDUMOProvider(author = "Hiroyoshi HOUCHI", name = "近接センサ", send = AndroidProximityData.class)
+@IDUMOProvider(send = AndroidProximityData.class)
+@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "近接センサ", summary = "Androidの近接センサ")
 public class AndroidProximityProvider implements Sendable, AndroidController, AndroidActivityController {
 	
 	private ProximitySensor	proximity;

@@ -18,6 +18,7 @@
 package jp.idumo.core.doclet.perser.special;
 
 import jp.idumo.core.doclet.element.AnnotationArrayValue;
+import jp.idumo.core.doclet.element.StringValue;
 
 import com.sun.javadoc.AnnotationDesc;
 import com.sun.javadoc.AnnotationDesc.ElementValuePair;
@@ -48,7 +49,7 @@ public class AndroidAnnotation extends SpecicalAnnotation {
 			}
 		}
 	}
-	
+		
 	@Override
 	String getType() {
 		return TYPE;

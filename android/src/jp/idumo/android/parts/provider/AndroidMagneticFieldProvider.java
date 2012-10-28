@@ -23,6 +23,7 @@ import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidMagneticFieldData;
 import jp.idumo.android.manifest.AndroidFeature;
+import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.annotation.IDUMOProvider;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
@@ -41,7 +42,8 @@ import android.hardware.SensorManager;
  * 
  */
 @IDUMOAndroid(features = { AndroidFeature.SENSOR_COMPASS })
-@IDUMOProvider(author = "Hiroyoshi HOUCHI", name = "地磁気センサ", send = AndroidMagneticFieldData.class)
+@IDUMOProvider(send = AndroidMagneticFieldData.class)
+@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "地磁気センサ", summary = "Androidの地磁気センサ")
 public class AndroidMagneticFieldProvider implements Sendable, AndroidController, AndroidActivityController {
 	
 	private MagneticFieldSensor	magnet;

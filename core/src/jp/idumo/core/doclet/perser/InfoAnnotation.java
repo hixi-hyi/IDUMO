@@ -33,16 +33,16 @@ import com.sun.javadoc.AnnotationValue;
 /**
  * @author Hiroyoshi HOUCHI
  */
-public class CoreAnnotation implements IAnnotation {
+public class InfoAnnotation implements IAnnotation {
 	private static final String		AUTHOR	= "author";
-	private static final String		NAME	= "name";
-	private static final String		DESC	= "description";
+	private static final String		DISPLAY	= "display";
+	private static final String		SUMMARY	= "summary";
 	private static final String		SEND	= "send";
 	private static final String		RECEIVE	= "receive";
 	
 	private Map<String, IJSONValue>	items	= new HashMap<String, IJSONValue>();
 	
-	public CoreAnnotation(String clazzName, AnnotationDesc annotation) {
+	public InfoAnnotation(String clazzName, AnnotationDesc annotation) {
 		items.put("package", new StringValue(clazzName));
 		for (ElementValuePair elementValuePair : annotation.elementValues()) {
 			AnnotationTypeElementDoc elementDoc = elementValuePair.element();
@@ -50,10 +50,10 @@ public class CoreAnnotation implements IAnnotation {
 			String elementName = elementDoc.name();
 			if (elementName.equals(AUTHOR)) {
 				items.put(AUTHOR, new AnnotationSingleValue(aValue));
-			} else if (elementName.equals(NAME)) {
+			} else if (elementName.equals(DISPLAY)) {
 				items.put("display", new AnnotationSingleValue(aValue));
-			} else if (elementName.equals(DESC)) {
-				items.put(DESC, new AnnotationSingleValue(aValue));
+			} else if (elementName.equals(SUMMARY)) {
+				items.put(SUMMARY, new AnnotationSingleValue(aValue));
 			} else if (elementName.equals(SEND)) {
 				items.put(SEND, new AnnotationSingleValue(aValue));
 			} else if (elementName.equals(RECEIVE)) {

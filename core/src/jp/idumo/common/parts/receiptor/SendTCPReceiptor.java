@@ -10,6 +10,7 @@ import java.net.UnknownHostException;
 
 import jp.idumo.common.annotation.IDUMOCommon;
 import jp.idumo.common.data.element.TextElement;
+import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.annotation.IDUMOReceiptor;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
@@ -30,7 +31,8 @@ import jp.idumo.core.validator.ReceiveValidatorType;
  * @author Hiroyoshi HOUCHI
  */
 @IDUMOCommon
-@IDUMOReceiptor(author = "Hiroyoshi HOUCHI", name = "指定IPにTCP送信", receive = TextElement.class)
+@IDUMOReceiptor(receive = TextElement.class)
+@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "指定IPに文字列を送信", summary = "")
 public class SendTCPReceiptor implements Receivable, CoreController, Executable {
 	private String				ip;
 	private int					port;

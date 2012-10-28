@@ -33,14 +33,22 @@ public class JSONBuilder {
 		items.putAll(annotation.getKVMap());
 	}
 	
+	public void add(String key,Object value){
+		items.put(key, value);
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder json = new StringBuilder();
 		json.append("{");
+		boolean isExec = false;
 		for (Map.Entry<String, Object> e : items.entrySet()) {
+			isExec=true;
 			json.append(String.format("%s:%s,", e.getKey().toString(), e.getValue().toString()));
 		}
-		json.setLength(json.length() - 1);
+		if(isExec){
+			json.setLength(json.length() - 1);
+		}
 		json.append("}");
 		return json.toString();
 	}

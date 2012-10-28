@@ -33,7 +33,7 @@ public abstract class SpecicalAnnotation implements IAnnotation {
 	abstract String getType();
 	
 	public SpecicalAnnotation() {
-		items.put("type", new StringValue(getType()));
+//		items.put("type", new StringValue(getType()));
 	}
 	
 	@Override

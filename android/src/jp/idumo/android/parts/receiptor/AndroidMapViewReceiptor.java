@@ -22,6 +22,7 @@ import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.android.manifest.AndroidLibrary;
 import jp.idumo.android.manifest.AndroidPermission;
 import jp.idumo.common.data.element.LatLngElement;
+import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.annotation.IDUMOReceiptor;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
@@ -46,7 +47,8 @@ import com.google.android.maps.MapView;
  * 
  */
 @IDUMOAndroid(libraries = { AndroidLibrary.MAPS }, permissions = { AndroidPermission.INTERNET })
-@IDUMOReceiptor(author = "Hiroyoshi HOUCHI", name = "地図の表示", receive = LatLngElement.class)
+@IDUMOReceiptor(receive = LatLngElement.class)
+@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "地図の表示", summary = "GoogleMap")
 public class AndroidMapViewReceiptor implements Receivable, Executable, AndroidActivityController {
 	
 	private MapView					view;

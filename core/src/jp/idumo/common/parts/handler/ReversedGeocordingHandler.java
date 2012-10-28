@@ -5,6 +5,7 @@ import jp.idumo.common.component.ReversedGeocording;
 import jp.idumo.common.data.element.LatLngElement;
 import jp.idumo.common.data.element.LatLngElement.LatLngData;
 import jp.idumo.core.annotation.IDUMOHandler;
+import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
 import jp.idumo.core.data.connect.SingleConnectDataType;
@@ -21,7 +22,8 @@ import jp.idumo.core.validator.ReceiveValidatorType;
  * @author Hiroyoshi
  */
 @IDUMOCommon
-@IDUMOHandler(author = "Hiroyoshi HOUCHI", name = "逆ジオコーディング", description = "逆ジオコーディングを行うハンドラ．LatLngElementを受け取りStringを返します．", send = StringPrimitiveElement.class, receive = LatLngElement.class)
+@IDUMOHandler(send = StringPrimitiveElement.class, receive = LatLngElement.class)
+@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "逆ジオコーディング", summary = "LatLngから住所を調べる")
 public class ReversedGeocordingHandler implements Sendable, Receivable {
 	
 	private Sendable				sender;

@@ -19,6 +19,7 @@ package jp.idumo.common.parts.handler.raw;
 
 import jp.idumo.common.annotation.IDUMOCommon;
 import jp.idumo.core.annotation.IDUMOHandler;
+import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
 import jp.idumo.core.data.connect.SingleConnectDataType;
@@ -35,7 +36,8 @@ import jp.idumo.core.validator.ReceiveValidatorType;
  * @author Hiroyoshi HOUCHI
  */
 @IDUMOCommon
-@IDUMOHandler(author = "Hiroyoshi HOUCHI", name = "指定した数字より大きければ", receive = NumberPrimitiveElement.class, send = BoolPrimitiveData.class)
+@IDUMOHandler(receive = NumberPrimitiveElement.class, send = BoolPrimitiveData.class)
+@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "入力値＞指定値", summary = "入力値が指定値より大きい場合")
 public class NumberMoreThanHandler implements Sendable, Receivable {
 	
 	private Sendable				sender;

@@ -8,12 +8,6 @@ import jp.idumo.core.data.DataElement;
 
 @Target({ ElementType.TYPE })
 public @interface IDUMOAdaptor {
-	String author();
-
-	String name();
-
-	String description() default "";
-
 	Class<? extends DataElement> send();
 
 	Class<? extends DataElement>[] receive();

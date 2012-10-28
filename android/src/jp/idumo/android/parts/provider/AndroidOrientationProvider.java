@@ -25,6 +25,7 @@ import jp.idumo.android.core.AndroidActivityController;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidOrientationData;
 import jp.idumo.android.manifest.AndroidFeature;
+import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.annotation.IDUMOProvider;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
@@ -43,7 +44,8 @@ import android.hardware.SensorManager;
  * 
  */
 @IDUMOAndroid(features = { AndroidFeature.SENSOR_ACCELEROMETOR, AndroidFeature.SENSOR_BAROMETOR })
-@IDUMOProvider(author = "Hiroyoshi HOUCHI", name = "傾きセンサ", send = AndroidOrientationData.class)
+@IDUMOProvider(send = AndroidOrientationData.class)
+@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "傾きセンサ", summary = "Androidの傾きセンサ")
 public class AndroidOrientationProvider implements Sendable, AndroidController, AndroidActivityController {
 	
 	private OrientationSensor	sensor;

@@ -18,6 +18,7 @@
 package jp.idumo.common.parts.provider;
 
 import jp.idumo.common.annotation.IDUMOCommon;
+import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.annotation.IDUMOProvider;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
@@ -29,7 +30,8 @@ import jp.idumo.core.parts.Sendable;
  * @author Hiroyoshi HOUCHI
  */
 @IDUMOCommon
-@IDUMOProvider(author = "Hiroyoshi HOUCHI", description = "ユーザが指定した数字を送信", name = "指定した数字を送信", send = NumberPrimitiveElement.class)
+@IDUMOProvider(send = NumberPrimitiveElement.class)
+@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "指定した数字を送信", summary = "ユーザが指定した数字を送信")
 public class NumberProvider implements Sendable {
 	
 	private Double	num;

@@ -24,7 +24,8 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
-import jp.idumo.core.doclet.perser.CoreAnnotation;
+import jp.idumo.core.doclet.perser.ConnectAnnotation;
+import jp.idumo.core.doclet.perser.InfoAnnotation;
 import jp.idumo.core.doclet.perser.special.AndroidAnnotation;
 import jp.idumo.core.doclet.perser.special.CommonAnnotation;
 import jp.idumo.core.doclet.perser.special.ConsoleAnnotation;
@@ -37,24 +38,25 @@ import com.sun.javadoc.RootDoc;
  * @author Hiroyoshi HOUCHI
  */
 public class IDUMOVisualDoclet {
-	private static final String	JSON_NAME	= "idumoitem.json";
+	private static final String ENCODING = "UTF-8";
+	private static final String	ITEM_JSON_NAME	= "idumoitem.json";
+	private static final String ANDROID_JSON_NAME ="android.json";
+	private static final String	INFO		= "IDUMOInfo";
 	
-	private static final String	COMMON		= "IDUMOCommon";
-	private static final String	ANDROID		= "IDUMOAndroid";
-	private static final String	CONSOLE		= "IDUMOConsole";
+	private static final String	I_COMMON		= "IDUMOCommon";
+	private static final String	I_ANDROID		= "IDUMOAndroid";
+	private static final String	I_CONSOLE		= "IDUMOConsole";
 	
-	private static final String	PROVIDER	= "IDUMOProvider";
-	private static final String	HANDLER		= "IDUMOHandler";
-	private static final String	ADAPTOR		= "IDUMOAdaptor";
-	private static final String	RECEIPTOR	= "IDUMOReceiptor";
+	private static final String	I_PROVIDER	= "IDUMOProvider";
+	private static final String	I_HANDLER		= "IDUMOHandler";
+	private static final String	I_ADAPTOR		= "IDUMOAdaptor";
+	private static final String	I_RECEIPTOR	= "IDUMOReceiptor";
 	
 	public static boolean start(RootDoc root) throws FileNotFoundException, UnsupportedEncodingException {
 		
-		File file = new File(System.getProperty("user.dir") + "/" + JSON_NAME);
-		System.out.println(file.getPath());
-		FileOutputStream fos = new FileOutputStream(file);
-		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
-		PrintWriter pw = new PrintWriter(osw);
+		File idumoitem = new File(System.getProperty("user.dir") + "/" + ITEM_JSON_NAME);
+		System.out.println(idumoitem.getPath());
+		PrintWriter pwItem = new PrintWriter(new OutputStreamWriter(new FileOutputStream(idumoitem),ENCODING));
 		
 		IDUMOItemTemplate provider = new IDUMOItemTemplate("provider");
 		IDUMOItemTemplate handler = new IDUMOItemTemplate("handler");
@@ -76,26 +78,32 @@ public class IDUMOVisualDoclet {
 				// System.out.println("typedoc   :" + typedoc);
 				// System.out.println("typename  :" + typedoc.name());
 				
-				// IDUMOCore
-				if (typename.equals(PROVIDER)) {
-					isProvider = true;
-					json.add(new CoreAnnotation(classname, annotation));
-				} else if (typename.equals(HANDLER)) {
-					isHandler = true;
-					json.add(new CoreAnnotation(classname, annotation));
-				} else if (typename.equals(ADAPTOR)) {
-					isAdaptor = true;
-					json.add(new CoreAnnotation(classname, annotation));
-				} else if (typename.equals(RECEIPTOR)) {
-					isReceiptor = true;
-					json.add(new CoreAnnotation(classname, annotation));
+				
+				//Info
+				if(typename.equals(INFO)){
+					json.add(new InfoAnnotation(classname, annotation));
 				}
 				
-				if (typename.equals(COMMON)) {
+				// Connect
+				if (typename.equals(I_PROVIDER)) {
+					isProvider = true;
+					json.add(new ConnectAnnotation(annotation));
+				} else if (typename.equals(I_HANDLER)) {
+					isHandler = true;
+					json.add(new ConnectAnnotation(annotation));
+				} else if (typename.equals(I_ADAPTOR)) {
+					isAdaptor = true;
+					json.add(new ConnectAnnotation(annotation));
+				} else if (typename.equals(I_RECEIPTOR)) {
+					isReceiptor = true;
+					json.add(new ConnectAnnotation(annotation));
+				}
+				
+				if (typename.equals(I_COMMON)) {
 					json.add(new CommonAnnotation(annotation));
-				} else if (typename.equals(ANDROID)) {
+				} else if (typename.equals(I_ANDROID)) {
 					json.add(new AndroidAnnotation(annotation));
-				} else if (typename.equals(CONSOLE)) {
+				} else if (typename.equals(I_CONSOLE)) {
 					json.add(new ConsoleAnnotation(annotation));
 				}
 			}
@@ -110,16 +118,16 @@ public class IDUMOVisualDoclet {
 			}
 		}
 		
-		pw.println(provider.getJson());
-		pw.println(handler.getJson());
-		pw.println(adaptor.getJson());
-		pw.println(receiptor.getJson());
+		pwItem.println(provider.getJson());
+		pwItem.println(handler.getJson());
+		pwItem.println(adaptor.getJson());
+		pwItem.println(receiptor.getJson());
 		
-		pw.close();
+		pwItem.close();
 		return true;
 	}
 	
-	public static CoreAnnotation getIDUMOItemData(String classname, AnnotationDesc[] annotations) {
+	public static InfoAnnotation getIDUMOItemData(String classname, AnnotationDesc[] annotations) {
 		
 		return null;
 	}

@@ -19,6 +19,7 @@ package jp.idumo.common.parts.handler.manifact;
 
 import jp.idumo.common.annotation.IDUMOCommon;
 import jp.idumo.core.annotation.IDUMOHandler;
+import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.data.DataElement;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.ThroughElement;
@@ -33,7 +34,8 @@ import jp.idumo.core.validator.ReceiveValidatorSize;
  * @author Hiroyoshi HOUCHI
  */
 @IDUMOCommon
-@IDUMOHandler(author = "Hiroyoshi HOUCHI", name = "配列の一番上を取得", description = "配列の一番上の値を取得する", receive = DataElement.class, send = ThroughElement.class)
+@IDUMOHandler(receive = DataElement.class, send = ThroughElement.class)
+@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "配列の一番上を取得", summary = "配列の一番上の値を取得する")
 public class ArrayGetTopHandler implements Sendable, Receivable {
 	
 	private Sendable				sender;

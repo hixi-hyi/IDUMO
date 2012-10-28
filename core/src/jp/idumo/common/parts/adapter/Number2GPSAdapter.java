@@ -20,6 +20,7 @@ package jp.idumo.common.parts.adapter;
 import jp.idumo.common.annotation.IDUMOCommon;
 import jp.idumo.common.data.element.LatLngElement.LatLngData;
 import jp.idumo.core.annotation.IDUMOAdaptor;
+import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.data.FlowingData;
 import jp.idumo.core.data.connect.ConnectDataType;
 import jp.idumo.core.data.connect.MultiConnectDataType;
@@ -36,7 +37,8 @@ import jp.idumo.core.validator.ReceiveValidatorType;
  * @author Hiroyoshi HOUCHI
  */
 @IDUMOCommon
-@IDUMOAdaptor(author = "Hiroyoshi HOUCHI", name = "Number->GPS", receive = { NumberPrimitiveElement.class, NumberPrimitiveElement.class }, send = LatLngData.class)
+@IDUMOAdaptor(receive = { NumberPrimitiveElement.class, NumberPrimitiveElement.class }, send = LatLngData.class)
+@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "Number->GPS", summary = "")
 public class Number2GPSAdapter implements Sendable, Receivable {
 	
 	private Sendable			sender1;
