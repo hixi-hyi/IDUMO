@@ -15,43 +15,42 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package jp.idumo.core.doclet;
+package jp.idumo.core.doclet.element;
 
-import java.util.Map;
-import java.util.TreeMap;
-
-import jp.idumo.core.doclet.element.IJSONValue;
-import jp.idumo.core.doclet.perser.IAnnotation;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author Hiroyoshi HOUCHI
  */
-public class JSONBuilder {
+public class StringArrayValue implements IJSONValue {
 	
-	private Map<String, IJSONValue>	items	= new TreeMap<String, IJSONValue>();
+	private String[]	values;
 	
-	public void add(IAnnotation annotation) {
-		items.putAll(annotation.getKVMap());
+	public StringArrayValue(String... values) {
+		this.values = values;
 	}
 	
-	public void add(String key,IJSONValue value){
-		items.put(key, value);
+	public StringArrayValue(List<String> list){
+		this.values = list.toArray(new String[0]);
 	}
 	
 	@Override
 	public String toString() {
-		StringBuilder json = new StringBuilder();
-		json.append("{");
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
 		boolean isExec = false;
-		for (Map.Entry<String, IJSONValue> e : items.entrySet()) {
-			isExec=true;
-			json.append(String.format("%s:%s,", e.getKey().toString(), e.getValue().toString()));
+		for (String value : values) {
+			isExec = true;
+			sb.append("'");
+			sb.append(value);
+			sb.append("',");			
 		}
 		if(isExec){
-			json.setLength(json.length() - 1);
+			sb.setLength(sb.length()-1);
 		}
-		json.append("}");
-		return json.toString();
+		sb.append("]");
+		return sb.toString();
 	}
 	
 }

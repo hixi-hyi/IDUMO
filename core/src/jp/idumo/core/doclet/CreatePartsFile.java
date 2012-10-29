@@ -23,7 +23,9 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
+import jp.idumo.core.doclet.element.StringArrayValue;
 import jp.idumo.core.doclet.perser.ConnectAnnotation;
 import jp.idumo.core.doclet.perser.InfoAnnotation;
 import jp.idumo.core.doclet.perser.special.AndroidAnnotation;
@@ -37,26 +39,25 @@ import com.sun.javadoc.RootDoc;
 /**
  * @author Hiroyoshi HOUCHI
  */
-public class IDUMOVisualDoclet {
-	private static final String ENCODING = "UTF-8";
-	private static final String	ITEM_JSON_NAME	= "idumoitem.json";
-	private static final String ANDROID_JSON_NAME ="android.json";
-	private static final String	INFO		= "IDUMOInfo";
+public class CreatePartsFile {
+	private static final String	ENCODING		= "UTF-8";
+	private static final String	ITEM_JSON_NAME	= "idumoparts.json";
+	private static final String	INFO			= "IDUMOInfo";
 	
 	private static final String	I_COMMON		= "IDUMOCommon";
 	private static final String	I_ANDROID		= "IDUMOAndroid";
 	private static final String	I_CONSOLE		= "IDUMOConsole";
 	
-	private static final String	I_PROVIDER	= "IDUMOProvider";
+	private static final String	I_PROVIDER		= "IDUMOProvider";
 	private static final String	I_HANDLER		= "IDUMOHandler";
 	private static final String	I_ADAPTOR		= "IDUMOAdaptor";
-	private static final String	I_RECEIPTOR	= "IDUMOReceiptor";
+	private static final String	I_RECEIPTOR		= "IDUMOReceiptor";
 	
 	public static boolean start(RootDoc root) throws FileNotFoundException, UnsupportedEncodingException {
 		
 		File idumoitem = new File(System.getProperty("user.dir") + "/" + ITEM_JSON_NAME);
 		System.out.println(idumoitem.getPath());
-		PrintWriter pwItem = new PrintWriter(new OutputStreamWriter(new FileOutputStream(idumoitem),ENCODING));
+		PrintWriter pwItem = new PrintWriter(new OutputStreamWriter(new FileOutputStream(idumoitem), ENCODING));
 		
 		IDUMOItemTemplate provider = new IDUMOItemTemplate("provider");
 		IDUMOItemTemplate handler = new IDUMOItemTemplate("handler");
@@ -71,6 +72,7 @@ public class IDUMOVisualDoclet {
 			isProvider = isHandler = isAdaptor = isReceiptor = false;
 			// System.out.println(classDoc.toString());
 			AnnotationDesc[] annotations = classDoc.annotations();
+			ArrayList<String> types = new ArrayList<String>();
 			JSONBuilder json = new JSONBuilder();
 			for (AnnotationDesc annotation : annotations) {
 				// System.out.println("annotation:" + annotation);
@@ -78,9 +80,8 @@ public class IDUMOVisualDoclet {
 				// System.out.println("typedoc   :" + typedoc);
 				// System.out.println("typename  :" + typedoc.name());
 				
-				
-				//Info
-				if(typename.equals(INFO)){
+				// Info
+				if (typename.equals(INFO)) {
 					json.add(new InfoAnnotation(classname, annotation));
 				}
 				
@@ -100,13 +101,18 @@ public class IDUMOVisualDoclet {
 				}
 				
 				if (typename.equals(I_COMMON)) {
-					json.add(new CommonAnnotation(annotation));
+					types.add("android");
+					types.add("console");
+//					json.add(new CommonAnnotation(annotation));
 				} else if (typename.equals(I_ANDROID)) {
-					json.add(new AndroidAnnotation(annotation));
+					types.add("android");
+//					json.add(new AndroidAnnotation(annotation));
 				} else if (typename.equals(I_CONSOLE)) {
-					json.add(new ConsoleAnnotation(annotation));
+					types.add("console");
+//					json.add(new ConsoleAnnotation(annotation));
 				}
 			}
+			json.add("type",new StringArrayValue(types));
 			if (isProvider) {
 				provider.add(json);
 			} else if (isHandler) {
