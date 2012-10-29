@@ -45,7 +45,7 @@ public class JSONBuilder {
 		boolean isExec = false;
 		for (Map.Entry<String, IJSONValue> e : items.entrySet()) {
 			isExec=true;
-			json.append(String.format("%s:%s,", e.getKey().toString(), e.getValue().toString()));
+			json.append(String.format("\"%s\":%s,", e.getKey().toString(), e.getValue().toString()));
 		}
 		if(isExec){
 			json.setLength(json.length() - 1);

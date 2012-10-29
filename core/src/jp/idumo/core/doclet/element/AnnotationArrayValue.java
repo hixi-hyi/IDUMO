@@ -39,16 +39,16 @@ public class AnnotationArrayValue implements IJSONValue {
 		if (rv instanceof AnnotationValue[]) {
 			AnnotationValue[] av = (AnnotationValue[]) value.value();
 			for (AnnotationValue element : av) {
-				sb.append("'");
+				sb.append(JSON_STRING_DELIMITER);
 				sb.append(element.value().toString());
-				sb.append("'");
+				sb.append(JSON_STRING_DELIMITER);
 				sb.append(",");
 			}
 			sb.setLength(sb.length() - 1);
 		} else if (rv instanceof ClassDocImpl) {
-			sb.append("'");
+			sb.append(JSON_STRING_DELIMITER);
 			sb.append(rv.toString());
-			sb.append("'");
+			sb.append(JSON_STRING_DELIMITER);
 		}
 		sb.append("]");
 		return sb.toString();

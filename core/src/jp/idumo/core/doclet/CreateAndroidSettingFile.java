@@ -53,7 +53,7 @@ public class CreateAndroidSettingFile {
 				if (typename.equals(I_ANDROID)) {
 					JSONBuilder json = new JSONBuilder();
 					json.add(new AndroidAnnotation(annotation));
-					builder.append(String.format("  '%s':%s,\n", classname, json));
+					builder.append(String.format("  \"%s\":%s,\n", classname, json));
 				}
 			}
 		}

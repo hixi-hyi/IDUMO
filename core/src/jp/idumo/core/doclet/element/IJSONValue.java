@@ -21,5 +21,5 @@ package jp.idumo.core.doclet.element;
  * @author Hiroyoshi HOUCHI
  */
 public interface IJSONValue {
-	
+	public static final String JSON_STRING_DELIMITER = "\""; 
 }

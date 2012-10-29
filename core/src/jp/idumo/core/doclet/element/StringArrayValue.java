@@ -42,9 +42,10 @@ public class StringArrayValue implements IJSONValue {
 		boolean isExec = false;
 		for (String value : values) {
 			isExec = true;
-			sb.append("'");
+			sb.append(JSON_STRING_DELIMITER);
 			sb.append(value);
-			sb.append("',");			
+			sb.append(JSON_STRING_DELIMITER);
+			sb.append(",");
 		}
 		if(isExec){
 			sb.setLength(sb.length()-1);

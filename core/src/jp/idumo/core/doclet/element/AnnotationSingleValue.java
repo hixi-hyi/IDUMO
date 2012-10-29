@@ -33,9 +33,9 @@ public class AnnotationSingleValue implements IJSONValue {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("'");
+		sb.append(JSON_STRING_DELIMITER);
 		sb.append(value.value().toString());
-		sb.append("'");
+		sb.append(JSON_STRING_DELIMITER);
 		return sb.toString();
 	}
 	
