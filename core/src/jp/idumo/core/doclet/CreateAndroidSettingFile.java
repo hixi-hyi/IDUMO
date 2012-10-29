@@ -42,7 +42,7 @@ public class CreateAndroidSettingFile {
 		File android = new File(System.getProperty("user.dir") + "/" + ANDROID_JSON_NAME);
 		PrintWriter pwAndroid = new PrintWriter(new OutputStreamWriter(new FileOutputStream(android), ENCODING));
 		StringBuilder builder = new StringBuilder();
-		builder.append("[\n");
+		builder.append("{\n");
 		ClassDoc[] classes = root.classes();
 		for (ClassDoc classDoc : classes) {
 			String classname = classDoc.toString();
@@ -58,8 +58,7 @@ public class CreateAndroidSettingFile {
 			}
 		}
 		builder.setLength(builder.length() - 2);
-		builder.append("\n");
-		builder.append("]");
+		builder.append("\n}");
 		pwAndroid.println(builder);
 		pwAndroid.close();
 		return true;
