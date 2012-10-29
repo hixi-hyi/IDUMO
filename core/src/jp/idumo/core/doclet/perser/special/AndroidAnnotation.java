@@ -18,6 +18,7 @@
 package jp.idumo.core.doclet.perser.special;
 
 import jp.idumo.core.doclet.element.AnnotationArrayValue;
+import jp.idumo.core.doclet.element.AnnotationEnumArrayValue;
 import jp.idumo.core.doclet.element.StringValue;
 
 import com.sun.javadoc.AnnotationDesc;
@@ -41,11 +42,11 @@ public class AndroidAnnotation extends SpecicalAnnotation {
 			AnnotationValue aValue = elementValuePair.value();
 			String elementName = elementDoc.name();
 			if (elementName.equals(LIBRARIES)) {
-				items.put(LIBRARIES, new AnnotationArrayValue(aValue));
+				items.put(LIBRARIES, new AnnotationEnumArrayValue(aValue));
 			} else if (elementName.equals(FEATURES)) {
-				items.put(FEATURES, new AnnotationArrayValue(aValue));
+				items.put(FEATURES, new AnnotationEnumArrayValue(aValue));
 			} else if (elementName.equals(PERMISSIONS)) {
-				items.put(PERMISSIONS, new AnnotationArrayValue(aValue));
+				items.put(PERMISSIONS, new AnnotationEnumArrayValue(aValue));
 			}
 		}
 	}

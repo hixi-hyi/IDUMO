@@ -17,10 +17,12 @@
  */
 package jp.idumo.android.manifest;
 
+import jp.idumo.core.doclet.element.EnumAnnotation;
+
 /**
  * @author Hiroyoshi HOUCHI
  */
-public enum AndroidPermission {
+public enum AndroidPermission implements EnumAnnotation{
 	NONE(""),
 	ACCESS_CHECKIN_PROPERTIES(android.Manifest.permission.ACCESS_CHECKIN_PROPERTIES),
 	ACCESS_COARSE_LOCATION(android.Manifest.permission.ACCESS_COARSE_LOCATION),

@@ -17,10 +17,12 @@
  */
 package jp.idumo.android.manifest;
 
+import jp.idumo.core.doclet.element.EnumAnnotation;
+
 /**
  * @author Hiroyoshi HOUCHI
  */
-public enum AndroidLibrary {
+public enum AndroidLibrary implements EnumAnnotation{
 	NONE(""),
 	MAPS("com.google.android.maps"),
 	;

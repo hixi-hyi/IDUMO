@@ -17,10 +17,12 @@
  */
 package jp.idumo.android.manifest;
 
+import jp.idumo.core.doclet.element.EnumAnnotation;
+
 /**
  * @author Hiroyoshi HOUCHI
  */
-public enum AndroidFeature {
+public enum AndroidFeature implements EnumAnnotation{
 	NONE(""),
 	/*-- Hardware --*/
 	//Audio
