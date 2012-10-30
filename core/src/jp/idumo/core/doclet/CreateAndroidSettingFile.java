@@ -36,6 +36,13 @@ public class CreateAndroidSettingFile {
 	private static final String	ENCODING			= "UTF-8";
 	private static final String	ANDROID_JSON_NAME	= "android.json";
 	private static final String	I_ANDROID			= "IDUMOAndroid";
+
+	public static String getDefaultSetting(){
+		JSONBuilder json = new JSONBuilder();
+		String classname = "default";
+		json.add(AndroidAnnotation.getDefault());
+		return String.format("  \"%s\":%s, \n",classname,json);
+	}
 	
 	public static boolean start(RootDoc root) throws IOException {
 		
@@ -43,6 +50,7 @@ public class CreateAndroidSettingFile {
 		PrintWriter pwAndroid = new PrintWriter(new OutputStreamWriter(new FileOutputStream(android), ENCODING));
 		StringBuilder builder = new StringBuilder();
 		builder.append("{\n");
+		builder.append(getDefaultSetting());
 		ClassDoc[] classes = root.classes();
 		for (ClassDoc classDoc : classes) {
 			String classname = classDoc.toString();

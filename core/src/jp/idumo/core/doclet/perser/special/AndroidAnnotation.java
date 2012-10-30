@@ -17,8 +17,13 @@
  */
 package jp.idumo.core.doclet.perser.special;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import jp.idumo.core.doclet.element.AnnotationArrayValue;
 import jp.idumo.core.doclet.element.AnnotationEnumArrayValue;
+import jp.idumo.core.doclet.element.EnumArrayValue;
+import jp.idumo.core.doclet.element.IJSONValue;
 import jp.idumo.core.doclet.element.StringValue;
 
 import com.sun.javadoc.AnnotationDesc;
@@ -49,6 +54,19 @@ public class AndroidAnnotation extends SpecicalAnnotation {
 				items.put(PERMISSIONS, new AnnotationEnumArrayValue(aValue));
 			}
 		}
+	}
+	
+	private AndroidAnnotation(){}
+	
+	public static AndroidAnnotation getDefault(){
+		AndroidAnnotation annotation = new AndroidAnnotation();
+		EnumArrayValue library = new EnumArrayValue("jp.idumo.android.manifest.AndroidLibrary");
+		library.add("MAPS");
+		EnumArrayValue permission = new EnumArrayValue("jp.idumo.android.manifest.AndroidPermission");
+		permission.add("INTERNET");
+		annotation.items.put(LIBRARIES, library);
+		annotation.items.put(PERMISSIONS, permission);
+		return annotation;
 	}
 		
 	@Override
