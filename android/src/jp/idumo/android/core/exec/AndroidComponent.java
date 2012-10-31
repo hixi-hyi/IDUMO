@@ -3,14 +3,14 @@ package jp.idumo.android.core.exec;
 import java.util.Collection;
 
 import jp.idumo.android.core.AndroidActivityController;
+import jp.idumo.android.core.AndroidActivityResource;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.core.exec.CoreComponent;
 import jp.idumo.core.parts.Connectable;
-import android.app.Activity;
 
 public abstract class AndroidComponent extends CoreComponent {
 	
-	protected Activity	activity;
+	private AndroidActivityResource	activity;
 	
 	public Collection<AndroidController> getAndroidControllers() {
 		AndroidContainer container = (AndroidContainer) getContainer();
@@ -25,7 +25,7 @@ public abstract class AndroidComponent extends CoreComponent {
 		}
 	}
 	
-	public void setActivity(Activity activity) {
+	public void setActivity(AndroidActivityResource activity) {
 		this.activity = activity;
 	}
 	

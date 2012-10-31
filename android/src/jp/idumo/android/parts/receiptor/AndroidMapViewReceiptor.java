@@ -19,6 +19,7 @@ package jp.idumo.android.parts.receiptor;
 
 import jp.idumo.android.annotation.IDUMOAndroid;
 import jp.idumo.android.core.AndroidActivityController;
+import jp.idumo.android.core.AndroidActivityResource;
 import jp.idumo.android.manifest.AndroidLibrary;
 import jp.idumo.android.manifest.AndroidPermission;
 import jp.idumo.common.data.element.LatLngElement;
@@ -89,9 +90,9 @@ public class AndroidMapViewReceiptor implements Receivable, Executable, AndroidA
 	}
 	
 	@Override
-	public void registActivity(Activity activity) {
-		view = new MapView(activity, API_KEY);
-		activity.setContentView(view);
+	public void registActivity(AndroidActivityResource activity) {
+		view = new MapView(activity.getActivity(), API_KEY);
+		activity.getActivity().setContentView(view);
 		
 		controller = view.getController();
 		controller.setZoom(ZOOM_LEVEL);

@@ -19,6 +19,7 @@ package jp.idumo.android.parts.receiptor;
 
 import jp.idumo.android.annotation.IDUMOAndroid;
 import jp.idumo.android.core.AndroidActivityController;
+import jp.idumo.android.core.AndroidActivityResource;
 import jp.idumo.common.data.element.TextElement;
 import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.annotation.IDUMOReceiptor;
@@ -32,7 +33,6 @@ import jp.idumo.core.parts.Receivable;
 import jp.idumo.core.parts.Sendable;
 import jp.idumo.core.util.LogManager;
 import jp.idumo.core.validator.ReceiveValidatorSize;
-import android.app.Activity;
 import android.widget.TextView;
 
 /**
@@ -82,9 +82,9 @@ public class AndroidTextViewReceiptor implements Receivable, Executable, Android
 	}
 	
 	@Override
-	public void registActivity(Activity activity) {
-		view = new TextView(activity);
-		activity.setContentView(view);
+	public void registActivity(AndroidActivityResource activity) {
+		view = new TextView(activity.getActivity());
+		activity.getActivity().setContentView(view);
 		view.setTextSize(30.0f);
 	}
 	

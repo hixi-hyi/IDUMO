@@ -20,6 +20,7 @@ package jp.idumo.android.parts.provider;
 import jp.idumo.android.annotation.IDUMOAndroid;
 import jp.idumo.android.component.sensor.GPSSensor;
 import jp.idumo.android.core.AndroidActivityController;
+import jp.idumo.android.core.AndroidActivityResource;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidGPSData;
 import jp.idumo.android.manifest.AndroidFeature;
@@ -95,9 +96,9 @@ public class AndroidGPSProvider implements Sendable, AndroidController, AndroidA
 	}
 	
 	@Override
-	public void registActivity(Activity activity) {
+	public void registActivity(AndroidActivityResource activity) {
 		if (!gps.isInit()) {
-			LocationManager location = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+			LocationManager location = (LocationManager) activity.getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
 			gps.init(location);
 		}
 	}

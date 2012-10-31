@@ -20,6 +20,7 @@ package jp.idumo.android.parts.provider;
 import jp.idumo.android.annotation.IDUMOAndroid;
 import jp.idumo.android.component.sensor.AccelerometerSensor;
 import jp.idumo.android.core.AndroidActivityController;
+import jp.idumo.android.core.AndroidActivityResource;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidAccelerometerData;
 import jp.idumo.android.manifest.AndroidFeature;
@@ -95,9 +96,9 @@ public class AndroidAccelerometerProvider implements Sendable, AndroidController
 	}
 	
 	@Override
-	public void registActivity(Activity activity) {
+	public void registActivity(AndroidActivityResource activity) {
 		if (!accel.isInit()) {
-			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+			SensorManager sensor = (SensorManager) activity.getApplicationContext().getSystemService(Context.SENSOR_SERVICE);
 			accel.init(sensor);
 		}
 	}

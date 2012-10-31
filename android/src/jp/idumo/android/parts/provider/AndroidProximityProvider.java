@@ -20,6 +20,7 @@ package jp.idumo.android.parts.provider;
 import jp.idumo.android.annotation.IDUMOAndroid;
 import jp.idumo.android.component.sensor.ProximitySensor;
 import jp.idumo.android.core.AndroidActivityController;
+import jp.idumo.android.core.AndroidActivityResource;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidProximityData;
 import jp.idumo.android.manifest.AndroidFeature;
@@ -94,9 +95,9 @@ public class AndroidProximityProvider implements Sendable, AndroidController, An
 	}
 	
 	@Override
-	public void registActivity(Activity activity) {
+	public void registActivity(AndroidActivityResource activity) {
 		if (!proximity.isInit()) {
-			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+			SensorManager sensor = (SensorManager) activity.getApplicationContext().getSystemService(Context.SENSOR_SERVICE);
 			proximity.init(sensor);
 		}
 	}

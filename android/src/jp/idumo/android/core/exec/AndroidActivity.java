@@ -1,14 +1,13 @@
 package jp.idumo.android.core.exec;
 
+import jp.idumo.android.core.AndroidActivityResource;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.core.exception.IDUMOException;
 import jp.idumo.core.exception.IDUMORuntimeException;
 import jp.idumo.core.exec.CoreActivity;
 import jp.idumo.core.exec.CoreController;
 import jp.idumo.core.parts.Executable;
-import android.app.Activity;
 import android.os.Handler;
-
 
 public class AndroidActivity implements CoreActivity, Runnable {
 	
@@ -92,11 +91,7 @@ public class AndroidActivity implements CoreActivity, Runnable {
 		onIdumoExec();
 	}
 	
-	/**
-	 * @param activity
-	 * @see jp.idumo.android.core.exec.AndroidComponent#setActivity(android.app.Activity)
-	 */
-	public void setActivity(Activity activity) {
+	public void setActivity(AndroidActivityResource activity) {
 		component.setActivity(activity);
 	}
 	

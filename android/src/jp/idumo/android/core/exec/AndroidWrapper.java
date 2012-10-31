@@ -1,5 +1,6 @@
 package jp.idumo.android.core.exec;
 
+import jp.idumo.android.core.AndroidActivityResource;
 import jp.idumo.core.exception.IDUMOException;
 import jp.idumo.core.exec.CoreWrapper;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ public abstract class AndroidWrapper extends MapActivity implements CoreWrapper 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		init();
-		execution.setActivity(this);
+		execution.setActivity(new AndroidActivityResource(this));
 		try {
 			execution.onIdumoCreated();
 		} catch (IDUMOException e) {

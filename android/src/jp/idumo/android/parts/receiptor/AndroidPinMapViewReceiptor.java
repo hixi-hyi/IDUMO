@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.idumo.android.core.AndroidActivityController;
+import jp.idumo.android.core.AndroidActivityResource;
 import jp.idumo.common.data.element.LatLngElement;
 import jp.idumo.core.data.DataElement;
 import jp.idumo.core.data.FlowingData;
@@ -94,14 +95,14 @@ public class AndroidPinMapViewReceiptor implements Receivable, Executable,Androi
 	}
 
 	@Override
-	public void registActivity(Activity activity) {
-		view = new MapView(activity,API_KEY);
-		activity.setContentView(view);
+	public void registActivity(AndroidActivityResource activity) {
+		view = new MapView(activity.getActivity(),API_KEY);
+		activity.getActivity().setContentView(view);
 		
 		controller = view.getController();
 		controller.setZoom(ZOOM_LEVEL);
 	
-		Drawable marker = activity.getResources().getDrawable(R.drawable.androidmarker);
+		Drawable marker = activity.getApplicationContext().getResources().getDrawable(R.drawable.androidmarker);
 		overlay = new DefaultItemizedOverlay(marker);
 		view.getOverlays().add(overlay);
 		

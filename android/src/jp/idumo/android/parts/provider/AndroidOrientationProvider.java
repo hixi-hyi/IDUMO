@@ -22,6 +22,7 @@ import jp.idumo.android.component.sensor.AccelerometerSensor;
 import jp.idumo.android.component.sensor.MagneticFieldSensor;
 import jp.idumo.android.component.sensor.OrientationSensor;
 import jp.idumo.android.core.AndroidActivityController;
+import jp.idumo.android.core.AndroidActivityResource;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidOrientationData;
 import jp.idumo.android.manifest.AndroidFeature;
@@ -96,16 +97,16 @@ public class AndroidOrientationProvider implements Sendable, AndroidController, 
 	}
 	
 	@Override
-	public void registActivity(Activity activity) {
+	public void registActivity(AndroidActivityResource activity) {
 		if (!sensor.isInit()) {
 			AccelerometerSensor accelerometerSensor = AccelerometerSensor.INSTANCE;
 			if (!accelerometerSensor.isInit()) {
-				SensorManager sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+				SensorManager sensorManager = (SensorManager) activity.getApplicationContext().getSystemService(Context.SENSOR_SERVICE);
 				accelerometerSensor.init(sensorManager);
 			}
 			MagneticFieldSensor magneticFieldSensor = MagneticFieldSensor.INSTANCE;
 			if (!magneticFieldSensor.isInit()) {
-				SensorManager sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+				SensorManager sensorManager = (SensorManager) activity.getApplicationContext().getSystemService(Context.SENSOR_SERVICE);
 				magneticFieldSensor.init(sensorManager);
 			}
 			sensor.init(accelerometerSensor, magneticFieldSensor);

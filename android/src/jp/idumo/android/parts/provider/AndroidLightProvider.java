@@ -20,6 +20,7 @@ package jp.idumo.android.parts.provider;
 import jp.idumo.android.annotation.IDUMOAndroid;
 import jp.idumo.android.component.sensor.LightSensor;
 import jp.idumo.android.core.AndroidActivityController;
+import jp.idumo.android.core.AndroidActivityResource;
 import jp.idumo.android.core.AndroidController;
 import jp.idumo.android.data.AndroidLightData;
 import jp.idumo.android.manifest.AndroidFeature;
@@ -94,9 +95,9 @@ public class AndroidLightProvider implements Sendable, AndroidController, Androi
 	}
 	
 	@Override
-	public void registActivity(Activity activity) {
+	public void registActivity(AndroidActivityResource activity) {
 		if (!light.isInit()) {
-			SensorManager sensor = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+			SensorManager sensor = (SensorManager) activity.getApplicationContext().getSystemService(Context.SENSOR_SERVICE);
 			light.init(sensor);
 		}
 	}
