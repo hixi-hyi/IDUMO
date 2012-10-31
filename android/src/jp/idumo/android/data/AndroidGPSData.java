@@ -69,7 +69,7 @@ public class AndroidGPSData extends AbstractData implements LatLngElement {
 	}
 	
 	@Override
-	public String toString() {
+	public String getText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(LATITUDE);
 		sb.append(":");

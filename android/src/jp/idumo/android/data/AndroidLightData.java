@@ -36,7 +36,7 @@ public class AndroidLightData extends AbstractData {
 	}
 	
 	@Override
-	public String toString() {
+	public String getText() {
 		return String.format("%s:%f", LIGHT, getLight());
 	}
 }

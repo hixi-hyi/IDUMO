@@ -31,7 +31,13 @@ public class AndroidTemperatureData extends AbstractData {
 		add(new NumberRawDataType(TEMPERATURE, temperature, "Android Temperature"));
 	}
 	
-	public float getProximity() {
+	public float getTempeature() {
 		return (Float) getValue(TEMPERATURE);
 	}
+
+	@Override
+	public String getText() {
+		return String.format("%s:%f", TEMPERATURE, getTempeature());
+	}
+
 }

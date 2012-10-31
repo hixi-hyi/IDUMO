@@ -48,7 +48,7 @@ public class AndroidOrientationData extends AbstractData {
 	}
 	
 	@Override
-	public String toString() {
+	public String getText() {
 		return String.format("%s:%f\n%s:%f\n%s:%f", PITCH, getPitch(), ROLL, getRoll(), AZMUTH, getAzmuth());
 	}
 }

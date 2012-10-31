@@ -67,7 +67,8 @@ public class AndroidTextViewReceiptor implements Receivable, Executable, Android
 		FlowingData idf = sender.onCall();
 		StringBuilder sb = new StringBuilder();
 		for (DataElement d : idf) {
-			sb.append(d.toString());
+			TextElement t = (TextElement)d;
+			sb.append(t.getText());
 		}
 		
 		LogManager.debug(sb.toString());

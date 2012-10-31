@@ -49,7 +49,7 @@ public class AndroidAccelerometerData extends AbstractData {
 	}
 	
 	@Override
-	public String toString() {
+	public String getText() {
 		return String.format("%s:%f\n%s:%f\n%s:%f", X, getX(), Y, getY(), Z, getZ());
 	}
 }
