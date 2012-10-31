@@ -19,35 +19,28 @@ package jp.idumo.core.doclet.element;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import com.sun.javadoc.AnnotationValue;
-import com.sun.javadoc.FieldDoc;
-import com.sun.media.jai.opimage.AddCollectionCRIF;
-import com.sun.tools.javadoc.ClassDocImpl;
 
 /**
  * @author Hiroyoshi HOUCHI
  */
 public class EnumArrayValue implements IJSONValue {
 	
-	private String className;
-	private Map<String,Object> enumMap = new HashMap<String, Object>();
-	private List<String> valueList =new ArrayList<String>();
+	private String				className;
+	private Map<String, Object>	enumMap		= new HashMap<String, Object>();
+	private List<String>		valueList	= new ArrayList<String>();
 	
 	public EnumArrayValue(String className) {
 		this.className = className;
 		createStructure();
 	}
 	
-	public void add(String enumStr){
-		valueList.add(enumStr);		
+	public void add(String enumStr) {
+		valueList.add(enumStr);
 	}
 	
-	private void createStructure(){
+	private void createStructure() {
 		try {
 			Class<?> clazz = Class.forName(className);
 			Object[] objects = clazz.getEnumConstants();
@@ -66,7 +59,7 @@ public class EnumArrayValue implements IJSONValue {
 		sb.append("[");
 		for (String sName : valueList) {
 			sb.append(JSON_STRING_DELIMITER);
-			EnumAnnotation enumAnnotation = (EnumAnnotation)enumMap.get(sName);
+			EnumAnnotation enumAnnotation = (EnumAnnotation) enumMap.get(sName);
 			sb.append(enumAnnotation.getValue());
 			sb.append(JSON_STRING_DELIMITER);
 			sb.append(",");

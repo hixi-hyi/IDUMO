@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import jp.idumo.core.doclet.element.IJSONValue;
-import jp.idumo.core.doclet.element.StringValue;
 import jp.idumo.core.doclet.perser.IAnnotation;
 
 /**
@@ -33,7 +32,7 @@ public abstract class SpecicalAnnotation implements IAnnotation {
 	abstract String getType();
 	
 	public SpecicalAnnotation() {
-//		items.put("type", new StringValue(getType()));
+		// items.put("type", new StringValue(getType()));
 	}
 	
 	@Override

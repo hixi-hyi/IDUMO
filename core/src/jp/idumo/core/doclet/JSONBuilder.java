@@ -34,7 +34,7 @@ public class JSONBuilder {
 		items.putAll(annotation.getKVMap());
 	}
 	
-	public void add(String key,IJSONValue value){
+	public void add(String key, IJSONValue value) {
 		items.put(key, value);
 	}
 	
@@ -44,10 +44,10 @@ public class JSONBuilder {
 		json.append("{");
 		boolean isExec = false;
 		for (Map.Entry<String, IJSONValue> e : items.entrySet()) {
-			isExec=true;
+			isExec = true;
 			json.append(String.format("\"%s\":%s,", e.getKey().toString(), e.getValue().toString()));
 		}
-		if(isExec){
+		if (isExec) {
 			json.setLength(json.length() - 1);
 		}
 		json.append("}");

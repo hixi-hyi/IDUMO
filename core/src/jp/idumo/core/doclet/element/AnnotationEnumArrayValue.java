@@ -18,9 +18,7 @@
 package jp.idumo.core.doclet.element;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import com.sun.javadoc.AnnotationValue;
 import com.sun.javadoc.FieldDoc;
@@ -31,9 +29,9 @@ import com.sun.tools.javadoc.ClassDocImpl;
  */
 public class AnnotationEnumArrayValue implements IJSONValue {
 	
-	private AnnotationValue	value;
-	private String className;
-	private Map<String,Object> enumMap = new HashMap<String, Object>();
+	private AnnotationValue		value;
+	private String				className;
+	private Map<String, Object>	enumMap	= new HashMap<String, Object>();
 	
 	public AnnotationEnumArrayValue(AnnotationValue value) {
 		this.value = value;
@@ -41,7 +39,7 @@ public class AnnotationEnumArrayValue implements IJSONValue {
 		createStructure();
 	}
 	
-	private void createStructure(){
+	private void createStructure() {
 		
 		try {
 			Class<?> clazz = Class.forName(className);
@@ -55,7 +53,7 @@ public class AnnotationEnumArrayValue implements IJSONValue {
 		
 	}
 	
-	private void analyzeClassName(){
+	private void analyzeClassName() {
 		Object rv = value.value();
 		String className = null;
 		if (rv instanceof AnnotationValue[]) {
@@ -65,8 +63,8 @@ public class AnnotationEnumArrayValue implements IJSONValue {
 			className = rv.toString();
 		}
 		int lastcommma = className.lastIndexOf('.');
-		className = className.substring(0,lastcommma);
-		this.className =  className;
+		className = className.substring(0, lastcommma);
+		this.className = className;
 	}
 	
 	@Override
@@ -81,7 +79,7 @@ public class AnnotationEnumArrayValue implements IJSONValue {
 				FieldDoc fd = (FieldDoc) element.value();
 				String cName = fd.toString();
 				String sName = fd.name();
-				EnumAnnotation enumAnnotation = (EnumAnnotation)enumMap.get(sName);
+				EnumAnnotation enumAnnotation = (EnumAnnotation) enumMap.get(sName);
 				System.out.println(cName);
 				System.out.println(sName);
 				sb.append(enumAnnotation.getValue());

@@ -17,7 +17,6 @@
  */
 package jp.idumo.core.doclet.element;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -31,7 +30,7 @@ public class StringArrayValue implements IJSONValue {
 		this.values = values;
 	}
 	
-	public StringArrayValue(List<String> list){
+	public StringArrayValue(List<String> list) {
 		this.values = list.toArray(new String[0]);
 	}
 	
@@ -47,8 +46,8 @@ public class StringArrayValue implements IJSONValue {
 			sb.append(JSON_STRING_DELIMITER);
 			sb.append(",");
 		}
-		if(isExec){
-			sb.setLength(sb.length()-1);
+		if (isExec) {
+			sb.setLength(sb.length() - 1);
 		}
 		sb.append("]");
 		return sb.toString();

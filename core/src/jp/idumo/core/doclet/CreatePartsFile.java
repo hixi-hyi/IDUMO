@@ -28,9 +28,6 @@ import java.util.ArrayList;
 import jp.idumo.core.doclet.element.StringArrayValue;
 import jp.idumo.core.doclet.perser.ConnectAnnotation;
 import jp.idumo.core.doclet.perser.InfoAnnotation;
-import jp.idumo.core.doclet.perser.special.AndroidAnnotation;
-import jp.idumo.core.doclet.perser.special.CommonAnnotation;
-import jp.idumo.core.doclet.perser.special.ConsoleAnnotation;
 
 import com.sun.javadoc.AnnotationDesc;
 import com.sun.javadoc.ClassDoc;
@@ -103,16 +100,16 @@ public class CreatePartsFile {
 				if (typename.equals(I_COMMON)) {
 					types.add("android");
 					types.add("console");
-//					json.add(new CommonAnnotation(annotation));
+					// json.add(new CommonAnnotation(annotation));
 				} else if (typename.equals(I_ANDROID)) {
 					types.add("android");
-//					json.add(new AndroidAnnotation(annotation));
+					// json.add(new AndroidAnnotation(annotation));
 				} else if (typename.equals(I_CONSOLE)) {
 					types.add("console");
-//					json.add(new ConsoleAnnotation(annotation));
+					// json.add(new ConsoleAnnotation(annotation));
 				}
 			}
-			json.add("type",new StringArrayValue(types));
+			json.add("type", new StringArrayValue(types));
 			if (isProvider) {
 				provider.add(json);
 			} else if (isHandler) {

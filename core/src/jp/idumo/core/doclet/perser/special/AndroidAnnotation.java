@@ -17,14 +17,8 @@
  */
 package jp.idumo.core.doclet.perser.special;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import jp.idumo.core.doclet.element.AnnotationArrayValue;
 import jp.idumo.core.doclet.element.AnnotationEnumArrayValue;
 import jp.idumo.core.doclet.element.EnumArrayValue;
-import jp.idumo.core.doclet.element.IJSONValue;
-import jp.idumo.core.doclet.element.StringValue;
 
 import com.sun.javadoc.AnnotationDesc;
 import com.sun.javadoc.AnnotationDesc.ElementValuePair;
@@ -56,9 +50,9 @@ public class AndroidAnnotation extends SpecicalAnnotation {
 		}
 	}
 	
-	private AndroidAnnotation(){}
+	private AndroidAnnotation() {}
 	
-	public static AndroidAnnotation getDefault(){
+	public static AndroidAnnotation getDefault() {
 		AndroidAnnotation annotation = new AndroidAnnotation();
 		EnumArrayValue library = new EnumArrayValue("jp.idumo.android.manifest.AndroidLibrary");
 		library.add("MAPS");
@@ -68,7 +62,7 @@ public class AndroidAnnotation extends SpecicalAnnotation {
 		annotation.items.put(PERMISSIONS, permission);
 		return annotation;
 	}
-		
+	
 	@Override
 	String getType() {
 		return TYPE;

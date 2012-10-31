@@ -36,12 +36,12 @@ public class CreateAndroidSettingFile {
 	private static final String	ENCODING			= "UTF-8";
 	private static final String	ANDROID_JSON_NAME	= "android.json";
 	private static final String	I_ANDROID			= "IDUMOAndroid";
-
-	public static String getDefaultSetting(){
+	
+	public static String getDefaultSetting() {
 		JSONBuilder json = new JSONBuilder();
 		String classname = "default";
 		json.add(AndroidAnnotation.getDefault());
-		return String.format("  \"%s\":%s, \n",classname,json);
+		return String.format("  \"%s\":%s, \n", classname, json);
 	}
 	
 	public static boolean start(RootDoc root) throws IOException {
