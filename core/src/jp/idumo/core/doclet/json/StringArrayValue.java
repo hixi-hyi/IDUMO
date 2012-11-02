@@ -15,25 +15,42 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package jp.idumo.android.manifest;
+package jp.idumo.core.doclet.json;
 
-import jp.idumo.core.doclet.json.EnumAnnotation;
+import java.util.List;
 
 /**
  * @author Hiroyoshi HOUCHI
  */
-public enum AndroidLibrary implements EnumAnnotation{
-	NONE(""),
-	MAPS("com.google.android.maps"),
-	;
-	private String library;
+public class StringArrayValue implements IJSONValue {
 	
-	private AndroidLibrary(String library){
-		this.library = library;
+	private String[]	values;
+	
+	public StringArrayValue(String... values) {
+		this.values = values;
 	}
 	
-	public String getValue(){
-		return library;
+	public StringArrayValue(List<String> list) {
+		this.values = list.toArray(new String[0]);
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		boolean isExec = false;
+		for (String value : values) {
+			isExec = true;
+			sb.append(JSON_STRING_DELIMITER);
+			sb.append(value);
+			sb.append(JSON_STRING_DELIMITER);
+			sb.append(",");
+		}
+		if (isExec) {
+			sb.setLength(sb.length() - 1);
+		}
+		sb.append("]");
+		return sb.toString();
 	}
 	
 }

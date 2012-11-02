@@ -19,7 +19,7 @@ package jp.idumo.core.doclet.perser;
 
 import java.util.Map;
 
-import jp.idumo.core.doclet.element.IJSONValue;
+import jp.idumo.core.doclet.json.IJSONValue;
 
 /**
  * @author Hiroyoshi HOUCHI

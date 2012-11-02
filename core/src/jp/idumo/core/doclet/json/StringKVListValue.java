@@ -15,11 +15,49 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package jp.idumo.core.doclet.element;
+package jp.idumo.core.doclet.json;
+
+import java.util.List;
 
 /**
  * @author Hiroyoshi HOUCHI
  */
-public interface IJSONValue {
-	public static final String	JSON_STRING_DELIMITER	= "\"";
+public class StringKVListValue implements IJSONValue {
+	
+	private List<String> keys;
+	private List<String> values;
+	
+	
+	public StringKVListValue(List<String> keys,List<String> values) {
+		if(keys.size()!=values.size()){
+			throw new RuntimeException();
+		}
+		this.keys = keys;
+		this.values = values;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		boolean isExec = false;
+		for(int i=0;i<keys.size();i++){
+			isExec = true;
+			sb.append("{");
+			sb.append(JSON_STRING_DELIMITER);
+			sb.append(keys.get(i));
+			sb.append(JSON_STRING_DELIMITER);
+			sb.append(":");
+			sb.append(JSON_STRING_DELIMITER);
+			sb.append(values.get(i));
+			sb.append(JSON_STRING_DELIMITER);
+			sb.append("},");
+		}
+		if (isExec) {
+			sb.setLength(sb.length() - 1);
+		}
+		sb.append("]");
+		return sb.toString();
+	}
+	
 }

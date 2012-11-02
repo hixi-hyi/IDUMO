@@ -15,25 +15,58 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package jp.idumo.android.manifest;
+package jp.idumo.core.doclet.json;
 
-import jp.idumo.core.doclet.json.EnumAnnotation;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Hiroyoshi HOUCHI
  */
-public enum AndroidLibrary implements EnumAnnotation{
-	NONE(""),
-	MAPS("com.google.android.maps"),
-	;
-	private String library;
+public class EnumArrayValue implements IJSONValue {
 	
-	private AndroidLibrary(String library){
-		this.library = library;
+	private String				className;
+	private Map<String, Object>	enumMap		= new HashMap<String, Object>();
+	private List<String>		valueList	= new ArrayList<String>();
+	
+	public EnumArrayValue(String className) {
+		this.className = className;
+		createStructure();
 	}
 	
-	public String getValue(){
-		return library;
+	public void add(String enumStr) {
+		valueList.add(enumStr);
+	}
+	
+	private void createStructure() {
+		try {
+			Class<?> clazz = Class.forName(className);
+			Object[] objects = clazz.getEnumConstants();
+			for (Object object : objects) {
+				enumMap.put(object.toString(), object);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		for (String sName : valueList) {
+			sb.append(JSON_STRING_DELIMITER);
+			EnumAnnotation enumAnnotation = (EnumAnnotation) enumMap.get(sName);
+			sb.append(enumAnnotation.getValue());
+			sb.append(JSON_STRING_DELIMITER);
+			sb.append(",");
+		}
+		sb.setLength(sb.length() - 1);
+		sb.append("]");
+		return sb.toString();
 	}
 	
 }
