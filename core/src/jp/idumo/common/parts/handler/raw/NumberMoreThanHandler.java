@@ -18,6 +18,7 @@
 package jp.idumo.common.parts.handler.raw;
 
 import jp.idumo.common.annotation.IDUMOCommon;
+import jp.idumo.core.annotation.IDUMOConstructor;
 import jp.idumo.core.annotation.IDUMOHandler;
 import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.data.FlowingData;
@@ -45,6 +46,7 @@ public class NumberMoreThanHandler implements Sendable, Receivable {
 	private ReceiveValidatorSize	validator	= new ReceiveValidatorSize(1);
 	private ReceiveValidatorType	vType		= new ReceiveValidatorType(1, NumberPrimitiveElement.class);
 	
+	@IDUMOConstructor({ "比較する数値" })
 	public NumberMoreThanHandler(double condition) {
 		this.condition = condition;
 	}

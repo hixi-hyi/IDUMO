@@ -18,6 +18,7 @@
 package jp.idumo.common.parts.provider;
 
 import jp.idumo.common.annotation.IDUMOCommon;
+import jp.idumo.core.annotation.IDUMOConstructor;
 import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.annotation.IDUMOProvider;
 import jp.idumo.core.data.FlowingData;
@@ -36,7 +37,8 @@ public class NumberProvider implements Sendable {
 	
 	private Double	num;
 	
-	public NumberProvider(Double num) {
+	@IDUMOConstructor({ "送る数字" })
+	public NumberProvider(double num) {
 		this.num = num;
 	}
 	

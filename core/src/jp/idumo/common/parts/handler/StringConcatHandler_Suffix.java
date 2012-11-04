@@ -18,6 +18,7 @@
 package jp.idumo.common.parts.handler;
 
 import jp.idumo.common.annotation.IDUMOCommon;
+import jp.idumo.core.annotation.IDUMOConstructor;
 import jp.idumo.core.annotation.IDUMOHandler;
 import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.data.DataElement;
@@ -43,6 +44,7 @@ public class StringConcatHandler_Suffix implements Sendable, Receivable {
 	private String				fixWord;
 	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
 	
+	@IDUMOConstructor({ "接尾語" })
 	public StringConcatHandler_Suffix(String fixWord) {
 		this.fixWord = fixWord;
 	}

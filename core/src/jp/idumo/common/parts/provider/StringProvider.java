@@ -37,7 +37,7 @@ public class StringProvider implements Sendable {
 	
 	private String	str;
 	
-	@IDUMOConstructor({ "入力文字列" })
+	@IDUMOConstructor({ "送る文字列" })
 	public StringProvider(String str) {
 		// IDUMOLogManager.debug(str);
 		this.str = str;

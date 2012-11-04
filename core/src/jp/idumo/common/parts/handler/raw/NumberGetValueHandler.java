@@ -18,6 +18,7 @@
 package jp.idumo.common.parts.handler.raw;
 
 import jp.idumo.common.annotation.IDUMOCommon;
+import jp.idumo.core.annotation.IDUMOConstructor;
 import jp.idumo.core.annotation.IDUMOHandler;
 import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.data.DataElement;
@@ -43,6 +44,7 @@ public class NumberGetValueHandler implements Sendable, Receivable {
 	private Sendable			sender;
 	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
 	
+	@IDUMOConstructor({ "取り出す要素の名前" })
 	public NumberGetValueHandler(String name) {
 		this.name = name;
 	}

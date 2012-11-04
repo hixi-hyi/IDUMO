@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import jp.idumo.common.annotation.IDUMOCommon;
+import jp.idumo.core.annotation.IDUMOConstructor;
 import jp.idumo.core.annotation.IDUMOHandler;
 import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.data.DataElement;
@@ -47,6 +48,7 @@ public class SortHandler implements Sendable, Receivable {
 	private Sendable			sender;
 	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
 	
+	@IDUMOConstructor({ "ソートする要素" })
 	public SortHandler(String name) {
 		this.name = name;
 	}
