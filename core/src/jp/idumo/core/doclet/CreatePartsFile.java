@@ -23,24 +23,16 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.AnnotatedElement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
-import jp.idumo.core.doclet.json.IJSONValue;
 import jp.idumo.core.doclet.json.StringArrayValue;
+import jp.idumo.core.doclet.json.StringValue;
 import jp.idumo.core.doclet.perser.ConnectAnnotation;
-import jp.idumo.core.doclet.perser.IAnnotation;
 import jp.idumo.core.doclet.perser.ConstructorAnnotation;
 import jp.idumo.core.doclet.perser.InfoAnnotation;
 
 import com.sun.javadoc.AnnotationDesc;
 import com.sun.javadoc.ClassDoc;
 import com.sun.javadoc.ConstructorDoc;
-import com.sun.javadoc.ParamTag;
-import com.sun.javadoc.Parameter;
 import com.sun.javadoc.RootDoc;
 
 /**
@@ -50,7 +42,7 @@ public class CreatePartsFile {
 	private static final String	ENCODING		= "UTF-8";
 	private static final String	ITEM_JSON_NAME	= "idumoparts.json";
 	private static final String	I_INFO			= "IDUMOInfo";
-	private static final String I_CONSTRUCTOR   = "IDUMOConstructor";
+	private static final String	I_CONSTRUCTOR	= "IDUMOConstructor";
 	
 	private static final String	I_COMMON		= "IDUMOCommon";
 	private static final String	I_ANDROID		= "IDUMOAndroid";
@@ -61,28 +53,24 @@ public class CreatePartsFile {
 	private static final String	I_ADAPTOR		= "IDUMOAdaptor";
 	private static final String	I_RECEIPTOR		= "IDUMOReceiptor";
 	
-	
 	public static boolean start(RootDoc root) throws FileNotFoundException, UnsupportedEncodingException {
 		
 		File idumoitem = new File(System.getProperty("user.dir") + "/" + ITEM_JSON_NAME);
 		System.out.println(idumoitem.getPath());
 		PrintWriter pwItem = new PrintWriter(new OutputStreamWriter(new FileOutputStream(idumoitem), ENCODING));
 		
-		IDUMOItemTemplate provider = new IDUMOItemTemplate("provider");
-		IDUMOItemTemplate handler = new IDUMOItemTemplate("handler");
-		IDUMOItemTemplate receiptor = new IDUMOItemTemplate("receiptor");
-		IDUMOItemTemplate adaptor = new IDUMOItemTemplate("adaptor");
+		boolean isItem;
 		
-		boolean isProvider, isHandler, isAdaptor, isReceiptor, isItem;
+		JSONArrayTemplate template = new JSONArrayTemplate();
 		
 		ClassDoc[] classes = root.classes();
 		for (ClassDoc classDoc : classes) {
 			String classname = classDoc.toString();
-			isProvider = isHandler = isAdaptor = isReceiptor = isItem = false;
+			isItem = false;
 			// System.out.println(classDoc.toString());
 			AnnotationDesc[] annotations = classDoc.annotations();
 			JSONBuilder json = new JSONBuilder();
-			//Class
+			// Class
 			for (AnnotationDesc annotation : annotations) {
 				// System.out.println("annotation:" + annotation);
 				String typename = annotation.annotationType().name();
@@ -97,60 +85,48 @@ public class CreatePartsFile {
 				
 				// Connect
 				if (typename.equals(I_PROVIDER)) {
-					isProvider = true;
+					json.add("type", new StringValue("provider"));
 					json.add(new ConnectAnnotation(annotation));
 				} else if (typename.equals(I_HANDLER)) {
-					isHandler = true;
+					json.add("type", new StringValue("handler"));
 					json.add(new ConnectAnnotation(annotation));
 				} else if (typename.equals(I_ADAPTOR)) {
-					isAdaptor = true;
+					json.add("type", new StringValue("adaptor"));
 					json.add(new ConnectAnnotation(annotation));
 				} else if (typename.equals(I_RECEIPTOR)) {
-					isReceiptor = true;
+					json.add("type", new StringValue("receiptor"));
 					json.add(new ConnectAnnotation(annotation));
 				}
 				
 				if (typename.equals(I_COMMON)) {
-					json.add("type", new StringArrayValue("android","console"));
+					json.add("platform", new StringArrayValue("android", "console"));
 				} else if (typename.equals(I_ANDROID)) {
-					json.add("type", new StringArrayValue("android"));
+					json.add("platform", new StringArrayValue("android"));
 				} else if (typename.equals(I_CONSOLE)) {
-					json.add("type", new StringArrayValue("console"));
+					json.add("platform", new StringArrayValue("console"));
 				}
 			}
 			// Constructer
-			if(isItem){
+			if (isItem) {
 				ConstructorDoc[] constructors = classDoc.constructors();
 				for (ConstructorDoc constructor : constructors) {
-					for(AnnotationDesc annotation : constructor.annotations() ){
-						if(annotation.annotationType().name().equals(I_CONSTRUCTOR)){
-							json.add(new ConstructorAnnotation(constructor,annotation));
+					for (AnnotationDesc annotation : constructor.annotations()) {
+						if (annotation.annotationType().name().equals(I_CONSTRUCTOR)) {
+							json.add(new ConstructorAnnotation(constructor, annotation));
 						}
 						
 					}
 				}
 			}
-			
-			if (isProvider) {
-				provider.add(json);
-			} else if (isHandler) {
-				handler.add(json);
-			} else if (isAdaptor) {
-				adaptor.add(json);
-			} else if (isReceiptor) {
-				receiptor.add(json);
+			if (isItem) {
+				template.add(json);
 			}
 		}
 		
-		pwItem.println(provider.getJson());
-		pwItem.println(handler.getJson());
-		pwItem.println(adaptor.getJson());
-		pwItem.println(receiptor.getJson());
+		pwItem.println(template.toJsonString());
 		
 		pwItem.close();
 		return true;
 	}
 	
-	
 }
-
