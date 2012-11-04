@@ -23,20 +23,15 @@ import java.util.List;
 /**
  * @author Hiroyoshi HOUCHI
  */
-public class IDUMOItemTemplate {
-	private String				name;
+public class JSONArrayTemplate {
 	private static final String	SEPARATE	= ",\n";
 	private List<JSONBuilder>	jsons		= new ArrayList<JSONBuilder>();
-	
-	public IDUMOItemTemplate(String name) {
-		this.name = name;
-	}
 	
 	public void add(JSONBuilder item) {
 		jsons.add(item);
 	}
 	
-	public String getJson() {
+	public String toJsonString() {
 		StringBuilder sb = new StringBuilder();
 		boolean isExec = false;
 		for (JSONBuilder item : jsons) {
@@ -45,9 +40,9 @@ public class IDUMOItemTemplate {
 			sb.append(item.toString());
 			sb.append(SEPARATE);
 		}
-		if (isExec) {
-			sb.setLength(sb.length() - SEPARATE.length());
-			return String.format("var %s =[\n%s\n];", name, sb.toString());
+		if(isExec){
+			sb.setLength(sb.length() - SEPARATE.length());			
+			return String.format("[\n%s\n];",sb.toString());
 		}
 		return "";
 		
