@@ -17,7 +17,7 @@
  */
 package jp.idumo.android.manifest;
 
-import jp.idumo.core.doclet.element.EnumAnnotation;
+import jp.idumo.core.doclet.json.EnumAnnotation;
 
 /**
  * @author Hiroyoshi HOUCHI

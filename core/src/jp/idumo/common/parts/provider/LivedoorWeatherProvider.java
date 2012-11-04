@@ -20,6 +20,7 @@ package jp.idumo.common.parts.provider;
 import jp.idumo.common.annotation.IDUMOCommon;
 import jp.idumo.common.component.LivedoorWeather;
 import jp.idumo.common.data.LivedoorWeatherData;
+import jp.idumo.core.annotation.IDUMOConstructor;
 import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.annotation.IDUMOProvider;
 import jp.idumo.core.data.FlowingData;
@@ -40,6 +41,7 @@ public class LivedoorWeatherProvider implements Sendable {
 	
 	private LivedoorWeather	weather;
 	
+	@IDUMOConstructor({ "市番号" })
 	public LivedoorWeatherProvider(int citynum) {
 		try {
 			weather = new LivedoorWeather(citynum);

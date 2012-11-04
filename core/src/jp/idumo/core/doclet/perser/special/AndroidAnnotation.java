@@ -17,8 +17,8 @@
  */
 package jp.idumo.core.doclet.perser.special;
 
-import jp.idumo.core.doclet.element.AnnotationEnumArrayValue;
-import jp.idumo.core.doclet.element.EnumArrayValue;
+import jp.idumo.core.doclet.json.AnnotationEnumArrayValue;
+import jp.idumo.core.doclet.json.EnumArrayValue;
 
 import com.sun.javadoc.AnnotationDesc;
 import com.sun.javadoc.AnnotationDesc.ElementValuePair;

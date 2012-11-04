@@ -15,18 +15,16 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package jp.idumo.core.doclet.element;
-
-import com.sun.javadoc.AnnotationValue;
+package jp.idumo.core.doclet.json;
 
 /**
  * @author Hiroyoshi HOUCHI
  */
-public class AnnotationSingleValue implements IJSONValue {
+public class StringValue implements IJSONValue {
 	
-	private AnnotationValue	value;
+	private String	value;
 	
-	public AnnotationSingleValue(AnnotationValue value) {
+	public StringValue(String value) {
 		this.value = value;
 	}
 	
@@ -34,7 +32,7 @@ public class AnnotationSingleValue implements IJSONValue {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(JSON_STRING_DELIMITER);
-		sb.append(value.value().toString());
+		sb.append(value);
 		sb.append(JSON_STRING_DELIMITER);
 		return sb.toString();
 	}

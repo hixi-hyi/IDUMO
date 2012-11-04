@@ -15,56 +15,41 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package jp.idumo.core.doclet.element;
+package jp.idumo.core.doclet.json;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * @author Hiroyoshi HOUCHI
  */
-public class EnumArrayValue implements IJSONValue {
+public class MapValue implements IJSONValue {
 	
-	private String				className;
-	private Map<String, Object>	enumMap		= new HashMap<String, Object>();
-	private List<String>		valueList	= new ArrayList<String>();
+	private Map<String, String>	map;
 	
-	public EnumArrayValue(String className) {
-		this.className = className;
-		createStructure();
-	}
-	
-	public void add(String enumStr) {
-		valueList.add(enumStr);
-	}
-	
-	private void createStructure() {
-		try {
-			Class<?> clazz = Class.forName(className);
-			Object[] objects = clazz.getEnumConstants();
-			for (Object object : objects) {
-				enumMap.put(object.toString(), object);
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
+	public MapValue(Map<String, String> map) {
+		this.map = map;
 	}
 	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
-		for (String sName : valueList) {
+		boolean isExec = false;
+		for (Map.Entry<String, String> m : map.entrySet()) {
+			isExec = true;
+			sb.append("{");
 			sb.append(JSON_STRING_DELIMITER);
-			EnumAnnotation enumAnnotation = (EnumAnnotation) enumMap.get(sName);
-			sb.append(enumAnnotation.getValue());
+			sb.append(m.getKey());
 			sb.append(JSON_STRING_DELIMITER);
-			sb.append(",");
+			sb.append(":");
+			sb.append(JSON_STRING_DELIMITER);
+			sb.append(m.getValue());
+			sb.append(JSON_STRING_DELIMITER);
+			sb.append("},");
 		}
-		sb.setLength(sb.length() - 1);
+		if (isExec) {
+			sb.setLength(sb.length() - 1);
+		}
 		sb.append("]");
 		return sb.toString();
 	}

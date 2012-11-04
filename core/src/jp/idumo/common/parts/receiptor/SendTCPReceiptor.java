@@ -10,6 +10,7 @@ import java.net.UnknownHostException;
 
 import jp.idumo.common.annotation.IDUMOCommon;
 import jp.idumo.common.data.element.TextElement;
+import jp.idumo.core.annotation.IDUMOConstructor;
 import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.annotation.IDUMOReceiptor;
 import jp.idumo.core.data.FlowingData;
@@ -43,6 +44,7 @@ public class SendTCPReceiptor implements Receivable, CoreController, Executable 
 	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
 	private ReceiveValidator	vType	= new ReceiveValidatorType(1, StringPrimitiveElement.class);
 	
+	@IDUMOConstructor({ "IPアドレス", "port番号" })
 	public SendTCPReceiptor(String ip, int port) {
 		LogManager.log();
 		this.ip = ip;

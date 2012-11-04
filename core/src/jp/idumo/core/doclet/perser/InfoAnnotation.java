@@ -20,10 +20,10 @@ package jp.idumo.core.doclet.perser;
 import java.util.HashMap;
 import java.util.Map;
 
-import jp.idumo.core.doclet.element.AnnotationArrayValue;
-import jp.idumo.core.doclet.element.AnnotationSingleValue;
-import jp.idumo.core.doclet.element.IJSONValue;
-import jp.idumo.core.doclet.element.StringValue;
+import jp.idumo.core.doclet.json.AnnotationArrayValue;
+import jp.idumo.core.doclet.json.AnnotationSingleValue;
+import jp.idumo.core.doclet.json.IJSONValue;
+import jp.idumo.core.doclet.json.StringValue;
 
 import com.sun.javadoc.AnnotationDesc;
 import com.sun.javadoc.AnnotationDesc.ElementValuePair;

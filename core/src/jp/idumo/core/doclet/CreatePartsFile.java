@@ -1,5 +1,5 @@
 /**
- * Copyright (c) <2012>, <Hiroyoshi Houchi> All rights reserved.
+ * Copyright (uc) <2012>, <Hiroyoshi Houchi> All rights reserved.
  * 
  * http://www.hixi-hyi.com/
  *
@@ -23,14 +23,24 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.AnnotatedElement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
-import jp.idumo.core.doclet.element.StringArrayValue;
+import jp.idumo.core.doclet.json.IJSONValue;
+import jp.idumo.core.doclet.json.StringArrayValue;
 import jp.idumo.core.doclet.perser.ConnectAnnotation;
+import jp.idumo.core.doclet.perser.IAnnotation;
+import jp.idumo.core.doclet.perser.ConstructorAnnotation;
 import jp.idumo.core.doclet.perser.InfoAnnotation;
 
 import com.sun.javadoc.AnnotationDesc;
 import com.sun.javadoc.ClassDoc;
+import com.sun.javadoc.ConstructorDoc;
+import com.sun.javadoc.ParamTag;
+import com.sun.javadoc.Parameter;
 import com.sun.javadoc.RootDoc;
 
 /**
@@ -39,7 +49,8 @@ import com.sun.javadoc.RootDoc;
 public class CreatePartsFile {
 	private static final String	ENCODING		= "UTF-8";
 	private static final String	ITEM_JSON_NAME	= "idumoparts.json";
-	private static final String	INFO			= "IDUMOInfo";
+	private static final String	I_INFO			= "IDUMOInfo";
+	private static final String I_CONSTRUCTOR   = "IDUMOConstructor";
 	
 	private static final String	I_COMMON		= "IDUMOCommon";
 	private static final String	I_ANDROID		= "IDUMOAndroid";
@@ -49,6 +60,7 @@ public class CreatePartsFile {
 	private static final String	I_HANDLER		= "IDUMOHandler";
 	private static final String	I_ADAPTOR		= "IDUMOAdaptor";
 	private static final String	I_RECEIPTOR		= "IDUMOReceiptor";
+	
 	
 	public static boolean start(RootDoc root) throws FileNotFoundException, UnsupportedEncodingException {
 		
@@ -61,16 +73,16 @@ public class CreatePartsFile {
 		IDUMOItemTemplate receiptor = new IDUMOItemTemplate("receiptor");
 		IDUMOItemTemplate adaptor = new IDUMOItemTemplate("adaptor");
 		
-		boolean isProvider, isHandler, isAdaptor, isReceiptor;
+		boolean isProvider, isHandler, isAdaptor, isReceiptor, isItem;
 		
 		ClassDoc[] classes = root.classes();
 		for (ClassDoc classDoc : classes) {
 			String classname = classDoc.toString();
-			isProvider = isHandler = isAdaptor = isReceiptor = false;
+			isProvider = isHandler = isAdaptor = isReceiptor = isItem = false;
 			// System.out.println(classDoc.toString());
 			AnnotationDesc[] annotations = classDoc.annotations();
-			ArrayList<String> types = new ArrayList<String>();
 			JSONBuilder json = new JSONBuilder();
+			//Class
 			for (AnnotationDesc annotation : annotations) {
 				// System.out.println("annotation:" + annotation);
 				String typename = annotation.annotationType().name();
@@ -78,7 +90,8 @@ public class CreatePartsFile {
 				// System.out.println("typename  :" + typedoc.name());
 				
 				// Info
-				if (typename.equals(INFO)) {
+				if (typename.equals(I_INFO)) {
+					isItem = true;
 					json.add(new InfoAnnotation(classname, annotation));
 				}
 				
@@ -98,18 +111,26 @@ public class CreatePartsFile {
 				}
 				
 				if (typename.equals(I_COMMON)) {
-					types.add("android");
-					types.add("console");
-					// json.add(new CommonAnnotation(annotation));
+					json.add("type", new StringArrayValue("android","console"));
 				} else if (typename.equals(I_ANDROID)) {
-					types.add("android");
-					// json.add(new AndroidAnnotation(annotation));
+					json.add("type", new StringArrayValue("android"));
 				} else if (typename.equals(I_CONSOLE)) {
-					types.add("console");
-					// json.add(new ConsoleAnnotation(annotation));
+					json.add("type", new StringArrayValue("console"));
 				}
 			}
-			json.add("type", new StringArrayValue(types));
+			// Constructer
+			if(isItem){
+				ConstructorDoc[] constructors = classDoc.constructors();
+				for (ConstructorDoc constructor : constructors) {
+					for(AnnotationDesc annotation : constructor.annotations() ){
+						if(annotation.annotationType().name().equals(I_CONSTRUCTOR)){
+							json.add(new ConstructorAnnotation(constructor,annotation));
+						}
+						
+					}
+				}
+			}
+			
 			if (isProvider) {
 				provider.add(json);
 			} else if (isHandler) {
@@ -130,9 +151,6 @@ public class CreatePartsFile {
 		return true;
 	}
 	
-	public static InfoAnnotation getIDUMOItemData(String classname, AnnotationDesc[] annotations) {
-		
-		return null;
-	}
 	
 }
+

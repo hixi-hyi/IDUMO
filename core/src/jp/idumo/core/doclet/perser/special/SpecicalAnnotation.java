@@ -20,7 +20,7 @@ package jp.idumo.core.doclet.perser.special;
 import java.util.HashMap;
 import java.util.Map;
 
-import jp.idumo.core.doclet.element.IJSONValue;
+import jp.idumo.core.doclet.json.IJSONValue;
 import jp.idumo.core.doclet.perser.IAnnotation;
 
 /**

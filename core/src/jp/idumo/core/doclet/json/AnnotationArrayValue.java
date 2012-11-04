@@ -15,42 +15,61 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package jp.idumo.core.doclet.element;
+package jp.idumo.core.doclet.json;
 
+import java.lang.annotation.ElementType;
+import java.util.ArrayList;
 import java.util.List;
+
+import com.sun.javadoc.AnnotationValue;
+import com.sun.tools.javadoc.ClassDocImpl;
 
 /**
  * @author Hiroyoshi HOUCHI
  */
-public class StringArrayValue implements IJSONValue {
+public class AnnotationArrayValue implements IJSONValue {
 	
-	private String[]	values;
+	private AnnotationValue	value;
 	
-	public StringArrayValue(String... values) {
-		this.values = values;
-	}
-	
-	public StringArrayValue(List<String> list) {
-		this.values = list.toArray(new String[0]);
+	public AnnotationArrayValue(AnnotationValue value) {
+		this.value = value;
 	}
 	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
-		boolean isExec = false;
-		for (String value : values) {
-			isExec = true;
-			sb.append(JSON_STRING_DELIMITER);
-			sb.append(value);
-			sb.append(JSON_STRING_DELIMITER);
-			sb.append(",");
-		}
-		if (isExec) {
+		Object rv = value.value();
+		if (rv instanceof AnnotationValue[]) {
+			AnnotationValue[] av = (AnnotationValue[]) value.value();
+			for (AnnotationValue element : av) {
+				sb.append(JSON_STRING_DELIMITER);
+				sb.append(element.value().toString());
+				sb.append(JSON_STRING_DELIMITER);
+				sb.append(",");
+			}
 			sb.setLength(sb.length() - 1);
+		} else if (rv instanceof ClassDocImpl) {
+			sb.append(JSON_STRING_DELIMITER);
+			sb.append(rv.toString());
+			sb.append(JSON_STRING_DELIMITER);
 		}
 		sb.append("]");
 		return sb.toString();
+	}
+	
+	public List<String> toStringList(){
+		List<String> list = new ArrayList<String>();
+		Object rv = value.value();
+		if (rv instanceof AnnotationValue[]) {
+			AnnotationValue[] av = (AnnotationValue[]) value.value();
+			for (AnnotationValue element : av) {
+				list.add(element.value().toString());
+			}
+		} else if (rv instanceof ClassDocImpl) {
+			list.add(rv.toString());
+		}
+		return list;
 	}
 	
 }

@@ -18,6 +18,7 @@
 package jp.idumo.common.parts.handler.raw;
 
 import jp.idumo.common.annotation.IDUMOCommon;
+import jp.idumo.core.annotation.IDUMOConstructor;
 import jp.idumo.core.annotation.IDUMOHandler;
 import jp.idumo.core.annotation.IDUMOInfo;
 import jp.idumo.core.data.DataElement;
@@ -36,12 +37,13 @@ import jp.idumo.core.validator.ReceiveValidatorSize;
  */
 @IDUMOCommon
 @IDUMOHandler(receive = DataElement.class, send = StringPrimitiveElement.class)
-@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "指定した要素の文字列を取得", summary="入力データから指定したタグの文字列を取得する")
+@IDUMOInfo(author = "Hiroyoshi HOUCHI", display = "指定した要素の文字列を取得", summary = "入力データから指定したタグの文字列を取得する")
 public class StringGetValueHandler implements Sendable, Receivable {
 	private String				name;
 	private Sendable			sender;
 	private ReceiveValidator	vSize	= new ReceiveValidatorSize(1);
 	
+	@IDUMOConstructor({ "取り出す要素の名前" })
 	public StringGetValueHandler(String name) {
 		this.name = name;
 	}

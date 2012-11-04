@@ -20,7 +20,7 @@ package jp.idumo.core.doclet;
 import java.util.Map;
 import java.util.TreeMap;
 
-import jp.idumo.core.doclet.element.IJSONValue;
+import jp.idumo.core.doclet.json.IJSONValue;
 import jp.idumo.core.doclet.perser.IAnnotation;
 
 /**
@@ -36,6 +36,10 @@ public class JSONBuilder {
 	
 	public void add(String key, IJSONValue value) {
 		items.put(key, value);
+	}
+	
+	public void add(JSONBuilder builder){
+		items.putAll(builder.items);
 	}
 	
 	@Override
