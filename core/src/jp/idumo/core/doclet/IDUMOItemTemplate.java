@@ -36,7 +36,7 @@ public class IDUMOItemTemplate {
 		jsons.add(item);
 	}
 	
-	public String getJson() {
+	public String toJsonString() {
 		StringBuilder sb = new StringBuilder();
 		boolean isExec = false;
 		for (JSONBuilder item : jsons) {
