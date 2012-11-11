@@ -33,7 +33,7 @@ public class ConstructorAnnotation implements IAnnotation {
 		}
 	}
 	
-	private static final String			TAG			= "param";
+	private static final String			TAG			= "arguments";
 	private static final String			VALUE		= "value";
 	private static final Set<String>	ALLOW_CLASS	= new HashSet<String>();
 	
