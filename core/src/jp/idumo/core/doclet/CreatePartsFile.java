@@ -61,8 +61,8 @@ public class CreatePartsFile {
 		
 		boolean isItem;
 		
-//		JSONArrayTemplate template = new JSONArrayTemplate();
-		IDUMOItemTemplate template = new IDUMOItemTemplate("idumoparts");
+		JSONArrayTemplate template = new JSONArrayTemplate();
+//		IDUMOItemTemplate template = new IDUMOItemTemplate("idumoparts");
 		
 		ClassDoc[] classes = root.classes();
 		for (ClassDoc classDoc : classes) {
