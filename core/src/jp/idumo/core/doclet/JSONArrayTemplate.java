@@ -42,7 +42,7 @@ public class JSONArrayTemplate {
 		}
 		if(isExec){
 			sb.setLength(sb.length() - SEPARATE.length());			
-			return String.format("[\n%s\n];",sb.toString());
+			return String.format("[\n%s\n]",sb.toString());
 		}
 		return "";
 		
