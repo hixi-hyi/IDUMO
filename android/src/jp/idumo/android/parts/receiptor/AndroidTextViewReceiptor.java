@@ -58,7 +58,7 @@ public class AndroidTextViewReceiptor implements Receivable, Executable, Android
 	
 	@Override
 	public ConnectDataType receivableType() {
-		return new ArrayConnectDataType(DataElement.class);
+		return new ArrayConnectDataType(TextElement.class);
 	}
 	
 	@Override
